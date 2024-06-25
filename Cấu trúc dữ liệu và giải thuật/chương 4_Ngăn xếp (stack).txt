@@ -1,0 +1,208 @@
+																														Bắt đầu viết vào ngày 18/7/2023
+
+4.1 Stack là gì? 
+Stack là một cấu trúc dữ liệu đơn giản được sử dụng để lưu trữ dữ liệu (tương tự như Linked List). Trong một stack, thứ tự mà dữ liệu được thêm vào là quan trọng. Một đống đĩa trong một quán ăn là một ví dụ tốt về stack. Các đĩa được thêm vào stack khi chúng được làm sạch và đặt lên trên cùng. Khi cần một đĩa, nó được lấy từ đỉnh của stack. Đĩa đầu tiên được đặt vào stack là đĩa cuối cùng được sử dụng. Định nghĩa: Stack là một danh sách được sắp xếp trong đó việc thêm và xóa được thực hiện ở một đầu, được gọi là đỉnh. Phần tử cuối cùng được chèn là phần tử đầu tiên được xóa. Do đó, nó được gọi là danh sách Last In First Out (LIFO) hoặc First In Last Out (FILO). Có tên gọi đặc biệt cho hai thay đổi có thể được thực hiện trên một stack. Khi một phần tử được chèn vào stack, khái niệm được gọi là push, và khi một phần tử được loại bỏ khỏi stack, khái niệm được gọi là pop. Việc pop một stack trống được gọi là underflow và việc push một phần tử vào một stack đầy được gọi là overflow. Thông thường, chúng ta xem như là các ngoại lệ.
+
+4.2 Cách sử dụng stack
+Hãy xem xét một ngày làm việc trong văn phòng. Hãy giả sử một nhà phát triển đang làm việc trên một dự án dài hạn. Quản lý sau đó giao cho nhà phát triển một nhiệm vụ mới quan trọng hơn. Nhà phát triển đặt dự án dài hạn sang một bên và bắt đầu làm việc trên nhiệm vụ mới. Điện thoại reo, và đây là ưu tiên cao vì nó phải được trả lời ngay lập tức. Nhà phát triển đẩy nhiệm vụ hiện tại vào khay đợi và trả lời điện thoại. Khi cuộc gọi kết thúc, nhiệm vụ đã bị bỏ để trả lời điện thoại được lấy từ khay đợi và công việc tiếp tục. Để tiếp nhận một cuộc gọi khác, có thể phải xử lý theo cùng cách, nhưng cuối cùng nhiệm vụ mới sẽ hoàn thành, và nhà phát triển có thể lấy dự án dài hạn từ khay đợi và tiếp tục với nó.
+
+4.3 Stack ADT
+Các hoạt động sau đây tạo ra một stack là một ADT. Để đơn giản, giả định dữ liệu là kiểu số nguyên.
+Các hoạt động chính của stack
+- Push (int data): Thêm dữ liệu vào stack.
+- int Pop(): Xóa và trả về phần tử cuối cùng được chèn vào stack.
+
+Các hoạt động phụ trợ của stack
+- int Top(): Trả về phần tử cuối cùng được chèn vào mà không xóa nó.
+- int Size(): Trả về số lượng phần tử được lưu trữ trong stack.
+- int IsEmptyStack(): Cho biết xem có phần tử nào được lưu trữ trong stack hay không.
+- int IsFullStack(): Cho biết stack đã đầy chưa.
+
+Ngoại lệ
+Cố gắng thực hiện một hoạt động có thể gây ra một trạng thái lỗi, được gọi là ngoại lệ. Các hoạt động pop và top trong Stack ADT không thể được thực hiện nếu stack là trống. Cố gắng thực hiện pop (top) trên một stack trống sẽ gây ra ngoại lệ. Cố gắng đẩy một phần tử vào một stack đầy sẽ gây ra ngoại lệ.
+
+4.4 Ứng dụng
+Sau đây là một số ứng dụng mà stack đóng vai trò quan trọng:
+Ứng dụng trực tiếp
+- Cân bằng các ký hiệu
+- Chuyển đổi trung tố thành hậu tố
+- Đánh giá biểu thức hậu tố
+- Thực hiện cuộc gọi hàm (bao gồm đệ quy)
+- Tìm kiếm khoảng thời gian (tìm kiếm khoảng thời gian trong thị trường chứng khoán, xem phần Vấn đề)
+- Lịch sử truy cập trang web trong trình duyệt web [nút Quay lại]
+- Chuỗi hoàn tác trong trình chỉnh sửa văn bản
+- So khớp các thẻ trong HTML và XML
+Ứng dụng gián tiếp
+- Cấu trúc dữ liệu phụ trợ cho các thuật toán khác (Ví dụ: Các thuật toán duyệt cây)
+- Thành phần của các cấu trúc dữ liệu khác (Ví dụ: Mô phỏng hàng đợi, xem phần Hàng đợi)
+
+4.5 Cài đặt
+Có nhiều cách để cài đặt stack ADT; dưới đây là những phương pháp được sử dụng phổ biến.
+- Cài đặt dựa trên mảng đơn giản
+- Cài đặt dựa trên mảng động
+- Cài đặt dựa trên danh sách liên kết
+
+Triển khai đơn giản bằng mảng
+
+Triển khai này của ADT ngăn xếp sử dụng một mảng. Trong mảng, chúng ta thêm các phần tử từ trái sang phải và sử dụng một biến để theo dõi chỉ số của phần tử đỉnh. Mảng lưu trữ các phần tử ngăn xếp có thể trở nên đầy. Một thao tác đẩy sẽ ném ra một ngoại lệ ngăn xếp đầy. Tương tự, nếu chúng ta thử xóa một phần tử từ một ngăn xếp rỗng, nó sẽ ném ra một ngoại lệ ngăn xếp trống.
+
+Dưới đây là mã nguồn được trình bày bằng ngôn ngữ C++, sử dụng vector thay cho mảng tĩnh để tối ưu khả năng chứa của ngăn xếp
+
+#include <iostream>
+#include<vector>
+
+using namespace std;
+
+template <class T>
+class Stack{
+private:    
+    vector <T> stack;
+public:
+    void push(T);
+    T top();
+    T pop();
+    int size();
+    bool empty();
+};
+template <class T>
+void Stack <T> :: push(T a){
+    stack.emplace_back(a);
+}
+template <class T>
+//hàm trả về giá trị của phần tử trên cùng, nhưng không xóa nó đi
+T Stack <T> :: top(){
+    if(!stack.empty())
+    return stack.back();
+    else return T();
+}
+template <class T>
+//hàm trả về giá trị phần tử trên cùng, và xóa nó khỏi stack
+T Stack <T> :: pop(){
+    if(!stack.empty()){
+    T a= stack.back();
+    stack.pop_back();
+    return a;
+    }
+    else return T();
+}
+template <class t>
+int Stack <t> :: size(){
+    return stack.size();
+}
+template <class t>
+bool Stack <t> :: empty(){
+    return stack.empty();
+}
+int main(){
+    Stack <int> stack;
+    while(true){
+        cout <<"\nNHAP LUA CHON:\n1. them vao stack\n2. xem gia tri phan tu tren cung\n3. lay phan tu tren cung ra\n4. xem so phan tu cua stack\n";
+        int k; cout << "nhap lua chon: ";
+        cin >> k;
+        switch (k){
+            case 1: {
+                int a; cout <<"nhap gia tri muon them: ";
+                cin >> a;
+                stack.push(a); break;
+            }
+            case 2: {
+                if(!stack.empty())
+                cout <<"phan tu tren cung la: "<< stack.top(); 
+                else cout << "ngan xep rong";
+                break;
+            }
+            case 3:{
+                if(!stack.empty())
+                cout << "phan tu tren cung la: " << stack.pop(); 
+                else cout << "ngan xep rong";
+                break; 
+            }
+            case 4:{
+                cout << "tong so phan tu la: " <<stack.size(); break;
+            }
+            default: cout <<"nhap lai lua chon "; break;
+        }
+    }
+}
+Hiệu suất và Giới hạn
+
+Hiệu suất:
+- Độ phức tạp không gian (cho n thao tác đẩy) là O(n).
+- Độ phức tạp thời gian của các thao tác Đẩy (Push()), Lấy (Pop()), Kích thước (Size()), Kiểm tra rỗng (IsEmptyStack()) và Kiểm tra đầy (IsFullStack()) đều là O(1).
+- Độ phức tạp thời gian của Xóa (DeleteStack()) cũng là O(1).
+
+Giới hạn:
+- Kích thước tối đa của ngăn xếp phải được xác định trước và không thể thay đổi.
+- Khi cố gắng đẩy một phần tử mới vào ngăn xếp đầy, sẽ xảy ra một ngoại lệ cụ thể của triển khai.
+
+Triển khai mảng động:
+
+Đầu tiên, hãy xem cách triển khai ngăn xếp dựa trên mảng đơn giản. Chúng ta sử dụng một biến chỉ số top để chỉ định vị trí của phần tử được chèn gần đây nhất trong ngăn xếp. Khi chèn (hoặc đẩy) một phần tử, chúng ta tăng chỉ số top và đặt phần tử mới vào vị trí đó. Tương tự, khi lấy (hoặc loại bỏ) một phần tử, chúng ta lấy phần tử tại vị trí top và giảm chỉ số top. Chúng ta sử dụng giá trị -1 để đại diện cho một ngăn xếp trống.
+
+Vấn đề cần được giải quyết là khi tất cả các vị trí trong mảng ngăn xếp có phần tử. Cách thử đầu tiên: Nếu chúng ta tăng kích thước mảng lên 1 mỗi khi ngăn xếp đầy?
+- Đẩy (Push()): tăng kích thước của S[] lên 1.
+- Lấy (Pop()): giảm kích thước của S[] đi 1.
+
+Vấn đề với cách tiếp cận này là cách tăng kích thước mảng quá tốn kém. Hãy xem lý do cho điều này. Ví dụ, với n = 1, để đẩy một phần tử, chúng ta tạo một mảng mới có kích thước là 2 và sao chép tất cả các phần tử cũ sang mảng mới, sau đó thêm phần tử mới vào cuối. Với n = 2, để đẩy một phần tử, chúng ta tạo một mảng mới có kích thước là 3 và sao chép tất cả các phần tử cũ sang mảng mới, sau đó thêm phần tử mới vào cuối. Tương tự, với n = n-1, nếu chúng ta muốn đẩy một phần tử, chúng ta tạo một mảng mới có kích thước n và sao chép tất cả các phần tử cũ sang mảng mới và cuối cùng thêm phần tử mới vào. Sau n thao tác đẩy, tổng thời gian T(n) (số lần sao chép) tỷ lệ thuận với 1 + 2 + ... + n ≈ O(n^2).
+
+Phương pháp thay thế: Tăng gấp đôi lặp lại
+
+Chúng ta có thể cải thiện độ phức tạp bằng cách sử dụng kỹ thuật tăng gấp đôi mảng. Nếu mảng đầy, chúng ta tạo ra một mảng mới có kích thước gấp đôi và sao chép các phần tử vào mảng mới. Với phương pháp này, việc đẩy n phần tử mất thời gian tỷ lệ thuận với n (không phải n^2). Để đơn giản, chúng ta giả định rằng ban đầu chúng ta bắt đầu với n = 1 và tăng lên n = 32. Điều đó có nghĩa là chúng ta tăng gấp đôi ở các giá trị 1, 2, 4, 8, 16. Cách khác để phân tích cùng một phương pháp là: với n = 1, nếu chúng ta muốn thêm (đẩy) một phần tử, chúng ta tăng kích thước hiện tại của mảng lên gấp đôi và sao chép tất cả các phần tử của mảng cũ sang mảng mới. Với n = 1, chúng ta thực hiện 1 thao tác sao chép, với n = 2, chúng ta thực hiện 2 thao tác sao chép, và với n = 4, chúng ta thực hiện 4 thao tác sao chép và tiếp tục như vậy. Đến khi chúng ta đạt đến n = 32, tổng số lần sao chép là 1 + 2 + 4 + 8 + 16 = 31, xấp xỉ bằng giá trị 2n (32). Nếu quan sát kỹ, chúng ta thực hiện phép tăng gấp đôi logn lần. Bây giờ, hãy tổng quát hóa cuộc trò chuyện. Đối với n thao tác đẩy, chúng ta tăng kích thước mảng lên gấp đôi logn lần. Điều đó có nghĩa là chúng ta sẽ có logn thành phần trong biểu thức dưới đây.
+	1+2+4+8+.............+n/2+n ≈ 2n = O(n).
+Tổng thời gian T(n) của một loạt các thao tác đẩy n là tỷ lệ thuận với T(n) là O(n) và thời gian trung bình của một thao tác đẩy là O(1).
+Phương pháp này chính là mã nguồn sử dụng vector ở phía trên
+
+Hiệu suất
+Giả sử n là số phần tử trong ngăn xếp. Độ phức tạp của các thao tác với cách hiện thực này có thể được xác định như sau:
+- Độ phức tạp không gian (cho n thao tác đẩy) là O(n).
+- Độ phức tạp thời gian của thao tác tạo ngăn xếp là O(1).
+- Độ phức tạp thời gian của thao tác đẩy là O(1) (trung bình).
+- Độ phức tạp thời gian của thao tác lấy ra là O(1).
+- Độ phức tạp thời gian của thao tác truy xuất đỉnh là O(1).
+- Độ phức tạp thời gian của thao tác kiểm tra xem ngăn xếp có rỗng không là O(1).
+- Độ phức tạp thời gian của thao tác xóa ngăn xếp là O(1).
+
+Lưu ý: Nhân đôi kích thước mảng quá nhiều lần có thể gây ra ngoại lệ tràn bộ nhớ.
+
+Sử dụng danh sách liên kết
+
+Cách hiện thực khác cho ngăn xếp là sử dụng danh sách liên kết. Thao tác đẩy được thực hiện bằng cách chèn phần tử vào đầu danh sách. Thao tác lấy ra được thực hiện bằng cách xóa nút từ đầu danh sách (nút đầu/cụm đầu).
+
+Giả sử n là số phần tử trong ngăn xếp. Các phức tạp của các thao tác với cách hiện thực này có thể được xác định như sau:
+- Độ phức tạp không gian (cho n thao tác đẩy) là O(n).
+- Độ phức tạp thời gian của thao tác tạo ngăn xếp là O(1).
+- Độ phức tạp thời gian của thao tác đẩy là O(1) (trung bình).
+- Độ phức tạp thời gian của thao tác lấy ra là O(1).
+- Độ phức tạp thời gian của thao tác truy xuất đỉnh là O(1).
+- Độ phức tạp thời gian của thao tác kiểm tra xem ngăn xếp có rỗng không là O(1).
+- Độ phức tạp thời gian của thao tác xóa ngăn xếp là O(n).
+
+Lưu ý: Độ phức tạp thời gian của thao tác xóa ngăn xếp là O(n) vì trong trường hợp xóa ngăn xếp, ta phải xóa tất cả các nút trong danh sách liên kết.
+
+4.6 So sánh các Cách triển khai xây dựng ngăn xếp
+
+So sánh Chiến lược Tăng dần và Chiến lược tăng gấp đôi bộ nhớ
+
+Chúng ta sẽ so sánh chiến lược tăng dần và chiến lược tăng gấp đôi bằng cách phân tích tổng thời gian T(n) cần thiết để thực hiện một loạt n thao tác đẩy. Chúng ta bắt đầu với một ngăn xếp rỗng được đại diện bởi một mảng có kích thước 1. Chúng ta gọi thời gian trung bình của một thao tác đẩy là thời gian trung bình của một thao tác đẩy trong loạt các thao tác, tức là T(n)/n.
+
+Chiến lược Tăng dần:
+Thời gian trung bình (thời gian trung bình mỗi thao tác) của một thao tác đẩy là O(n) [O(n^2)/n].
+
+Chiến lược tăng gấp đôi:
+Trong phương pháp này, thời gian trung bình của một thao tác đẩy là O(1) [O(n)/n].
+
+Lưu ý: Đối với phân tích chi tiết, xin vui lòng xem phần Các cách triển khai.
+
+So sánh Cách triển khai Mảng và Cách triển khai Danh sách liên kết:
+
+Cách triển khai Mảng:
+- Các thao tác mất thời gian hằng số.
+- Thao tác tăng gấp đôi có chi phí cao xảy ra sau một thời gian nhất định.
+- Bất kỳ chuỗi n thao tác nào (bắt đầu từ ngăn xếp rỗng) - "gắn kết" giới hạn mất thời gian tỷ lệ thuận với n.
+
+Cách triển khai Danh sách liên kết:
+- Tăng và giảm một cách linh hoạt.
+- Mỗi thao tác mất thời gian hằng số O(1).
+- Mỗi thao tác sử dụng thêm không gian và thời gian để xử lý các tham chiếu.
+
+																															Kết thúc vào ngày  18/7/2023

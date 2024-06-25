@@ -1,0 +1,561 @@
+																													Bắt đầu viết vào ngày ngày 12/8/2023
+
+10.1 Khái niệm về Sắp xếp
+Sắp xếp là một thuật toán sắp đặt các phần tử của danh sách vào một thứ tự cụ thể [tăng dần hoặc giảm dần]. Kết quả là một hoán vị hoặc sắp xếp lại của dữ liệu đầu vào.
+
+10.2 Tại sao Sắp xếp là Cần thiết?
+Sắp xếp là một trong những loại thuật toán quan trọng trong khoa học máy tính và có rất nhiều nghiên cứu đã được tiến hành trong lĩnh vực này. Sắp xếp có thể giảm đáng kể sự phức tạp của một vấn đề và thường được sử dụng cho các thuật toán cơ sở dữ liệu và tìm kiếm.
+
+10.3 Phân loại các Thuật toán Sắp xếp
+Các thuật toán sắp xếp thường được phân loại dựa trên các thông số sau.
+
+Theo Số lần So sánh
+Trong phương pháp này, các thuật toán sắp xếp được phân loại dựa trên số lần so sánh. Đối với các thuật toán sắp xếp dựa trên so sánh, trường hợp tốt nhất là O(nlogn) và trường hợp xấu nhất là O(n^2). Các thuật toán sắp xếp dựa trên so sánh đánh giá các phần tử của danh sách thông qua phép so sánh khóa và cần ít nhất O(nlogn) lần so sánh cho hầu hết các đầu vào. Sau này trong chương này, chúng ta sẽ thảo luận về một số thuật toán sắp xếp không dựa trên so sánh (tuyến tính) như Counting sort, Bucket sort, Radix sort, vv. Các thuật toán sắp xếp tuyến tính áp đặt một số hạn chế về đầu vào để cải thiện phức tạp.
+
+Theo Số lần Hoán đổi
+Trong phương pháp này, các thuật toán sắp xếp được phân loại theo số lần hoán đổi (còn được gọi là nghịch đảo).
+
+Theo Sử dụng Bộ nhớ
+Một số thuật toán sắp xếp "trong chỗ" và chúng cần O(1) hoặc O(logn) bộ nhớ để tạo các vị trí phụ trợ để sắp xếp dữ liệu tạm thời.
+
+Theo Đệ quy
+Các thuật toán sắp xếp có thể đệ quy [quick sort] hoặc không đệ quy [selection sort và insertion sort], và có một số thuật toán sử dụng cả hai (merge sort).
+
+Theo Sự ổn định
+Thuật toán sắp xếp ổn định nếu với tất cả các chỉ số i và j sao cho khóa A[i] bằng khóa A[j], nếu bản ghi R[i] đứng trước bản ghi R[j] trong tệp gốc, bản ghi R[i] đứng trước bản ghi R[j] trong danh sách đã sắp xếp. Một số thuật toán sắp xếp duy trì thứ tự tương đối của các phần tử có khóa bằng nhau (các phần tử tương đương giữ lại vị trí tương đối của chúng ngay cả sau khi sắp xếp).
+
+Theo Khả năng Thích nghi
+Với một số thuật toán sắp xếp, phức tạp thay đổi dựa trên tính đã được sắp xếp trước [quick sort]: tính đã sắp xếp trước của đầu vào ảnh hưởng đến thời gian chạy. Các thuật toán có tính chất này được biết đến là có khả năng thích nghi.
+
+10.4 Phân loại khác
+Một phương pháp khác để phân loại các thuật toán sắp xếp là:
+
+- Sắp xếp Nội bộ: Các thuật toán sắp xếp sử dụng bộ nhớ chính hoàn toàn trong suốt quá trình sắp xếp được gọi là các thuật toán sắp xếp nội bộ. Loại thuật toán này giả định truy cập ngẫu nhiên tốc độ cao đến tất cả bộ nhớ.
+
+- Sắp xếp Ngoại bộ: Các thuật toán sắp xếp sử dụng bộ nhớ ngoại, chẳng hạn như băng hoặc đĩa, trong suốt quá trình sắp xếp thuộc loại này.
+
+10.5 Bubble Sort
+Bubble sort là thuật toán sắp xếp đơn giản nhất. Nó hoạt động bằng cách lặp qua mảng đầu vào từ phần tử đầu tiên đến cuối cùng, so sánh từng cặp phần tử và hoán đổi chúng nếu cần. Bubble sort tiếp tục lặp qua đến khi không cần thêm hoán đổi nào nữa. Thuật toán này được đặt tên theo cách các phần tử nhỏ hơn "nổi lên" lên đầu của danh sách. Thường thì thuật toán sắp xếp chèn có hiệu suất tốt hơn bubble sort. Một số nhà nghiên cứu gợi ý rằng chúng ta không nên dạy bubble sort vì tính đơn giản và độ phức tạp thời gian cao của nó.
+
+Hiệu suất của thuật toán Bubble Sort
+Trường hợp phức tạp nhất: O(n^2)
+Trường hợp tốt nhất (phiên bản cải thiện): O(n)
+Trường hợp trung bình (phiên bản cơ bản): O(n^2)
+Trường hợp phức tạp nhất về không gian: O(1) (không gian bổ sung)
+
+10.6 Selection Sort
+Selection sort là thuật toán sắp xếp "trong chỗ". Selection sort hoạt động tốt cho các tệp nhỏ. Nó được sử dụng để sắp xếp các tệp có giá trị lớn và khóa nhỏ. Điều này bởi vì sự chọn lựa được thực hiện dựa trên khóa và việc hoán đổi chỉ được thực hiện khi cần thiết.
+
+Cách triển khai
+- gán phần tử hiện tại là nhỏ nhất
+- duyệt hết các phần tử trong danh sách
+- nếu phần tử nào bé hơn phần tử hiện tại thì gán min bằng chỉ số của nó
+- sau khi duyệt hết, hoán đổi phần tử hiện tại với phần tử min
+
+Hiệu suất của thuật toán Selection Sort
+Trường hợp phức tạp nhất: O(n^2)
+Trường hợp tốt nhất: O(n^2)
+Trường hợp trung bình: O(n^2)
+Trường hợp phức tạp nhất về không gian: O(1) (không gian bổ sung)
+
+10.7 Insertion Sort
+Insertion sort là một thuật toán so sánh đơn giản và hiệu quả. Trong thuật toán này, mỗi vòng lặp loại bỏ một phần tử từ dữ liệu đầu vào và chèn nó vào vị trí chính xác trong danh sách đang được sắp xếp. Sự lựa chọn của phần tử được loại bỏ từ dữ liệu đầu vào là ngẫu nhiên và quá trình này được lặp lại cho đến khi tất cả các phần tử đầu vào đã được xử lý.
+
+Ưu điểm của Insertion Sort
+- Dễ cài đặt: Insertion sort có cách thức cài đặt đơn giản.
+- Hiệu quả cho dữ liệu nhỏ: Insertion sort hoạt động hiệu quả cho dữ liệu nhỏ.
+- Thích ứng: Nếu danh sách đầu vào đã được sắp xếp (có thể không hoàn toàn), thì insertion sort có thời gian chạy O(n + d), trong đó d là số lần đảo ngược.
+- Thực tế hiệu quả hơn so với các thuật toán Selection và Bubble Sorts: Mặc dù tất cả đều có phức tạp thời gian xấu nhất là O(n^2).
+- Ổn định: Duy trì thứ tự tương đối của dữ liệu đầu vào nếu các khóa giống nhau.
+- Yêu cầu chỉ một lượng không gian bổ sung hằng số O(1).
+- Trực tuyến: Insertion sort có thể sắp xếp danh sách khi nó nhận được dữ liệu.
+
+Thuật toán
+Mỗi lần lặp của insertion sort loại bỏ một phần tử từ dữ liệu đầu vào và chèn nó vào vị trí chính xác trong danh sách đã được sắp xếp cho đến khi không còn phần tử đầu vào nào. Việc sắp xếp thường được thực hiện trong chỗ. Mảng kết quả sau k lần lặp có tính chất là k + 1 phần tử đầu đã được sắp xếp.
+Hiệu suất của thuật toán Insertion Sort
+Trường hợp phức tạp nhất: Θ(n^2)
+Trường hợp tốt nhất: Θ(n)
+Trường hợp trung bình: Θ(n^2)
+Trường hợp phức tạp nhất về không gian: O(n^2) (tổng cộng), O(1) (không gian bổ sung)
+
+So sánh với các Thuật toán Sắp xếp Khác
+
+Insertion sort là một trong những thuật toán sắp xếp cơ bản với thời gian phức tạp O(n^2) trong trường hợp tồi nhất. Insertion sort được sử dụng khi dữ liệu gần như đã được sắp xếp (do tính thích ứng của nó) hoặc khi kích thước đầu vào nhỏ (do chi phí thấp của nó). Vì những lý do này và tính ổn định của nó, insertion sort được sử dụng như trường hợp cơ sở đệ quy (khi kích thước vấn đề nhỏ) cho các thuật toán sắp xếp chia để trị chi phí cao hơn, chẳng hạn như merge sort hoặc quick sort.
+
+10.8 Shell Sort
+Shell sort (còn được gọi là sắp xếp Shell hoặc sắp xếp theo khoảng cách giảm dần) được phát minh bởi Donald Shell. Thuật toán sắp xếp này là một tổng quát của thuật toán sắp xếp chèn. Sắp xếp chèn hoạt động hiệu quả với đầu vào đã gần như đã được sắp xếp. Shell sort cũng được gọi là sắp xếp chèn theo khoảng cách n. Thay vì so sánh chỉ các cặp liền kề nhau, shell sort thực hiện một số lần lặp và sử dụng các khoảng cách khác nhau giữa các phần tử liền kề (kết thúc với khoảng cách 1 hoặc sắp xếp chèn cổ điển). 
+
+Trong sắp xếp chèn, sự so sánh được thực hiện giữa các phần tử liền kề. Tối đa 1 lượt đảo ngược cho mỗi sự so sánh được thực hiện với sắp xếp chèn. Biến thể được sử dụng trong shell sort là tránh so sánh các phần tử liền kề cho đến bước cuối cùng của thuật toán. Vì vậy, bước cuối cùng của shell sort thực chất là thuật toán sắp xếp chèn. Nó cải thiện sắp xếp chèn bằng cách cho phép so sánh và trao đổi các phần tử ở xa nhau. Đây là thuật toán đầu tiên có độ phức tạp dưới dạng bậc hai trong số các thuật toán sắp xếp so sánh. 
+
+Shellsort thực tế là một sự mở rộng đơn giản của sắp xếp chèn. Sự khác biệt chính là khả năng trao đổi các phần tử ở xa nhau, làm cho nó nhanh hơn để các phần tử đến vị trí của chúng. Ví dụ, nếu phần tử nhỏ nhất nằm ở cuối mảng, với sắp xếp chèn, nó sẽ cần toàn bộ mảng bước để đưa phần tử này đến đầu mảng. Tuy nhiên, với shell sort, phần tử này có thể nhảy hơn một bước và đạt đúng vị trí trong ít trao đổi hơn. 
+
+Ý tưởng cơ bản trong shellsort là trao đổi mọi phần tử hth trong mảng. Bây giờ chúng ta sẽ nói thêm về điều này, h xác định cách xa trao đổi phần tử có thể xảy ra, ví dụ như lấy h là 13, phần tử đầu tiên (chỉ số 0) được trao đổi với phần tử thứ 14 (chỉ số 13) nếu cần (tất nhiên). Phần tử thứ hai với phần tử thứ 15, và cứ thế. Bây giờ nếu chúng ta lấy h bằng 1, thì nó chính xác giống như sắp xếp chèn thông thường. 
+
+Shellsort hoạt động bằng cách bắt đầu với h đủ lớn (nhưng không lớn hơn kích thước mảng) để cho phép trao đổi phần tử phù hợp ở xa nhau. Khi một lần sắp xếp hoàn thành với h cụ thể, mảng có thể được coi như h-đã sắp xếp. Bước tiếp theo là giảm h bằng một chuỗi cụ thể, và thực hiện một lần sắp xếp h khác. Khi h là 1 và đã được sắp xếp theo h, mảng đã hoàn toàn được sắp xếp. Lưu ý rằng chuỗi cuối cùng cho ft là 1, vì vậy lần sắp xếp cuối cùng luôn là sắp xếp chèn, ngoại trừ lúc này mảng đã được hình thành và dễ dàng để sắp xếp hơn. 
+
+Shell sort sử dụng một chuỗi tăng h1, h2, ..., ht được gọi là chuỗi tăng. Bất kỳ chuỗi tăng nào cũng tốt miễn là h1 = 1 và một số lựa chọn tốt hơn. Shell sort thực hiện nhiều lần lặp qua danh sách đầu vào và sắp xếp một số tập hợp có kích thước bằng nhau bằng cách sử dụng sắp xếp chèn. Shell sort cải thiện hiệu suất của sắp xếp chèn bằng cách nhanh chóng dịch chuyển giá trị đến vị trí của chúng. 
+
+Chú ý rằng khi h == 1, thuật toán thực hiện một vòng lặp qua toàn bộ danh sách, so sánh các phần tử liền kề, nhưng thực hiện rất ít trao đổi phần tử. Đối với
+h == 1, shell sort hoạt động giống như sắp xếp chèn, ngoại trừ số lần đảo ngược phải được loại bỏ đã được giảm đáng kể bởi các bước trước của thuật toán với h > 1.
+
+Phân tích Shell Sort
+Shell sort hiệu quả cho các danh sách có kích thước trung bình. Đối với các danh sách lớn, thuật toán không phải là sự lựa chọn tốt nhất. Đây là thuật toán nhanh nhất trong tất cả các thuật toán sắp xếp O(n2). Nhược điểm của Shell sort là nó là một thuật toán phức tạp và không hiệu quả như sắp xếp trộn, sắp xếp heap và sắp xếp nhanh. Shell sort chậm hơn đáng kể so với sắp xếp trộn, sắp xếp heap và sắp xếp nhanh, nhưng là một thuật toán tương đối đơn giản, điều này làm cho nó là một lựa chọn tốt cho việc sắp xếp danh sách có ít hơn 5000 mục, trừ khi tốc độ quan trọng. Nó cũng là một lựa chọn tốt cho việc sắp xếp lặp lại các danh sách nhỏ hơn. Trường hợp tốt nhất trong Shell sort là khi mảng đã được sắp xếp theo thứ tự đúng. Số lần so sánh ít hơn. Thời gian chạy của Shell sort phụ thuộc vào việc lựa chọn chuỗi tăng. 
+
+Hiệu suất
+Độ phức tạp trong trường hợp xấu nhất phụ thuộc vào độ dài chuỗi. Tốt nhất đã biết: O(nlog2n) 
+Trong trường hợp tốt nhất: O(n) 
+Độ phức tạp trung bình phụ thuộc vào độ dài chuỗi
+Độ phức tạp không gian trong trường hợp xấu nhất: O(n)
+
+10.9 Sắp xếp trộn (Merge Sort)
+Sắp xếp trộn là một ví dụ về chiến lược chia để trị. **Ghi chú Quan trọng**
+- Trộn là quá trình kết hợp hai tệp đã được sắp xếp để tạo thành một tệp lớn hơn đã được sắp xếp.
+- Chọn là quá trình chia một tệp thành hai phần: k phần tử nhỏ nhất và n - k phần tử lớn nhất.
+- Chọn và trộn là hai phép toán đối nghịch
+   + Chọn chia một danh sách thành hai danh sách
+   + Trộn kết hợp hai tệp để tạo thành một tệp
+
+Sắp xếp trộn là sự bổ sung của Sắp xếp nhanh (Quick Sort).
+- Sắp xếp trộn truy cập dữ liệu theo cách tuần tự.
+- Thuật toán này được sử dụng để sắp xếp một danh sách liên kết.
+- Sắp xếp trộn không nhạy cảm với thứ tự ban đầu của đầu vào của nó.
+
+Trong Sắp xếp nhanh, hầu hết công việc được thực hiện trước các cuộc gọi đệ quy. Sắp xếp nhanh bắt đầu với tệp con lớn nhất và kết thúc bằng các tệp con nhỏ hơn, dẫn đến việc cần sử dụng ngăn xếp (stack). Hơn nữa, thuật toán này không ổn định.
+
+Trong Sắp xếp trộn, danh sách được chia thành hai phần, sau đó từng phần được xử lý riêng biệt. Sắp xếp trộn bắt đầu với các tệp con nhỏ hơn và kết thúc bằng tệp con lớn nhất. Kết quả là thuật toán này không cần ngăn xếp và là ổn định.
+
+10.11 Sắp xếp nhanh (Quick Sort)
+
+Sắp xếp nhanh là một ví dụ về kỹ thuật thuật toán chia để trị. Nó còn được gọi là sắp xếp trao đổi phân đoạn. Nó sử dụng cuộc gọi đệ quy để sắp xếp các phần tử, và nó là một trong những thuật toán nổi tiếng trong các thuật toán sắp xếp dựa trên so sánh. Chiến lược:
+- Chia: Mảng A[low ... high] được chia thành hai mảng con không rỗng A[low ... q] và A[q + 1... high], sao cho mỗi phần tử của A[low ... high] nhỏ hơn hoặc bằng mỗi phần tử của A[q + 1... high]. Chỉ số q được tính toán là một phần của quy trình chia này.
+- Trị: Hai mảng con A[low ... q] và A[q + 1 ... high] được sắp xếp bằng các cuộc gọi đệ quy đến Sắp xếp nhanh.
+
+Thuật toán
+Thuật toán đệ quy bao gồm bốn bước:
+1) Nếu trong mảng cần sắp xếp chỉ có một hoặc không có phần tử, thì trả về.
+2) Chọn một phần tử trong mảng để đóng vai trò là điểm "pivot" (thường là phần tử ở vị trí bên trái nhất trong mảng).
+3) Chia mảng thành hai phần - một phần chứa các phần tử lớn hơn pivot và phần còn lại chứa các phần tử nhỏ hơn pivot.
+4) Lặp đệ quy thuật toán cho cả hai phần của mảng ban đầu.
+
+Phân Tích
+Giả định rằng T(n) là phức tạp của Sắp xếp nhanh và giả sử tất cả các phần tử đều khác nhau. Đệ quy cho T(n) phụ thuộc vào hai kích thước vấn đề con, phụ thuộc vào phần tử phân đoạn. Nếu pivot là phần tử thứ i nhỏ nhất, thì chính xác (i - 1) phần tử sẽ ở phần trái và (n - i) ở phần phải. Gọi nó là phân chia i. Vì mỗi phần tử có xác suất bằng nhau được chọn làm pivot, xác suất chọn phần tử thứ i là 1/n.
+
+Trường hợp tốt nhất (Best Case): Mỗi phân chia chia mảng thành hai nửa và cho ra: 
+	T(n) = 2T(n/2) + Θ(n) = Θ(nlogn)		 [sử dụng công thức chia để trị của master theorem]
+
+Trường hợp xấu nhất (Worst Case): Mỗi phân chia cho ra các phân chia không cân đối và ta có
+	T(n) = T(n – 1) + Θ(n) = Θ(n^2)			 [sử dụng công thức trừ để trị của master theorem]
+
+Trường hợp xấu nhất xảy ra khi danh sách đã được sắp xếp và phần tử cuối cùng được chọn làm pivot.
+
+Trường hợp trung bình (Average Case): Trong trường hợp trung bình của Sắp xếp nhanh, chúng ta không biết nơi phân chia xảy ra. Vì lý do này, chúng ta xem xét tất cả các vị trí chia có thể, cộng tất cả các phức tạp tương ứng và chia cho n để có phức tạp trung bình.  Độ phức tạp thời gian, T(n) = O(nlogn).
+
+Hiệu suất
+- Phức tạp trường hợp xấu nhất: O(n^2)
+- Phức tạp trường hợp tốt nhất: O(nlogn)
+- Phức tạp trường hợp trung bình: O(nlogn)
+- Phức tạp không gian trường hợp xấu nhất: O(1)
+
+Sắp xếp nhanh ngẫu nhiên (Randomized Quick Sort)
+Trong hành vi trường hợp trung bình của Sắp xếp nhanh, ta giả định rằng tất cả các sắp xếp của các số đầu vào đều có xác suất bằng nhau. Tuy nhiên, ta không thể luôn kỳ vọng điều này đúng. Ta có thể thêm sự ngẫu nhiên vào một thuật toán để giảm xác suất xảy ra trường hợp xấu trong Sắp xếp nhanh. Có hai cách để thêm ngẫu nhiên vào Sắp xếp nhanh: hoặc bằng cách đặt dữ liệu đầu vào một cách ngẫu nhiên vào mảng hoặc bằng cách chọn ngẫu nhiên một phần tử trong dữ liệu đầu vào để làm pivot. Lựa chọn thứ hai dễ dàng hơn để phân tích và thực hiện. Sự thay đổi chỉ diễn ra trong thuật toán phân chia.
+
+Trong Sắp xếp nhanh thông thường, phần tử pivot luôn là phần tử ở vị trí bên trái nhất trong danh sách cần sắp xếp. Thay vì luôn sử dụng A[low] làm pivot, phiên bản ngẫu nhiên của Sắp xếp nhanh sẽ sử dụng một phần tử được chọn ngẫu nhiên từ mảng con A[low..high]. Việc này được thực hiện bằng cách trao đổi phần tử A[low] với một phần tử được chọn ngẫu nhiên từ A[low..high]. Điều này đảm bảo rằng phần tử pivot có khả năng bằng nhau để là một trong các phần tử high - low + 1 trong mảng con. Vì phần tử pivot được chọn ngẫu nhiên, ta có thể kỳ vọng việc chia mảng đầu vào là cân đối hợp lý trên trung bình. Điều này có thể giúp ngăn chặn tình trạng xấu nhất của Sắp xếp nhanh xảy ra trong trường hợp phân chia không cân đối. Mặc dù phiên bản ngẫu nhiên cải thiện phức tạp trong trường hợp xấu nhất, phức tạp xấu nhất của nó vẫn là O(n^2). Một cách để cải thiện Sắp xếp ngẫu nhiên là chọn pivot cho phân chia cẩn thận hơn bằng cách chọn trung vị của một tập hợp 3 phần tử được chọn ngẫu nhiên từ mảng.
+
+10.14 Các Thuật toán Sắp xếp Tuyến tính
+Trong các phần trước, chúng ta đã thấy nhiều ví dụ về các thuật toán sắp xếp dựa trên so sánh. Trong số chúng, thuật toán sắp xếp dựa trên so sánh tốt nhất có phức tạp O(nlogn). Trong phần này, chúng ta sẽ thảo luận về các loại thuật toán khác: Các Thuật toán Sắp xếp Tuyến tính. Để cải thiện phức tạp thời gian của việc sắp xếp với các thuật toán này, chúng ta đưa ra một số giả định về đầu vào. Một số ví dụ về Các Thuật toán Sắp xếp Tuyến tính bao gồm:
+ • Sắp xếp Đếm
+ • Sắp xếp Thùng
+ • Sắp xếp Cơ số
+
+10.15 Sắp xếp Đếm
+Sắp xếp đếm không phải là thuật toán sắp xếp dựa trên so sánh và có phức tạp O(n) cho việc sắp xếp. Để đạt được phức tạp O(n), sắp xếp đếm giả định rằng mỗi phần tử trong tập hợp là một số nguyên trong khoảng từ 1 đến K, với K là một số nguyên nào đó. Khi n = O(n), thuật toán sắp xếp đếm chạy trong thời gian O(n). Ý tưởng cơ bản của sắp xếp đếm là xác định, đối với mỗi phần tử đầu vào X, số lượng phần tử nhỏ hơn X. Thông tin này có thể được sử dụng để đặt X trực tiếp vào vị trí đúng của nó. Ví dụ, nếu có 10 phần tử nhỏ hơn X, thì X thuộc vị trí thứ 11 trong đầu ra. Trong đoạn mã dưới đây, A[0 ..n – 1] là mảng đầu vào có độ dài n. Trong sắp xếp đếm, chúng ta cần thêm hai mảng nữa: hãy giả sử mảng B[0 ..n – 1] chứa đầu ra đã sắp xếp và mảng C[0 ..K – 1] cung cấp bộ nhớ tạm thời.
+
+Tổng phức tạp: O(K) + O(n) + O(K) + O(n) = O(n) nếu K = O(n). Phức tạp không gian: O(n) nếu K = O(n). Lưu ý: Sắp xếp đếm hoạt động tốt nếu K = O(n). Ngược lại, phức tạp sẽ lớn hơn.
+
+10.16 Sắp xếp Thùng (hoặc Sắp xếp Bin)
+Tương tự như sắp xếp đếm, sắp xếp thùng cũng áp đặt các hạn chế về đầu vào để cải thiện hiệu suất. Nói cách khác, sắp xếp thùng hoạt động tốt nếu đầu vào được lấy từ tập hợp cố định. Sắp xếp thùng là sự tổng quát của Sắp xếp Đếm. Ví dụ, giả sử tất cả các phần tử đầu vào đều thuộc {0, 1, . . . , K – 1}, tức là tập hợp các số nguyên trong khoảng [0, K – 1]. Điều này có nghĩa, K là số lượng các phần tử riêng biệt trong đầu vào. Sắp xếp thùng sử dụng K bộ đếm. Bộ đếm thứ i theo dõi số lần xuất hiện của phần tử thứ i. Sắp xếp thùng với hai thùng thực chất là phiên bản của thuật toán Sắp xếp Nhanh với hai thùng.
+
+Đối với sắp xếp thùng, hàm băm được sử dụng để chia các phần tử trong mảng đầu vào, để nhiều khóa có thể băm vào cùng một thùng. Do đó, mỗi thùng phải thực sự là một danh sách có thể mở rộng; tương tự như sắp xếp cơ số. Trong mã dưới đây, sắp xếp chèn được sử dụng để sắp xếp mỗi thùng. Điều này để thể hiện rằng thuật toán sắp xếp thùng không chỉ định phương pháp sắp xếp nào được sử dụng trên các thùng. Một người lập trình có thể tiếp tục sử dụng sắp xếp thùng liên tục trên mỗi thùng cho đến khi tập hợp được sắp xếp (theo cách của chương trình sắp xếp cơ số dưới đây). Bất kể phương pháp sắp xếp nào được sử dụng trên các thùng, sắp xếp thùng vẫn hướng đến O(n).
+
+Phức tạp thời gian: O(n). Phức tạp không gian: O(n).
+
+10.17 Sắp xếp Cơ số (Radix Sort)
+Tương tự như sắp xếp đếm và sắp xếp thùng, thuật toán sắp xếp cơ số này cũng giả định một số thông tin về các phần tử đầu vào. Giả sử các giá trị đầu vào cần được sắp xếp thuộc hệ cơ số d. Điều này có nghĩa tất cả các số là các số có d chữ số. Trong sắp xếp cơ số, trước tiên sắp xếp các phần tử dựa trên chữ số cuối cùng (chữ số ít quan trọng nhất). Kết quả này sau đó lại được sắp xếp theo chữ số thứ hai (chữ số tiếp theo ít quan trọng nhất). Tiếp tục quá trình này cho tất cả các chữ số cho đến khi đạt đến các chữ số quan trọng nhất. Sử dụng một phương pháp sắp xếp ổn định nào đó để sắp xếp chúng theo chữ số cuối cùng. Sau đó ổn định sắp xếp chúng theo chữ số thứ hai ít quan trọng nhất, sau đó là thứ ba, v.v. Nếu chúng ta sử dụng sắp xếp đếm làm phương pháp sắp xếp ổn định, tổng thời gian là O(nd) ≈ O(n).
+
+Thuật toán:
+1) Lấy chữ số ít quan trọng của mỗi phần tử.
+2) Sắp xếp danh sách các phần tử dựa trên chữ số đó, nhưng giữ nguyên thứ tự của các phần tử có cùng chữ số (đây là định nghĩa của sắp xếp ổn định).
+3) Lặp lại việc sắp xếp với mỗi chữ số quan trọng hơn.
+
+Tốc độ của sắp xếp cơ số phụ thuộc vào các hoạt động cơ bản bên trong. Nếu các hoạt động không đủ hiệu quả, sắp xếp cơ số có thể chậm hơn các thuật toán khác như Sắp xếp Nhanh và Sắp xếp Trộn. Các hoạt động này bao gồm các chức năng chèn và xóa của các danh sách con và quá trình cô lập chữ số chúng ta muốn. Nếu các số không có cùng độ dài thì cần kiểm tra xem có chữ số bổ sung cần được sắp xếp. Đây có thể là một trong những phần chậm nhất của sắp xếp cơ số và cũng là một trong những khía cạnh khó làm cho nó hiệu quả. Vì sắp xếp cơ số phụ thuộc vào các chữ số hoặc chữ cái, nó ít linh hoạt hơn so với các loại sắp xếp khác. Đối với mỗi loại dữ liệu khác nhau, sắp xếp cơ số cần được viết lại, và nếu thay đổi thứ tự sắp xếp, sắp xếp cần phải viết lại lại. Tóm lại, sắp xếp cơ số tốn nhiều thời gian để viết và rất khó để viết một sắp xếp cơ số mục đích chung có thể xử lý tất cả các loại dữ liệu. Đối với nhiều chương trình cần sắp xếp nhanh, sắp xếp cơ số là một lựa chọn tốt. Tuy nhiên, vẫn có các thuật toán sắp xếp nhanh hơn, điều này là một trong những lý do tại sao sắp xếp cơ số không được sử dụng nhiều như một số loại sắp xếp khác. Phức tạp thời gian: O(nd) ≈ O(n), nếu d nhỏ.
+
+10.18 Introsort 
+Intro_sort bắt đầu với quicksort, và nếu độ sâu đệ quy vượt quá một giới hạn cụ thể, nó chuyển sang Heapsort để tránh trường hợp xấu O(n^2) của quicksort. Nó cũng sử dụng sắp xếp chèn khi số lượng phần tử cần sắp xếp khá ít. Vì vậy, trước tiên nó tạo ra một phân vùng. Có ba trường hợp phát sinh từ đây.
+
+1.Nếu kích thước phân vùng có khả năng vượt quá giới hạn độ sâu tối đa, Introsort chuyển sang Heapsort. Chúng ta định nghĩa giới hạn độ sâu tối đa là 2*log(N).
+2. Nếu kích thước phân vùng quá nhỏ, thì Quicksort giảm thành Insertion Sort. Chúng ta định nghĩa điểm cắt này là 16 (do nghiên cứu). Vì vậy, nếu kích thước phân vùng nhỏ hơn 16 thì chúng ta sẽ thực hiện sắp xếp chèn.
+3. Nếu kích thước phân vùng nằm dưới giới hạn và không quá nhỏ (tức là từ 16 đến 2*log(N)), thì nó thực hiện quicksort đơn giản.
+
+Tại sao Introsort lại tốt hơn so với Quicksort đơn giản hoặc Tại sao cần Introsort?
+Vì Quicksort có thể có trường hợp xấu là O(N2) và nó cũng làm tăng không gian ngăn xếp đệ quy (O(log N) nếu áp dụng đệ quy đuôi), vì vậy để tránh tất cả những điều này, chúng ta cần chuyển thuật toán từ Quicksort sang một thuật toán khác nếu có cơ hội của trường hợp xấu. Vì vậy, Introsort giải quyết vấn đề này bằng cách chuyển sang Heapsort. Ngoài ra, do hệ số hằng số lớn hơn, Quicksort có thể thực hiện thậm chí còn kém hơn thuật toán sắp xếp O(N2) khi N đủ nhỏ. Vì vậy, nó chuyển sang sắp xếp chèn để giảm thời gian chạy của sắp xếp. Nếu việc chọn trục xấu thực hiện, thì Quicksort không tốt hơn cả sắp xếp nổi bọt.
+
+Tại sao lại sử dụng sắp xếp chèn (mà không phải sắp xếp nổi bọt, v.v)?
+Sắp xếp chèn có những ưu điểm sau:
+
+1. Đó là một sự thật đã biết và đã được thiết lập rằng sắp xếp chèn là thuật toán sắp xếp dựa trên so sánh tối ưu nhất cho các mảng nhỏ.
+2. Nó có một tính chất về khả năng tham chiếu tốt.
+3. Đó là thuật toán sắp xếp thích ứng, nghĩa là nó vượt trội hơn tất cả các thuật toán khác nếu các phần tử mảng được sắp xếp một phần.
+
+Tại sao lại sử dụng Heapsort (mà không phải Mergesort, v.v)?
+Điều này hoàn toàn do yêu cầu về bộ nhớ. Mergesort yêu cầu không gian O(N) trong khi Heapsort là một thuật toán in-place O(1) space.
+
+Tại sao không sử dụng Heapsort thay thế Quicksort khi kích thước phân vùng nằm dưới giới hạn?
+Câu hỏi này giống như tại sao Quicksort thường vượt trội hơn Heapsort? Câu trả lời là, mặc dù Heapsort cũng có O(N log N) trong trường hợp trung bình và xấu nhất cũng như không gian O(1), chúng ta vẫn không sử dụng nó khi kích thước phân vùng nằm dưới giới hạn vì hệ số hằng số bổ sung ẩn trong Heapsort lớn hơn đáng kể so với Quicksort.
+
+10.19.Tim_sort
+Tim Sort là một thuật toán sắp xếp kết hợp được tạo ra từ sắp xếp trộn và sắp xếp chèn. Nó được thiết kế để hoạt động tốt trên nhiều loại dữ liệu thực tế. Tim Sort là thuật toán sắp xếp mặc định được sử dụng bởi các hàm sorted() và list.sort() trong Python.
+
+Thuật toán Tim Sort
+Ý tưởng chính sau Tim Sort là tận dụng thứ tự hiện có trong dữ liệu để giảm thiểu số lượng so sánh và hoán đổi. Điều này được thực hiện bằng cách chia mảng thành các phần con nhỏ gọi là "runs," đã được sắp xếp và sau đó ghép các runs này bằng cách sử dụng một biến thể của thuật toán sắp xếp trộn.
+
+Cách Tim Sort hoạt động
+Hãy xem xét một mảng ví dụ: arr[] = {4, 2, 8, 6, 1, 5, 9, 3, 7}.
+
+Bước 1: Xác định kích thước của run
+Kích thước run tối thiểu: 32 (chúng ta sẽ bỏ qua bước này vì mảng của chúng ta nhỏ)
+
+Bước 2: Chia mảng thành runs
+Trong bước này, chúng ta sử dụng sắp xếp chèn để sắp xếp các phần con nhỏ (runs) trong mảng.
+Mảng ban đầu: [4, 2, 8, 6, 1, 5, 9, 3, 7]
+Không có runs ban đầu, vì vậy chúng ta sẽ tạo runs bằng cách sắp xếp chèn.
+Runs đã sắp xếp: [2, 4], [6, 8], [1, 5, 9], [3, 7]
+Mảng được cập nhật: [2, 4, 6, 8, 1, 5, 9, 3, 7]
+
+Bước 3: Ghép các runs
+Trong bước này, chúng ta sẽ ghép các runs đã sắp xếp bằng cách sử dụng một biến thể của thuật toán sắp xếp trộn.
+Ghép các runs cho đến khi toàn bộ mảng được sắp xếp.
+Các runs đã ghép: [2, 4, 6, 8], [1, 3, 5, 7, 9]
+Mảng được cập nhật: [2, 4, 6, 8, 1, 3, 5, 7, 9]
+
+Bước 4: Điều chỉnh kích thước run
+Sau mỗi thao tác ghép, chúng ta tăng gấp đôi kích thước run cho đến khi nó vượt quá độ dài của mảng.
+Kích thước run tăng gấp đôi: 32, 64, 128 (chúng ta sẽ bỏ qua bước này vì mảng của chúng ta nhỏ)
+
+Bước 5: Tiếp tục ghép
+Lặp lại quá trình ghép cho đến khi toàn bộ mảng được sắp xếp.
+Run đã ghép cuối cùng: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+Mảng đã sắp xếp cuối cùng là [1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+10.20 Sắp xếp Ngoại vi (External Sorting)
+
+Sắp xếp ngoại vi là một thuật ngữ chung cho một loạt các thuật toán sắp xếp có thể xử lý lượng lớn dữ liệu. Những thuật toán sắp xếp ngoại vi này hữu ích khi tập tin quá lớn và không thể chứa vào bộ nhớ chính. Tương tự như thuật toán sắp xếp trong, có nhiều thuật toán khác nhau cho việc sắp xếp ngoại vi. Một thuật toán như vậy là External Mergesort. Trong thực tế, những thuật toán sắp xếp ngoại vi này thường được bổ sung bởi các thuật toán sắp xếp trong.
+
+External Mergesort đơn giản
+
+Một số bản ghi từ mỗi băng được đọc vào bộ nhớ chính, được sắp xếp bằng cách sử dụng một thuật toán sắp xếp trong, và sau đó xuất ra băng. Vì sự rõ ràng, hãy giả sử rằng cần phải sắp xếp 900 megabyte dữ liệu bằng cách sử dụng chỉ 100 megabyte RAM.
+
+1) Đọc 100MB dữ liệu vào bộ nhớ chính và sắp xếp bằng một phương pháp thông thường (chẳng hạn như Quick sort).
+2) Ghi dữ liệu đã sắp xếp vào đĩa.
+3) Lặp lại bước 1 và 2 cho đến khi tất cả dữ liệu được sắp xếp thành các phần nhỏ có kích thước 100MB. Bây giờ chúng ta cần ghép chúng thành một tập tin đầu ra đã sắp xếp duy nhất.
+4) Đọc 10MB đầu tiên của mỗi phần nhỏ đã sắp xếp (gọi chúng là bộ đệm đầu vào) vào bộ nhớ chính (tổng cộng 90MB) và cấp phát 10MB còn lại cho bộ đệm đầu ra.
+5) Thực hiện phân loại ghép 9 chiều và lưu kết quả vào bộ đệm đầu ra. Nếu bộ đệm đầu ra đã đầy, ghi nó vào tập tin đầu ra đã sắp xếp cuối cùng. Nếu bất kỳ trong số 9 bộ đệm đầu vào nào trở thành trống, điền chúng bằng 10MB tiếp theo của phần nhỏ đã sắp xếp 100MB tương ứng; hoặc nếu không còn dữ liệu nào trong phần nhỏ đã sắp xếp, đánh dấu nó là đã cạn kiệt và không sử dụng nó để ghép. 
+
+Thuật toán trên có thể tổng quát hóa bằng cách giả định rằng lượng dữ liệu cần được sắp xếp vượt quá bộ nhớ có sẵn một hệ số K. Sau đó, cần sắp xếp K phần dữ liệu và thực hiện phân loại K chiều. Nếu X là lượng bộ nhớ chính có sẵn, sẽ có K bộ đệm đầu vào và 1 bộ đệm đầu ra, mỗi bộ đệm đầu ra có kích thước X/(K + 1). Tùy thuộc vào các yếu tố khác nhau (tốc độ ổ cứng là bao nhiêu?), hiệu suất tốt hơn có thể đạt được nếu bộ đệm đầu ra được làm lớn hơn (ví dụ, gấp đôi kích thước của một bộ đệm đầu vào).
+
+Phức tạp của Sắp xếp Ngoại vi 2 chiều: Trong mỗi lượt, chúng ta đọc + ghi mỗi trang trong tập tin. Hãy giả sử có n trang trong tập tin. Điều đó có nghĩa chúng ta cần ⌈logn⌉ + 1 lượt. Tổng chi phí là 2n(⌈logn⌉ + 1).
+
+Dưới đây là chương trình chứa các thuật toán sắp xếp phía trên, được trình bày bằng ngôn ngữ C++
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <random>
+#include <cmath>
+constexpr int length = 40;
+using namespace std;
+inline void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+void bubble_sort(vector<int> &a) {
+    int n = a.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[i] > a[j])
+                swap(a[i], a[j]);
+        }
+    }
+}
+void selection_sort(vector<int> &arr) {
+    int min;
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        min = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min])
+                min = j;
+        }
+        if(i != min)
+        swap(arr[min], arr[i]);
+    }
+}
+void insertion_sort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 1; i < n; i++) {
+        int key = arr.at(i);
+        int j = i;
+        while(arr[j-1] > key && j > 0) {
+        arr[j] = arr[j - 1];
+        j--;
+        }
+        arr.at(j) = key;
+    }
+}
+void shell_sort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = n / 2; i >= 1; i /=2) {
+        for (int j = i; j < n; j++) {
+            int key = arr.at(j);
+            int k = j;
+            while (k >= i && key < arr[k - i]) {
+                arr[k] = arr[k - i];
+                k = k - i;
+            }
+            arr[k] = key;
+        }
+    }
+}
+void heap_sort(vector<int> &arr) { 
+    priority_queue<int, vector<int>, greater<int>> heap;
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        heap.emplace(arr.at(i));
+    }
+    for (int i = 0; i < n; i++) {
+        arr.at(i) = heap.top(); heap.pop();
+    }
+}
+void merge(vector<int>& arr, int l, int m, int r) {
+    //i la chi so cua mang left, j la chi so cua mang right
+    int i, j = 0, k = l;
+    // n_1, n_2 la do dai cua mang left va right
+    int n_1 = m - l + 1;
+    int n_2 = r - m;
+    vector<int> left(n_1);
+    vector<int> right(n_2);
+    // chia
+    for (int i = 0; i < n_1; i++) {
+        left[i] = arr[l+i]; 
+    }
+    for (int i = 0; i < n_2; i++) {
+        right[i] = arr[m+1+i];
+    }
+    // tron
+    i = 0;
+    while (i < n_1 && j < n_2) {
+        arr[k++] = (left[i] <= right[j]) ? left[i++] : right[j++]; // i++, j++, k++ la de tang gia tri cua chung sau khi thuc                     
+    }                                                              // hien cau lenh
+    while (i < n_1) {
+        arr[k++] = left[i++];
+    }
+    while (j < n_2) {
+        arr[k++] = right[j++];
+    }
+}
+void merge_sort(vector<int>& arr, int l, int r) {
+    if (l < r) {
+        int mid = l + (r-l) / 2;
+        merge_sort(arr, l, mid);
+        merge_sort(arr, mid+1, r);
+        merge(arr, l, mid, r);
+    }
+}
+int patrition(vector<int>& arr, int l, int r) {
+    int pi = arr[r];
+    int i = l - 1 ;
+    for (int j = l; j < r; j++) {
+        if (pi > arr[j]) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }    
+    swap(arr[r], arr[i+1]);
+    return i + 1;
+}    
+void quick_sort(vector<int>& arr, int l, int r) {
+    if (l < r) {
+        int pi = patrition(arr, l, r);
+        quick_sort(arr, l, pi - 1);
+        quick_sort(arr, pi + 1, r);
+    }
+}
+void counting_sort(vector<int> &arr, int k) {
+    vector<int> temp(k + 1, 0);
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        temp[arr[i]]++;
+    }
+    int x = 0, i = 0;
+    while(x <= k) {
+        int m = temp[x];
+        for (int j = 0; j < m; j++) {
+            arr[i] = x;
+            i++;
+        }
+        x++;
+    }
+}
+void bucket_sort(vector<int> arr, int k) {
+    int s = arr.size();
+    int n;
+    if (s < 10000) {
+        quick_sort(arr, 0, s - 1);
+        return;
+    }
+    else n = ceil(static_cast<float>(k) / 10000) + 1;
+    if (k % 10 == 0) n++;
+    vector<vector<int>> bucket(n);
+    for (int i = 0; i < s; i++) {
+        int index = arr[i] / 10000;
+        bucket.at(index).emplace_back(arr[i]);
+    }
+    for (int i = 0; i < n; i++) {
+        int k = bucket.at(i).size() - 1;
+        quick_sort(bucket.at(i), 0, k);
+    }
+    int j = 0;
+    for (int i = 0; i < n; i++) {
+        int x = 0;
+        int size = bucket.at(i).size();
+        while (x < size) {
+            arr[j] = bucket.at(i)[x];
+            j++; x++;
+        }
+    }
+}
+//for intro_sort
+void insertion_sort_2(vector<int>& arr, int left, int right) {
+    for (int i = left + 1; i <= right; i++) {
+        int k = arr[i];
+        int j = i;
+        while (j > left && k < arr[j - 1]) {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        arr[j] = k;
+    }
+}
+void heap_sort_2(vector<int>& arr, int left, int right) {
+    priority_queue<int, vector<int>, greater<int>> heap;
+    for (int i = left; i <= right; i++) {
+        heap.emplace(arr.at(i));
+    }
+    for (int i = left; i <= right; i++) {
+        arr.at(i) = heap.top(); heap.pop();
+    }
+}
+void quick_sort_2(vector<int>& arr, int l, int r, int deep) {
+    if (r - l > length && deep > 0) {
+        int pivot = patrition(arr, l, r);
+        deep--;
+        quick_sort_2(arr, l, pivot - 1, deep);
+        quick_sort_2(arr, pivot + 1, r, deep);
+    }
+    else if (r - l > length && deep == 0) {
+        heap_sort_2(arr, l, r);
+    }
+    else {
+        insertion_sort_2(arr, l, r);
+    }
+}
+void intro_sort(vector<int>& arr) {
+    int l = 0, r = arr.size() - 1;
+    int deep = 2 * log2(r + 1);
+    quick_sort_2(arr, l, r, deep);
+}
+//for tim_sort
+void tim_sort(vector<int>& arr) {
+    if (arr.size() < length) {
+        insertion_sort(arr); return;
+    }
+    int size = arr.size();
+    // so mang nho duoc chia ra
+    int count;
+    if (size % length == 0) {
+        count = size / length;
+    }
+    else count = size / length + 1;
+    for (int i = 0; i < count; i++) {
+        int left = i * length;
+        int right;
+        // mang con cuoi cung
+        if (i == count - 1) right = size - 1;
+        else right = left + length - 1;
+        insertion_sort_2(arr, left, right);
+    }
+    int k = 1;
+    while (count > 1) {
+        for (int i = 0; i < count / 2; i++) {
+            int left = length * 2 * i * k;
+            int mid = left + length * k - 1;
+            int right;
+            if (count % 2 == 0) {
+                if (i == count / 2 - 1) {
+                    right = size - 1;
+                }
+                else {
+                    right = mid + length * k;
+                }
+            }
+            else {
+                right = mid + length * k;
+            }
+            merge(arr, left, mid, right);
+        }
+        k = k * 2;
+        if (count % 2 == 0) {
+            count = count / 2;
+        }
+        else {
+            count = count / 2 + 1;
+        }
+    }
+}
+int main() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    
+    // Định nghĩa phạm vi cho giá trị ngẫu nhiên (ở đây là từ -1000 đến 1000)
+    std::uniform_int_distribution<> dis(0, 10000000);
+    
+    // Khởi tạo vector và thêm các phần tử ngẫu nhiên vào
+    std::vector<int> randomVector;
+    for (int i = 0; i < 10000000; ++i) {
+        randomVector.push_back(dis(gen));
+    }
+    clock_t start_time, end_time;
+	double total_time;
+    cout << "100 phan tu dau tien khi chua sap xep: ";
+    for (int i = 0; i < 100; i++) {
+        cout << randomVector.at(i) << ' ';
+    }
+	start_time = clock();
+    intro_sort(randomVector);
+    end_time = clock();
+	// tinh tong thoi gian chay, don vi la ticks
+	total_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+    cout << "\n\nsap xep mang 10 trieu phan tu ton so thoi gian la: " << total_time  << 's' << endl << endl;
+    cout << "\n\n100 phan tu dau tien: ";
+    for (int i = 0; i < 100; i ++) {
+        cout << randomVector[i] << ' ';
+    }
+    /*cout << "\n100 phan tu cuoi cung: ";
+    for (int i = 10000000 - 100; i < 10000000; i++) {
+        cout << randomVector.at(i) << ' ';
+    }*/
+    return 0;
+}
+
+
+																													Viết xong vào ngày 15/8/2023

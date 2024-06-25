@@ -1,0 +1,18 @@
+8.1 Giới thiệu
+
+Trong chương này, chúng ta sẽ biểu diễn một khái niệm toán học quan trọng: tập hợp. Điều này liên quan đến cách biểu diễn một nhóm các phần tử mà không cần bất kỳ thứ tự nào. Cấu trúc dữ liệu "disjoint sets" được sử dụng cho mục đích này. Nó được sử dụng để giải quyết vấn đề tương đương. Nó rất đơn giản để triển khai. Một mảng đơn giản có thể được sử dụng để triển khai, và mỗi chức năng chỉ cần một vài dòng mã. Cấu trúc dữ liệu "disjoint sets" hoạt động như một cấu trúc dữ liệu phụ trợ cho nhiều thuật toán khác (ví dụ như thuật toán Kruskal trong lý thuyết đồ thị). Trước khi bắt đầu cuộc thảo luận về cấu trúc dữ liệu "disjoint sets", hãy xem xét một số tính chất cơ bản của các tập hợp.
+
+8.2 Mối Quan Hệ Tương Đương và Các Lớp Tương Đương
+
+Đối với cuộc thảo luận dưới đây, hãy giả sử rằng 5 là một tập chứa các phần tử và một mối quan hệ R được định nghĩa trên nó. Điều đó có nghĩa rằng đối với mọi cặp phần tử a, b ∈ 5, a R b có thể đúng hoặc sai. Nếu a R b đúng, thì chúng ta nói a có mối quan hệ với b, ngược lại a không có mối quan hệ với b. Một mối quan hệ R được gọi là mối quan hệ tương đương nếu nó thỏa mãn các tính chất sau:
+
+- Tự phản xạ (Reflexive): Đối với mọi phần tử a ∈ S, a R a là đúng.
+- Đối xứng (Symmetric): Đối với bất kỳ hai phần tử a, b ∈ S, nếu a R b là đúng thì b R a cũng đúng.
+- Bắc cầu (Transitive): Đối với ba phần tử a, b, c ∈ S, nếu a R b và b R c là đúng thì a R c cũng đúng.
+
+Ví dụ, mối quan hệ ≤ (nhỏ hơn hoặc bằng) và ≥ (lớn hơn hoặc bằng) trên tập hợp số nguyên không phải là mối quan hệ tương đương. Chúng là tự phản xạ (vì a ≤ a) và bắc cầu (a ≤ b và b ≤ c dẫn đến a ≤ c) nhưng không đối xứng (a ≤ b không đưa ra b ≤ a). Tương tự, mối quan hệ vận chuyển đường sắt cũng là mối quan hệ tương đương. Mối quan hệ này là tự phản xạ vì mọi địa điểm đều kết nối với chính nó. Nếu có kết nối từ thành phố a đến thành phố b, thì thành phố b cũng có kết nối với thành phố a, vì vậy mối quan hệ này là đối xứng. Cuối cùng, nếu thành phố a kết nối với thành phố b và thành phố b kết nối với thành phố c, thì thành phố a cũng kết nối với thành phố c. Lớp tương đương của một phần tử a ∈ S là một tập con của S chứa tất cả các phần tử có mối quan hệ với a. Các lớp tương đương tạo ra một phân vùng của S. Mỗi thành viên của S xuất hiện chính xác trong một lớp tương đương. Để xác định xem a có mối quan hệ R với b hay không, chúng ta chỉ cần kiểm tra xem a và b có trong cùng một lớp tương đương (nhóm) hay không. Trong ví dụ trên, hai thành phố sẽ ở trong cùng một lớp tương đương nếu chúng có kết nối đường sắt. Nếu ch
+
+úng không có kết nối, chúng sẽ thuộc về các lớp tương đương khác nhau. Vì giao của hai lớp tương đương bất kỳ là rỗng (ϕ), các lớp tương đương thỉnh thoảng được gọi là các tập hợp không giao. Trong các phần tiếp theo, chúng ta sẽ cố gắng xem xét các hoạt động có thể thực hiện trên các lớp tương đương. Các hoạt động có thể thực hiện là:
+- Tạo một lớp tương đương (tạo một tập hợp)
+- Tìm tên của lớp tương đương (Find)
+- Kết hợp các lớp tương đương (Union)

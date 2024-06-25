@@ -1,0 +1,212 @@
+																											 			Bắt đầu viết vào ngày 18/7/2023
+
+5.1 Khái niệm hàng đợi là gì?
+
+Hàng đợi là một cấu trúc dữ liệu được sử dụng để lưu trữ dữ liệu (tương tự với Danh sách Liên kết và Ngăn xếp). Trong hàng đợi, thứ tự mà dữ liệu đến rất quan trọng. Nói một cách tổng quát, một hàng đợi là một dãy người hoặc đồ vật đang chờ được phục vụ theo thứ tự tuần tự, bắt đầu từ đầu của hàng hoặc chuỗi. Định nghĩa: Một hàng đợi là một danh sách được sắp xếp trong đó việc chèn được thực hiện ở một đầu (đuôi) và việc xóa được thực hiện ở đầu kia (đầu). Phần tử được chèn đầu tiên cũng là phần tử được xóa đầu tiên. Do đó, nó được gọi là First in First out (FIFO) hoặc Last in Last out (LILO) list. Tương tự với Ngăn xếp, hai thao tác chính trên hàng đợi được đặt tên riêng. Khi một phần tử được chèn vào hàng đợi, thì quá trình này được gọi là EnQueue, và khi một phần tử được loại bỏ khỏi hàng đợi, thì quá trình này được gọi là DeQueue. Việc xóa khỏi hàng đợi rỗng được gọi là tràn dữ liệu (underflow) và việc chèn một phần tử vào hàng đợi đã đầy được gọi là tràn dữ liệu (overflow). Thông thường, chúng ta coi chúng như là các ngoại lệ. 
+
+5.2 Cách sử dụng hàng đợi
+
+Khái niệm hàng đợi có thể được giải thích bằng cách quan sát một hàng đợi tại quầy đặt vé. Khi chúng ta vào hàng đợi, chúng ta đứng ở cuối hàng và người đứng đầu hàng là người sẽ được phục vụ tiếp theo. Người này sẽ rời hàng đợi và được phục vụ. Khi điều này xảy ra, người tiếp theo sẽ đến đầu hàng, rời hàng đợi và được phục vụ. Khi mỗi người ở đầu hàng tiếp tục rời hàng đợi, chúng ta di chuyển về phía đầu hàng. Cuối cùng, chúng ta sẽ đến đầu hàng và rời hàng đợi để được phục vụ. Hành vi này rất hữu ích trong các trường hợp cần duy trì thứ tự đến.
+
+5.3 Queue ADT
+
+Các thao tác sau đây tạo nên một Queue ADT. Việc chèn và xóa trong hàng đợi phải tuân theo nguyên tắc FIFO. Để đơn giản, chúng ta giả định các phần tử là các số nguyên.
+
+Các thao tác chính trên hàng đợi:
+- EnQueue(int data): Chèn một phần tử vào cuối hàng đợi.
+- int DeQueue(): Xóa và trả về phần tử ở đầu hàng đợi.
+
+Các thao tác phụ trợ trên hàng đợi:
+- int Front(): Trả về phần tử ở đầu hàng đợi mà không xóa nó.
+- int QueueSize(): Trả về số lượng phần tử đã lưu trữ trong hàng đợi.
+- int IsEmptyQueueQ(): Chỉ ra liệu hàng đợi có rỗng hay không
+
+5.4 Ngoại lệ
+Tương tự như các ADT khác, việc thực hiện DeQueue trên một hàng đợi rỗng sẽ gây ra một "Ngoại lệ hàng đợi rỗng" và việc thực hiện EnQueue trên một hàng đợi đầy sẽ gây ra một "Ngoại lệ hàng đợi đầy".
+
+5.5 Ứng dụng
+Dưới đây là một số ứng dụng sử dụng hàng đợi.
+
+Ứng dụng trực tiếp:
+- Hệ điều hành xếp lịch công việc (với độ ưu tiên như nhau) theo thứ tự đến (ví dụ: hàng đợi in ấn).
+- Mô phỏng các hàng đợi thực tế như hàng đợi tại quầy bán vé hoặc bất kỳ kịch bản đến trước đến sau nào đó đòi hỏi một hàng đợi.
+- Đa chương trình.
+- Truyền dữ liệu bất đồng bộ (file IO, ống, socket).
+- Thời gian chờ của khách hàng tại trung tâm cuộc gọi.
+- Xác định số thu ngân cần có tại siêu thị.
+
+Ứng dụng gián tiếp:
+- Cấu trúc dữ liệu phụ trợ cho các thuật toán.
+- Thành phần của các cấu trúc dữ liệu khác.
+
+5.6 Triển khai
+Có nhiều cách (tương tự với Ngăn xếp) để triển khai các thao tác hàng đợi, và dưới đây là một số phương pháp phổ biến.
+
+- Triển khai dựa trên mảng vòng đơn giản (Simple circular array based implementation).
+- Triển khai dựa trên mảng vòng động (Dynamic circular array based implementation).
+- Triển khai bằng danh sách liên kết (Linked list implementation).
+
+Tại sao sử dụng mảng vòng?
+Đầu tiên, hãy xem xem chúng ta có thể sử dụng mảng đơn giản để triển khai hàng đợi giống như chúng ta đã làm với ngăn xếp. Chúng ta biết rằng trong hàng đợi, việc chèn được thực hiện ở một đầu và việc xóa được thực hiện ở đầu kia. Sau khi thực hiện một số lần chèn và xóa, quá trình trở nên dễ hiểu. Trong ví dụ dưới đây, rõ ràng có thể thấy rằng các ô ban đầu của mảng đang bị lãng phí. Vì vậy, triển khai mảng đơn giản cho hàng đợi không hiệu quả. Để giải quyết vấn đề này, chúng ta giả sử mảng là mảng vòng. Điều này có nghĩa là chúng ta xem phần tử cuối cùng và phần tử đầu tiên của mảng là liền kề. Với cách biểu diễn này, nếu có các ô trống ở đầu, chỉ số rear (chỉ đến phần tử đuôi) có thể dễ dàng di chuyển đến ô trống tiếp theo (tức là những ô vừa mới được đưa ra khỏi hàng đợi trước đó). Lưu ý: Triển khai mảng vòng đơn giản và triển khai mảng vòng động rất tương tự với triển khai mảng của ngăn xếp. Vui lòng xem phần ngăn xếp để tìm hiểu phân tích của các triển khai này.
+
+a. Triển khai mảng vòng đơn giản:
+Triển khai đơn giản này của Queue ADT sử dụng một mảng. Trong mảng, chúng ta thêm phần tử theo kiểu vòng tròn và sử dụng hai biến để theo dõi phần tử đầu và phần tử cuối. Thông thường, front được sử dụng để chỉ định phần tử đầu, và rear được sử dụng để chỉ định phần tử cuối trong hàng đợi. Mảng lưu trữ các phần tử của hàng đợi có thể trở thành đầy. Một hoạt động EnQueue sẽ gây ra ngoại lệ hàng đợi đầy. Tương tự, nếu chúng ta thử xóa một phần tử từ một hàng đợi rỗng, nó sẽ gây ra ngoại lệ hàng đợi rỗng. Lưu ý: Ban đầu, cả front và rear đều có giá trị là -1, cho biết rằng hàng đợi đang rỗng.
+
+Dưới đây là một cách triển khai mã nguồn xây dựng cấu trúc dữ liệu hàng đợi bằng ngôn ngữ C++
+
+#include <iostream>
+#include<vector>
+#define max 20
+
+using namespace std;
+
+template <class T>
+class Queue{
+private:    
+    T arr[max];
+    int front = -1;
+    int rear = -1;
+public:
+    //hàm chèn một phần tử vào cuối hàng đợi
+    void en_queue(T);
+    //hàm lấy phần tử đầu ra khỏi hàng đợi
+    T de_queue();
+    //hàm trả về giá trị của phần tử đầu của hàng đợi
+    T defront();
+    //hàm trả về số phần tử của hàng đợi
+    int size();
+    //trả về true nếu hàng đợi trống, false nếu ngược lại
+    bool empty();
+    //trả về true nếu hàng đợi đầy
+    bool full();
+};
+template <class T>
+void Queue <T> :: en_queue(T a){
+    if(this -> full()){
+        cout <<"HANG DOI DAY"; return;
+    }
+    else if (this -> empty()){
+        front = 0; rear = 0;
+    }
+    else {
+        rear = (rear+1)%max;
+    }
+    arr[rear] = a;
+}
+template <class T>
+T Queue <T> :: de_queue(){
+    if(this -> empty()){
+        return T();
+    }
+    //lúc này vẫn còn một phần tử được cả front và rear chỉ vào
+    else if(front == rear){
+        int a = front;
+        front = rear = -1;
+        return arr[a];
+    }
+    else {
+        int a = front;
+        front = (front +1)% max;
+        return arr[a];
+    }
+}
+template <class T>
+T Queue <T> :: defront(){
+    if(this -> empty()){
+        return T();
+    }
+    else return arr[front];
+}
+template <class T>
+int Queue <T> :: size(){
+    if((front == -1)&&(rear == -1)) return 0;
+    else if(rear >= front){
+        return (rear - front) +1;
+    }
+    else if(rear < front){
+        return (max +(rear- front)+1);
+    }
+    else return 0;
+}
+template <class T>
+bool Queue <T> :: empty(){
+    return ((front == -1)&&(rear == -1));
+}
+template <class T>
+bool Queue <T> :: full(){
+    return(front == (rear+1)%max);
+}
+int main(){
+    Queue<int> lmao;
+    if(!lmao.empty()){
+        cout <<"hang doi rong\n";
+    }
+    while(true){
+        cout <<"\n\n\tNHAP LUA CHON:\n1. them vao hang doi\n2. xem gia tri phan tu dau tien\n3. lay phan tu dau tien ra\n4. xem so phan tu cua hang doi\n";
+        int k; cout << "nhap lua chon: ";
+        cin >> k;
+        system("cls");
+        switch (k){
+            case 1: {
+                int a; cout <<"nhap gia tri muon them: ";
+                cin >> a;
+                lmao.en_queue(a); break;
+            }
+            case 2: {
+                if(!lmao.empty())
+                cout <<"phan tu dau tien la: "<< lmao.defront(); 
+                else cout << "HANG DOI RONG";
+                break;
+            }
+            case 3:{
+                if(!lmao.empty())
+                cout << "phan tu dau tien la: " << lmao.de_queue(); 
+                else cout << "HANG DOI RONG";
+                break; 
+            }
+            case 4:{
+                cout << "tong so phan tu la: " <<lmao.size(); break;
+            }
+            default: cout <<"nhap lai lua chon "; break;
+        }
+    }
+}
+
+Hiệu suất và Giới hạn
+Hiệu suất: Gọi n là số lượng phần tử trong hàng đợi:
+- Độ phức tạp không gian (cho n thao tác EnQueue): O(n)
+- Độ phức tạp thời gian của EnQueue(): O(1)
+- Độ phức tạp thời gian của DeQueue(): O(1)
+- Độ phức tạp thời gian của IsEmptyQueue(): O(1)
+- Độ phức tạp thời gian của IsFullQueue(): O(1)
+- Độ phức tạp thời gian của QueueSize(): O(1)
+- Độ phức tạp thời gian của DeleteQueue(): O(1)
+
+Giới hạn: Kích thước tối đa của hàng đợi phải được xác định trước và không thể thay đổi. Việc thêm một phần tử mới vào hàng đợi đầy sẽ gây ra một ngoại lệ cụ thể của triển khai.
+b. Triển khai bằng mảng vòng động
+Sử dụng vector để triển khai mảng vòng, khi đầy phần tử thì vector sẽ tự động tăng vùng nhớ lên, đồng thời ta copy dữ liệu từ vector cũ qua, nhưng theo thứ tự arr[0] sẽ là front, cho đến arr[n/2-1] sẽ là rear.
+Hiệu suất:
+Cho n là số lượng phần tử trong hàng đợi, thì:
+
+- Không gian bộ nhớ (cho n phép EnQueue) là O(n).
+- Độ phức tạp thời gian của EnQueue() là O(1) (Trung bình).
+- Độ phức tạp thời gian của DeQueue() là O(1).
+- Độ phức tạp thời gian của QueueSize() là O(1).
+- Độ phức tạp thời gian của IsEmptyQueue() là O(1).
+- Độ phức tạp thời gian của IsFullQueue() là O(1).
+- Độ phức tạp thời gian của DeleteQueue() là O(1).
+
+c. Triển khai bằng Danh sách liên kết
+Một cách khác để triển khai hàng đợi là sử dụng Danh sách liên kết. Phép EnQueue được thực hiện bằng cách chèn một phần tử vào cuối danh sách. Phép DeQueue được thực hiện bằng cách xóa một phần tử từ đầu danh sách.
+Hiệu suất:
+Cho n là số lượng phần tử trong hàng đợi, thì:
+
+Không gian bộ nhớ (cho n phép EnQueue) là O(n).
+Độ phức tạp thời gian của EnQueue() là O(1) (Trung bình).
+Độ phức tạp thời gian của DeQueue() là O(1).
+Độ phức tạp thời gian của IsEmptyQueue() là O(1).
+Độ phức tạp thời gian của DeleteQueue() là O(1).
+So sánh các triển khai:
+Lưu ý: So sánh rất tương tự như triển khai ngăn xếp (Stacks) và chương trình ngăn xếp (Stacks chapter).
+
+																													          Kết thúc vào ngày  19/7/2023

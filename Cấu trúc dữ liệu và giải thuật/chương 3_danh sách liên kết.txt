@@ -1,0 +1,1241 @@
+																														Bắt đầu viết vào ngày 15/7/2023
+
+3.1 Linked List (danh sách liên kết) là gì?
+Linked List là một cấu trúc dữ liệu được sử dụng để lưu trữ tập hợp dữ liệu. Một linked list có các thuộc tính sau:
+- Các phần tử kế tiếp được kết nối bằng con trỏ.
+- Phần tử cuối cùng trỏ đến NULL.
+- Có thể mở rộng hoặc thu hẹp kích thước trong quá trình thực thi chương trình.
+- Có thể có độ dài tùy ý (cho đến khi bộ nhớ hệ thống cạn kiệt).
+- Không lãng phí không gian bộ nhớ (nhưng sử dụng thêm bộ nhớ cho các con trỏ). Nó cấp phát bộ nhớ khi danh sách mở rộng.
+
+3.2 ADT (Abstract Data Type) của Linked List
+Các hoạt động sau đây làm cho linked list trở thành một ADT:
+- Insert: chèn một phần tử vào danh sách.
+- Delete: loại bỏ và trả về phần tử ở vị trí cụ thể từ danh sách.
+Các hoạt động phụ của Linked List:
+- Delete List: xóa tất cả các phần tử của danh sách (huỷ danh sách).
+- Count: trả về số lượng phần tử trong danh sách.
+- Tìm nút thứ n từ cuối danh sách.
+
+3.3 Tại sao sử dụng Linked List?
+Có nhiều cấu trúc dữ liệu khác có thể thực hiện cùng chức năng như linked list. Trước khi thảo luận về linked list, quan trọng để hiểu sự khác biệt giữa linked list và mảng. Cả linked list và mảng được sử dụng để lưu trữ tập hợp dữ liệu, và vì cả hai đều được sử dụng cho cùng một mục đích, chúng ta cần phân biệt việc sử dụng của chúng. Điều đó có nghĩa là trong những trường hợp nào mảng phù hợp và trong những trường hợp nào linked list phù hợp.
+
+3.4 Tổng quan về Mảng
+Một khối bộ nhớ được cấp phát cho toàn bộ mảng để chứa các phần tử của mảng. Các phần tử của mảng có thể được truy cập trong thời gian hằng số bằng cách sử dụng chỉ số của phần tử cụ thể làm chỉ số mảng.
+
+Tại sao truy cập các phần tử mảng mất thời gian hằng số?
+
+Để truy cập một phần tử trong mảng, địa chỉ của phần tử được tính toán dưới dạng offset từ địa chỉ cơ sở của mảng. Quá trình tính toán này bao gồm một phép nhân để xác định offset cần được thêm vào địa chỉ cơ sở để lấy địa chỉ bộ nhớ của phần tử. Đầu tiên, kích thước của phần tử kiểu dữ liệu đó được tính toán và sau đó nhân với chỉ số của phần tử để tính giá trị cần được thêm vào địa chỉ cơ sở. Hai phép toán này, một phép nhân và một phép cộng, mất thời gian hằng số. Do đó, việc truy cập các phần tử mảng có thể được thực hiện trong thời gian hằng số.
+
+Ưu điểm của Mảng:
+- Đơn giản và dễ sử dụng.
+- Truy cập nhanh đến các phần tử (truy cập hằng số).
+
+Nhược điểm của Mảng:
+- Phân bổ toàn bộ bộ nhớ cần thiết từ đầu và lãng phí không gian bộ nhớ cho các chỉ số trong mảng không có giá trị.
+- Kích thước cố định: Kích thước của mảng là tĩnh (phải xác định kích thước mảng trước khi sử dụng).
+- Phân bổ một khối duy nhất: Để cấp phát mảng ban đầu, đôi khi không thể lấy đủ bộ nhớ cho toàn bộ mảng (nếu kích thước mảng lớn).
+- Chèn phần tử dựa trên vị trí phức tạp: Để chèn một phần tử vào vị trí đã cho, chúng ta có thể cần di chuyển các phần tử hiện có. Điều này sẽ tạo ra một vị trí để chúng ta chèn phần tử mới vào vị trí mong muốn. Nếu vị trí mà chúng ta muốn thêm phần tử là ở đầu, thì thao tác di chuyển sẽ tốn kém hơn.
+
+Mảng Động:
+Mảng động (còn được gọi là mảng mở rộng, mảng thay đổi kích thước, bảng động hoặc danh sách mảng) là một cấu trúc dữ liệu danh sách có kích thước biến đổi và hỗ trợ việc thêm hoặc xóa các phần tử. Một cách đơn giản để triển khai mảng động là bắt đầu ban đầu với một mảng có kích thước cố định. Ngay khi mảng đó trở thành đầy, tạo mảng mới có kích thước gấp đôi so với mảng ban đầu. Tương tự, giảm kích thước mảng xuống một nửa nếu số phần tử trong mảng ít hơn một nửa. Lưu ý: Chúng ta sẽ thấy cách triển khai mảng động trong các chương về Stacks, Queues và Hashing.
+
+Ưu điểm của Linked List:
+Linked List có cả ưu điểm và nhược điểm. Ưu điểm của linked list là nó có thể được mở rộng trong thời gian hằng số. Để tạo một mảng, chúng ta phải phân bổ bộ nhớ cho một số phần tử nhất định. Để thêm nhiều phần tử vào mảng khi đã đầy, chúng ta phải tạo một mảng mới và sao chép mảng cũ vào mảng mới. Điều này có thể mất rất nhiều thời gian. Chúng ta có thể ngăn chặn điều này bằng cách phân bổ nhiều không gian ban đầu nhưng chúng ta có thể phân bổ nhiều hơn số lượng bộ nhớ cần thiết và gây lãng phí bộ nhớ. Với linked list, chúng ta có thể bắt đầu với không gian chỉ cho một phần tử được phân bổ và dễ dàng thêm các phần tử mới mà không cần sao chép và phân bổ lại. 
+
+Vấn đề với Linked List (Nhược điểm):
+Có một số vấn đề với linked list. Nhược điểm chính của linked list là thời gian truy cập vào các phần tử cá nhân. Mảng là truy cập ngẫu nhiên, điều đó có nghĩa là nó mất O(1) để truy cập vào bất kỳ phần tử nào trong mảng. Linked list mất O(n) để truy cập một phần tử trong danh sách trong trường hợp xấu nhất. Một lợi thế khác của mảng trong việc truy cập thời gian là sự tương quan vị trí trong bộ nhớ. Mảng được xác định là các khối bộ nhớ liền kề, do đó bất kỳ phần tử mảng nào sẽ nằm gần về mặt vật lý với hàng xóm của nó. Điều này rất có lợi từ các phương pháp bộ nhớ đệm CPU hiện đại. 
+Mặc dù việc phân bổ động của bộ nhớ là một lợi thế lớn, nhưng chi phí với việc lưu trữ và truy xuất dữ liệu có thể tạo ra sự khác biệt lớn. Đôi khi linked list khó khăn trong việc điều khiển. Nếu phần tử cuối cùng bị xóa, phần tử trước nó phải được thay đổi để giữ một con trỏ NULL. Điều này đòi hỏi phải duyệt qua danh sách để tìm phần tử kế cuối, và cho con trỏ trong nó trở thành con trỏ NULL. 
+Cuối cùng, linked list lãng phí bộ nhớ về việc phải lưu địa chỉ của ô nhớ kế tiếp.
+
+3.5 so sánh danh sách liên kết với mảng và mảng động
+
+công việc thực hiện			linked list			array				dynamic array
+truy xuất 					O(n) 				O(1)				O(1)
+thêm, xóa phần tử đầu		O(1)				O(n)				O(n)
+thêm phần tử cuối			O(n) 				O(1)				O(1)
+xóa phần tử cuối			O(n)				O(1)				O(n)
+thêm/xóa phần tử giữa		O(n) 				O(n) 				O(n)
+tốn bộ nhớ 					O(n)				0					O(n)
+
+3.6 Danh sách liên kết đơn
+
+Thông thường, thuật ngữ "linked list" đề cập đến danh sách liên kết đơn. Danh sách này bao gồm một số node, trong đó mỗi node có một con trỏ next chỉ đến phần tử tiếp theo. Liên kết của node cuối cùng trong danh sách là NULL, điều này chỉ ra sự kết thúc của danh sách. Dưới đây là một khai báo kiểu dữ liệu cho một danh sách liên kết của các số nguyên:
+
+class Node{
+    private: 
+    int data;
+    Node * next;
+    public:
+};
+Trong đó, `Node` là một cấu trúc đại diện cho một node trong danh sách, bao gồm một trường `data` để lưu trữ giá trị của node và một con trỏ `next` để trỏ đến node tiếp theo trong danh sách. Kiểu `LinkedList` được định nghĩa là một con trỏ tới `Node`, và nó sẽ được sử dụng để đại diện cho danh sách liên kết.
+
+Các hoạt động cơ bản trên một danh sách:
+- Duyệt qua danh sách
+- Chèn một phần tử vào danh sách
+- Xóa một phần tử khỏi danh sách
+
+a.Duyệt qua Danh sách Liên kết:
+Giả sử rằng con trỏ "head" trỏ đến node đầu tiên trong danh sách. Để duyệt qua danh sách, chúng ta thực hiện các bước sau:
+- duyệt theo các con trỏ.
+- Hiển thị nội dung của các node (hoặc đếm) khi chúng được duyệt qua.
+- Dừng lại khi con trỏ next trỏ đến NULL.
+
+Hàm ListLength() nhận một danh sách liên kết làm đầu vào và đếm số node trong danh sách.
+Dưới đây là một phiên bản của hàm ListLength() viết bằng ngôn ngữ C++
+
+#include<iostream>
+class Node{
+    private: 
+    int data;
+    Node * next;
+    public:
+    Node(int, Node*);
+    friend int list_length(Node*);
+};
+Node :: Node(int a, Node * b){
+    data = a; next = b;
+}
+int list_length(Node* head){
+    int count=0;
+    for(Node *a= head; a!= NULL; a = a-> next){
+        count ++;
+    }
+    return count;
+}
+Độ phức tạp thời gian (Time Complexity): O(n), do phải quét qua danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), do chỉ cần tạo một biến tạm thời để lưu trữ dữ liệu, không phụ thuộc vào kích thước của danh sách.
+
+Hàm print_list() nhận một danh sách liên kết làm đầu vào và in ra data của các node trong danh sách liên kết đó, dưới đây là một phiên bản của hàm print_list(), được viết bằng ngôn ngữ C++
+
+void print_list(Node* head){
+    if(list_length(head)){
+        cout << "danh sach gom " << list_length(head) << " phan tu: ";
+        while (head != NULL){
+            cout << head-> data<<' ';
+            head = head-> next;
+        }
+    }
+    else cout << "danh sach rong\n";
+}
+
+b.Chèn phần tử vào danh sách liên kết đơn có ba trường hợp:
+- Chèn một node mới trước head (ở đầu danh sách)
+- Chèn một node mới sau tail (ở cuối danh sách)
+- Chèn một node mới vào giữa danh sách (vị trí ngẫu nhiên)
+
+Lưu ý: Để chèn một phần tử vào danh sách liên kết tại vị trí p, giả sử sau khi chèn phần tử, vị trí của node mới là p.
+
+Chèn một Node vào Đầu danh sách Liên kết Đơn
+Trong trường hợp này, một node mới được chèn trước node head hiện tại. Chỉ cần điều chỉnh một con trỏ next (con trỏ next của node mới) và có thể thực hiện trong hai bước:
+- Cập nhật con trỏ next của node mới để trỏ đến head hiện tại.
+- Cập nhật con trỏ head để trỏ đến node mới.
+
+Chèn một Node vào Cuối danh sách Liên kết Đơn
+Trong trường hợp này, chúng ta cần điều chỉnh hai con trỏ next (con trỏ next của node cuối và con trỏ next của node mới).
+- Con trỏ next của node mới trỏ đến NULL.
+- Con trỏ next của node cuối trỏ đến node mới.
+
+Chèn một Node vào Giữa danh sách Liên kết Đơn
+Giả sử chúng ta có một vị trí cần chèn node mới. Trong trường hợp này, chúng ta cũng cần điều chỉnh hai con trỏ next.
+- Nếu chúng ta muốn thêm một phần tử vào vị trí 3, thì chúng ta dừng lại ở vị trí 2. Điều đó có nghĩa là chúng ta duyệt qua 2 node và chèn node mới. Để đơn giản, giả sử node thứ hai được gọi là "node vị trí". Con trỏ next của node mới trỏ đến node tiếp theo ban đầu của node vị trí.
+- Con trỏ next của node vị trí giờ đây trỏ đến node mới.
+
+Dưới đây là mã code cho cả ba trường hợp. Chúng ta phải cập nhật con trỏ của phần tử đầu tiên trong hàm gọi, không chỉ trong hàm được gọi. Vì lí do này, chúng ta cần gửi một con trỏ hai lần. Đoạn mã sau chèn một node vào danh sách liên kết đơn.
+
+void insert(Node ** head, int position, int data){
+    int k = list_length(*head);
+    Node * lmao = * head;
+    if(p==1){
+        *head= new Node(data, *head);
+    }
+    //khúc này phải là lmao->next thì mới thay đổi dữ liệu bên ngoài hàm được
+    else if (p <= k){
+        for(int i = 1; i< p -1 ; i++){
+            lmao = lmao-> next;
+        }
+        Node * temp = new Node(data, lmao ->next);
+        lmao -> next = temp;
+    }
+    else if (p==(1+k)){
+        while(lmao-> next != NULL){
+            lmao = lmao-> next;
+        }
+        lmao -> next = new Node(data);
+    }
+    else return;
+}
+void print_list(Node* head){
+    while (head != NULL){
+        cout << head-> data<<' ';
+        head = head-> next;
+    }
+}
+
+Lưu ý: Chúng ta có thể triển khai ba biến thể của phép chèn riêng biệt.
+Độ phức tạp thời gian (Time Complexity): O(n), trong trường hợp xấu nhất, chúng ta có thể cần chèn node vào cuối danh sách.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần tạo một biến tạm thời.
+
+c.Xóa trong Danh sách liên kết đơn
+Tương tự như việc chèn, ở đây chúng ta cũng có ba trường hợp:
+- Xóa node đầu tiên
+- Xóa node cuối cùng
+- Xóa node nằm giữa danh sách
+
+Xóa Node đầu tiên trong Danh sách liên kết đơn
+Node đầu tiên (node head hiện tại) được xóa khỏi danh sách. Có thể thực hiện trong hai bước:
+- Tạo một node tạm thời mà sẽ trỏ đến cùng node với head hiện tại.
+- Tiếp theo, di chuyển con trỏ head đến node kế tiếp và giải phóng node tạm thời.
+
+Xóa Node cuối cùng trong Danh sách liên kết đơn
+Trong trường hợp này, node cuối cùng được xóa khỏi danh sách. Thao tác này phức tạp hơn việc xóa node đầu tiên, vì thuật toán cần tìm node trước node cuối. Có thể thực hiện trong ba bước:
+- Duyệt qua danh sách và trong quá trình duyệt, duy trì địa chỉ của node trước đó. Khi chúng ta đến cuối danh sách, chúng ta sẽ có hai con trỏ, một con trỏ trỏ đến node cuối và một con trỏ trỏ đến node trước node cuối.
+- Cập nhật con trỏ next của node trước đó thành NULL.
+- Giải phóng node cuối.
+
+Xóa Node nằm giữa danh sách liên kết đơn
+Trong trường hợp này, node cần xóa luôn nằm giữa hai node. Các liên kết head và tail không được cập nhật trong trường hợp này. Có thể thực hiện trong hai bước:
+- Giống như trường hợp trước, duy trì node trước đó trong quá trình duyệt qua danh sách. Khi chúng ta tìm thấy node cần xóa, thay đổi con trỏ next của node trước đó thành con trỏ next của node cần xóa.
+- Giải phóng node hiện tại cần xóa.
+
+Độ phức tạp thời gian (Time Complexity): O(n). Trong trường hợp xấu nhất, chúng ta có thể cần xóa node ở cuối danh sách.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần một biến tạm thời.
+
+Dưới đây là một mã nguồn dùng để xóa node trong danh sách liên kết viết bằng ngôn ngữ C++
+
+void del(Node*& head,int position){
+    int k = list_length(head);
+    Node * lmao = head;
+    if(p==1){
+        head = head -> next;
+        delete lmao;
+        return;
+    }
+    else if(p==k){
+        while(true){
+        lmao = lmao -> next;
+        if((lmao -> next)->next == NULL){
+            Node * lamo = lmao->next;
+            lmao->next = NULL;
+            delete lamo;
+            break;
+        }
+        }
+    }
+    else if(p< k){
+        for (int i = 1; i < p -1; i++){
+            lmao = lmao -> next;
+        }
+        Node* lamo = lmao -> next;
+        lmao -> next = (lmao-> next) -> next;
+        delete lamo;
+    }
+    else{
+        cout << "\nnhap sai vi tri";
+        return;
+    }
+}
+
+d.Xóa toàn bộ Danh sách liên kết đơn
+Quy trình này hoạt động bằng cách lưu trữ node hiện tại trong một biến tạm và giải phóng node hiện tại. Sau khi giải phóng node hiện tại, chuyển đến node tiếp theo bằng một biến tạm và lặp lại quá trình này cho tất cả các node.
+
+Dưới đây là một mã nguồn có tác dụng xóa toàn bộ danh sách liên kết
+
+void deleting(Node * &xhead){
+    Node * lmao;
+    Node * head = xhead;
+    while(true){
+        lmao = head;
+        head = head -> next;
+        if(head == NULL ) break;
+        delete lmao;
+    }
+    xhead= NULL;
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để quét qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần hai biến tạm thời.
+
+dưới đây là một chương trình hoàn chỉnh cơ bản của danh sách liên kết đơn:
+
+#include<iostream>
+#define p position
+using namespace std;
+class Node{
+    private: 
+    int data;
+    Node * next;
+    public:
+    Node (int);
+    Node(int, Node*);
+    friend void deleting(Node*&);
+    friend void del(Node *&, int);
+    friend void print_list(Node*);
+    friend void insert(Node**, int , int);
+    friend int list_length(Node*);
+    
+};
+Node:: Node (int a){
+    data = a; next = NULL;
+}
+Node :: Node(int a, Node * b){
+    data = a; next = b;
+}
+int list_length(Node* head){
+    int count=0;
+    for(Node *a= head; a!= NULL; a = a-> next){
+        count ++;
+    }
+    return count;
+}
+void del(Node*& head,int position){
+    int k = list_length(head);
+    Node * lmao = head;
+    if(p==1){
+        head = head -> next;
+        delete lmao;
+        return;
+    }
+    else if(p==k){
+        while(true){
+        lmao = lmao -> next;
+        if((lmao -> next)->next == NULL){
+            Node * lamo = lmao->next;
+            lmao->next = NULL;
+            delete lamo;
+            break;
+        }
+        }
+    }
+    else if(p< k){
+        for (int i = 1; i < p -1; i++){
+            lmao = lmao -> next;
+        }
+        Node* lamo = lmao -> next;
+        lmao -> next = (lmao-> next) -> next;
+        delete lamo;
+    }
+    else{
+        cout << "\nnhap sai vi tri";
+        return;
+    }
+}
+void insert(Node ** head, int position, int data){
+    int k = list_length(*head);
+    Node * lmao = * head;
+    if(p==1){
+        *head= new Node(data, *head);
+    }
+    //khúc này phải là lmao->next thì mới thay đổi dữ liệu bên ngoài hàm được
+    else if (p <= k){
+        for(int i = 1; i< p -1 ; i++){
+            lmao = lmao-> next;
+        }
+        Node * temp = new Node(data, lmao ->next);
+        lmao -> next = temp;
+    }
+    else if (p==(1+k)){
+        while(lmao-> next != NULL){
+            lmao = lmao-> next;
+        }
+        lmao -> next = new Node(data);
+    }
+    else return;
+}
+void print_list(Node* head){
+    if(list_length(head)){
+        cout << "danh sach gom " << list_length(head) << " phan tu: ";
+        while (head != NULL){
+            cout << head-> data<<' ';
+            head = head-> next;
+        }
+    }
+    else cout << "danh sach rong\n";
+}
+
+void deleting(Node * &xhead){
+    Node * lmao;
+    Node * head = xhead;
+    while(true){
+        lmao = head;
+        head = head -> next;
+        if(head == NULL ) break;
+        delete lmao;
+    }
+    xhead= NULL;
+}
+int main(){
+    Node* head=NULL;
+    while (true){
+        cout << "\n1.them phan tu vao vi tri n\n2.in danh sach\n3.dung\n4.xoa phan tu\n5.xoa danh sach\n";
+        cout << "nhap lua chon: ";
+        int k;
+        cin >>k;
+        if (k==1){
+            cout << "nhap gia tri phan tu muon them: ";
+            int m;
+            cin >> m;
+            int n; cout << "nhap vi tri cua phan tu: ";
+            cin >> n;
+            insert(&head,n,m);
+        }
+        else if(k==2) print_list(head);
+        else if(k==3) break;
+        else if(k==4) {
+            int x;
+            cout << "nhap vi tri muon xoa: ";
+            cin >> x;
+            del(head, x);
+        }
+        else if(k==5) deleting(head);
+        else{
+            cout << "nhap sai";
+            continue;
+        }
+    }
+    return 0;
+}
+
+3.7 Danh sách liên kết kép (Doubly Linked List)
+Lợi ích của danh sách liên kết kép (còn được gọi là danh sách hai chiều) là cho phép điều hướng cả hai hướng dựa trên một node trong danh sách. Trong một danh sách liên kết đơn, chúng ta không thể xóa một node trừ khi có con trỏ trỏ đến node đứng trước nó. Nhưng trong danh sách liên kết kép, chúng ta có thể xóa một node ngay cả khi không có địa chỉ của node trước (vì mỗi node có một con trỏ trái trỏ đến node trước đó và có thể di chuyển về phía sau). Nhược điểm chính của danh sách liên kết kép là:
+- Mỗi node yêu cầu một con trỏ phụ, làm tăng yêu cầu không gian.
+- Việc chèn hoặc xóa một node mất thời gian hơn (cần nhiều phép toán con trỏ hơn).
+
+Tương tự như danh sách liên kết đơn, hãy thực hiện các phép toán của danh sách liên kết kép. Nếu bạn đã hiểu các phép toán của danh sách liên kết đơn, thì các phép toán của danh sách liên kết kép cũng dễ dàng. Dưới đây là khai báo kiểu cho một danh sách liên kết kép chứa các số nguyên:
+
+class Node{
+    private: 
+    int data;
+    Node * next;
+    Node * prev;
+};
+
+a.Chèn vào Danh sách liên kết kép
+Chèn vào danh sách liên kết kép có ba trường hợp tương tự như danh sách liên kết đơn:
+
+Chèn một node mới trước head.
+Chèn một node mới sau tail (ở cuối danh sách).
+Chèn một node mới vào giữa danh sách.
+
+Chèn một Node vào Đầu danh sách Liên kết kép
+Trong trường hợp này, node mới được chèn trước node head. Cần điều chỉnh con trỏ previous và next và có thể thực hiện trong hai bước:
+- Cập nhật con trỏ right của node mới để trỏ đến node head hiện tại, và cũng làm con trỏ left của node mới trỏ đến NULL.
+- Cập nhật con trỏ left của node head để trỏ đến node mới và đặt node mới làm head.
+
+Chèn một Node vào Cuối danh sách Liên kết kép
+Trong trường hợp này, duyệt qua danh sách cho đến cuối và chèn node mới.
+- Con trỏ right của node mới trỏ đến NULL và con trỏ left trỏ đến cuối danh sách.
+- Cập nhật con trỏ right của node cuối cùng để trỏ đến node mới.
+
+Chèn một Node vào Giữa danh sách Liên kết kép
+Như đã thảo luận trong danh sách liên kết đơn, duyệt qua danh sách để tìm node vị trí và chèn node mới.
+- Con trỏ right của node mới trỏ đến node tiếp theo của node vị trí mà chúng ta muốn chèn node mới. Đồng thời, con trỏ left của node mới trỏ đến node vị trí.
+- Con trỏ right của node vị trí trỏ đến node mới và con trỏ left của node tiếp theo của node vị trí trỏ đến node mới.
+
+Bây giờ, hãy viết mã cho tất cả ba trường hợp này. Chúng ta phải cập nhật con trỏ phần tử đầu tiên trong hàm gọi, không chỉ trong hàm được gọi. Vì lý do này, chúng ta cần gửi một con trỏ hai lần. Đoạn mã sau chèn một node vào danh sách liên kết kép, được trình bày bằng ngôn ngữ C++.
+
+void insert(Node ** head, int position, int data){
+    int k = list_length(*head);
+    Node * lmao = * head;
+    if(p==1){
+        if(k>=1){
+            *head= new Node(data, *head, nullptr);
+            ((*head)->next) ->prev = *head;
+        }
+        else{
+            *head = new Node(data);
+        }
+    }
+    //khúc này phải là lmao->next thì mới thay đổi dữ liệu bên ngoài hàm được
+    else if (p <= k){
+        for(int i = 1; i< p -1 ; i++){
+            lmao = lmao-> next;
+        }
+        Node * temp = new Node(data, lmao ->next, lmao);
+        lmao -> next = temp;
+        (temp -> next) -> prev = temp;
+    }
+    else if (p==(1+k)){
+        while(lmao-> next != nullptr){
+            lmao = lmao-> next;
+        }
+        lmao -> next = new Node(data);
+        (lmao-> next)->prev = lmao;
+    }
+    else {
+        cout << "vi tri nhap khong hop le!\n";
+        return;
+    }
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n). Trong trường hợp xấu nhất, chúng ta có thể cần chèn node vào cuối danh sách.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần một biến tạm thời.
+
+b.Xóa trong Danh sách liên kết kép
+
+Tương tự như việc xóa trong danh sách liên kết đơn, chúng ta có ba trường hợp trong danh sách liên kết kép:
+- Xóa node đầu tiên.
+- Xóa node cuối cùng.
+- Xóa một node ở giữa danh sách.
+
+Xóa Node đầu tiên trong danh sách liên kết kép
+Trong trường hợp này, node đầu tiên (node head hiện tại) sẽ được xóa khỏi danh sách. Chúng ta có thể thực hiện theo hai bước sau:
+- Tạo một node tạm thời và cho node này trỏ đến node head hiện tại.
+- Di chuyển con trỏ của head đến node tiếp theo và đặt con trỏ prev của head thành NULL. Sau đó, giải phóng node tạm thời.
+
+Xóa Node cuối cùng trong danh sách liên kết kép
+Thao tác này phức tạp hơn so với việc xóa node đầu tiên, vì thuật toán phải tìm một node trước node tail trước tiên. Chúng ta có thể thực hiện theo ba bước sau:
+- Duyệt qua danh sách và duy trì địa chỉ của node trước đó. Khi chúng ta đến cuối danh sách, chúng ta sẽ có hai con trỏ, một con trỏ trỏ đến node tail và một con trỏ trỏ đến node trước node tail.
+- Cập nhật con trỏ next của node trước đó thành NULL để ngừng trỏ đến node tail.
+- Giải phóng node tail.
+
+Xóa Node ở giữa trong danh sách liên kết kép
+Trong trường hợp này, node cần xóa luôn nằm giữa hai node, và các liên kết head và tail không được cập nhật. Việc xóa có thể thực hiện theo hai bước sau:
+- Giống với trường hợp trước đó, duy trì node trước đó trong quá trình duyệt qua danh sách. Khi chúng ta tìm thấy node cần xóa, thay đổi con trỏ next của node trước đó để trỏ đến node tiếp theo của node cần xóa. Đồng thời thay đổi con trỏ prev của node sau node cần xóa trỏ đến node trước node cần xóa.
+- Giải phóng node hiện tại cần xóa.
+
+Dưới đây là môt phiên bản mã nguồn cho phép xóa các node trong danh sách liên kết kép, được trình bày bằng ngôn ngữ C++
+
+void del(Node*& head,int position){
+    int k = list_length(head);
+    Node * lmao = head;
+    if(p==1){
+        head = head -> next;
+        head -> prev = nullptr;
+        delete lmao;
+        return;
+    }
+    else if(p==k){
+        while(true){
+            lmao = lmao -> next;
+            if((lmao ->next) -> next == nullptr){
+                delete lmao ->next;
+                lmao -> next = nullptr;
+                break;
+            }
+        }
+    }
+    else if(p< k){
+        for (int i = 1; i < p -1; i++){
+            lmao = lmao -> next;
+        }
+        Node * k = lmao -> next;
+        lmao -> next = (lmao-> next) -> next;
+        ((lmao -> next) -> next) -> prev = lmao;
+        delete k;
+    }
+    else{
+        cout << "\nnhap sai vi tri";
+        return;
+    }
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để duyệt qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần tạo một biến tạm thời.
+
+Dưới đây là một chương trình cơ bản là hoàn chỉnh của danh sách liên kết đôi
+
+#include<iostream>
+#define p position
+using namespace std;
+class Node{
+    private: 
+    int data;
+    Node * next;
+    Node * prev;
+    public:
+    Node (int);
+    Node(int, Node*, Node*);
+    friend void deleting(Node*&);
+    friend void del(Node *&, int);
+    friend void print_list(Node*);
+    friend void insert(Node**, int , int);
+    friend int list_length(Node*);
+    
+};
+Node:: Node (int a){
+    data = a; next = nullptr; prev=nullptr;
+}
+Node :: Node(int a, Node * b, Node* c){
+    data = a; next = b; prev = c;
+}
+int list_length(Node* head){
+    int count=0;
+    for(Node *a= head; a!= nullptr; a = a-> next){
+        count ++;
+    }
+    return count;
+}
+void del(Node*& head,int position){
+    int k = list_length(head);
+    Node * lmao = head;
+    if(p==1){
+        head = head -> next;
+        head -> prev = nullptr;
+        delete lmao;
+        return;
+    }
+    else if(p==k){
+        while(true){
+            lmao = lmao -> next;
+            if((lmao ->next) -> next == nullptr){
+                delete lmao ->next;
+                lmao -> next = nullptr;
+                break;
+            }
+        }
+    }
+    else if(p< k){
+        for (int i = 1; i < p -1; i++){
+            lmao = lmao -> next;
+        }
+        Node * k = lmao -> next;
+        lmao -> next = (lmao-> next) -> next;
+        ((lmao -> next) -> next) -> prev = lmao;
+        delete k;
+    }
+    else{
+        cout << "\nnhap sai vi tri";
+        return;
+    }
+}
+void insert(Node ** head, int position, int data){
+    int k = list_length(*head);
+    Node * lmao = * head;
+    if(p==1){
+        if(k>=1){
+            *head= new Node(data, *head, nullptr);
+            ((*head)->next) ->prev = *head;
+        }
+        else{
+            *head = new Node(data);
+        }
+    }
+    //khúc này phải là lmao->next thì mới thay đổi dữ liệu bên ngoài hàm được
+    else if (p <= k){
+        for(int i = 1; i< p -1 ; i++){
+            lmao = lmao-> next;
+        }
+        Node * temp = new Node(data, lmao ->next, lmao);
+        lmao -> next = temp;
+        (temp -> next) -> prev = temp;
+    }
+    else if (p==(1+k)){
+        while(lmao-> next != nullptr){
+            lmao = lmao-> next;
+        }
+        lmao -> next = new Node(data);
+        (lmao-> next)->prev = lmao;
+    }
+    else {
+        cout << "vi tri nhap khong hop le!\n";
+        return;
+    }
+}
+void print_list(Node* head){
+    if(list_length(head)){
+        cout << "danh sach gom " << list_length(head) << " phan tu: ";
+        while (head != nullptr){
+            cout << head-> data<<' ';
+            head = head-> next;
+        }
+    }
+    else cout << "danh sach rong\n";
+}
+
+void deleting(Node * &xhead){
+    Node * lmao;
+    Node * head = xhead;
+    while(true){
+        lmao = head;
+        head = head -> next;
+        if(head == nullptr ) break;
+        delete lmao;
+    }
+    xhead= nullptr;
+}
+int main(){
+    Node* head=nullptr;
+    while (true){
+        cout << "\n1.them phan tu vao vi tri n\n2.in danh sach\n3.dung\n4.xoa phan tu\n5.xoa danh sach\n";
+        cout << "nhap lua chon: ";
+        int k;
+        cin >>k;
+        if (k==1){
+            cout << "nhap gia tri phan tu muon them: ";
+            int m;
+            cin >> m;
+            int n; cout << "nhap vi tri cua phan tu: ";
+            cin >> n;
+            insert(&head,n,m);
+        }
+        else if(k==2) print_list(head);
+        else if(k==3) break;
+        else if(k==4) {
+            int x;
+            cout << "nhap vi tri muon xoa: ";
+            cin >> x;
+            del(head, x);
+        }
+        else if(k==5) deleting(head);
+        else{
+            cout << "nhap sai";
+            continue;
+        }
+    }
+    return 0;
+}
+
+
+3.8Danh sách liên kết vòng (Circular Linked List)
+
+Trong danh sách liên kết đơn và danh sách liên kết kép, cuối của danh sách được chỉ định bằng giá trị NULL. Nhưng trong danh sách liên kết vòng, không có node nào có con trỏ NULL. Khi duyệt qua danh sách liên kết vòng, chúng ta phải cẩn thận, nếu không, chúng ta sẽ lặp vô tận. Trong danh sách liên kết vòng, mỗi node có một node kế tiếp. Lưu ý rằng, khác với danh sách liên kết đơn, không có node nào có con trỏ NULL trong danh sách liên kết vòng. Trong một số tình huống, danh sách liên kết vòng rất hữu ích. Ví dụ, khi một số tiến trình sử dụng cùng tài nguyên máy tính (CPU) trong cùng một khoảng thời gian, chúng ta phải đảm bảo không tiến trình nào truy cập tài nguyên trước khi tất cả các tiến trình khác làm điều đó (thuật toán round robin). Dưới đây là một khai báo kiểu cho danh sách liên kết vòng chứa các số nguyên.
+
+class Node{
+    private: 
+    int data;
+    Node * next;
+};
+
+Đếm số node trong danh sách liên kết vòng
+Danh sách vòng có thể truy cập thông qua node đánh dấu là head. Để đếm số node, chúng ta phải duyệt qua danh sách từ node đánh dấu là head, với sự trợ giúp của một node giả lmao, và dừng đếm khi lmao đạt đến node bắt đầu head. Nếu danh sách rỗng, head sẽ là NULL, và trong trường hợp đó, đặt count = 0. Nếu không, đặt con trỏ lmao thành node đầu tiên và tiếp tục đếm cho đến khi con trỏ lmao đạt đến node bắt đầu.
+
+Dưới đây là mã nguồn viết bằng ngôn ngữ C++
+
+int count(Node * head){
+    Node * lmao = head;
+    int count = 0;
+    if (head == nullptr) return 0;
+    else{
+        do{
+            lmao = lmao -> next;
+            count ++;
+        }
+        while(lmao !=head);
+    }
+    return count;
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để duyệt qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần tạo một biến tạm thời.
+
+In nội dung của danh sách liên kết vòng
+Chúng ta giả định rằng danh sách được truy cập thông qua node đầu tiên (head). Đầu tiên chúng ta đếm số node trong danh sách liên kết vòng, sau đó cho lặp số lần đúng bằng số node trong danh sách, mỗi lần lặp ta in ra giá trị của node đó, đồng thời chuyển tới node tiếp theo
+
+Dưới đây là một phiên bản mã nguồn viết bằng ngôn ngữ C++
+
+void print_list(Node* head){
+    if(count(head)){
+        cout << "danh sach gom " << count(head) << " phan tu: ";
+        for(int i = 1; i<= count(head); i++){
+            cout << head -> data << ' ';
+            head = head -> next;
+        }
+    }
+    else cout << "DANH SACH RONG\n";
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để duyệt qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần một biến tạm thời.
+
+Chèn một node vào cuối danh sách liên kết vòng
+Thêm một node chứa dữ liệu vào cuối danh sách liên kết vòng (danh sách vòng) được đầu bởi head. Node mới sẽ được đặt ngay sau node tail (là node cuối cùng của danh sách), điều này có nghĩa là nó sẽ được chèn giữa node tail và node đầu tiên.
+- Tạo một node mới và ban đầu cho con trỏ next của node mới trỏ tới node đầu tiên.
+- Duyệt qua danh sách để đến node tail (tức là con trỏ temp sẽ là next ở trước node tail). Điều này có nghĩa là trong danh sách vòng, chúng ta nên dừng ở node mà node tiếp theo là head.
+- Cập nhật con trỏ next của node tail cũ trước đó để trỏ tới node mới.
+
+Dưới đây là một phiên bản mã nguồn viết bằng ngôn ngữ C++
+
+void add_end(Node *& head, int data){
+    if(head == nullptr){
+        head= new Node (data);
+        head -> next = head;
+    }
+    else{
+        Node * lmao = head;
+        for(int i = 1; i < count(head); i++){
+            lmao = lmao -> next;
+        }
+        lmao -> next = new Node(data, head);
+    }
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để duyệt qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần một biến tạm thời.
+
+Chèn một node vào đầu danh sách liên kết vòng
+Sự khác biệt duy nhất giữa việc chèn một node vào đầu và vào cuối là, sau khi chèn node mới, chúng ta chỉ cần cập nhật con trỏ. Các bước thực hiện như sau:
+- Tạo một node mới và ban đầu cho con trỏ next của node mới trỏ tới chính nó.
+- Cập nhật con trỏ next của node mới thành node head và duyệt qua danh sách cho đến node tail. Điều này có nghĩa là trong danh sách vòng, chúng ta nên dừng ở node là node trước đó trong danh sách.
+- Cập nhật node đầu tiên trong danh sách trước đây để trỏ tới node mới.
+- Đặt node mới làm head.
+
+Dưới đây là một phiên bản mã nguồn viết bằng ngôn ngữ C++
+
+void push_front(Node *& head, int data){
+    if(head == nullptr){
+        head = new Node(data, head);
+        head -> next = head;
+    }
+    else{
+        Node * temp = head;
+        for(int i = 1; i < count(temp); i++){
+            temp = temp -> next;
+        }
+        head = new Node(data, head);
+        temp -> next = head;
+    }
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để duyệt qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần một biến tạm thời.
+
+Xóa node cuối cùng trong danh sách liên kết vòng
+Duyệt qua danh sách để đến node cuối cùng. Node này được đặt tên là node tail và con trỏ next của nó phải trỏ tới node đầu tiên. Để xóa node cuối cùng:
+- Duyệt qua danh sách và tìm node tail và node trước node tail.
+- Cập nhật con trỏ next của node trước node tail để trỏ tới head.
+- Giải phóng node tail.
+
+Dưới đây là một phiên bản mã nguồn viết bằng ngôn ngữ C++
+
+void pop_back(Node *& headx){
+    Node*head = headx;
+    if(headx -> next == headx){
+        headx = nullptr;
+        delete head;
+        return;
+    }
+    do{
+        head = head ->next;
+    }
+    while((head -> next) -> next !=headx);
+    delete head -> next;
+    head -> next = headx;
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để duyệt qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần một biến tạm thời.
+
+Xóa node đầu tiên trong danh sách liên kết vòng
+Node đầu tiên có thể được xóa bằng cách đơn giản thay thế trường next của node tail bằng trường next của node đầu tiên.
+- Tìm node tail của danh sách liên kết bằng cách duyệt qua danh sách. Node tail là node trước node head mà chúng ta muốn xóa.
+- Tạo một node tạm thời và cho con trỏ next của node tạm thời trỏ tới head. Cập nhật con trỏ next của node tail để trỏ tới node tiếp theo của head.
+- Di chuyển con trỏ head đến node tiếp theo. Tạo một node tạm thời và cho con trỏ next của node tạm thời trỏ tới head. Cập nhật con trỏ next của node tail để trỏ tới node tiếp theo của head.
+
+Dưới đây là một phiên bản mã nguồn được trình bày bằng ngôn ngữ C++
+
+void pop_front(Node*& head){
+    if(head -> next == head){
+        delete head;
+        head = nullptr;
+        return;
+    }
+    Node * temp = head;
+    for(int i = 1; i< count(head); i++){
+        temp = temp -> next;
+    }
+    Node * lmao = temp -> next;
+    temp -> next = head -> next;
+    head = head -> next;
+    delete lmao;
+}
+
+Độ phức tạp thời gian (Time Complexity): O(n), để duyệt qua toàn bộ danh sách có kích thước n.
+Độ phức tạp không gian (Space Complexity): O(1), chỉ cần một biến tạm thời.
+
+Dưới đây là phiên bản hoàn chỉnh của các mã nguồn trên
+
+#include<iostream>
+using namespace std;
+class Node{
+    private: 
+    int data;
+    Node * next;
+    public:
+    Node (int);
+    Node(int, Node*);
+    friend void push_front(Node *&, int);
+    friend void add_end(Node *& , int);
+    friend int count(Node*);
+    friend void deleting(Node*&);
+    friend void pop_back(Node*&);
+    friend void pop_front(Node*&);
+    friend void print_list(Node*);
+};
+Node:: Node (int a){
+    data = a; next = nullptr;
+}
+Node :: Node(int a, Node * b){
+    data = a; next = b;
+}
+int count(Node * head){
+    Node * lmao = head;
+    int count = 0;
+    if (head == nullptr) return 0;
+    else{
+        do{
+            lmao = lmao -> next;
+            count ++;
+        }
+        while(lmao !=head);
+    }
+    return count;
+}
+void print_list(Node* head){
+    if(count(head)){
+        cout << "danh sach gom " << count(head) << " phan tu: ";
+        for(int i = 1; i<= count(head); i++){
+            cout << head -> data << ' ';
+            head = head -> next;
+        }
+    }
+    else cout << "\nDANH SACH RONG\n";
+}
+void pop_back(Node *& headx){
+    Node*head = headx;
+    if(headx -> next == headx){
+        headx = nullptr;
+        delete head;
+        return;
+    }
+    do{
+        head = head ->next;
+    }
+    while((head -> next) -> next !=headx);
+    delete head -> next;
+    head -> next = headx;
+}
+void pop_front(Node*& head){
+    if(head -> next == head){
+        delete head;
+        head = nullptr;
+        return;
+    }
+    Node * temp = head;
+    for(int i = 1; i< count(head); i++){
+        temp = temp -> next;
+    }
+    Node * lmao = head;
+    head = head -> next;
+    temp -> next = head;
+    delete lmao;
+}
+void add_end(Node *& head, int data){
+    if(head == nullptr){
+        head= new Node (data);
+        head -> next = head;
+    }
+    else{
+        Node * lmao = head;
+        for(int i = 1; i < count(head); i++){
+            lmao = lmao -> next;
+        }
+        lmao -> next = new Node(data, head);
+    }
+}
+void push_front(Node *& head, int data){
+    if(head == nullptr){
+        head = new Node(data, head);
+        head -> next = head;
+    }
+    else{
+        Node * temp = head;
+        for(int i = 1; i < count(temp); i++){
+            temp = temp -> next;
+        }
+        head = new Node(data, head);
+        temp -> next = head;
+    }
+}
+void deleting(Node * &xhead){
+    if(xhead == nullptr) return;
+    Node * head = xhead;
+    Node * lmao;
+    int k = count(head);
+    for(int i = 1; i< k; i++){
+        lmao = head;
+        head = head -> next;
+        delete lmao;
+    }
+    xhead= nullptr;
+}
+int main(){
+    Node* head=nullptr;
+    while (true){
+        cout << "\n1.them dau\n2.in danh sach\n3.dung\n4.xoa cuoi\n5.xoa dau\n6.xoa danh sach\n7.them cuoi\n";
+        cout << "nhap lua chon: ";
+        int k;
+        cin >>k;
+        if (k==1){
+            cout << "nhap gia tri muon them: ";
+            int a;
+            cin >> a;
+            push_front(head, a);
+        }
+        else if(k==2) print_list(head);
+        else if(k==3) break;
+        else if(k==4) pop_back(head);
+        else if(k==5) pop_front (head);
+        else if(k==6) deleting(head);
+        else if(k==7){
+            int a;
+            cout << "nhap gia tri muon them: ";
+            cin >> a;
+            add_end(head, a);
+        } 
+        else{
+            cout << "nhap sai";
+            continue;
+        }
+    }
+    return 0;
+}
+
+Ứng dụng của danh sách liên kết vòng
+Danh sách liên kết vòng được sử dụng trong việc quản lý tài nguyên tính toán của một máy tính. Chúng ta có thể sử dụng danh sách liên kết vòng để thực hiện các ngăn xếp (stack) và hàng đợi (queue).
+
+3.9 Danh sách liên kết kép hiệu suất bộ nhớ
+Trong cách triển khai thông thường, chúng ta cần giữ một con trỏ tiến tới phần tử tiếp theo trong danh sách và một con trỏ lùi tới phần tử trước đó. Điều này có nghĩa là các phần tử trong cài đặt danh sách liên kết kép bao gồm dữ liệu, một con trỏ tới nút kế tiếp và một con trỏ tới nút trước đó trong danh sách như được hiển thị dưới đây.
+
+Định nghĩa nút truyền thống
+Gần đây, một tạp chí (Sinha) trình bày một cách triển khai thay thế của ADT danh sách liên kết kép, bao gồm các hoạt động chèn, duyệt và xóa. Cài đặt này dựa trên sự khác biệt con trỏ. Mỗi nút chỉ sử dụng một trường con trỏ để di chuyển qua lại danh sách.
+
+Định nghĩa nút mới
+Trường con trỏ ptrdiff chứa sự khác biệt giữa con trỏ tới nút trước và con trỏ tới nút tiếp theo. Sự khác biệt con trỏ được tính bằng phép XOR (^). ptrdiff = con trỏ tới nút trước ^ con trỏ tới nút tiếp theo. ptrdiff của nút đầu (nút head) là kết quả của NULL ^ nút tiếp theo (nút tiếp theo nút head). Tương tự, ptrdiff của nút cuối là kết quả của nút trước đó (nút trước nút cuối) ^ NULL.
+
+Ví dụ, hãy xem xét danh sách liên kết sau. Trong ví dụ trên:
+- Con trỏ tiếp theo của A là: NULL ^ B
+- Con trỏ tiếp theo của B là: A ^ C
+- Con trỏ tiếp theo của C là: B ^ D
+- Con trỏ tiếp theo của D là: C ^ NULL
+
+Tại sao nó hoạt động?
+Để tìm câu trả lời cho câu hỏi này, chúng ta hãy xem xét các tính chất của phép XOR (^):
+- X ^ X = 0
+- X ^ 0 = X
+- X ^ Y = Y ^ X (đối xứng)
+- (X ^ Y) ^ Z = X ^ (Y ^ Z) (kết hợp)
+
+Trong ví dụ trên, giả sử chúng ta đang ở nút C và muốn di chuyển tới nút B. Chúng ta biết ptrdiff của C được xác định là B ^ D. Nếu chúng ta muốn di chuyển tới nút B, thực hiện phép XOR trên ptrdiff của C với D sẽ cho ra B. Điều này xảy ra vì (B ^ D) ^ D = B (vì D ^ D = 0). Tương tự, nếu chúng ta muốn di chuyển tới nút D, chúng ta phải áp dụng XOR vào ptrdiff của C với B để thu được D. (B ^ D) ^ B = D (vì B ^ B = 0).
+
+Từ những thảo luận trên, chúng ta có thể thấy rằng chỉ bằng cách sử dụng một con trỏ duy nhất, chúng ta có thể di chuyển qua lại. Có thể triển khai danh sách liên kết kép hiệu suất bộ nhớ mà vẫn đảm bảo hiệu suất thời gian tối ưu nhất.
+
+3.10 Danh sách liên kết dỡ bỏ
+
+Một trong những ưu điểm lớn nhất của danh sách liên kết so với mảng là việc chèn một phần tử vào bất kỳ vị trí nào chỉ mất O(1) thời gian. Tuy nhiên, việc tìm kiếm một phần tử trong danh sách liên kết mất O(n) thời gian. Có một biến thể đơn giản của danh sách liên kết đơn gọi là danh sách liên kết dỡ bỏ. Một danh sách liên kết dỡ bỏ lưu trữ nhiều phần tử trong mỗi node (chúng ta gọi nó là khối để thuận tiện). Trong mỗi khối, một danh sách liên kết vòng được sử dụng để kết nối tất cả các nút. Giả sử rằng không có nhiều hơn n phần tử trong danh sách liên kết dỡ bỏ tại bất kỳ thời điểm nào. Để đơn giản hóa vấn đề này, tất cả các khối, ngoại trừ khối cuối cùng, nên chứa chính xác [√n] phần tử (với [√n] là số tự nhiên nhỏ nhấ >=√n). Do đó, không có nhiều hơn [√n] blocks tại bất kỳ thời điểm nào.
+
+a. Tìm kiếm một phần tử trong danh sách liên kết dỡ bỏ
+Trong danh sách liên kết dỡ bỏ, chúng ta có thể tìm kiếm phần tử thứ k trong O(√n): 
+1. Duyệt qua danh sách các khối để tìm khối chứa phần tử thứ k, tức là khối[k/[√n]]. Việc này mất O(√n) vì chúng ta có thể tìm được nó bằng cách đi qua không quá [√n] blocks.
+2. Tìm phần tử thứ k trong danh sách liên kết vòng của khối này. Điều này cũng mất O(√n) vì không có nhiều hơn [√n] nodes trong một khối duy nhất.
+
+b. Chèn một phần tử vào danh sách liên kết dỡ bỏ
+Khi chèn một nút, chúng ta phải sắp xếp lại các nút trong danh sách liên kết dỡ bỏ để duy trì các tính chất đã được đề cập trước đó, rằng mỗi khối chứa [√n] nodes. Giả sử chúng ta chèn một nút x sau nút thứ i, và x nên được đặt trong khối thứ j. Các nút trong khối j và các khối sau khối j phải được dịch chuyển về phía đuôi của danh sách để mỗi khối vẫn có [√n] nodes. Ngoài ra, một khối mới cần được thêm vào phần đuôi nếu khối cuối cùng của danh sách đã đầy, tức là nó có nhiều hơn [√n] nodes.
+
+c. Thực hiện phép dịch chuyển
+Lưu ý rằng mỗi phép dịch chuyển, bao gồm việc loại bỏ một nút từ đuôi của danh sách liên kết tròn trong một khối và chèn một nút vào đầu danh sách liên kết tròn trong khối tiếp theo, chỉ mất O(1) thời gian. Do đó, độ phức tạp thời gian tổng của một phép chèn cho danh sách liên kết dỡ bỏ là O(√n); có tối đa O(√n) khối và do đó tối đa O(√n) phép dịch chuyển.
+
+Dưới đây, A là khối phía trước, còn B là khối phía sau
+
+1. Cần một con trỏ tạm để lưu trữ đuôi của A.
+2. Trong khối A, di chuyển con trỏ next của node đầu tiên để trỏ đến node trước node tail, để node tail của A có thể được loại bỏ.
+3. Đặt con trỏ next của nút sẽ được dịch chuyển (đuôi của A) để trỏ đến đuôi của B.
+4. Đặt con trỏ next của nút đầu tiên của B để trỏ đến nút mà con trỏ temp trỏ tới.
+5. Cuối cùng, đặt con trỏ head của B để trỏ đến nút mà con trỏ temp trỏ tới. Bây giờ nút mà con trỏ temp trỏ tới trở thành nút đầu tiên mới của B.
+6. Con trỏ temp có thể được loại bỏ. Chúng ta đã hoàn thành phép dịch chuyển để di chuyển đuôi ban đầu của A để trở thành nút đầu tiên mới của B.
+7. Đặt con trỏ prev của node cuối cùng của khối A trỏ đến node đầu tiên của khối B để hoàn thành liên kết
+
+d. Hiệu suất
+Với unrolled linked lists(danh sách liên kết dỡ bỏ), có một số ưu điểm về hiệu suất và không gian. Đầu tiên, nếu số lượng phần tử trong mỗi khối được thiết kế phù hợp (ví dụ: không vượt quá kích thước của một dòng cache), chúng ta sẽ có hiệu suất cache tốt hơn từ tính cục bộ tốt hơn của bộ nhớ. Thứ hai, vì chúng ta có O(n/m) liên kết, trong đó n là số lượng phần tử trong unrolled linked list và m là số lượng phần tử chúng ta có thể lưu trữ trong bất kỳ khối nào, như mảng chẳng hạn, chúng ta cũng có thể tiết kiệm một lượng không gian đáng kể, điều này đặc biệt rõ ràng nếu mỗi phần tử nhỏ.
+
+e. So sánh danh sách liên kết thường và danh sách liên kết dỡ bỏ
+Để so sánh chi phí cho một danh sách unrolled, các phần tử trong cài đặt danh sách liên kết kép bao gồm dữ liệu, một con trỏ đến nút kế tiếp và một con trỏ đến nút trước trong danh sách, như được hiển thị dưới đây. 
+
+class Node{
+    private: 
+    int data;
+    Node * next;
+    Node * prev;
+};
+Giả sử chúng ta có các con trỏ 8 byte, mỗi nút sẽ chiếm 16 byte. Vì vậy, nếu chúng ta muốn lưu trữ 1000 phần tử trong danh sách này, chúng ta sẽ có 16KB chi phí phụ. 
+Bây giờ, hãy nghĩ về một nút unrolled linked list (gọi là LinkedBlock). Nó sẽ trông giống như sau: 
+
+class Block{
+	private:
+	int a = new int[100];
+	Block * next;
+	int node_count;
+};
+
+Do đó, việc phân bổ một nút đơn (12 byte + 8 byte chi phí phụ) với một mảng gồm 100 phần tử (400 byte + 8 byte chi phí phụ) sẽ có chi phí là 428 byte, hoặc 4.28 byte cho mỗi phần tử. Nếu tính đến IK phần tử của chúng ta ở trên, nó sẽ tốn khoảng 4.2KB chi phí phụ, gần gấp 4 lần tốt hơn so với danh sách gốc. Ngay cả khi danh sách trở nên rất mảnh vụn và các mảng phần tử chỉ đạt khoảng 1/2 sức chứa trung bình, đây vẫn là một cải thiện. Hơn nữa, lưu ý rằng chúng ta có thể điều chỉnh kích thước mảng để đạt được chi phí phụ tốt nhất cho ứng dụng của chúng ta.
+
+Dưới đây là chương trình được viết bằng ngôn ngữ C++ bởi chat GPT
+
+#include <iostream>
+#include <cmath>
+#include <ctime>
+#include <cstring>
+
+int blockSize; // kích thước tối đa của các nút trong một khối
+
+struct ListNode {
+    ListNode* next;
+    int value;
+};
+
+struct LinkedBlock {
+    LinkedBlock* next;
+    ListNode* head;
+    int nodeCount;
+};
+
+LinkedBlock blockHead;
+
+// tạo một khối trống
+LinkedBlock* newLinkedBlock() {
+    LinkedBlock* block = new LinkedBlock;
+    block->next = nullptr;
+    block->head = nullptr;
+    block->nodeCount = 0;
+    return block;
+}
+
+// tạo một nút
+ListNode* newListNode(int value) {
+    ListNode* temp = new ListNode;
+    temp->next = nullptr;
+    temp->value = value;
+    return temp;
+}
+
+void searchElement(int k, LinkedBlock** fLinkedBlock, ListNode** fListNode) {
+    // tìm khối
+    int j = (k + blockSize - 1) / blockSize; // nút thứ k nằm trong khối thứ j
+    LinkedBlock* p = &blockHead;
+
+    while (--j) {
+        p = p->next;
+    }
+    *fLinkedBlock = p;
+
+    // tìm nút
+    ListNode* q = p->head;
+    k = k % blockSize;
+    if (k == 0) k = blockSize;
+    k--;
+    while (k--) {
+        q = q->next;
+    }
+    *fListNode = q;
+}
+
+void shift(LinkedBlock* A) {
+    LinkedBlock* B;
+    ListNode* temp;
+
+    while (A->nodeCount > blockSize) { // nếu khối này vẫn cần di chuyển
+        // nếu đạt cuối danh sách. Một chút khác biệt
+        if (A->next == nullptr) {
+            A->next = newLinkedBlock();
+        }
+
+        B = A->next;
+        temp = A->head->next;
+        A->head->next = A->head->next->next;
+        temp->next = B->head->next;
+        B->head->next = temp;
+
+        A->nodeCount--;
+        B->nodeCount++;
+        A = B;
+    }
+}
+
+void addElement(int k, int x) {
+    ListNode* p;
+    ListNode* q;
+    LinkedBlock* r;
+
+    if (blockHead.head == nullptr) { // trường hợp đặc biệt khi khối chưa có
+        blockHead.next = newLinkedBlock();
+        blockHead.head = newListNode(x);
+        blockHead.head->next = blockHead.head;
+        blockHead.nodeCount++;
+    } else {
+        if (k == 0) { // trường hợp đặc biệt khi k = 0
+            p = blockHead.head;
+            q = q->next;
+            p->next = newListNode(x);
+            p->next->next = q;
+            blockHead.head = p->next;
+            blockHead.nodeCount++;
+            shift(&blockHead);
+        } else {
+            searchElement(k, &r, &p);
+            q = p->next;
+            p->next = newListNode(x);
+            p->next->next = q;
+            r->nodeCount++;
+            shift(r);
+        }
+    }
+}
+
+int searchElement(int k) {
+    ListNode* p;
+    LinkedBlock* q;
+    searchElement(k, &q, &p);
+    return p->value;
+}
+
+int testUnRolledLinkedList() {
+    int tt = clock();
+    int m, i, k, x;
+    char cmd[10];
+
+    std::cin >> m;
+    blockSize = static_cast<int>(std::sqrt(m - 0.001)) + 1;
+
+    for (i = 0; i < m; i++) {
+        std::cin >> cmd;
+        if (std::strcmp(cmd, "add") == 0) {
+            std::cin >> k >> x;
+            addElement(k, x);
+        } else if (std::strcmp(cmd, "search") == 0) {
+            std::cin >> k;
+            std::cout << searchElement(k) << std::endl;
+        } else {
+            std::cerr << "Wrong Input" << std::endl;
+            return 0;
+        }
+    }
+
+    return tt;
+}
+
+int main() {
+    int timeTaken = testUnRolledLinkedList();
+    std::cout << "Time taken: " << timeTaken << " ms" << std::endl;
+    return 0;
+}
+
+3.11 Skip Lists (Danh sách bỏ qua)
+Cây nhị phân có thể được sử dụng để biểu diễn các kiểu dữ liệu trừu tượng như từ điển và danh sách được sắp xếp. Chúng hoạt động tốt khi các phần tử được chèn theo thứ tự ngẫu nhiên. Tuy nhiên, một số chuỗi thao tác, chẳng hạn như chèn các phần tử theo thứ tự, tạo ra cấu trúc dữ liệu kém hiệu năng. Nếu có thể xáo trộn ngẫu nhiên danh sách các phần tử cần chèn, cây sẽ hoạt động tốt với khả năng cao cho bất kỳ chuỗi đầu vào nào. Tuy nhiên, trong hầu hết các trường hợp, các truy vấn phải được trả lời trực tuyến, vì vậy việc xáo trộn đầu vào một cách ngẫu nhiên là không thực tế.
+
+Các thuật toán cây cân bằng sắp xếp lại cây khi thực hiện các thao tác để duy trì các điều kiện cân bằng nhất định và đảm bảo hiệu năng tốt. Skip list là một giải pháp xác suất cho các cây cân bằng. Skip list là một cấu trúc dữ liệu có thể được sử dụng như một giải pháp thay thế cho cây nhị phân cân bằng (xem chương Cây). So với cây nhị phân, skip list cho phép tìm kiếm, chèn và xóa các phần tử nhanh chóng. Điều này được thực hiện bằng cách sử dụng cân bằng xác suất thay vì cân bằng nghiêm ngặt. Skip list về cơ bản là một danh sách liên kết với các con trỏ bổ sung để có thể bỏ qua các nút trung gian. Nó sử dụng một bộ tạo số ngẫu nhiên để đưa ra một số quyết định.
+
+Trong một danh sách liên kết được sắp xếp thông thường, tìm kiếm, chèn và xóa đều có độ phức tạp O(n) vì danh sách phải được duyệt từng nút từ đầu để tìm nút liên quan. Nếu bằng cách nào đó chúng ta có thể duyệt danh sách theo bước lớn hơn (bước nhảy), chúng ta sẽ giảm chi phí của việc duyệt. Đây là ý tưởng cơ bản đằng sau Skip List. Skip List với Một Mức, Skip List với Hai Mức, Skip List với Ba Mức
+
+Hiệu năng
+Trong một danh sách liên kết đơn giản gồm n phần tử, để thực hiện một tìm kiếm, chúng ta cần n phép so sánh trong trường hợp xấu nhất. Nếu chúng ta thêm một con trỏ thứ hai trỏ đến hai nút tiếp theo cho mỗi nút, số phép so sánh sẽ giảm xuống n/2 + 1 trong trường hợp xấu nhất. Thêm một con trỏ nữa cho mỗi nút thứ tư và làm cho chúng trỏ đến nút thứ tư tiếp theo giảm số phép so sánh xuống ⌈n/2⌉ + 2. Nếu chiến lược này tiếp tục để mỗi nút có i con trỏ trỏ đến 2 * i – 1 nút tiếp theo, chúng ta sẽ đạt được hiệu năng O(logn) và số con trỏ chỉ tăng gấp đôi (n + n/2 + n/4 + n/8 + n/16 + .... = 2n).
+
+Các thao tác tìm kiếm, chèn và xóa trên cây tìm kiếm nhị phân thông thường là hiệu quả, O(logn), khi dữ liệu đầu vào là ngẫu nhiên; nhưng hiệu quả kém hơn, O(n), khi dữ liệu đầu vào được sắp xếp. Hiệu năng của Skip List cho các thao tác tương tự và cho bất kỳ tập dữ liệu nào cũng tương tự như cây tìm kiếm nhị phân được xây dựng ngẫu nhiên - tức là O(logn).
+
+So sánh Skip List và Unrolled Linked List
+Một cách đơn giản, Skip List là danh sách liên kết được sắp xếp với hai khác biệt:
+- Các nút trong danh sách thông thường có một con trỏ tiếp theo. Các nút trong Skip List có nhiều con trỏ tiếp theo (cũng gọi là con trỏ chuyển tiếp).
+- Số con trỏ chuyển tiếp cho một nút cụ thể được xác định theo cách xác suất. Chúng ta nói về một nút Skip List có các cấp, một cấp cho mỗi con trỏ chuyển tiếp. Số cấp trong một nút được gọi là kích thước của nút.
+
+Trong một danh sách được sắp xếp thông thường, các thao tác chèn, xóa và tìm kiếm yêu cầu duyệt tuần tự của danh sách. Điều này dẫn đến hiệu năng O(n) cho mỗi thao tác. Skip List cho phép bỏ qua các nút trung gian trong danh sách trong quá trình duyệt - dẫn đến hiệu năng trung bình dự kiến là O(logn) cho mỗi thao tác. 
+
+																															Kết thúc vào ngày  18/7/2023

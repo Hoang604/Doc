@@ -1,0 +1,201 @@
+																															Bắt đầu viết vào ngày 9/82023
+7.1: Khái niệm về Hàng Đợi Ưu Tiên
+
+Trong một số tình huống, chúng ta có thể cần tìm phần tử nhỏ nhất/lớn nhất trong một tập hợp các phần tử. Chúng ta có thể thực hiện điều này thông qua cấu trúc dữ liệu Hàng Đợi Ưu Tiên (Priority Queue). Hàng đợi ưu tiên là một cấu trúc dữ liệu hỗ trợ các thao tác Chèn (Insert) và delete_min (trả về và loại bỏ phần tử nhỏ nhất) hoặc delete_max (trả về và loại bỏ phần tử lớn nhất). Những thao tác này tương đương với các thao tác EnQueue và DeQueue của một hàng đợi. Sự khác biệt là, trong hàng đợi ưu tiên, thứ tự mà các phần tử vào hàng đợi có thể không giống với thứ tự chúng được xử lý. Một ứng dụng ví dụ của hàng đợi ưu tiên là lập lịch công việc, nơi ưu tiên được ưu ái hơn là phục vụ theo nguyên tắc đến trước đến trước sau.
+
+Một hàng đợi ưu tiên được gọi là hàng đợi ưu tiên tăng dần nếu phần tử có khóa nhỏ nhất có ưu tiên cao nhất (nghĩa là luôn xóa phần tử nhỏ nhất). Tương tự, một hàng đợi ưu tiên được gọi là hàng đợi ưu tiên giảm dần nếu phần tử có khóa lớn nhất có ưu tiên cao nhất (luôn xóa phần tử lớn nhất). Vì hai loại này là đối xứng nhau, chúng ta sẽ tập trung vào loại hàng đợi ưu tiên tăng dần.
+
+7.2: cấu trúc dữ liệu Hàng Đợi Ưu Tiên
+
+Các thao tác sau đây tạo thành cấu trúc dữ liệu hàng đợi ưu tiên (Priority Queue). Các thao tác chính của Hàng Đợi Ưu Tiên:
+
+Hàng đợi ưu tiên là một tập hợp các phần tử, mỗi phần tử có một khóa kèm theo. 
+- insert (key, data): Chèn dữ liệu có khóa vào hàng đợi ưu tiên. Các phần tử được sắp xếp dựa trên khóa.
+- delete_min/delete_max: Loại bỏ và trả về phần tử có khóa nhỏ nhất/lớn nhất.
+- get_min/get_max: Trả về phần tử có khóa nhỏ nhất/lớn nhất mà không xóa nó.
+
+Các thao tác phụ của Hàng Đợi Ưu Tiên:
+- Trả về phần tử có khóa nhỏ thứ k/lớn thứ k trong hàng đợi ưu tiên.
+- size: Trả về số lượng phần tử trong hàng đợi ưu tiên.
+- Heap sort: Sắp xếp các phần tử trong hàng đợi ưu tiên dựa trên ưu tiên (khóa).
+
+7.3 Ứng dụng của Hàng đợi Ưu tiên
+
+Hàng đợi ưu tiên có nhiều ứng dụng - dưới đây là một số trong số chúng:
+
+- Nén dữ liệu: Thuật toán mã hóa Huffman.
+- Thuật toán tìm đường đi ngắn nhất: Thuật toán Dijkstra.
+- Thuật toán cây khung nhỏ nhất: Thuật toán Prim.
+- Mô phỏng dựa vào sự kiện: Khách hàng trong hàng đợi.
+- Vấn đề lựa chọn: Tìm phần tử thứ k nhỏ nhất.
+
+7.4 Các cách triển khai Hàng Đợi Ưu Tiên
+
+Trước khi thảo luận về việc thực hiện thực tế, hãy liệt kê các tùy chọn có thể. 
+
+Triển khai bằng mảng không được sắp xếp
+Các phần tử được chèn vào mảng mà không quan tâm đến thứ tự. Việc xóa (DeleteMax) được thực hiện bằng cách tìm kiếm khóa và sau đó xóa. Độ phức tạp của việc chèn: O(1). Độ phức tạp của delete_min: O(n).
+
+Triển khai bằng danh sách liên kết không được sắp xếp
+Nó rất tương tự với việc thực hiện mảng, nhưng thay vì sử dụng mảng, ta sử dụng danh sách liên kết. Độ phức tạp của việc chèn: O(1). Độ phức tạp của delete_min: O(n).
+
+Triển khai bằng mảng được sắp xếp
+Các phần tử được chèn vào mảng theo thứ tự đã sắp xếp dựa trên trường khóa. Việc xóa được thực hiện ở một đầu duy nhất. Độ phức tạp của việc chèn: O(n). Độ phức tạp của DeleteMin: O(1).
+
+Triển khai bằng danh sách liên kết được sắp xếp
+Các phần tử được chèn vào danh sách theo thứ tự đã sắp xếp dựa trên trường khóa. Việc xóa được thực hiện ở một đầu duy nhất, do đó bảo tồn trạng thái của hàng đợi ưu tiên. Tất cả các chức năng khác liên quan đến ADT danh sách liên kết được thực hiện mà không cần thay đổi. Độ phức tạp của việc chèn: O(n). Độ phức tạp của DeleteMin: O(1).
+
+Triển khai bằng cây nhị phân tìm kiến nhị phân tự cân bằng (Cây AVL, cây đỏ đen)
+
+Cả việc chèn lẫn việc xóa đều mất O(logn) trong trường hợp tồi nhất (xem chương về Cây).
+
+Triển khai bằng Binary Heap
+
+Trong các phần tiếp theo, chúng ta sẽ thảo luận về điều này một cách chi tiết. Tạm thời, hãy giả sử rằng việc thực hiện bảng ưu tiên nhị phân mang lại độ phức tạp O(logn) cho tìm kiếm, chèn và xóa, và độ phức tạp O(1) cho việc tìm phần tử lớn nhất hoặc nhỏ nhất.
+
+7.5 Cây Heap và Cây Heap Nhị Phân
+
+Cây Heap là gì?
+Một cây heap là một loại cây có những thuộc tính đặc biệt. Yêu cầu cơ bản của một cây heap là giá trị của một nút phải lớn hơn hoặc bằng (hoặc nhỏ hơn hoặc bằng) giá trị của các nút con của nó. Điều này được gọi là thuộc tính heap. Một cây heap cũng có thuộc tính bổ sung rằng tất cả các lá nên ở mức h hoặc h - 1 (trong đó h là chiều cao của cây) cho một h > 0 (cây nhị phân hoàn chỉnh). Điều đó có nghĩa là cây heap nên tạo thành một cây nhị phân hoàn chỉnh 
+
+Trong ví dụ bên dưới, cây bên trái là một cây heap (mỗi phần tử đều lớn hơn các nút con của nó) và cây bên phải không phải là một cây heap (vì 11 lớn hơn 2).
+
+Các loại Heap?
+Dựa trên thuộc tính của cây heap, chúng ta có thể phân loại heap thành hai loại:
+- Min heap: Giá trị của một nút phải nhỏ hơn hoặc bằng giá trị của các nút con của nó.
+- Max heap: Giá trị của một nút phải lớn hơn hoặc bằng giá trị của các nút con của nó.
+
+7.6 Cây Heap Nhị Phân
+
+Trong cây heap nhị phân, mỗi nút có thể có tối đa hai nút con. Trong thực tế, cây heap nhị phân đã đủ mạnh mẽ và chúng ta tập trung vào các cây heap nhị phân min và max cho phần còn lại của bài thảo luận.
+
+Biểu diễn Cây Heap: Trước khi xem xét các thao tác trên cây heap, chúng ta hãy xem làm thế nào để biểu diễn chúng. Một cách là sử dụng mảng. Vì cây heap tạo thành các cây nhị phân hoàn chỉnh, không có bất kỳ sự lãng phí về vị trí nào. Cho bài thảo luận bên dưới, hãy giả định rằng các phần tử được lưu trữ trong mảng, bắt đầu từ chỉ số 0. Cây heap max trước đó có thể được biểu diễn như sau:
+
+Lưu ý: Cho phần còn lại của thảo luận, hãy giả sử rằng chúng ta đang thực hiện các thao tác trên cây heap max.
+
+Xếp chồng một Phần Tử
+
+Sau khi chèn một phần tử vào cây heap, có thể xảy ra trường hợp nó không đáp ứng thuộc tính heap. Trong trường hợp đó, chúng ta cần điều chỉnh vị trí các phần tử trong cây để khôi phục lại tính heap. Quá trình này được gọi là "xếp chồng" (heapifying). Trong max-heap, để xếp chồng một phần tử, chúng ta phải tìm phần tử lớn nhất trong các nút con của nó và hoán đổi nó với phần tử hiện tại, và tiếp tục quá trình này cho đến khi thuộc tính heap được đáp ứng tại mọi nút.
+
+Quan sát: Một thuộc tính quan trọng của cây heap là nếu một phần tử không đáp ứng thuộc tính heap, thì tất cả các phần tử từ phần tử đó đến gốc đều gặp vấn đề tương tự. Trong ví dụ dưới đây, phần tử 1 không đáp ứng thuộc tính heap và phần tử cha của nó, 31, cũng gặp vấn đề tương tự. Tương tự, nếu chúng ta thực hiện xếp chồng cho một phần tử, thì tất cả các phần tử từ phần tử đó đến gốc cũng sẽ tự động đáp ứng thuộc tính heap. Hãy xem qua một ví dụ.
+
+Trong cây heap ở trên, phần tử 1 không đáp ứng thuộc tính heap. Hãy thử xếp chồng phần tử này. Để xếp chồng phần tử 1, tìm phần tử lớn nhất trong các nút con của nó và hoán đổi với nó.
+
+Dưới đây là cấu trúc dữ liệu heap, trình bày bằng vector, trong ngôn ngữ C++
+
+#include <iostream>
+#include <vector>
+
+inline void swap(int &a, int &b) {
+    a ^= b;
+    b ^= a;
+    a ^= b;
+}
+class max_heap {
+private:
+    std::vector <int> arr;
+    // to heapify a subtree with the root at given index (chinh sua lai heap sau khi them phan tu vao)
+    void max_heapify(int);
+    // to get index of parent of node i
+    int parent(int i) { return (i-1)/2; }
+    // to get index of left child of node at index i
+    int left(int i) { return (2*i + 1); }
+    // to get index of right child of node at index i
+    int right(int i) { return (2*i + 2); }
+    // Decreases key value of key at index i to new_val
+    // tac dung chinh la de thay the gia tri phan tu co index i thanh INT_MAX, sau do extract_max de xoa phan tu do di
+    void decrease_key(int i, int new_val);
+    
+public:
+    // to extract the root which is the minimum element
+    int extract_max();
+    int get_max() { return arr.at(0); }
+    void delete_key(int);
+    void insert(int);
+    void delete_data(int);
+};
+void max_heap::max_heapify(int i) {
+    int l = left(i);
+    int r = right(i);
+    int max = i;
+    if(l <= arr.size() - 1 && arr[i] < arr[l] ) {
+        max = l;
+    }
+    if(r <= arr.size() - 1 && arr[max] < arr[r]) {
+        max = r;
+    }
+    if(max != i) {
+        swap(arr[max], arr[i]);
+        max_heapify(max);
+    }
+}
+int max_heap::extract_max() {
+    if(arr.empty()) {
+        return INT_MAX;
+    }
+    if(arr.size() == 1) {
+        int root = arr[0];
+        arr.pop_back();
+        return root;
+    }
+    int root = arr[0];
+    arr[0] = arr.back();
+    arr.pop_back();
+    max_heapify(0);
+    return root;
+}
+void max_heap::decrease_key(int i, int new_value) {
+    arr.at(i) = new_value;
+    while(i != 0 && arr.at(i) > arr.at(parent(i))) {
+        swap(arr.at(i), arr.at(parent(i)));
+        i = parent(i);
+    }
+}
+void max_heap::delete_key(int i) {
+    decrease_key(i, INT_MAX);
+    extract_max();
+}
+void max_heap::delete_data(int data) {
+    int i = 0;
+    while(arr[i] != data) {
+        i++;
+    }
+    delete_key(i);
+}
+void max_heap::insert(int data) {
+    arr.emplace_back(data);
+    int i = arr.size() - 1;
+    while(arr.at(i) > arr.at(parent(i))) {
+        swap(arr.at(i), arr.at(parent(i)));
+        i = parent(i);
+    }
+}
+int main() {
+    max_heap heap;
+    for (int i = 0; i < 10; i++) {
+        heap.insert(i);
+    }
+    std::cout << heap.extract_max();
+    std::cout << heap.get_max();
+    heap.delete_key(0);
+    std::cout << heap.get_max();
+    return 0;
+}
+
+
+7.7 Heapsort
+Một ứng dụng chính của cấu trúc dữ liệu Heap là trong việc sắp xếp (sắp xếp heap). Thuật toán sắp xếp heap chèn tất cả các phần tử (từ một mảng chưa được sắp xếp) vào một heap, sau đó loại bỏ chúng từ gốc của heap cho đến khi heap trống rỗng. Lưu ý rằng sắp xếp heap có thể thực hiện trực tiếp trên mảng cần được sắp xếp. Thay vì xóa một phần tử, chúng ta hoán đổi phần tử đầu tiên (lớn nhất) với phần tử cuối cùng và giảm kích thước heap (kích thước mảng). Sau đó, chúng ta tiến hành heapify phần tử đầu tiên. Tiếp tục quá trình này cho đến khi số lượng phần tử còn lại là một.
+
+void heap_sort(int *arr, int size) {
+    max_heap heap;
+    for (int i = 0; i < size; i++) {
+        heap.insert(arr[i]);
+    }
+    for (int i = 0; i < size; i++) {
+        arr[i] = heap.extract_max();
+    }
+}
+
+Độ phức tạp thời gian: Khi chúng ta loại bỏ các phần tử khỏi heap, các giá trị trở nên được sắp xếp (vì các phần tử lớn nhất luôn luôn là gốc). Vì độ phức tạp thời gian của cả thuật toán chèn và thuật toán xóa là O(logn) (trong đó n là số lượng phần tử trong heap), độ phức tạp thời gian của thuật toán sắp xếp heap là O(nlogn).
+
+																													Kết thúc viết vào ngày 10/8/2023

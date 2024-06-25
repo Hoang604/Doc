@@ -1,0 +1,15 @@
+																													Bắt đầu viết vào ngày 17/8/2023
+
+12.1 Các thuật toán Lựa chọn là gì? 
+Thuật toán lựa chọn là một thuật toán để tìm phần tử thứ k nhỏ/lớn nhất trong một danh sách (còn được gọi là thống kê thứ tự k). Điều này bao gồm việc tìm phần tử tối thiểu, tối đa và trung vị. Để tìm thống kế thứ tự k, có nhiều giải pháp cung cấp các phức tạp khác nhau, và trong chương này chúng tôi sẽ liệt kê những khả năng đó.
+
+12.2 Lựa chọn thông qua Sắp xếp 
+Một vấn đề lựa chọn có thể được chuyển thành một vấn đề sắp xếp. Trong phương pháp này, chúng ta trước tiên sắp xếp các phần tử đầu vào và sau đó lấy phần tử mong muốn. Điều này hiệu quả nếu chúng ta muốn thực hiện nhiều lựa chọn. Ví dụ, cho rằng chúng ta muốn lấy phần tử nhỏ nhất. Sau khi sắp xếp các phần tử đầu vào, chúng ta có thể đơn giản trả về phần tử đầu tiên (giả sử mảng được sắp xếp theo thứ tự tăng dần). Bây giờ, nếu chúng ta muốn tìm phần tử thứ hai nhỏ nhất, chúng ta có thể đơn giản trả về phần tử thứ hai từ danh sách đã sắp xếp.
+Điều đó có nghĩa, đối với phần tử thứ hai nhỏ nhất, chúng ta không thực hiện việc sắp xếp lại. Tình hình tương tự cũng xảy ra với các truy vấn sau này. Ngay cả khi chúng ta muốn lấy phần tử thứ k nhỏ nhất, chỉ cần quét một lần danh sách đã sắp xếp là đủ để tìm phần tử (hoặc chúng ta có thể trả về giá trị thứ k nếu các phần tử trong mảng). Từ cuộc thảo luận ở trên, điều chúng ta có thể nói là, với việc sắp xếp ban đầu, chúng ta có thể trả lời bất kỳ truy vấn nào trong một lần quét, O(n). Nói chung, phương pháp này yêu cầu O(nlogn) thời gian (cho việc sắp xếp), trong đó n là độ dài của danh sách đầu vào. Giả sử chúng ta thực hiện n truy vấn, sau đó chi phí trung bình cho mỗi hoạt động chỉ là O(nlogn) / O(n) ≈ O(logn). Loại phân tích này được gọi là phân tích trải nghiệm.
+
+12.3 Thuật toán lựa chọn dựa trên phân vùng
+Quét qua các số k lần để có phần tử mong muốn. Phương pháp này được sử dụng trong sắp xếp nổi bọt (và sắp xếp chọn), mỗi lần chúng ta tìm ra phần tử nhỏ nhất trong toàn bộ dãy bằng cách so sánh từng phần tử. Trong phương pháp này, dãy phải được duyệt qua k lần. Do đó, độ phức tạp là O(n × k).
+
+Nói chung là để tìm kiếm thì trước tiên là sắp xếp, rồi sau đó trả về chỉ số nếu là mảng, hoặc duyệt tuyến tính nếu là danh sách liên kết
+
+																												 	Kết thúc vào ngày 17/8/2023

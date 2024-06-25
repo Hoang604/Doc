@@ -1,0 +1,614 @@
+																														Bắt đầu viết vào ngày 12/7/2023
+
+Kính gửi độc giả,
+
+Xin vui lòng kiên nhẫn đọc tiếp! Tôi biết rằng nhiều người thường không đọc Phần mở đầu của một cuốn sách. Nhưng tôi khuyến nghị mạnh mẽ rằng bạn nên đọc Phần mở đầu đặc biệt này. Mục tiêu chính của cuốn sách này không phải là trình bày các định lý và chứng minh về cấu trúc dữ liệu và thuật toán. Tôi đã tuân thủ một mô hình cải thiện các giải pháp vấn đề với các độ phức tạp khác nhau (đối với mỗi vấn đề, bạn sẽ tìm thấy nhiều giải pháp với các độ phức tạp khác nhau và giảm đi). Đơn giản là một liệt kê các giải pháp có thể. Với cách tiếp cận này, ngay cả khi bạn gặp một câu hỏi mới, nó sẽ cho bạn một cách để suy nghĩ về các giải pháp có thể. Bạn sẽ thấy cuốn sách này hữu ích cho việc chuẩn bị phỏng vấn, chuẩn bị cho các kỳ thi cạnh tranh và phỏng vấn trên trường đại học. Nếu bạn đang tìm việc, nếu bạn đọc toàn bộ cuốn sách, tôi tin chắc rằng bạn sẽ có thể thách thức các nhà phỏng vấn. Nếu bạn đọc nó như là một giảng viên, nó sẽ giúp bạn giảng bài theo một phương pháp dễ hiểu và kết quả là học sinh của bạn sẽ đánh giá cao việc họ đã chọn Công nghệ thông tin làm ngành học. Cuốn sách này cũng hữu ích cho sinh viên đại học chuyên ngành Kỹ thuật và học viên cao học trong quá trình học tập của họ. Trong tất cả các chương, bạn sẽ thấy sự tập trung nhiều hơn vào các vấn đề và phân tích của chúng hơn là lý thuyết. Trong mỗi chương, bạn sẽ đọc về lý thuyết cơ bản cần thiết trước, sau đó là một phần về bài tập. Tổng cộng, có khoảng 700 bài toán thuật toán, tất cả đều có lời giải. Nếu bạn đọc cuốn sách như là một sinh viên chuẩn bị cho các kỳ thi cạnh tranh về Công nghệ thông tin, nội dung bao gồm tất cả các chủ đề cần thiết một cách chi tiết. Trong quá trình viết cuốn sách này, tập trung chính của tôi là giúp đỡ các sinh viên đang chuẩn bị cho các kỳ thi này. Trong tất cả các chương, bạn sẽ thấy sự tập trung nhiều hơn vào các vấn đề và phân tích hơn là lý thuyết. Trong mỗi chương, bạn sẽ đầu tiên đọc về lý thuyết cơ bản cần thiết, sau đó là các bài tập khác nhau. Đối với nhiều bài toán, chúng tôi cung cấp nhiều giải pháp với các mức độ phức tạp khác nhau. Chúng tôi bắt đầu bằng giải pháp thô sơ và dần dần tiến đến giải pháp tốt nhất có thể cho vấn đề đó. Đối với mỗi vấn đề, chúng tôi cố gắng hiểu rõ thời gian thuật toán mất bao lâu và bộ nhớ mà thuật toán sử dụng.
+
+Đề nghị độc giả nên đọc ít nhất một lần toàn bộ cuốn sách này để hiểu đầy đủ về tất cả các chủ đề được đề cập. Sau đó, trong những lần đọc sau, bạn có thể nhảy trực tiếp đến bất kỳ chương nào để tham khảo một chủ đề cụ thể. Mặc dù đã có nhiều lần đọc nhằm sửa chữa lỗi, vẫn có thể còn một số lỗi chính tả nhỏ trong cuốn sách. Nếu phát hiện ra bất kỳ lỗi nào, chúng sẽ được cập nhật tại www.CareerMonk.com. Bạn có thể theo dõi trang web này để biết các sửa lỗi cũng như các bài toán và lời giải mới. Hơn nữa, xin vui lòng cung cấp ý kiến đóng góp quý báu của bạn qua địa chỉ email: Info@CareerMonk.com. Tôi chúc bạn thành công và tôi tin rằng bạn sẽ thấy cuốn sách này hữu ích.
+
+- Narasimha Karumanchi
+Mục lục:
+
+1. Giới thiệu
+   1.1 Các biến
+   1.2 Các kiểu dữ liệu
+   1.3 Cấu trúc dữ liệu
+   1.4 Kiểu dữ liệu trừu tượng (ADTs)
+   1.5 Thuật toán là gì?
+   1.6 Tại sao phân tích thuật toán?
+   1.7 Mục tiêu của phân tích thuật toán
+   1.8 Phân tích thời gian chạy là gì?
+   1.9 Làm thế nào để so sánh các thuật toán?
+   1.10 Tỷ lệ tăng trưởng là gì?
+   1.11 Các tỷ lệ tăng trưởng phổ biến
+   1.12 Các loại phân tích
+   1.13 Ký hiệu Asymptotic
+   1.14 Ký hiệu Big-O [Hàm giới hạn trên]
+   1.15 Ký hiệu Omega-Ω [Hàm giới hạn dưới]
+   1.16 Ký hiệu Theta-Θ [Hàm thứ tự]
+   1.17 Lưu ý quan trọng
+   1.18 Tại sao gọi là phân tích Asymptotic?
+   1.19 Hướng dẫn cho phân tích Asymptotic
+   1.20 Thuận tiện trong thuật ngữ giới hạn vô hạn
+   1.21 Logarit và Tổng thường được sử dụng
+   1.22 Định lý chung cho các phương trình tái phân chia và chinh phục
+   1.23 Định lý chung cho phương trình chênh lệch và chinh phục
+   1.24 Biến thể của Định lý chung về chênh lệch và chinh phục
+   1.25 Phương pháp đoán và xác nhận
+   1.26 Phân tích Amortized
+   1.27 Phân tích thuật toán: Các vấn đề và giải pháp
+
+2. Đệ quy và Backtracking
+   2.1 Giới thiệu
+   2.2 Đệ quy là gì?
+   2.3 Tại sao sử dụng đệ quy?
+   2.4 Định dạng của một hàm đệ quy
+   2.5 Đệ quy và Bộ nhớ (Hình dung)
+   2.6 Đệ quy so với Lặp
+   2.7 Ghi chú về Đệ quy
+   2.8 Ví dụ về thuật toán đệ quy
+   2.9 Đệ quy: Các vấn đề và giải pháp
+   2.10 Backtracking là gì?
+   2.11 Ví dụ về thuật toán Backtracking
+   2.12 Backtracking: Các vấn đề và giải pháp
+
+3. Danh sách liên kết
+   3.1 Danh sách liên kết là gì?
+   3.2 Kiểu dữ liệu danh sách liên kết
+   3.3 Tại sao sử dụng danh sách liên kết?
+   3.4 Tổng quan về mảng
+   3.5 So sánh danh sách liên kết với mảng và mảng động
+   3.6 Danh sách liên kết đơn
+   3.7 Danh sách liên kết kép
+   3.8 Danh sách liên kết vòng
+   3.9 Danh sách liên kết kép tiết kiệm bộ nhớ
+   3.10 Danh sách liên kết được gom nhóm
+   3.11 Danh sách liên kết vượt mức
+   3.12 Danh sách liên kết: Các vấn đề và giải pháp
+
+4. Ngăn xếp
+   4.1 Ngăn xếp là gì?
+   4.2 Ngăn xếp được sử dụng như thế nào
+   4.3 Kiểu dữ liệu ngăn xếp
+   4.4 Ứng dụng của ngăn xếp
+   4.5 Cách triển khai
+   4.6 So sánh các cách triển khai
+   4.7 Ngăn xếp: Các vấn đề và giải pháp
+
+5. Hàng đợi
+   5.1 Hàng đợi là gì?
+   5.2 Hàng đợi được sử dụng như thế nào?
+   5.3 Kiểu dữ liệu hàng đợi
+   5.4 Ngoại lệ
+   5.5 Ứng dụng
+   5.6 Cách triển khai
+   5.7 Hàng đợi: Các vấn đề và giải pháp
+
+6. Cây
+   6.1 Cây là gì?
+   6.2 Thuật ngữ
+   6.3 Cây nhị phân
+   6.4 Các loại cây nhị phân
+   6.5 Thuộc tính của cây nhị phân
+   6.6 Các phương pháp duyệt cây nhị phân
+   6.7 Cây tổng quát (cây N-ary)
+   6.8 Cây nhị phân được gắn kết (duyệt không cần Stack hoặc Hàng đợi)
+   6.9 Cây biểu thức
+   6.10 Cây XOR
+   6.11 Cây tìm kiếm nhị phân (BST)
+   6.12 Cây tìm kiếm nhị phân cân bằng
+   6.13 Cây AVL (Adelson-Velskii và Landis)
+   6.14 Các biến thể khác trên cây
+
+7. Hàng đợi ưu tiên và Heap
+   7.1 Hàng đợi ưu tiên là gì?
+   7.2 Kiểu dữ liệu hàng đợi ưu tiên
+   7.3 Ứng dụng của hàng đợi ưu tiên
+   7.4 Cách triển khai hàng đợi ưu tiên
+   7.5 Heap và Heap nhị phân
+   7.6 Heap nhị phân
+   7.7 Sắp xếp Heap
+   7.8 Hàng đợi ưu tiên [Heap]: Các vấn đề và giải pháp
+
+8. Kiểu dữ liệu Disjoint Sets
+   8.1 Giới thiệu
+   8.2 Quan hệ tương đương và các lớp tương đương
+   8.3 Kiểu dữ liệu Disjoint Sets
+   8.4 Ứng dụng
+   8.5 Lựa chọn khi triển khai kiểu dữ liệu Disjoint Sets
+   8.8 Triển khai UNION nhanh (FIND chậm)
+   8.9 Triển khai UNION nhanh (FIND nhanh)
+   8.10 Tóm tắt
+   8.11 Kiểu dữ liệu Disjoint Sets: Các vấn đề và giải pháp
+
+9. Thuật toán Đồ thị
+   9.1 Giới thiệu
+   9.2 Thuật ngữ
+   9.3 Ứng dụng của Đồ thị
+   9.4 Biểu diễn Đồ thị
+   9.5 Duyệt Đồ thị
+   9.6 Sắp xếp Topological
+   9.7 Thuật toán đường đi ngắn nhất
+   9.8 Cây bao phủ nhỏ nhất
+   9.9 Thuật toán Đồ thị: Các vấn đề và giải pháp
+
+10. Sắp xếp
+   10.1 Sắp xếp là gì?
+   10.2 Tại sao cần sắp xếp?
+   10.3 Phân loại thuật toán sắp xếp
+   10.4 Các phân loại khác
+   10.5 Sắp xếp nổi bọt
+   10.6 Sắp xếp chọn
+   10.7 Sắp xếp chèn
+   10.8 Sắp xếp Shell
+   10.9 Sắp xếp trộn
+   10.10 Sắp xếp Heap
+   10.11 Sắp xếp nhanh
+   10.12 Sắp xếp cây
+   10.13 So sánh các thuật toán sắp xếp
+   10.14 Các thuật toán sắp xếp tuyến tính
+   10.15 Sắp xếp đếm
+   10.16 Sắp xếp theo thùng (hoặc sắp xếp theo bin)
+   10.17 Sắp xếp theo hệ cơ số
+   10.18 Sắp xếp theo thứ tự
+   10.19 Sắp xếp ngoại (sắp xếp ngoại vi)
+   10.20 Sắp xếp: Các vấn đề và giải pháp
+
+11. Tìm kiếm
+   11.1 Tìm kiếm là gì?
+   11.2 Tại sao chúng ta cần tìm kiếm?
+   11.3 Các loại tìm kiếm
+   11.4 Tìm kiếm tuyến tính không sắp xếp
+   11.5 Tìm kiếm tuyến tính đã sắp xếp
+   11.6 Tìm kiếm nhị phân
+   11.7 Tìm kiếm nội suy
+   11.8 So sánh các thuật toán tìm kiếm cơ bản
+   11.9 Bảng ký hiệu và băm
+   11.10 Thuật toán tìm kiếm chuỗi
+   11.11 Tìm kiếm: Các vấn đề và giải pháp
+
+12. Thuật toán chọn [Giá trị trung vị]
+   12.1 Các thuật toán chọn là gì?
+   12.2 Chọn bằng cách sắp xếp
+   12.3 Thuật toán chọn dựa trên phân vùng
+   12.4 Thuật toán chọn tuyến tính - Thuật toán trung vị của trung vị
+   12.5 Tìm các phần tử nhỏ nhất K theo thứ tự đã sắp xếp
+   12.6 Thuật toán chọn: Các vấn đề và giải pháp
+
+13. Bảng ký hiệu
+   13.1 Giới thiệu
+   13.2 Bảng ký hiệu là gì?
+   13.3 Các phương pháp triển khai bảng ký hiệu
+   13.4 Bảng so sánh các ký hiệu cho các phương pháp triển khai
+
+14. Băm
+   14.1 Băm là gì?
+   14.2 Tại sao cần băm?
+   14.3 Kiểu dữ liệu HashTable
+   14.4 Hiểu về băm 
+   14.5 Các thành phần của băm
+   14.6 Bảng băm
+   14.7 Hàm băm
+   14.8 Tỷ lệ tải
+   14.9 Xung đột
+   14.10 Các kỹ thuật giải quyết xung đột
+   14.11 Chia sẻ riêng
+   14.12 Tiếp cận mở
+   14.13 So sánh các kỹ thuật giải quyết xung đột
+   14.14 Làm thế nào để băm có độ phức tạp O(1)?
+   14.15 Các kỹ thuật băm
+   14.16 Các vấn đề không phù hợp với bảng băm
+   14.17 Bloom Filters
+   14.18 Băm: Các vấn đề và giải pháp
+
+15. Thuật toán chuỗi
+   15.1 Giới thiệu
+   15.2 Các thuật toán khớp chuỗi
+   15.3 Phương pháp thô mạ
+   15.4 Thuật toán khớp chuỗi Rabin-Karp
+   15.5 Khớp chuỗi với máy tự động hữu hạn
+   15.6 Thuật toán KMP
+   15.7 Thuật toán Boyer-Moore
+   15.8 Cấu trúc dữ liệu để lưu trữ chuỗi
+   15.9 Bảng băm cho chuỗi
+   15.10 Cây nhị phân tìm kiếm cho chuỗi
+   15.11 Trie
+   15.12 Cây tìm kiếm nhị phân ba
+   15.13 So sánh cây nhị phân tìm kiếm, Trie và cây tìm kiếm nhị phân ba
+   15.14 Cây hậu tố
+   15.15 Thuật toán chuỗi: Các vấn đề và giải pháp
+
+16. Các kỹ thuật thiết kế thuật toán
+   16.1 Giới thiệu
+   16.2 Phân loại
+   16.3 Phân loại theo phương pháp triển khai
+   16.4 Phân loại theo phương pháp thiết kế
+   16.5 Các phân loại khác
+
+17. Thuật toán tham lam
+   17.1 Giới thiệu
+   17.2 Chiến lược tham lam
+   17.3 Các yếu tố của thuật toán tham lam
+   17.4 Tham lam luôn hoạt động?
+   17.5 Ưu điểm và nhược điểm của phương pháp tham lam
+   17.6 Ứng dụng tham lam
+   17.7 Hiểu về kỹ thuật tham lam
+   17.8 Thuật toán tham lam: Các vấn đề và giải pháp
+
+18. Thuật toán chia để trị
+   18.1 Giới thiệu
+   18.2 Chiến lược chia để trị là gì?
+   18.3 Chia để trị luôn hoạt động?
+   18.4 Trực quan hóa chia để trị
+   18.5 Hiểu về chia để trị
+   18.6 Ưu điểm của chia để trị
+   18.7 Nhược điểm của chia để trị  
+   18.8 Định lý chung
+   18.9 Ứng dụng chia để trị
+   18.10 Chia để trị: Các vấn đề và giải pháp
+
+19. Lập trình động
+   19.1 Giới thiệu
+   19.2 Chiến lược lập trình động là gì?
+   19.3 Các thuộc tính của chiến lược lập trình động
+   19.4 Lập trình động có thể giải quyết tất cả các vấn đề?
+   19.5 Các phương pháp tiếp cận lập trình động
+   19.6 Các ví dụ về thuật toán lập trình động
+   19.7 Hiểu về lập trình động
+   19.8 Dãy con chung dài nhất
+   19.9 Lập trình động: Các vấn đề và giải pháp
+
+20. Lớp phức tạp
+   20.1 Giới thiệu
+   20.2 Thời gian đa thức / mũ
+   20.3 Vấn đề quyết định là gì?  
+   20.4 Thủ tục quyết định
+   20.5 Lớp phức tạp là gì?
+   20.6 Các loại lớp phức tạp
+   20.7 Sự thu hẹp
+   20.8 Lớp phức tạp: Các vấn đề và giải pháp
+
+21. Các khái niệm khác
+   21.1 Giới thiệu
+   21.2 Mẹo về lập trình Bit-wise
+   21.3 Các câu hỏi lập trình khác
+CHƯƠNG 1: GIỚI THIỆU
+	Mục tiêu của chương này là giải thích tầm quan trọng của phân tích thuật toán, các ký hiệu, mối quan hệ và giải quyết càng nhiều vấn đề có thể. Hãy tập trung vào việc hiểu các yếu tố cơ bản của thuật toán, tầm quan trọng của phân tích thuật toán, sau đó dần dần chuyển sang các chủ đề khác như đã đề cập ở trên. Sau khi hoàn thành chương này, bạn sẽ có thể tìm ra độ phức tạp của bất kỳ thuật toán nào (đặc biệt là các hàm đệ quy).
+
+1.1 Biến
+	Trước khi đến định nghĩa biến, hãy liên kết chúng với các phương trình toán học cũ. Chúng ta đã giải nhiều phương trình toán học từ khi còn nhỏ. Ví dụ, xem phương trình dưới đây:
+                                      x+1=3*y
+	Chúng ta không cần quan tâm đến việc sử dụng phương trình này. Điều quan trọng mà chúng ta cần hiểu là phương trình có tên (x và y), chứa giá trị (dữ liệu). Điều này có nghĩa là tên (x và y) là những nơi đặt giữ dữ liệu. Tương tự, trong lập trình khoa học máy tính, chúng ta cần một cái gì đó để lưu trữ dữ liệu và biến là cách để làm điều đó.
+
+1.2 Kiểu dữ liệu
+	Trong phương trình đã đề cập ở trên, các biến x và y có thể có bất kỳ giá trị nào như số nguyên (10, 20), số thực (0.23, 5.5) hoặc chỉ là 0 và 1. Để giải quyết phương trình, chúng ta cần liên kết chúng với loại giá trị chúng có thể nhận được và kiểu dữ liệu là tên được sử dụng trong lập trình khoa học máy tính cho mục đích này. Một kiểu dữ liệu trong ngôn ngữ lập trình là một tập hợp dữ liệu có giá trị được xác định trước. Ví dụ về kiểu dữ liệu là: số nguyên, số thực, số nguyên không dấu, ký tự, chuỗi, v.v. Bộ nhớ máy tính chỉ được điền đầy với các số 0 và 1. Nếu chúng ta có một vấn đề và muốn mã hóa nó, rất khó khăn để cung cấp giải pháp dưới dạng các số 0 và 1. Để giúp người dùng, các ngôn ngữ lập trình và trình biên dịch cung cấp cho chúng ta các kiểu dữ liệu. Ví dụ, số nguyên chiếm 2 byte (giá trị thực tế phụ thuộc vào trình biên dịch), số thực chiếm 4 byte, v.v. Điều này cho biết rằng trong bộ nhớ, chúng ta kết hợp 2 byte (16 bit) và gọi nó là số nguyên. Tương tự, kết hợp 4 byte (32 bit) và gọi là số thực. Một kiểu dữ liệu giúp giảm công sức lập trình. Ở mức cao nhất, có hai loại kiểu dữ liệu: Kiểu dữ liệu được định nghĩa bởi hệ thống (còn gọi là kiểu dữ liệu nguyên thủy) và kiểu dữ liệu do người dùng định nghĩa.
+	Kiểu dữ liệu do hệ thống xác định (Kiểu dữ liệu nguyên thủy) là các kiểu dữ liệu được định nghĩa bởi hệ thống. Các kiểu dữ liệu nguyên thủy được cung cấp bởi nhiều ngôn ngữ lập trình là: int, float, char, double, bool, v.v. Số bit được cấp phát cho mỗi kiểu dữ liệu nguyên thủy phụ thuộc vào ngôn ngữ lập trình, trình biên dịch và hệ điều hành. Đối với cùng một kiểu dữ liệu nguyên thủy, các ngôn ngữ khác nhau có thể sử dụng kích thước khác nhau. Tùy thuộc vào kích thước của các kiểu dữ liệu, tập giá trị có sẵn tổng cộng (miền giá trị) cũng sẽ thay đổi. Ví dụ, "int" có thể chiếm 2 byte hoặc 4 byte. Nếu nó chiếm 2 byte (16 bit), thì giá trị có thể có từ -32.768 đến 32.767 (-2^15 đến 2^15-1). Nếu nó chiếm 4 byte (32 bit), thì giá trị có thể nằm trong khoảng từ -2.147.483.648 đến +2.147.483.647 (-2^31 đến 2^31-1). Tương tự với các kiểu dữ liệu khác.
+
+*Kiểu dữ liệu do người dùng định nghĩa
+	Nếu các kiểu dữ liệu do hệ thống xác định không đủ, thì hầu hết các ngôn ngữ lập trình cho phép người dùng định nghĩa các kiểu dữ liệu riêng, được gọi là kiểu dữ liệu do người dùng định nghĩa. Ví dụ tốt về kiểu dữ liệu do người dùng định nghĩa là cấu trúc trong C/C++ và lớp (class) trong Java. Ví dụ, trong đoạn mã dưới đây, chúng ta kết hợp nhiều kiểu dữ liệu do hệ thống xác định và gọi kiểu dữ liệu do người dùng định nghĩa bằng tên "newType". Điều này mang lại sự linh hoạt và thoải mái hơn trong xử lý bộ nhớ máy tính.
+
+1.3 Cấu trúc dữ liệu
+	Dựa trên cuộc thảo luận ở trên, khi chúng ta có dữ liệu trong biến, chúng ta cần một cơ chế nào đó để xử lý dữ liệu đó để giải quyết các vấn đề. Cấu trúc dữ liệu là một cách cụ thể để lưu trữ và tổ chức dữ liệu trên máy tính sao cho nó có thể được sử dụng một cách hiệu quả. Một cấu trúc dữ liệu là một định dạng đặc biệt để tổ chức và lưu trữ dữ liệu. Các loại cấu trúc dữ liệu chung bao gồm mảng, tệp tin, danh sách liên kết, ngăn xếp, hàng đợi, cây, đồ thị và nhiều loại khác. Tùy thuộc vào cách tổ chức các phần tử, cấu trúc dữ liệu được phân loại thành hai loại: 1) Cấu trúc dữ liệu tuyến tính: Các phần tử được truy cập theo thứ tự tuần tự nhưng không bắt buộc phải lưu trữ tất cả các phần tử tuần tự. Ví dụ: Danh sách liên kết, ngăn xếp và hàng đợi. 2) Cấu trúc dữ liệu phi tuyến: Các phần tử của cấu trúc dữ liệu này được lưu trữ/truy cập theo một thứ tự phi tuyến. Ví dụ: Cây và đồ thị.
+
+1.4 Abstract Data Types (ADTs)
+	Abstract Data Types (ADTs) là cách kết hợp cấu trúc dữ liệu với các thao tác đi kèm để đơn giản hóa quá trình giải quyết các vấn đề. Trong khi các kiểu dữ liệu nguyên thủy được hệ thống cung cấp hỗ trợ các thao tác cơ bản như cộng và trừ, kiểu dữ liệu người dùng tự định nghĩa yêu cầu định nghĩa các thao tác riêng của chúng. ADT bao gồm hai phần: phần khai báo dữ liệu và phần khai báo các thao tác.
+
+	Các ADT thông dụng bao gồm Danh sách liên kết, Ngăn xếp, Hàng đợi, Hàng đợi ưu tiên, Cây nhị phân, Từ điển, Các tập không giao nhau (Liên kết và Tìm kiếm), Bảng băm, Đồ thị và nhiều loại khác. Ví dụ, ngăn xếp sử dụng cơ chế LIFO (Last-In-First-Out - vào sau thì ra trước), trong đó phần tử cuối cùng được chèn vào là phần tử đầu tiên bị xóa. Các thao tác trên ngăn xếp bao gồm tạo ngăn xếp, đẩy một phần tử vào ngăn xếp, lấy một phần tử từ ngăn xếp, tìm phần tử đầu ngăn xếp hiện tại và tìm số lượng phần tử trong ngăn xếp.
+
+	Khi định nghĩa ADT, không cần quan tâm đến chi tiết cài đặt. Chúng chỉ được xem xét khi sử dụng ADT. Các loại ADT khác nhau phù hợp với các ứng dụng khác nhau, và một số được chuyên biệt cho các nhiệm vụ cụ thể. Trước cuối cuốn sách này, bạn sẽ có thể liên kết các cấu trúc dữ liệu với loại vấn đề mà chúng giải quyết.
+
+1.5 Thuật toán là gì?
+	Bây giờ, chúng ta tiếp tục hiểu khái niệm về thuật toán. Hãy xem xét vấn đề làm một chiếc bánh xèo. Chúng ta có thể cung cấp một thủ tục từng bước để giải quyết vấn đề này, chẳng hạn như lấy chiếc chảo, lấy dầu, kiểm tra xem chúng ta có dầu không, và cứ thế. Thủ tục từng bước này được gọi là thuật toán - một tập hợp các hướng dẫn rõ ràng để giải quyết một vấn đề cụ thể.
+
+	Trong nghiên cứu truyền thống về thuật toán, có hai tiêu chí chính để đánh giá tính chính xác và hiệu quả của thuật toán. Tính chính xác đề cập đến việc thuật toán cung cấp một giải pháp cho vấn đề trong một số bước hữu hạn. Hiệu quả liên quan đến các tài nguyên - bộ nhớ và thời gian - cần thiết để thực thi thuật toán. Lưu ý rằng chúng ta không cần phải chứng minh từng bước của thuật toán; thay vào đó, chúng ta tập trung vào tính chính xác và hiệu quả tổng thể.
+
+1.6 Tại sao phân tích thuật toán quan trọng?
+	Khi đi từ thành phố A đến thành phố B, có nhiều cách để thực hiện điều này: bằng máy bay, bằng xe buýt, bằng tàu hỏa và còn bằng xe đạp. Tùy thuộc vào sự có sẵn và tiện lợi, chúng ta chọn cách phù hợp nhất. Tương tự, trong khoa học máy tính, có nhiều thuật toán khác nhau để giải quyết cùng một vấn đề (ví dụ, vấn đề sắp xếp có nhiều thuật toán như sắp xếp chèn, sắp xếp chọn, sắp xếp nhanh và nhiều thuật toán khác). Phân tích thuật toán giúp chúng ta xác định thuật toán nào hiệu quả nhất về thời gian và không gian sử dụng.
+
+1.7 Mục tiêu của phân tích thuật toán
+	Mục tiêu của phân tích thuật toán là so sánh các thuật toán (hoặc giải pháp) chủ yếu về thời gian chạy, nhưng cũng về các yếu tố khác (ví dụ: bộ nhớ, công sức phát triển, v.v.).
+
+1.8 Phân tích thời gian chạy (Running Time Analysis) là gì?
+	Đây là quá trình xác định thời gian xử lý tăng lên như thế nào khi kích thước của vấn đề (kích thước đầu vào) tăng lên. Kích thước đầu vào là số lượng phần tử trong đầu vào và tùy thuộc vào loại vấn đề, đầu vào có thể khác nhau. Dưới đây là những loại đầu vào phổ biến:
+	- Kích thước mảng
+	- Bậc đa thức
+	- Số lượng phần tử trong ma trận
+	- Số bit trong biểu diễn nhị phân của đầu vào
+	- Số đỉnh và cạnh trong đồ thị.
+
+1.9 Làm thế nào để so sánh các thuật toán?
+	Để so sánh các thuật toán, hãy xác định một số đại lượng khách quan: Thời gian thực thi? Không phải là một đại lượng tốt vì thời gian thực thi phụ thuộc vào máy tính cụ thể. Số lượng câu lệnh thực thi? Cũng không phải là một đại lượng tốt, vì số lượng câu lệnh thay đổi theo ngôn ngữ lập trình và phong cách của từng lập trình viên. Giải pháp lý tưởng? Hãy giả sử rằng chúng ta biểu diễn thời gian chạy của thuật toán dưới dạng một hàm của kích thước đầu vào n (tức là f(n)) và so sánh các hàm khác nhau này tương ứng với thời gian chạy. Loại so sánh này độc lập với thời gian máy tính, phong cách lập trình, v.v.
+
+1.10 Tốc độ tăng trưởng là gì? (Rate of Growth).
+	Tốc độ tăng trưởng là tốc độ mà thời gian chạy của thuật toán tăng theo hàm của đầu vào. Hãy giả sử bạn đi vào một cửa hàng để mua một chiếc xe hơi và một chiếc xe đạp. Nếu bạn gặp bạn của mình ở đó và anh ta hỏi bạn đang mua gì, thì thông thường bạn sẽ nói rằng bạn đang mua một chiếc xe hơi. Điều này bởi vì giá của chiếc xe hơi cao hơn so với giá của chiếc xe đạp (giả định giá của chiếc xe đạp tương đương với giá của chiếc xe hơi). 	
+	-tổng giá tiền = giá xe hơi + giá xe đạp ~ giá xe hơi
+	Đối với ví dụ trên, chúng ta có thể biểu diễn giá của chiếc xe hơi và giá của chiếc xe đạp dưới dạng hàm, và với một hàm đã cho, ta có thể bỏ qua các thuật ngữ cấp thấp không đáng kể (đối với các giá trị đầu vào lớn, n). Ví dụ, trong trường hợp dưới đây, n^4, 2n^2, 100n và 500 là các giá trị riêng lẻ của một hàm và gần đến n^4 vì n^4 là tốc độ tăng trưởng cao nhất.
+	n^4+2n^2+100n+500~n^4.
+
+1.11 Các tốc độ tăng trưởng thường được sử dụng
+	Biểu đồ dưới đây cho thấy mối quan hệ giữa các tốc độ tăng trưởng khác nhau.
+		2^2^n ---> n! ---> 4^n ---> 2^n ---> n^2 ---> n.log(n) ---> log(n!) ---> n ---> 2^(log(n)) ---> (log(n))^2 ---> log(n) ---> sqrt(log(n)) --->log(log(n)) --> 1
+	Dưới đây là danh sách các tốc độ tăng trưởng mà bạn sẽ gặp trong các chương sau.
+	độ phức tạp thời gian      tên                      		ví dụ
+	1                                             hằng số             		thêm phần tử vào đầu danh sách liên kết
+	log(n)                                   hàm logarit      		tìm kiếm phần tử trong một dãy đã được sắp xếp
+	n                                             tuyến tính        		tìm kiếm phần tử trong một dãy chưa được sắp xếp
+	n.log(n)                                tuyến tính-logarit      sắp xếp dãy n phần tử bằng thuật toán chia để trị - merge sort
+	n^2                                        bậc hai                           đường dẫn ngắn nhất giữa hai đỉnh trong đồ thị
+	n^3                                        bậc ba                             phép nhân ma trận	
+	n^4                                        bậc bốn                          bài toán tháp Hà Nội
+
+1.12 Các loại phân tích
+	Để phân tích(analyze) thuật toán đã cho, chúng ta cần biết với đầu vào nào thuật toán mất ít thời gian (tốc độ thực hiện nhanh) và với đầu vào nào thuật toán mất nhiều thời gian. Chúng ta đã thấy rằng một thuật toán có thể được biểu diễn(represented) dưới dạng một biểu thức. Điều đó có nghĩa là chúng ta biểu diễn thuật toán với nhiều biểu thức: một cho trường hợp mất ít thời gian và một cho trường hợp mất nhiều thời gian. Nói chung, trường hợp đầu tiên được gọi là trường hợp tốt nhất và trường hợp thứ hai được gọi là trường hợp xấu nhất cho thuật toán. Để phân tích một thuật toán, chúng ta cần một loại cú pháp, và điều đó tạo nền tảng cho phân tích/asymptotic notation. Có ba loại phân tích: 
+• Trường hợp xấu nhất
+	- Xác định đầu vào mà thuật toán mất nhiều thời gian nhất (thời gian chạy chậm nhất để hoàn thành).
+	- Đầu vào là đầu vào mà thuật toán chạy chậm nhất.
+• Trường hợp tốt nhất
+	- Xác định đầu vào mà thuật toán mất ít thời gian (thời gian chạy nhanh nhất để hoàn thành).
+	- Đầu vào là đầu vào mà thuật toán chạy nhanh nhất.
+• Trường hợp trung bình
+	- Dự đoán(provide a prediction) về thời gian chạy của thuật toán.
+	- Chạy thuật toán nhiều lần, sử dụng nhiều đầu vào khác nhau được tạo ra từ một phân phối nào đó, tính tổng thời gian chạy (bằng cách cộng thời gian từng 	lần), và chia cho số lần thử.
+	- Giả định rằng đầu vào là ngẫu nhiên.
+Giới hạn dưới <= Thời gian trung bình <= Giới hạn trên.
+	Đối với một thuật toán đã cho, chúng ta có thể biểu diễn các trường hợp tốt nhất, tồi nhất và trung bình dưới dạng biểu thức. Ví dụ, hãy cho f(n) là hàm biểu diễn thuật toán đã cho:
+		f(n) = n^2 +100n + 500 cho trường hợp xấu nhất
+		f(n) = n+ 100 cho trường hợp tốt nất
+	Tương tự cho trường hợp trung bình. Biểu thức định nghĩa các đầu vào mà thuật toán mất thời gian chạy trung bình (hoặc bộ nhớ)
+
+1.13 Ký hiệu Asymptotic
+	Với các biểu thức cho trường hợp tốt nhất, trung bình và xấu nhất, chúng ta cần xác định ranh giới trên và ranh giới dưới. Để biểu diễn những ranh giới trên và ranh giới dưới này, chúng ta cần một loại cú pháp, và đó là đề tài của cuộc thảo luận tiếp theo. Hãy giả sử rằng thuật toán đã cho được biểu diễn dưới dạng hàm f(n).
+
+1.14 Ký hiệu Big-O [Hàm ranh giới trên]
+	Ký hiệu này cung cấp ranh giới trên chặt chẽ của hàm đã cho. Thông thường, nó được biểu diễn dưới dạng f(n) = O(g(n)). Điều đó có nghĩa là, với các giá trị n lớn hơn, ranh giới trên của f(n) là g(n). Ví dụ, nếu f(n) = n^4 + 100n^2 + 10n + 50 là thuật toán đã cho, thì n^4 là g(n). Điều đó có nghĩa là g(n) cho ta tốc độ tăng tối đa của f(n) với các giá trị n lớn hơn.
+	Hãy xem ký hiệu O-notation (ký hiệu O) với một chút chi tiết hơn. Ký hiệu O được định nghĩa là O(g(n)) = {f(n): tồn tại các hằng số dương c và n0 sao cho 0 ≤ f(n) ≤ cg(n) với mọi n > n0}. g(n) là ranh giới trên chặt chẽ theo cấp số nhân cho f(n). Mục tiêu của chúng ta là cung cấp tốc độ tăng nhỏ nhất g(n) mà lớn hơn hoặc bằng tốc độ tăng của thuật toán đã cho (f(n)). Thông thường, chúng ta loại bỏ các giá trị n nhỏ. Điều đó có nghĩa là tốc độ tăng ở các giá trị n nhỏ không quá quan trọng. Trong hình vẽ, n0 là điểm từ đó chúng ta cần xem xét tốc độ tăng cho một thuật toán đã cho. Dưới n0, tốc độ tăng có thể khác nhau. n0 được gọi là ngưỡng cho hàm đã cho. 
+O(g(n)) là tập hợp các hàm có tốc độ tăng nhỏ hơn hoặc bằng tốc độ tăng của g(n). Ví dụ; O(n2) bao gồm O(1), O(n), O(nlogn), v.v.
+
+Lưu ý: Phân tích các thuật toán chỉ ở các giá trị n lớn hơn. Điều này có nghĩa là dưới n0, chúng ta không quan tâm đến tốc độ tăng.
+Các ví dụ
+Ví dụ-1: Tìm ranh giới trên cho f(n) = 3n + 8
+Giải: 3n + 8 ≤ 4n, với mọi n ≥ 8
+∴ 3n + 8 = O(n) với c = 4 và n0 = 8
+
+Ví dụ-2: Tìm ranh giới trên cho f(n) = n^2 + 1
+Giải: n^2 + 1 ≤ 2n^2, với mọi n ≥ 1
+∴ n^2 + 1 = O(n^2) với c = 2 và n0 = 1
+
+Ví dụ-3: Tìm ranh giới trên cho f(n) = n^4 + 100n^2 + 50
+Giải: n^4 + 100n^2 + 50 ≤ 2n^4, với mọi n ≥ 11
+∴ n^4 + 100n^2 + 50 = O(n^4) với c = 2 và n0 = 11
+
+Ví dụ-4: Tìm ranh giới trên cho f(n) = 2n^3 - 2n^2
+Giải: 2n^3 - 2n^2 ≤ 2n^3, với mọi n > 1
+∴ 2n^3 - 2n^2 = O(n^3) với c = 2 và n0 = 1
+
+Ví dụ-5: Tìm ranh giới trên cho f(n) = n
+Giải: n ≤ n, với mọi n ≥ 1
+∴ n = O(n) với c = 1 và n0 = 1
+
+Ví dụ-6: Tìm ranh giới trên cho f(n) = 410
+Giải: 410 ≤ 410, với mọi n > 1
+∴ 410 = O(1) với c = 1 và n0 = 1
+
+Không có tính duy nhất? 
+Không có một bộ giá trị duy nhất cho n0 và c trong việc chứng minh ranh giới tiệm cận. Hãy xem xét ví dụ 100n + 5 = O(n). Đối với hàm này, có nhiều giá trị n0 và c khả thi.
+Giải pháp 1: 100n + 5 ≤ 100n + n = 101n ≤ 101n, với mọi n ≥ 5, n0 = 5 và c = 101 là một giải pháp.
+Giải pháp 2: 100n + 5 ≤ 100n + 5n = 105n ≤ 105n, với mọi n > 1, n0 = 1 và c = 105 cũng là một giải pháp.
+
+1.15 Ký hiệu Omega-Q [Hàm định giá dưới] 
+	Tương tự như trong phần thảo luận O, ký hiệu này cung cấp giới hạn dưới chặt chẽ hơn của thuật toán đã cho và chúng ta biểu diễn nó dưới dạng f(n) = Ω(g(n)). Điều đó có nghĩa, với giá trị n lớn, giới hạn dưới chặt chẽ hơn của f(n) là g(n). Ví dụ, nếu f(n) = 100n2 + 10n + 50, thì g(n) là Ω(n2).
+Ký hiệu Ω có thể được định nghĩa như Ω(g(n)) = {f(n): tồn tại các hằng số dương c và n0 sao cho 0 ≤ cg(n) ≤ f(n) với mọi n ≥ n0}. g(n) là giới hạn dưới chặt chẽ đối với f(n). Mục tiêu của chúng ta là cung cấp tỷ lệ tăng trưởng lớn nhất g(n) mà nhỏ hơn hoặc bằng tỷ lệ tăng trưởng của thuật toán đã cho f(n). 
+Các ví dụ về Ω:
+Ví dụ 1: Tìm giới hạn dưới cho f(n) = 5n^2. 
+Giải: ∃ c, n0 sao cho: 0 ≤ c*n^2≤ 5n^2 ⇒ cn^2 ≤ 5n^2 ⇒ c = 5 và n0 = 1
+∴ 5n2 = Ω(n2) với c = 5 và n0 = 1
+Ví dụ 2: Chứng minh f(n) = 100n + 5 ≠ Ω(n^2). 
+Giải: ∃ c, n0 sao cho: 0 ≤ c*n^2 ≤ 100n + 5 100n + 5 ≤ 100n + 5n (∀n ≥ 1) = 105n c*n^2 ≤ 105n ⇒ n(cn - 105) ≤ 0
+Vì n là số dương ⇒ c*n - 105 ≤0 ⇒ n ≤105/c 
+⇒ Trái ngược: n không thể nhỏ hơn một hằng số
+
+1.16 Ký hiệu Theta-Θ [Hàm Sắp Thứ Tự] 
+	Ký hiệu này quyết định xem giới hạn trên và giới hạn dưới của một hàm (thuật toán) có giống nhau hay không. Thời gian chạy trung bình của một thuật toán luôn nằm giữa giới hạn dưới và giới hạn trên. Nếu giới hạn trên (O) và giới hạn dưới (Ω) cho kết quả giống nhau, thì ký hiệu Theta cũng sẽ có cùng tốc độ tăng trưởng. 
+	Ví dụ, giả sử f(n) = 10n + n là biểu thức. Sau đó, giới hạn trên chặt chẽ của nó g(n) là O(n). Tốc độ tăng trưởng trong trường hợp tốt nhất là g(n) = O(n). Trong trường hợp này, tốc độ tăng trưởng trong trường hợp tốt nhất và trường hợp xấu nhất là giống nhau. Do đó, trường hợp trung bình cũng sẽ giống nhau. Đối với một hàm (thuật toán) đã cho, nếu tốc độ tăng trưởng (giới hạn) cho O và Ω không giống nhau, thì tốc độ tăng trưởng cho trường hợp Theta có thể không giống nhau. Trong trường hợp này, chúng ta cần xem xét tất cả các phức tạp thời gian có thể và lấy trung bình của chúng (ví dụ: trường hợp trung bình của sắp xếp nhanh, xem phần sắp xếp). 
+	Hãy xem định nghĩa của ký hiệu Theta. Nó được định nghĩa là Θ(g(n)) = {f(n): tồn tại các hằng số dương c1, c2 và n0 sao cho 0 ≤ c1g(n) ≤ f(n) ≤ c2g(n) cho tất cả các n ≥ n0}. g(n) là một giới hạn chặt tại điểm xa cho f(n). Θ(g(n)) là tập hợp các hàm có cùng thứ tự tăng trưởng như g(n). 
+Ví dụ	
+	Ví dụ 1: Chứng minh n ≠ Θ(n^2) 
+		Giải pháp: c1 n2 ≤ n ≤ c2n2 ⇒ chỉ đúng cho: n ≤ 1/c1 ∴ n ≠ Θ(n2) 
+	Ví dụ 2: Chứng minh 6n^3 ≠ Θ(n^2) 
+		Giải pháp: c1 n2≤ 6n3 ≤ c2 n2 ⇒ chỉ đúng cho: n ≤ c2 /6 ∴ 6n3 ≠ Θ(n2) 
+	Ví dụ 3: Chứng minh n ≠ Θ(logn) 
+		Giải pháp: c1logn ≤ n ≤ c2logn ⇒ c2 ≥ n/log(n) , ∀ n ≥ n0 - vô lí
+
+1.17 Lưu ý quan trọng
+   Trong quá trình phân tích thuật toán (bao gồm cả trường hợp tốt nhất, xấu nhất và trung bình), chúng ta cố gắng xác định giới hạn trên (O), giới hạn dưới (Ω) và thời gian chạy trung bình (Theta-Θ). Tuy nhiên, không phải lúc nào cũng có thể xác định được các giới hạn trên và dưới cũng như thời gian chạy trung bình cho một hàm hay thuật toán cụ thể. Ví dụ, khi nghiên cứu trường hợp tốt nhất của một thuật toán, chúng ta cố gắng xác định giới hạn trên và dưới cũng như thời gian chạy trung bình. Trong các chương còn lại của bài viết, chúng ta thường tập trung vào việc xác định giới hạn trên (O) vì việc biết giới hạn dưới (Ω) của một thuật toán không mang ý nghĩa thực tiễn, và chúng ta sử dụng ký hiệu Theta-Θ khi giới hạn trên và dưới giống nhau.
+
+1.18 Tại sao được gọi là Phân tích đại số?
+   Từ bàn luận ở trên (với cả ba ký hiệu: trường hợp xấu nhất, tốt nhất và trung bình), chúng ta có thể dễ dàng hiểu rằng trong mọi trường hợp, chúng ta cố gắng tìm một hàm g(n) xấp xỉ hàm f(n) với các giá trị n lớn hơn. Điều đó có nghĩa là g(n) cũng là một đường cong xấp xỉ f(n) khi n lớn hơn. Trong toán học, chúng ta gọi đường cong như vậy là đường cong tiệm cận. Nói cách khác, g(n) là đường cong tiệm cận cho f(n). Do đó, việc phân tích thuật toán được gọi là phân tích đại số.
+
+1.19 Hướng dẫn cho Phân tích đại số
+Có một số quy tắc chung để giúp chúng ta xác định thời gian chạy của một thuật toán.
+1) Vòng lặp: Thời gian chạy của một vòng lặp là tối đa thời gian chạy của các câu lệnh bên trong vòng lặp (bao gồm cả các kiểm tra) nhân với số lần lặp. Thời gian tổng cộng = một hằng số c nhân với n = c * n = O(n).
+2) Vòng lặp lồng nhau: Phân tích từ bên trong ra. Thời gian chạy tổng cộng là tích của các kích thước của tất cả các vòng lặp. Thời gian tổng cộng = c * n * n = c * n^2 = O(n^2).
+3) Các câu lệnh liên tiếp: Cộng thêm các độ phức tạp thời gian của từng câu lệnh. Thời gian tổng cộng = c0 + c1n + c2n^2 = O(n^2).
+4) Câu lệnh if-then-else: Thời gian chạy trong trường hợp xấu nhất: kiểm tra, cộng với phần then hoặc phần else (phần nào lớn hơn). Thời gian tổng cộng = c0 + c1 + (c2 + c3) * n = O(n).
+5) Độ phức tạp logarithmic: Một thuật toán có độ phức tạp O(logn) nếu nó mất thời gian hằng số để giảm kích thước vấn đề đi một tỉ lệ nào đó (thường là một nửa). Ví dụ, xem xét chương trình sau:
+		for(int i=1; o<n;  ){
+			i*=2;
+		}
+   Nếu quan sát kỹ, ta thấy giá trị của i tăng gấp đôi sau mỗi bước. Ban đầu i = 1, bước tiếp theo i = 2, và trong các bước tiếp theo i = 4, 8 và cứ tiếp tục như vậy. Giả sử vòng lặp được thực thi k lần. Ở bước thứ k, 2^k = n, và ở bước (k + 1) chúng ta thoát khỏi vòng lặp. Áp dụng logarit tự nhiên cho cả hai bên, ta có Thời gian tổng cộng = O(logn). 
+   Lưu ý:  Tương tự trường hợp dãy giảm dần, tỷ lệ tăng trưởng xấu nhất cũng là O(logn). Một ví dụ khác: tìm kiếm nhị phân (tìm từ trong một từ điển gồm n trang) • Xem xét điểm giữa trong từ điển • Từ đó, xác định xem từ cần tìm có nằm bên trái hay phải so với điểm giữa • Lặp lại quá trình với phần trái hoặc phải của từ điển cho đến khi tìm thấy từ.
+
+1.20 Các thuộc tính đơn giản của ký hiệu đại số
+   • Tính bắc cầu: f(n)=g(n)) và g(n) = Θ(h(n)) ⇒ f(n) = Θ(h(n)). Có hiệu lực cho O và Ω cũng.
+   • Tính phản xạ: f(n) = Θ(f(n)). Có hiệu lực cho O và Ω.
+   • Tính đối xứng: f(n) = Θ(g(n)) nếu và chỉ nếu g(n) = Θ(f(n)).
+   • Tính đối xứng chuyển vị: f(n) = O(g(n)) nếu và chỉ nếu g(n) = Ω(f(n)).
+   • Nếu f(n) thuộc O(k.g(n))với mọi hằng số k > 0, thì f(n) thuộc O(g(n)).
+   • Nếu f1(n) thuộc O(g1(n)) và f2(n) thuộc O(g2(n)), thì (f1 + f2)(n) thuộc O(max(g1(n), g2(n))).
+   • Nếu f1(n) thuộc O(g1(n)) và f2(n) thuộc O(g2(n)), thì f1(n) * f2(n) thuộc O(g1(n) * g2(n)).
+
+1.21 Các công thức logarit và tính tổng thường dùng
+
+1.22 Định lý Master cho các phương trình tái quy hoạch Chia để trị
+Tất cả các thuật toán chia để trị (cũng được thảo luận chi tiết trong chương Chia để trị) chia bài toán thành các bài toán con, mỗi bài toán con là một phần của bài toán gốc, sau đó thực hiện một số công việc bổ sung để tính toán câu trả lời cuối cùng. Ví dụ, thuật toán merge sort [xem thêm trong chương Sắp xếp] hoạt động trên hai bài toán con, mỗi bài toán con có kích thước bằng một nửa kích thước ban đầu, và sau đó thực hiện công việc bổ sung O(n) để ghép các phần tử. Điều này dẫn đến phương trình thời gian chạy:
+				T(n) = 2T(n/2) + O(n)
+
+Định lý sau đây có thể được sử dụng để xác định thời gian chạy của các thuật toán chia để trị. Đối với một chương trình cụ thể (thuật toán), trước tiên chúng ta cố gắng tìm mối quan hệ tái quy hoạch cho bài toán. Bằng cách sử dụng toán học.
+**CHAT GPT SAID:
+(Định lí master trong thuật toán chia để trị (Master Theorem) là một công cụ quan trọng để phân tích hiệu suất thời gian của các thuật toán chia để trị. Nó cung cấp một công thức đệ quy để tính toán thời gian chạy của một thuật toán dựa trên số lượng phân tích con-đệ quy và kích thước của bài toán.
+
+Định lí master được biểu diễn thông qua công thức sau:
+
+T(n) = aT(n/b) + f(n)
+
+Trong đó:
+- T(n) là thời gian chạy của thuật toán trên một bài toán có kích thước n.
+- a là số lượng phân tích con-đệ quy của bài toán gốc.
+- n/b là kích thước của mỗi bài toán con-đệ quy.
+- f(n) là thời gian để giải quyết bài toán gốc (không tính thời gian của phân tích con-đệ quy).
+
+Công thức trên có thể có ba trường hợp tùy thuộc vào giá trị của a, b và f(n):
+
+1. Nếu f(n) = O(n^c) với c < log_b(a), thì thời gian chạy của thuật toán được xác định bởi phân tích con-đệ quy và là O(n^log_b(a)).
+
+2. Nếu f(n) = O(n^c) với c = log_b(a), thì thời gian chạy của thuật toán được xác định bởi cả hai phần tử, phân tích con-đệ quy và phần giải quyết bài toán gốc, và là O(n^c * log(n)).
+
+3. Nếu f(n) = O(n^c) với c > log_b(a), thì thời gian chạy của thuật toán được xác định bởi phần giải quyết bài toán gốc và là O(f(n)).
+
+Định lí master cung cấp một công cụ hữu ích để ước lượng thời gian chạy của các thuật toán chia để trị và giúp ta hiểu rõ hơn về hiệu suất của chúng. Tuy nhiên, nó chỉ áp dụng cho một số thuật toán cụ thể và không phải là một công cụ tổng quát cho tất cả các thuật toán chia để trị.)
+
+1.23 Định lý chia để trị Master: Vấn đề và Giải pháp
+Cho mỗi phương trình tái quy hoạch sau đây, hãy cho biểu thức thời gian chạy T(n) nếu phương trình tái quy hoạch có thể được giải bằng Định lý Master. Nếu không, chỉ ra rằng Định lý Master không áp dụng.
+Vấn đề-1 T(n) = 3T(n/2) + n^2
+Giải pháp: T(n) = 3T(n/2) + n^2 => T(n) = Θ(n^2) (Theorem Master Case 3.a)
+
+Vấn đề-2 T(n) = 4T(n/2) + n^2
+Giải pháp: T(n) = 4T(n/2) + n^2 => T(n) = Θ(n^2logn) (Theorem Master Case 2.a)
+
+Vấn đề-3 T(n) = T(n/2) + n^2
+Giải pháp: T(n) = T(n/2) + n^2 => T(n) = Θ(n^2) (Theorem Master Case 3.a)
+
+Vấn đề-4 T(n) = 2^nT(n/2) + n^n
+Giải pháp: T(n) = 2^nT(n/2) + n^n => Không áp dụng (a không hằng số)
+
+Vấn đề-5 T(n) = 16T(n/4) + n
+Giải pháp: T(n) = 16T(n/4) + n => T(n) = Θ(n^2) (Theorem Master Case 1)
+
+Vấn đề-6 T(n) = 2T(n/2) + nlogn
+Giải pháp: T(n) = 2T(n/2) + nlogn => T(n) = Θ(nlog^2n) (Theorem Master Case 2.a)
+
+Vấn đề-7 T(n) = 2T(n/2) + n/logn
+Giải pháp: T(n) = 2T(n/2) + n/logn => T(n) = Θ(nloglogn) (Theorem Master Case 2.b)
+
+Vấn đề-8 T(n) = 2T(n/4) + n^0.51
+Giải pháp: T(n) = 2T(n/4) + n^0.51 => T(n) = Θ(n^0.51) (Theorem Master Case 3.b)
+
+Vấn đề-9 T(n) = 0.5T(n/2) + 1/n
+Giải pháp: T(n) = 0.5T(n/2) + 1/n => Không áp dụng (a < 1)
+
+Vấn đề-10 T(n) = 6T(n/3) + n^2logn
+Giải pháp: T(n) = 6T(n/3) + n^2logn => T(n) = Θ(n^2logn) (Theorem Master Case 3.a)
+
+Vấn đề-11 T(n) = 64T(n/8) - n^2logn
+Giải pháp: T(n) = 64T(n/8) - n^2logn => Không áp dụng (hàm không dương)
+
+Vấn đề-12 T(n) = 7T(n/3) + n^2
+Giải pháp: T(n) = 7T(n/3) + n^2 => T(n) = Θ(n^2) (Theorem Master Case 3.as)
+
+Vấn đề-13 T(n) = 4T(n/2) + logn
+Giải pháp: T(n) = 4T(n/2) + logn => T(n) = Θ(n^2) (Theorem Master Case 1)
+
+Vấn đề-14
+
+ T(n) = 16T(n/4) + n!
+Giải pháp: T(n) = 16T(n/4) + n! => T(n) = Θ(n!) (Theorem Master Case 3.a)
+
+1.24 Định lý Master cho các phương trình đệ quy Subtract and Conquer
+Xét hàm T(n) được định nghĩa trên các giá trị dương n. 
+		T(n) = a.T(n-b) + F(	n)
+Có thuộc tính sau đối với một số hằng số c, a > 0, b ≥ 0, k ≥ 0 và hàm f(n). Nếu f(n) thuộc O(n^k) thì :
+		.T(n) = O(n^k) nếu a<1
+		.T(n) = O(n^k+1) nếu a = 1
+		.T(n) = O((n^k).(a^(n/b))) nếu a>1
+
+1.25 Định lý Master Variant của Subtract and Conquer. 
+Phương trình T(n) = T(αn) + T((1 – α)n) + βn, trong đó 0 < α < 1 và β > 0 là các hằng số sẽ có độ phức tạp là O(nlogn).
+
+******CHAT GPT SAID*******
+{
+Để giải phương trình trên, chúng ta sẽ sử dụng phương pháp đặt giới hạn (limiting argument) và chứng minh độ phức tạp thời gian là O(nlogn).
+
+Đặt T(n) = O(nlogn). Điều này có nghĩa là tồn tại một hằng số c > 0 và một giá trị ngưỡng n0 sao cho T(n) ≤ cnlogn đối với mọi n ≥ n0.
+
+Khi n đủ lớn, ta có:
+
+T(n) = T(αn) + T((1 – α)n) + βn
+
+     ≤ c(αn)log(αn) + c((1 – α)n)log((1 – α)n) + βn            (theo giả định đặt giới hạn)
+
+     = cαn(logn + logα) + c(1 – α)n(logn + log(1 – α)) + βn
+
+     = cnlogn + (cαlogα + c(1 – α)log(1 – α))n + cαnlogα + c(1 – α)nlog(1 – α) + βn
+
+     ≤ cnlogn + cn + cαnlogn + c(1 – α)nlogn + βn                 (vì αlogα ≤ 0 và (1 – α)log(1 – α) ≤ 0)
+
+     = (2cn + β)nlogn + (cn + β)
+
+Để đảm bảo T(n) ≤ cnlogn, ta cần:
+
+(2cn + β)nlogn + (cn + β) ≤ cnlogn
+
+(2cn + β)nlogn ≤ cnlogn - (cn + β)
+
+(2cn + β)n ≤ c - (cn + β)/logn
+
+Đối với đủ lớn n, ta có (2cn + β)n ≤ cn^2 và (cn + β)/logn ≤ cn/2.
+
+Do đó, ta có:
+
+cn^2 ≤ c - cn/2
+
+2cn^2 + cn ≤ c
+
+n(2cn + 1) ≤ c
+
+n ≤ c/(2cn + 1)
+
+Với giá trị c và n đủ lớn, ta có thể chọn n0 sao cho n ≤ c/(2cn + 1) đối với mọi n ≥ n0. Điều này chứng minh rằng T(n) ≤ cnlogn đối với mọi n ≥ n0 và do đó T(n) = O(nlogn).
+
+Do đó, giải phương trình T(n) = T(αn) + T((1 – α)n) + βn, với 0 < α < 1 và β > 0, có độ phức tạp thời gian là O(nlogn).
+}
+
+1.26 Phương pháp Đoán và Xác nhận
+Bây giờ, hãy thảo luận về một phương pháp có thể được sử dụng để giải quyết bất kỳ phương trình đệ quy nào. Ý tưởng cơ bản đằng sau phương pháp này là: 
+
+						đoán đáp án; sau đó chứng minh rằng đoán đáp án đó chính xác thông qua quy nạp. 
+
+Nói cách khác, nó giải quyết câu hỏi: Điều gì sẽ xảy ra nếu phương trình đệ quy cho trước không phù hợp với bất kỳ phương pháp nào trong các phương pháp trên (định lý Master)? Nếu chúng ta đoán một giải pháp và sau đó cố gắng xác minh đoán đáp án của chúng ta theo phương pháp quy nạp, thì thường là hoặc bằng chứng sẽ thành công (trong trường hợp đó chúng ta đã hoàn thành), hoặc bằng chứng sẽ thất bại (trong trường hợp đó, việc thất bại sẽ giúp chúng ta điều chỉnh đoán đáp án). Như một ví dụ, hãy xem xét phương trình đệ quy sau đây.
+ 		T(n) = sqrt(n)*T(sqrt(n)) + n
+ Nó không phù hợp với dạng yêu cầu bởi Định lý Master. Quan sát cẩn thận phương trình đệ quy này cho chúng ta cảm giác rằng nó tương tự như phương pháp chia để trị (chia bài toán thành sqrt(n) các bài toán con có kích thước sqrt(n) ). Như chúng ta có thể thấy, kích thước của các bài toán con ở cấp độ đệ quy đầu tiên là n. Vì vậy, hãy đoán rằng T(n) = O(nlogn), sau đó cố gắng chứng minh rằng đoán đáp án của chúng ta là chính xác. Hãy bắt đầu bằng việc cố gắng chứng minh một giới hạn trên T(n) < c.n.logn:
+			(trang 37)
+Bất đẳng thức cuối cùng giả định rằng chỉ cần 1 ≤ c.logn. Điều này là đúng nếu n đủ lớn và đối với bất kỳ hằng số c nào, dù nhỏ tới mức nào. Từ chứng trên, chúng ta có thể thấy rằng đoán đáp án của chúng ta đúng cho giới hạn trên. Bây giờ, hãy chứng minh giới hạn dưới cho phương trình đệ quy này.
+Bất đẳng thức cuối cùng giả định rằng chỉ cần 1 ≥ k.logn. Điều này là không chính xác nếu n đủ lớn và đối với bất kỳ hằng số k nào. Từ chứng trên, chúng ta có thể thấy rằng đoán đáp án của chúng ta là không chính xác cho giới hạn dưới. Từ cuộc thảo luận trên, chúng ta hiểu rằng Θ(nlogn) quá lớn. Vậy còn Θ(n) thì sao? Giới hạn dưới dễ dàng chứng minh trực tiếp:
+			(trang 37)
+Bây giờ, hãy chứng minh giới hạn trên cho Θ(n). Từ quy nạp trên, chúng ta hiểu rằng Θ(n) quá nhỏ và Θ(nlogn) quá lớn. Vậy có gì đó lớn hơn n và nhỏ hơn nlogn. Vậy sao về nloglogn? Chứng minh giới hạn trên cho nloglogn:
+			(trang 38)
+Chứng minh giới hạn dưới cho nloglogn:
+			(trang 38)
+Từ những bằng chứng trên, chúng ta có thể thấy rằng T(n) ≤ cnloglogn, nếu c ≥ 1 và T(n) ≥ knloglogn, nếu k ≤ 1. Kỹ thuật, chúng ta vẫn thiếu các trường hợp cơ bản trong cả hai chứng minh này, nhưng ở điểm này chúng ta có thể tự tin rằng T(n) = Θ(nloglogn).
+
+1.27 Phân tích khấu hao (Amortized Analysis)
+Phân tích khấu hao (amortized analysis) được sử dụng để xác định thời gian chạy trung bình cho một chuỗi các thao tác. Đây là một phương pháp khác biệt so với phân tích trường hợp trung bình (average case analysis), bởi vì phân tích khấu hao không đưa ra bất kỳ giả định nào về phân phối của các giá trị dữ liệu, trong khi phân tích trường hợp trung bình giả định rằng dữ liệu không "xấu" (ví dụ: một số thuật toán sắp xếp hoạt động tốt trung bình trên tất cả các trình tự nhập liệu nhưng rất tệ trên một số trình tự nhập liệu cụ thể). Tức là, phân tích khấu hao là một phân tích trường hợp tồi nhất (worst-case analysis), nhưng áp dụng cho một chuỗi các thao tác chứ không phải cho từng thao tác riêng lẻ.
+
+Lý do đằng sau phân tích khấu hao là để hiểu rõ hơn về thời gian chạy của một số kỹ thuật, trong đó phân tích trường hợp tồi nhất thông thường cung cấp một giới hạn quá tệ (pessimistic). Phân tích khấu hao thường áp dụng cho một phương pháp bao gồm một chuỗi các thao tác, trong đó đa số các thao tác là rẻ, nhưng một số thao tác là đắt. Nếu chúng ta có thể chứng minh rằng các thao tác đắt đỏ là hiếm, chúng ta có thể thay đổi chúng thành các thao tác rẻ, và chỉ giới hạn các thao tác rẻ. Phương pháp chung là gán một chi phí nhân tạo cho mỗi thao tác trong chuỗi, sao cho tổng các chi phí nhân tạo cho chuỗi các thao tác giới hạn tổng các chi phí thực sự cho chuỗi đó. Chi phí nhân tạo này được gọi là chi phí khấu hao (amortized cost) của một thao tác. Để phân tích thời gian chạy, chi phí khấu hao là một cách chính xác để hiểu tổng thời gian chạy - nhưng lưu ý rằng các thao tác cụ thể vẫn có thể mất thời gian lâu hơn, vì vậy không phải là cách giới hạn thời gian chạy của bất kỳ thao tác cá nhân nào trong chuỗi.
+
+Khi một sự kiện trong một chuỗi ảnh hưởng đến chi phí của các sự kiện sau đó:
+- Một nhiệm vụ cụ thể có thể đắt đỏ.
+- Nhưng nó có thể để lại cấu trúc dữ liệu trong một trạng thái làm cho các thao tác tiếp theo dễ dàng hơn.
+
+Ví dụ: Hãy xem xét một mảng các phần tử từ đó chúng ta muốn tìm phần tử thứ k nhỏ nhất. Chúng ta có thể giải quyết vấn đề này bằng cách sắp xếp. Sau khi sắp xếp mảng đã cho, chúng ta chỉ cần trả về phần tử thứ k từ đó. Chi phí của việc thực hiện sắp xếp (giả sử thuật toán sắp xếp dựa trên so sánh) là O(nlogn). Nếu chúng ta thực hiện n lần các lựa chọn như vậy thì chi phí trung bình của mỗi lần lựa chọn là O(nlogn/n) = O(logn). Điều này cho thấy rõ ràng rằng sắp xếp một lần giảm độ phức tạp của các thao tác sau đó.
+
+(Từ trang 40 đến trang 60 là các ví dụ)
+
+
+																															Kết thúc vào ngày  15/7/2023

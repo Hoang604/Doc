@@ -1,0 +1,308 @@
+																													Bắt đầu viết ngày 17/8/2023
+
+14.1 Khái niệm về Băm (Hashing) 
+
+Băm là một kỹ thuật được sử dụng để lưu trữ và truy xuất thông tin càng nhanh càng tốt. Nó được sử dụng để thực hiện tìm kiếm tối ưu và hữu ích trong việc triển khai các bảng kí hiệu (symbol tables).
+
+14.2 Tại sao sử dụng Băm? 
+
+Trong chương về Cây, chúng ta đã thấy rằng cây tìm kiếm nhị phân cân bằng hỗ trợ các hoạt động như chèn, xóa và tìm kiếm trong thời gian O(logn). Trong các ứng dụng, nếu chúng ta cần thực hiện những hoạt động này trong thời gian O(1), thì băm là một cách. Hãy nhớ rằng trường hợp tồi nhất của độ phức tạp của băm vẫn là O(n), nhưng trung bình nó là O(1).
+
+14.3 Abstract Data Type (ADT) Hash Table 
+
+Các hoạt động thông thường cho bảng băm gồm:
+• CreateHashTable: Tạo một bảng băm mới
+ • HashSearch: Tìm kiếm khóa trong bảng băm 
+• Hashlnsert: Chèn một khóa mới vào bảng băm 
+• HashDelete: Xóa một khóa khỏi bảng băm 
+• DeleteHashTable: Xóa bảng băm
+
+14.4 Hiểu về Băm 
+
+Một cách đơn giản, chúng ta có thể coi mảng như là một bảng băm. Để hiểu việc sử dụng bảng băm, hãy xem xét ví dụ sau đây: Đưa ra một thuật toán để in ký tự lặp đầu tiên nếu có các phần tử bị trùng trong chuỗi. Hãy suy nghĩ về các giải pháp có thể. Cách giải đơn giản và vét cạn của vấn đề này là: cho trước một chuỗi, cho mỗi ký tự, kiểm tra xem ký tự đó có lặp lại hay không. Độ phức tạp thời gian của phương pháp này là O(n^2) với độ phức tạp không gian là O(1). Bây giờ, hãy tìm một giải pháp tốt hơn cho vấn đề này. Vì mục tiêu của chúng ta là tìm ký tự lặp đầu tiên, nếu chúng ta ghi nhớ các ký tự trước đó trong một mảng nào đó thì sao? Chúng ta biết rằng số ký tự có thể có là 256 (để đơn giản, giả định chỉ có ký tự ASCII). Tạo một mảng có kích thước 256 và khởi tạo tất cả các phần tử về giá trị 0. Đối với mỗi ký tự đầu vào, đi đến vị trí tương ứng và tăng giá trị đếm. Vì chúng ta sử dụng mảng, nên mất thời gian hằng số để đến bất kỳ vị trí nào. Khi quét đầu vào, nếu chúng ta gặp một ký tự mà bộ đếm của nó đã là 1, thì chúng ta có thể nói rằng ký tự đó là ký tự đang lặp lại lần đầu tiên.
+
+Tại sao không sử dụng Mảng? 
+Trong vấn đề trước đó, chúng ta đã sử dụng một mảng có kích thước 256 vì chúng ta biết trước số lượng các ký tự khác nhau có thể có là [256]. Bây giờ, hãy xem xét một biến thể nhỏ của cùng vấn đề. Giả sử thay vì các ký tự, mảng được cho chứa các số, thì làm thế nào chúng ta giải quyết vấn đề? Trong trường hợp này, tập hợp các giá trị có thể có là vô hạn (hoặc ít nhất là rất lớn). Tạo ra một mảng khổng lồ và lưu trữ các bộ đếm là không khả thi. Điều đó có nghĩa là có một tập hợp các khóa phổ quát và giới hạn vị trí trong bộ nhớ. Nếu chúng ta muốn giải quyết vấn đề này, chúng ta cần cách nào đó để ánh xạ tất cả các khóa có thể có này vào các vị trí bộ nhớ có sẵn. Từ cuộc trò chuyện và sơ đồ trên, có thể thấy rằng chúng ta cần một phép ánh xạ của các khóa có thể có vào một trong các vị trí có sẵn. Do đó, việc sử dụng các mảng đơn giản không phải là lựa chọn chính xác để giải quyết các vấn đề trong đó các khóa có thể có rất lớn. Quá trình ánh xạ các khóa vào các vị trí được gọi là băm (hashing).
+
+Lưu Ý: Tạm thời, chưa cần quan tâm đến cách khóa được ánh xạ vào các vị trí. Điều này phụ thuộc vào hàm được sử dụng để thực hiện việc chuyển đổi. Một hàm đơn giản như key % kích thước của bảng.
+
+
+14.5 Các Thành Phần của Phép Băm
+
+Phép băm gồm bốn thành phần quan trọng: 
+1) Bảng Băm (Hash Table) 
+2) Hàm Băm (Hash Functions) 
+3) Xung Đột (Collisions) 
+4) Các Kỹ Thuật Giải Quyết Xung Đột (Collision Resolution Techniques)
+
+14.6 Bảng Băm	(khóa ở đây là cặp key : value)
+
+Bảng băm là một sự tổng quát hóa của mảng. Với một mảng, chúng ta lưu trữ phần tử có khóa là k tại vị trí k của mảng. Điều này có nghĩa rằng, với một khóa k cho trước, chúng ta tìm phần tử có khóa là k bằng cách nhìn vào vị trí thứ k của mảng. Đây được gọi là phép chỉ định trực tiếp. Phép chỉ định trực tiếp áp dụng khi chúng ta có đủ khả năng cấp phát một mảng với một vị trí cho mỗi khóa có thể có. Nhưng nếu chúng ta không có đủ không gian để cấp phát vị trí cho mỗi khóa có thể có, thì chúng ta cần một cơ chế để xử lý trường hợp này. Một cách khác để định nghĩa tình huống này là: nếu chúng ta có ít vị trí hơn và nhiều khóa có thể có, thì việc triển khai mảng đơn giản không đủ. Trong những trường hợp như vậy, một tùy chọn khác là sử dụng bảng băm.
+Bảng băm (hash table) hoặc bản đồ băm (hash map) là một cấu trúc dữ liệu lưu trữ các khóa và giá trị liên quan của chúng, và bảng băm sử dụng hàm băm để ánh xạ khóa với các giá trị liên quan của chúng. Quy ước chung là chúng ta sử dụng bảng băm khi số lượng khóa thực sự được lưu trữ nhỏ hơn so với số lượng khóa có thể có.
+
+14.7 Hàm Băm
+
+Hàm băm được sử dụng để biến đổi khóa thành chỉ số. Lý tưởng nhất, hàm băm nên ánh xạ mỗi khóa có thể có vào một chỉ số khe duy nhất, nhưng trong thực tế khó có thể đạt được. Một hàm băm biến mỗi phần tử trong tập hợp thành một khe duy nhất được gọi là hàm băm hoàn hảo. Nếu chúng ta biết các phần tử và tập hợp này sẽ không bao giờ thay đổi, thì có thể xây dựng một hàm băm hoàn hảo. Rất tiếc, với một tập hợp các phần tử bất kỳ, không có cách hệ thống nào để xây dựng một hàm băm hoàn hảo.
+
+May mắn thay, chúng ta không cần hàm băm phải hoàn hảo để vẫn đạt được hiệu suất hiệu quả. Một cách để luôn có một hàm băm hoàn hảo là tăng kích thước của bảng băm để có thể chứa mọi giá trị có thể có trong phạm vi các phần tử. Điều này đảm bảo mỗi phần tử sẽ có một khe duy nhất. Tuy việc này khả thi đối với số lượng phần tử nhỏ, nhưng không khả thi khi số lượng phần tử có thể có lớn. Ví dụ, nếu các phần tử là số An Sinh Xã Hội có chín chữ số, phương pháp này sẽ yêu cầu gần một tỷ khe. Nếu chúng ta chỉ muốn lưu trữ dữ liệu cho một lớp học gồm 25 học sinh, chúng ta sẽ lãng phí một lượng lớn bộ nhớ.
+
+Mục tiêu của chúng ta là tạo ra một hàm băm giảm thiểu số lần va chạm (collisions), dễ tính toán và phân phối đồng đều các phần tử trong bảng băm. Có một số cách thông thường để mở rộng phương pháp dư phần đơn giản. Chúng ta sẽ xem xét một số trong số chúng ở đây. 
+
+Phương pháp gấp gọn để xây dựng hàm băm bắt đầu bằng cách chia các phần tử thành các phần bằng nhau (phần cuối có thể không bằng nhau). Các phần này sau đó được cộng lại để tạo ra giá trị băm kết quả. Ví dụ, nếu phần tử của chúng ta là số điện thoại 436-555-4601, chúng ta sẽ chia các chữ số thành các nhóm có 2 số (43, 65, 55, 46, 01). Sau khi cộng, 43+65+55+46+01, chúng ta có 210. Nếu giả sử bảng băm của chúng ta có 11 khe, chúng ta cần thực hiện bước bổ sung của chia cho 11 và giữ lại phần dư. Trong trường hợp này, 210 % 11 là 1, vậy số điện thoại 436-555-4601 được băm vào khe 1. Một số phương pháp gấp gọn đi một bước xa hơn và đảo ngược mỗi phần khác nhau trước khi thực hiện phép cộng. Với ví dụ trên, chúng ta có 43+56+55+64+01=219, sau đó 219 % 11 = 10.
+
+Cách Lựa Chọn Hàm Băm?
+
+Các vấn đề cơ bản liên quan đến việc tạo ra bảng băm là:
+- Một hàm băm hiệu quả nên được thiết kế sao cho nó phân phối đều các giá trị chỉ số của các đối tượng được chèn trên bảng.
+- Một thuật toán giải quyết xung đột hiệu quả nên được thiết kế sao cho nó tính toán một chỉ số thay thế cho một khóa có chỉ số băm tương ứng với vị trí đã được chèn trước đó trên bảng băm.
+- Chúng ta phải chọn một hàm băm có thể tính toán nhanh chóng, trả về giá trị trong khoảng các vị trí trên bảng của chúng ta và giảm thiểu xung đột.
+
+Đặc Điểm của Hàm Băm Tốt
+- Một hàm băm tốt nên có các đặc điểm sau:
+- Giảm thiểu xung đột
+- Dễ dàng và nhanh chóng tính toán
+- Phân phối giá trị khóa đồng đều trong bảng băm
+- Sử dụng tất cả thông tin được cung cấp trong khóa
+- Có hệ số tải cao cho một tập hợp cụ thể các khóa (hệ số tải = số phần tử tối đa có thể có trong bảng băm / độ lớn của bảng băm)
+
+14.8 Hệ Số Tải
+Hệ số tải của một bảng băm không trống là số lượng mục được lưu trữ trong bảng chia cho kích thước của bảng. Đây là tham số quyết định được sử dụng khi chúng ta muốn tái băm hoặc mở rộng các mục hiện có trên bảng băm. Điều này cũng giúp chúng ta xác định hiệu suất của hàm băm. Điều này có nghĩa, nó cho biết liệu hàm băm có phân phối các khóa đều hay không.
+
+14.9 Xung Đột
+Hàm băm được sử dụng để ánh xạ mỗi khóa vào không gian địa chỉ khác nhau, nhưng thực tế không thể tạo ra một hàm băm như vậy và vấn đề này được gọi là xung đột. Xung đột là điều kiện mà hai bản ghi được lưu trữ tại cùng một vị trí.
+
+14.10 Các Kỹ Thuật Giải Quyết Xung Đột 
+Quá trình tìm vị trí thay thế được gọi là giải quyết xung đột. Mặc dù bảng băm có vấn đề xung đột, nhưng chúng hiệu quả hơn trong nhiều trường hợp so với tất cả các cấu trúc dữ liệu khác, như cây tìm kiếm. Có một số kỹ thuật giải quyết xung đột, và phổ biến nhất là chuỗi trực tiếp và tiếp cận mở.
+
+Chuỗi Trực Tiếp (Direct Chaining): Sử dụng một mảng các danh sách liên kết
+Chia riêng (Separate Chaining)
+
+Tiếp Cận Mở (Open Addressing): Triển khai dựa trên mảng
+Luồng tuyến tính (Linear Probing - tìm kiếm tuyến tính)
+Luồng bình phương (Quadratic Probing - tìm kiếm phi tuyến)
+Băm kép (Double Hashing - sử dụng hai hàm băm)
+
+14.11 Giải Quyết Xung Đột Bằng Chuỗi Riêng (Separate Chaining)
+
+Giải quyết xung đột bằng cách dùng chuỗi kết hợp biểu diễn liên kết với bảng băm. Khi hai hoặc nhiều hơn hai bản ghi băm đến cùng một vị trí, các bản ghi này được tổ chức thành một danh sách liên kết đơn gọi là chuỗi.
+
+14.12 Tiếp Cận Mở (Open Addressing)
+
+Trong tiếp cận mở, tất cả các khóa được lưu trữ trong chính bảng băm. Phương pháp này còn được gọi là băm đóng. Thủ tục này dựa trên phép tra khảo (probing). Xung đột được giải quyết bằng phương pháp tra khảo.
+
+ **Luồng Tuyến Tính (Linear Probing): Khoảng cách giữa các lần tra khảo được cố định là 1. Trong luồng tuyến tính, chúng ta tìm kiếm bảng băm tuần tự, bắt đầu từ vị trí băm gốc. Nếu vị trí đã được chiếm, chúng ta kiểm tra vị trí tiếp theo. Nếu cần, chúng ta quấn quanh từ vị trí cuối cùng của bảng về vị trí đầu tiên của bảng. Hàm tái băm được tính như sau: 
+									tái băm(khóa) = (n + 1) % kích thước bảng. 
+Một trong những vấn đề với luồng tuyến tính là các mục trong bảng có xu hướng tập trung lại gần nhau. Điều này có nghĩa là bảng chứa các nhóm vị trí được chiếm liên tiếp được gọi là tập hợp. 
+Các tập hợp này có thể gần nhau và hợp nhất thành một tập hợp lớn. Do đó, một phần của bảng có thể khá dày đặc, mặc dù một phần khác có số lượng mục tương đối ít. Tập trung gây ra các tìm kiếm tra khảo dài và do đó làm giảm hiệu suất chung. 
+
+Vị trí tiếp theo để tra khảo được xác định bởi bước nhảy, trong đó có thể có nhiều bước nhảy (hơn một). Bước nhảy nên tương đối nguyên tố cùng nhau với kích thước bảng, tức là ước số chung lớn nhất của chúng phải bằng 1. Nếu chúng ta chọn kích thước bảng là một số nguyên tố, thì bất kỳ bước nhảy nào cũng tương đối nguyên tố cùng nhau với kích thước bảng. việc xuất hiện các tập hơp là không thể được tránh bằng cách sử dụng bước nhảy lớn hơn.
+
+**Luồng Bình Phương (Quadratic Probing): Khoảng cách giữa các lần tra khảo tăng theo tỷ lệ với giá trị băm (khoảng cách tăng tuyến tính, và các chỉ số được mô tả bởi hàm bậc hai). Vấn đề về xuất hiện các tập hợp có thể được loại bỏ nếu chúng ta sử dụng phương pháp luồng bình phương. 
+Trong luồng bình phương, chúng ta bắt đầu từ vị trí băm gốc i. Nếu vị trí đã bị chiếm, chúng ta kiểm tra các vị trí i + 1^2, i + 2^2, i + 3^2, i + 4^2... Nếu cần, chúng ta quấn quanh từ vị trí cuối cùng của bảng về vị trí đầu tiên của bảng. Hàm tái băm được tính như sau: tái băm(khóa) = (n + k^2) % kích thước bảng.
+
+Ví dụ: Hãy giả định rằng kích thước bảng là 11 (0..10) 
+Hàm băm: h(key) = key mod 11 
+Chèn các khóa 31 mod 11 = 9 
+19 mod 11 = 8 
+2 mod 11 = 2 
+13 mod 11 = 2 → 2 + 1^2 = 3 
+25 mod 11 = 3 → 3 + 1^2=4
+24 mod 11 = 2 → 2 + 1^2, 2 + 2^2 = 6
+21 mod 11 = 10 
+9 mod 11 = 9 → 9 + 1^2, 9 + 2^2 mod 11, 9 + 3^2 mod 11=7 
+Mặc dù tránh được hiện tượng gom cụm bằng cách sử dụng tìm kiếm bình phương, vẫn có khả năng xảy ra gom cụm. Gom cụm được gây ra bởi nhiều khóa tìm kiếm được ánh xạ vào cùng một khóa băm. Do đó, chuỗi xâm nhập (probing sequence - chuỗi các vị trí trong bảng băm được sử dụng cho việc chèn và tìm kiếm phần tử) cho các khóa tìm kiếm như vậy bị kéo dài do các xung đột lặp lại trên chuỗi xâm nhập. Cả tìm kiếm tuyến tính và tìm kiếm bình phương đều sử dụng một chuỗi xâm nhập độc lập với khóa tìm kiếm.
+
+**Băm Kép (Double Hashing): Khoảng cách giữa các lần tra khảo được tính bằng hàm băm khác. Băm kép giảm thiểu tập trung một cách tốt hơn. Các bước nhảy cho chuỗi tra khảo được tính bằng cách sử dụng một hàm băm thứ hai. Hàm băm thứ hai h2 phải thoả mãn: h2(khóa) ≠ 0 và h2 ≠ h1. (trong đó h1 và h2 là các hàm băm, h1 là hàm lớn (băm trước) h2 là hàm bé)
+Chúng ta trước tiên tra khảo vị trí h1(khóa). Nếu vị trí đã bị chiếm, chúng ta tra khảo các vị trí h1(khóa) + h2(khóa), h1(khóa) + 2 * h2(khóa),......
+
+Ví dụ: Kích thước bảng là 11 (0..10), Hàm Băm: giả sử h1(khóa) = khóa mod 11 và h2(khóa) = 7 - (khóa mod 7)
+
+Chèn các khóa:
+
+58 mod 11 = 3
+14 mod 11 = 3 → 3 + 7 = 10
+91 mod 11 = 3 → 3 + 7, 3 + 2 * 7 = 6
+25 mod 11 = 3 → 3 + 3, 3 + 2 * 3 = 9
+
+14.13 So Sánh Các Kỹ Thuật Giải Quyết Xung Đột
+
+**So Sánh: Luồng Tuyến Tính vs. Băm Kép (Linear Probing vs. Double Hashing)
+Sự lựa chọn giữa luồng tuyến tính và băm kép phụ thuộc vào chi phí của việc tính toán hàm băm và trạng thái hệ số tải [số lượng phần tử trên mỗi khe] của bảng. Cả hai phương pháp đều sử dụng ít tra khảo nhưng băm kép mất nhiều thời gian hơn vì nó phải băm để so sánh hai hàm băm cho các khóa dài.
+
+**So Sánh: Tiếp Cận Mở vs. Chuỗi Riêng (Open Addressing vs. Separate Chaining)
+Việc so sánh này có phần phức tạp vì chúng ta phải tính đến việc sử dụng bộ nhớ. Chuỗi riêng sử dụng bộ nhớ bổ sung cho các liên kết. Tiếp cận mở cần bộ nhớ bổ sung một cách ngụ ý trong bảng để kết thúc chuỗi tra khảo. Bảng băm tiếp cận mở không thể được sử dụng nếu dữ liệu không có các khóa duy nhất. Một lựa chọn thay thế là sử dụng bảng băm được tách riêng.
+
+14.14 Làm Thế Nào Hashing Đạt Độ Phức Tạp O(1)
+
+Từ cuộc trao đổi trước đó, người ta có thắc mắc làm thế nào băm có độ phức tạp O(1) nếu nhiều phần tử ánh xạ vào cùng một vị trí... Câu trả lời cho vấn đề này khá đơn giản. Bằng cách sử dụng hệ số tải, chúng ta đảm bảo rằng mỗi khối (ví dụ, danh sách liên kết trong phương pháp chuỗi riêng) trung bình lưu trữ số lượng tối đa các phần tử nhỏ hơn hệ số tải. Hơn nữa, trong thực tế, hệ số tải này là một hằng số (thường là 10 hoặc 20). Kết quả là, việc tìm kiếm trong 20 phần tử hoặc 10 phần tử trở thành hằng số. Nếu số trung bình các phần tử trong một khối lớn hơn hệ số tải, chúng ta sẽ tái băm các phần tử với kích thước bảng băm lớn hơn. Một điều chúng ta cần nhớ là chúng ta xem xét tỷ lệ chiếm dụng trung bình (tổng số phần tử trong bảng băm chia cho kích thước bảng) khi quyết định tái băm. Thời gian truy cập của bảng phụ thuộc vào hệ số tải, mà lại phụ thuộc vào hàm băm. Điều này bởi vì hàm băm phân phối các phần tử vào bảng băm. Vì lý do này, chúng ta nói bảng băm đạt độ phức tạp O(1) trung bình. Ngoài ra, chúng ta thường sử dụng bảng băm trong các trường hợp mà tìm kiếm nhiều hơn so với thao tác chèn và xóa.
+
+14.15 Các Kỹ Thuật Băm
+
+Có hai loại kỹ thuật băm: băm tĩnh và băm động.
+
+Băm Tĩnh (Static Hashing): Nếu dữ liệu cố định thì băm tĩnh là hữu ích. Trong băm tĩnh, tập hợp các khóa được giữ cố định và được cung cấp từ trước, và số trang chính trong bảng chỉ định được giữ cố định.
+
+Băm Động (Dynamic Hashing): Nếu dữ liệu không cố định, băm tĩnh có thể làm cho hiệu suất kém đi, trong trường hợp này băm động là phương án thay thế, trong đó tập hợp các khóa có thể thay đổi một cách động.
+
+14.16 Những Vấn Đề Không Phù Hợp Cho Bảng Băm
+
+Các vấn đề không phù hợp cho bảng băm bao gồm:
+
+Các vấn đề yêu cầu sắp xếp dữ liệu.
+Các vấn đề có dữ liệu đa chiều.
+Tìm kiếm tiền tố, đặc biệt nếu các khóa dài và có độ dài biến thiên.
+Các vấn đề có dữ liệu động.
+Các vấn đề mà dữ liệu không có các khóa duy nhất.
+
+14.17 Bộ Lọc Bloom (Bloom Filters)
+
+Bộ lọc Bloom là một cấu trúc dữ liệu xác suất được thiết kế để kiểm tra xem một phần tử có tồn tại trong một tập hợp hay không, với hiệu suất tốt về bộ nhớ và thời gian. Nó cho chúng ta biết rằng phần tử có thể không nằm trong tập hợp hoặc có thể nằm trong tập hợp. Cấu trúc dữ liệu cơ bản của bộ lọc Bloom là một vector bit. Thuật toán này được phát minh vào năm 1970 bởi Burton Bloom và nó dựa vào việc sử dụng nhiều hàm băm khác nhau.
+
+Cách hoạt động:
+Bộ lọc Bloom bắt đầu với một mảng bit được khởi tạo bằng số không. Để lưu trữ một giá trị dữ liệu, chúng ta chỉ đơn giản áp dụng k hàm băm khác nhau và xem các giá trị kết quả như các chỉ số trong mảng, và chúng ta đặt mỗi phần tử của mảng k thành 1. Chúng ta lặp lại việc này cho mọi phần tử chúng ta gặp.
+
+Giả sử một phần tử xuất hiện và chúng ta muốn biết xem chúng ta đã thấy nó trước đây chưa. Chúng ta thực hiện k hàm băm và tra cứu các phần tử trong mảng đã chỉ định. Nếu bất kỳ phần tử nào có giá trị 0, chúng ta có thể chắc chắn rằng chúng ta chưa từng gặp phần tử này trước đây - nếu chúng ta đã gặp, các bit đã được đặt thành 1. Tuy nhiên, ngay cả khi tất cả chúng đều là 1, chúng ta vẫn không thể kết luận rằng chúng ta đã thấy phần tử trước đó vì tất cả các bit có thể đã được đặt bởi k hàm băm áp dụng cho nhiều phần tử khác nhau. Chúng ta chỉ có thể kết luận rằng có khả năng chúng ta đã gặp phần tử này trước đây. 
+
+Lưu ý rằng không thể loại bỏ một phần tử khỏi bộ lọc Bloom. Lý do đơn giản là chúng ta không thể hủy bỏ một bit mà dường như thuộc về một phần tử vì nó cũng có thể được đặt bởi một phần tử khác. 
+Nếu mảng bit chủ yếu trống, tức là đặt thành số không, và k hàm băm độc lập với nhau, thì xác suất sai dương (tức là kết luận rằng chúng ta đã thấy một mục dữ liệu khi thực tế không) thấp. Ví dụ, nếu chỉ có k bit được đặt, chúng ta có thể kết luận rằng xác suất sai dương rất gần về không vì khả năng lỗi duy nhất là chúng ta nhập một mục dữ liệu tạo ra cùng k giá trị băm - điều này không thể xảy ra miễn là các hàm 'băm' độc lập. 
+
+Khi mảng bit đầy, xác suất sai dương tăng chậm lên. Tất nhiên khi mảng bit đầy, mọi phần tử được truy vấn đều được xác định là đã được thấy trước đó. Vì vậy, rõ ràng chúng ta có thể đổi không gian để đạt được độ chính xác cũng như thời gian. 
+Việc loại bỏ một phần tử khỏi bộ lọc Bloom một lần có thể được mô phỏng bằng cách có một bộ lọc Bloom thứ hai chứa các phần tử đã bị loại bỏ. Tuy nhiên, các kết quả sai dương trong bộ lọc thứ hai sẽ trở thành các kết quả sai âm trong bộ lọc tổng hợp, điều này có thể không mong muốn. Trong phương pháp này, việc thêm lại một mục đã bị loại bỏ trước đó không thể thực hiện, vì chúng ta phải loại bỏ nó khỏi bộ lọc đã loại bỏ.
+
+**Lựa chọn hàm băm 
+Yêu cầu thiết kế k hàm băm độc lập khác nhau có thể bất khả thi đối với k lớn. Đối với một hàm băm tốt với đầu ra rộng, không nên có sự tương quan nhiều hoặc ít gì giữa các trường bit khác nhau của hàm băm đó, do đó loại hàm băm này có thể được sử dụng để tạo ra nhiều hàm băm khác nhau bằng cách chia đầu ra thành nhiều trường bit khác nhau. Hoặc có thể truyền k giá trị ban đầu khác nhau (như 0, 1, ..., k - 1) cho một hàm băm có giá trị ban đầu - hoặc thêm (hoặc nối) các giá trị này vào khóa. Đối với m và/tài k, tính độc lập giữa các hàm băm có thể được nới lỏng mà không làm tăng đáng kể tỷ lệ sai dương.
+
+**Lựa chọn kích thước vector bit 
+Một bộ lọc Bloom với lỗi 1% và giá trị k tối ưu, so sánh với độ lớn của các phần tử, chỉ cần khoảng 9.6 bit cho mỗi phần tử - bất kể kích thước của các phần tử. Lợi thế này một phần đến từ tính gọn gàng, được thừa kế từ các mảng, và một phần đến từ tính xác suất của nó. Tỷ lệ sai dương 1% có thể được giảm đi một số lần bằng cách chỉ thêm khoảng 4.8 bit cho mỗi phần tử.
+
+**Ưu điểm về không gian 
+Mặc dù có nguy cơ sai dương, bộ lọc Bloom có lợi thế mạnh về không gian so với các cấu trúc dữ liệu khác để biểu diễn tập hợp, chẳng hạn như cây tìm kiếm nhị phân tự cân bằng, cây thử, bảng băm hoặc các mảng đơn giản hoặc danh sách liên kết của các mục. Hầu hết chúng yêu cầu lưu trữ ít nhất các mục dữ liệu chính nó, điều này có thể yêu cầu từ một số lượng bit nhỏ, cho các số nguyên nhỏ, đến một số lượng bit tùy ý, chẳng hạn như đối với chuỗi (cây thử là ngoại lệ, vì chúng có thể chia sẻ bộ nhớ giữa các phần tử có các tiền tố bằng nhau). Các cấu trúc liên kết gây ra thêm chi phí không gian tuyến tính cho các con trỏ. Tuy nhiên, nếu số lượng giá trị tiềm năng nhỏ và nhiều trong số chúng có thể trong tập hợp, bộ lọc Bloom dễ dàng bị vượt qua bởi mảng bit xác định, yêu cầu chỉ một bit cho mỗi phần tử tiềm năng.
+
+**Ưu điểm về thời gian 
+Bộ lọc Bloom cũng có tính chất không thường thấy rằng thời gian cần thiết để thêm các mục hoặc kiểm tra xem một mục có trong tập hợp hay không là một hằng số cố định, O(k), hoàn toàn độc lập với số lượng mục đã có trong tập hợp. Không cấu trúc dữ liệu tập hợp trong không gian hằng số nào khác có tính chất này, nhưng thời gian trung bình truy cập của bảng băm hiếm khi sẽ làm cho chúng nhanh hơn trong thực tế so với một số bộ lọc Bloom. Trong một triển khai phần cứng, tuy nhiên, bộ lọc Bloom sáng sủa vì các truy vấn k độc lập và có thể song song được thực hiện.
+
+Dưới đây là header file "hashing.h" của cấu trúc dữ liệu hash map đơn giản
+
+#pragma once
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+struct my_pair {
+	std::string str;
+	int data;
+	my_pair(std::string, int);
+	my_pair();
+};
+
+class hash_map_container {
+private:
+	int size;
+	bool* bloom_array;
+	my_pair* arr;
+	int hash_function(std::string);
+	int hash_function_2(int);
+public:
+	hash_map_container(int size);
+	void push_key_data(std::string key, int data);
+	void delete_key(std::string key);
+	int get_data(std::string key);
+	void print_list();
+};
+
+****************Dưới đây là file hashing.cpp*****************
+
+#include <Hashing.h>
+using namespace std;
+
+my_pair::my_pair(std::string stri, int a) {
+	str = stri; data = a;
+}
+my_pair::my_pair() {
+	str = ""; data = 0;
+}
+hash_map_container::hash_map_container(int a) {
+	size = a;
+	bloom_array = new bool[size];
+	arr = new my_pair[size];
+	for (int i = 0; i < size; i++) {
+		bloom_array[i] = false;
+	}
+}
+int hash_map_container::hash_function(string str) {
+	int k = 0;
+	for (int i : str) {
+		k += i;
+	}
+	return k % size;
+}
+int hash_map_container::hash_function_2(int key) {
+	return (7 - key % 7);
+}
+void hash_map_container::push_key_data(string key, int data) {
+	int index = hash_function(key);
+	int k = hash_function_2(index);
+	while (bloom_array[index]) {
+		if (arr[index].str == key) return;
+		index = (index + k) % size;
+	}
+	arr[index] = my_pair(key, data);
+	bloom_array[index] = true;
+}
+void hash_map_container::delete_key(string key) {
+	int index = hash_function(key);
+	int k = hash_function_2(index);
+	while (bloom_array[index]) {
+		if (arr[index].str == key) {
+			bloom_array[index] = false;
+			arr[index].str = "";
+			arr[index].data = 0;
+		}
+		else {
+			index = (index + k) % size;
+		}
+	}
+}
+int hash_map_container::get_data(string key) {
+	int index = hash_function(key);
+	int k = hash_function_2(index);
+	while (bloom_array[index]) {
+		if (arr[index].str == key) {
+			return arr[index].data;
+		}
+		else {
+			index = (index + k) % size;
+		}
+	}
+	return INT_MIN;
+}
+void hash_map_container::print_list() {
+	for (int i = 0; i < size; i++) {
+		if (bloom_array[i]) {
+			cout << endl << i << ") " << left << setw(24) << arr[i].str << ": " << arr[i].data << endl;
+		}
+	}
+}
+
+*********Dưới đây là main************
+
+#include <Hashing.h>
+
+using namespace std;
+
+int main() {
+	hash_map_container map = hash_map_container(100);
+	map.push_key_data("lo van ton", 1234);
+	map.push_key_data("lo van ton 2", 12345);
+	map.push_key_data("lo van ton 3", 123456);
+	map.push_key_data("lo van ton 4", 123);
+	map.push_key_data("lo van ton 5", 124);
+	map.push_key_data("dinh viet hoang", 4869);
+	map.push_key_data("lmao", 24324);
+	map.delete_key("lo van ton 5");
+	cout << "data la: " << map.get_data("xx") << endl;
+	map.print_list();
+	return 0;
+}
+
+																														Viết xong vào ngày 19/8/2023

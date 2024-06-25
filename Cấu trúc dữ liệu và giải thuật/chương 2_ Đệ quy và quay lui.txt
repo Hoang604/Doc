@@ -1,0 +1,117 @@
+																														Bắt đầu viết vào ngày  14/7/2023
+
+2.1 Giới thiệu
+Trong chương này, chúng ta sẽ tìm hiểu về một trong những chủ đề quan trọng, "đệ quy", mà sẽ được sử dụng trong hầu hết các chương khác, và cũng về "backtracking" (quay lui) liên quan đến đệ quy.
+
+2.2 Đệ quy là gì?
+Bất kỳ hàm nào mà gọi chính nó được gọi là đệ quy. Một phương pháp đệ quy giải quyết một vấn đề bằng cách gọi một bản sao của chính nó để làm việc trên một vấn đề nhỏ hơn. Đây được gọi là bước đệ quy. Bước đệ quy có thể dẫn đến nhiều cuộc gọi đệ quy khác. Quan trọng là đảm bảo đệ quy kết thúc. Mỗi lần hàm gọi chính nó với một phiên bản đơn giản hơn của vấn đề gốc. Các vấn đề nhỏ dần này cuối cùng phải hội tụ vào trường hợp cơ bản (base case).
+
+2.3 Tại sao sử dụng đệ quy?
+Đệ quy là một kỹ thuật hữu ích được mượn từ toán học. Mã đệ quy thường ngắn gọn và dễ viết hơn mã lặp. Đệ quy hữu ích nhất cho các nhiệm vụ có thể được định nghĩa dựa trên các nhiệm vụ con tương tự. Ví dụ, các bài toán sắp xếp, tìm kiếm và duyệt thường có các giải pháp đệ quy đơn giản.
+
+2.4 Cấu trúc của một hàm đệ quy
+Một hàm đệ quy thực hiện một nhiệm vụ bằng cách gọi chính nó để thực hiện các nhiệm vụ con. Đến một thời điểm nào đó, hàm gặp một nhiệm vụ con mà nó có thể thực hiện mà không cần gọi chính nó. Trường hợp này, khi hàm không đệ quy, được gọi là trường hợp cơ bản (base case). Trường hợp trước đó, khi hàm gọi chính nó để thực hiện một nhiệm vụ con, được gọi là trường hợp đệ quy (recursive case). Chúng ta có thể viết tất cả các hàm đệ quy bằng cách sử dụng cấu trúc if - else if - else.
+
+Ví dụ, hãy xem xét hàm giai thừa: n! là tích của tất cả các số nguyên từ n đến 1. Định nghĩa đệ quy của giai thừa có dạng:
+
+n! = n * (n - 1)!
+
+Định nghĩa này dễ dàng được chuyển đổi thành cài đặt đệ quy. Ở đây, vấn đề là xác định giá trị của n!, và vấn đề con là xác định giá trị của (n - 1)!. Trong trường hợp đệ quy, khi n lớn hơn 1, hàm gọi chính nó để xác định giá trị của (n - 1)! và nhân với n.
+dưới đây là một đoạn code C++ viết về hàm tính giai thừa
+#include <iostream>
+
+using namespace std;
+
+int giai_thua(int n){
+    if (n==1) return 1;
+    else if (n>1) return n*giai_thua(n-1);
+    else return 0;
+}
+int main(){
+    int n; 
+    cout << "nhap gia tri cua n: ";
+    cin >> n;
+    int a= giai_thua(n);
+    if (a==0 ) cout << "nhap gia tri cua n bi loi";
+    else
+    cout << "giai thua cua n la: " << a;
+}
+
+2.5 Đệ quy và Bộ nhớ (Hiển thị)
+  Mỗi lời gọi đệ quy tạo một bản sao mới của phương thức đó (thực ra chỉ là các biến) trong bộ nhớ. Khi một phương thức kết thúc (nghĩa là trả về dữ liệu nào đó), bản sao của phương thức đó được loại bỏ khỏi bộ nhớ. Các giải pháp đệ quy có vẻ đơn giản nhưng việc hiển thị và theo dõi mất thời gian. Để hiểu rõ hơn, hãy xem xét ví dụ sau đây. (ví dụ trang 65 sách gốc)
+
+2.6 Đệ quy so với Lặp lại
+
+Trong khi thảo luận về đệ quy, câu hỏi cơ bản đầu tiên mà xuất hiện là: cách nào tốt hơn - lặp lại hay đệ quy? Câu trả lời cho câu hỏi này phụ thuộc vào chúng ta đang cố gắng làm gì. Phương pháp đệ quy phản ánh vấn đề mà chúng ta đang cố gắng giải quyết. Phương pháp đệ quy giúp giải quyết một vấn đề có thể không có câu trả lời rõ ràng nhất. Tuy nhiên, đệ quy tạo ra công việc thừa mỗi lần gọi đệ quy (cần không gian trên ngăn xếp). 
+
+Đệ quy:
+- Dừng khi đạt được trường hợp cơ bản.
+- Mỗi lần gọi đệ quy đòi hỏi bộ nhớ thêm trên ngăn xếp (bộ nhớ).
+- Nếu đệ quy vô tận, chương trình có thể hết bộ nhớ và gây lỗi tràn ngăn xếp.
+- Cách giải quyết một số vấn đề dễ hơn khi sử dụng đệ quy.
+
+Lặp lại:
+- Dừng khi một điều kiện được chứng minh là sai.
+- Mỗi lần lặp không yêu cầu bộ nhớ thêm.
+- Một vòng lặp vô tận có thể lặp mãi vì không tạo ra bộ nhớ thêm.
+- Cách giải quyết vấn đề theo phương pháp lặp không luôn luôn rõ ràng như một giải pháp đệ quy.
+
+2.7 Ghi chú về Đệ quy
+- Thuật toán đệ quy có hai loại trường hợp: trường hợp đệ quy và trường hợp cơ bản.
+- Mọi trường hợp hàm đệ quy phải kết thúc ở trường hợp cơ bản.
+- Nói chung, các giải pháp lặp lại hiệu quả hơn các giải pháp đệ quy [do công việc thừa của cuộc gọi hàm].
+- Một thuật toán đệ quy có thể được thực hiện mà không cần gọi hàm đệ quy bằng cách sử dụng ngăn xếp, nhưng đó thường là một công việc phức tạp không đáng làm. Điều đó có nghĩa rằng bất kỳ vấn đề nào có thể được giải quyết đệ quy cũng có thể được giải quyết theo cách lặp lại.
+- Đối với một số vấn đề, không có thuật toán lặp lại rõ ràng.
+- Một số vấn đề phù hợp nhất với giải pháp đệ quy trong khi những vấn đề khác không.
+
+2.8 Ví dụ về Thuật toán Đệ quy
+- Chuỗi Fibonacci, Tìm giai thừa
+- Sắp xếp trộn, Sắp xếp nhanh
+- Tìm kiếm nhị phân
+- Duyệt cây và nhiều vấn đề về cây: Duyệt theo thứ tự trung, Duyệt theo thứ tự tiền, Duyệt theo thứ tự hậu
+- Duyệt đồ thị: Duyệt theo chiều sâu (DFS), Duyệt theo chiều rộng (BFS)
+- Các ví dụ về Lập trình Động
+- Thuật toán Chia để trị
+- Tháp Hà Nội
+- Thuật toán Quay lui [sẽ được thảo luận trong phần tiếp theo]
+
+2.9 Đệ quy: Vấn đề và Giải pháp
+Trong chương này, chúng ta sẽ đề cập đến một số vấn đề liên quan đến đệ quy và chúng ta sẽ thảo luận về các vấn đề khác trong các chương khác. Khi bạn hoàn thành việc đọc toàn bộ cuốn sách, bạn sẽ gặp nhiều vấn đề đệ quy. 
+
+Vấn đề 1: Thảo luận về câu đố Tháp Hà Nội.
+Giải pháp: Tháp Hà Nội là một câu đố toán học. Nó bao gồm ba cột (hoặc cái chọt hoặc tháp) và một số đĩa có kích thước khác nhau có thể trượt vào bất kỳ cột nào. Câu đố bắt đầu với các đĩa trên một cột theo thứ tự tăng dần về kích thước, đĩa nhỏ nhất ở trên cùng, tạo thành hình dạng nón. Mục tiêu của câu đố là di chuyển toàn bộ đống đĩa sang một cột khác, tuân theo các quy tắc sau:
+- Chỉ có thể di chuyển một đĩa mỗi lần.
+- Mỗi lần di chuyển bao gồm việc lấy đĩa trên cùng từ một trong các cột và trượt nó vào cột khác, lên trên những đĩa khác có thể đã có trên cột đó
+- Không được đặt đĩa lên trên đĩa nhỏ hơn.
+Thuật toán:
+- Di chuyển n - 1 đĩa trên cột ban đầu sang cột trung gian,
+- Di chuyển đĩa thứ n từ cột ban đầu sang cột đích,
+- Di chuyển n - 1 đĩa từ cột trung gian sang cột đích.
+- Việc chuyển n - 1 đĩa từ cột ban đầu sang cột trung gian có thể được coi là một vấn đề mới và có thể được giải theo cùng phương pháp. Sau khi giải Tháp Hà Nội với ba đĩa, chúng ta có thể giải nó với bất kỳ số đĩa nào bằng thuật toán trên.
+
+2.10 Backtracking là gì?
+
+Backtracking là một cải tiến của phương pháp thử tất cả các trường hợp. Nó tìm kiếm một giải pháp cho một vấn đề trong tất cả các tùy chọn có sẵn. Trong backtracking, chúng ta bắt đầu với một lựa chọn có thể từ nhiều lựa chọn có sẵn và cố gắng giải quyết vấn đề. Nếu chúng ta có thể giải quyết vấn đề với lựa chọn đã chọn, chúng ta sẽ in ra giải pháp. Nếu không, chúng ta sẽ quay lại và chọn một lựa chọn khác và cố gắng giải quyết lại. Nếu không có lựa chọn nào hoạt động, chúng ta sẽ kết luận rằng không có giải pháp cho vấn đề. Backtracking là một dạng của đệ quy.
+
+Tình huống thông thường là bạn đối mặt với nhiều lựa chọn và bạn phải chọn một trong số chúng. Sau khi bạn đã đưa ra lựa chọn của mình, bạn sẽ có một tập hợp mới của các lựa chọn; tập hợp lựa chọn bạn nhận được phụ thuộc vào lựa chọn bạn đã chọn. Quá trình này được lặp đi lặp lại cho đến khi bạn đạt được một trạng thái cuối cùng. Nếu bạn đã đưa ra một chuỗi lựa chọn tốt, trạng thái cuối cùng của bạn sẽ là trạng thái mục tiêu; nếu không, thì không phải.
+
+Backtracking có thể được coi là một phương pháp duyệt cây/đồ thị có chọn lọc. Cây là cách biểu diễn một vị trí bắt đầu ban đầu (nút gốc) và một trạng thái mục tiêu cuối cùng (một trong các lá). Backtracking cho phép chúng ta xử lý các tình huống mà phương pháp thử tất cả các trường hợp thô sẽ tạo ra một số lượng lựa chọn không thể tính toán được. Backtracking là một dạng của phương pháp thô tinh (refined brute force). Tại mỗi nút, chúng ta loại bỏ các lựa chọn không thể và tiếp tục kiểm tra đệ quy chỉ những lựa chọn có tiềm năng. Điều thú vị về backtracking là chúng ta chỉ quay lui xa khi cần thiết để đến một điểm quyết định trước đó với một lựa chọn chưa được khám phá.  Nói chung, điều đó sẽ xảy ra tại điểm quyết định gần đây nhất. Dần dần, ngày càng nhiều các điểm quyết định này sẽ được khám phá đầy đủ, và chúng ta sẽ phải quay lại xa hơn và xa hơn. Nếu chúng ta quay lại tất cả đến trạng thái ban đầu và đã khám phá tất cả các lựa chọn từ đó, chúng ta có thể kết luận rằng vấn đề cụ thể không có giải pháp. Trong trường hợp đó, chúng ta đã thực hiện toàn bộ công việc của đệ quy toàn diện và biết rằng không có giải pháp khả thi.
+
+- Đôi khi thuật toán tốt nhất cho một vấn đề là thử tất cả các khả năng.
+- Điều này luôn chậm, nhưng có các công cụ tiêu chuẩn có thể được sử dụng để giúp đỡ.
+- Các công cụ: thuật toán để tạo ra các đối tượng cơ bản, chẳng hạn như chuỗi nhị phân [2n khả năng cho chuỗi n-bit], hoán vị [n!], tổ hợp [n! / r!(n - r)!], chuỗi tổng quát [chuỗi k-ary có độ dài n có kn khả năng], v.v...
+- Backtracking tăng tốc quá trình tìm kiếm toàn diện bằng cách cắt tỉa các lựa chọn.
+
+2.11 Ví dụ về thuật toán Backtracking
+- Chuỗi nhị phân: tạo ra tất cả các chuỗi nhị phân.
+- Tạo ra các chuỗi k-ary.
+- Vấn đề N-Queens.
+- Vấn đề Knapsack.
+- Chuỗi tổng quát.
+- Chu trình Hamilton [xem chương về Đồ thị].
+- Vấn đề Tô màu đồ thị.
+
+2.12 Các ví dụ cụ thể về áp dụng quay lui
+	(từ trang 70 đến 73)
+
+																															Kết thúc vào ngày  15/7/2023

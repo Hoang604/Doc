@@ -1,0 +1,97 @@
+13.1 Giới thiệu 
+Từ thuở thơ ấu, chúng ta đã sử dụng từ điển và nhiều người trong chúng ta còn có một trình xử lý văn bản (ví dụ như Microsoft Word) đi kèm với công cụ kiểm tra chính tả. Công cụ kiểm tra chính tả cũng là một loại từ điển nhưng giới hạn về phạm vi. Có nhiều ví dụ thời gian thực về từ điển và một số trong số chúng là:
+• Công cụ kiểm tra chính tả
+• Từ điển dữ liệu trong các ứng dụng quản lý cơ sở dữ liệu
+• Bảng ký hiệu được tạo bởi các trình tải, bộ lắp ráp và trình biên dịch
+• Bảng định tuyến trong các thành phần mạng (tra cứu DNS)
+
+Trong khoa học máy tính, chúng ta thường sử dụng thuật ngữ 'bảng ký hiệu' thay vì 'từ điển' khi đề cập đến kiểu dữ liệu trừu tượng (ADT). 
+
+13.2 Các bảng ký hiệu là gì?
+Chúng ta có thể định nghĩa bảng ký hiệu là một cấu trúc dữ liệu liên kết một giá trị với một khóa. Nó hỗ trợ các hoạt động sau:
+• Tìm kiếm xem một tên cụ thể có trong bảng hay không
+• Lấy các thuộc tính của tên đó
+• Sửa đổi các thuộc tính của tên đó
+• Chèn tên mới và các thuộc tính của nó
+• Xóa tên và các thuộc tính của nó
+Chỉ có ba hoạt động cơ bản trên bảng ký hiệu: tìm kiếm, chèn và xóa. 
+Ví dụ: tra cứu DNS. Hãy giả sử rằng khóa trong trường hợp này là URL và giá trị là địa chỉ IP.
+• Chèn URL với địa chỉ IP cụ thể
+• Cho trước URL, tìm địa chỉ IP tương ứng
+Khóa[Trang web] Giá trị[Địa chỉ IP] 
+- www.CareerMonks.com 128.112.136.11 
+- www.AuthorsInn.com 128.112.128.15 
+- www.AuthInn.com 130.132.143.21 
+- www.klm.com 128.103.060.55 
+- www.CareerMonk.com 209.052.165.60 13.3 
+
+13.3 Cài đặt Bảng ký hiệu 
+Trước khi thực hiện bảng ký hiệu, hãy liệt kê các cách cài đặt có thể. Bảng ký hiệu có thể được cài đặt theo nhiều cách và dưới đây là một số cách trong số chúng.
+
+Cài đặt Mảng Không thứ tự 
+Với phương pháp này, việc duy trì một mảng là đủ. Nó mất O(n) thời gian để tìm kiếm, chèn và xóa trong trường hợp xấu nhất. Cài đặt Mảng [Đã sắp xếp] theo thứ tự Trong phương pháp này, chúng ta duy trì một mảng đã sắp xếp theo khóa và giá trị.
+• Lưu trữ theo thứ tự đã sắp xếp theo khóa
+• keys[i] = khóa lớn thứ i
+• values[i] = giá trị liên quan với khóa lớn thứ i
+Vì các phần tử đã được sắp xếp và lưu trữ trong các mảng, chúng ta có thể sử dụng tìm kiếm nhị phân đơn giản để tìm một phần tử. Nó mất O(logn) thời gian để tìm kiếm và O(n) thời gian để chèn và xóa trong trường hợp xấu nhất. 
+
+Cài đặt Danh sách Liên kết Không thứ tự
+Chỉ việc duy trì một danh sách liên kết với hai giá trị dữ liệu là đủ cho phương pháp này. Nó mất O(n) thời gian để tìm kiếm, chèn và xóa trong trường hợp xấu nhất. 
+
+Cài đặt Danh sách Liên kết [Đã sắp xếp] theo thứ tự 
+Trong phương pháp này, trong quá trình chèn khóa, duy trì thứ tự của các khóa trong danh sách liên kết. Ngay cả khi danh sách đã được sắp xếp, trong trường hợp xấu nhất nó vẫn cần O(n) thời gian để tìm kiếm, chèn và xóa. 
+
+Cài đặt Cây Tìm Kiếm Nhị Phân (xem chương về Cây) 
+Ưu điểm của phương pháp này là: nó không cần nhiều mã code và có tìm kiếm nhanh [O(logn) trung bình]. 
+
+Cài đặt Cây Tìm Kiếm Nhị Phân Cân Bằng (xem chương về Cây). Đây là một sự mở rộng của cài đặt cây tìm kiếm nhị phân và mất O(logn) trong trường hợp xấu nhất cho các hoạt động tìm kiếm, chèn và xóa. 
+
+Cài đặt Tìm Kiếm Tam Phân Xin xem chương về Thuật toán Chuỗi. Đây là một trong những phương pháp quan trọng được sử dụng để triển khai từ điển. Cài đặt 
+
+Băm (xem chương về Băm)
+
+13.4 Bảng So sánh các cách triển khai bảng kí hiệu
+Chúng ta hãy xem xét bảng so sánh sau đây cho tất cả các thực hiện.
+
+Mảng 2D (Array):
+Triển khai bảng bằng mảng 2 chiều.
+Độ phức tạp thời gian:
+Truy cập phần tử: O(1)
+Thêm/Xóa hàng hoặc cột: Tùy thuộc vào cách triển khai, có thể là O(n) hoặc không phải là tối ưu.
+
+Danh sách liên kết 2D (Linked List):
+Sử dụng danh sách liên kết để biểu diễn bảng.
+Độ phức tạp thời gian:
+Truy cập phần tử: O(n)
+Thêm/Xóa hàng hoặc cột: O(n) (tùy thuộc vào cách triển khai)
+
+Cây 2D (2D Tree):
+Sử dụng cây để tổ chức dữ liệu 2D.
+Độ phức tạp thời gian:
+Truy vấn phần tử gần nhất: O(log n)
+Thêm/Xóa phần tử: O(log n)
+
+Hash Table (Bảng băm) hoặc Hash Map:
+Sử dụng hàm băm để lưu trữ và truy xuất dữ liệu.
+Độ phức tạp thời gian:
+Truy cập phần tử: Trung bình O(1), tệ nhất O(n)
+Thêm/Xóa phần tử: Trung bình O(1), tệ nhất O(n)
+
+Ma trận băm (Sparse Matrix):
+Sử dụng ma trận để lưu trữ các phần tử không rỗng.
+Độ phức tạp thời gian:
+Truy cập phần tử: O(1)
+Thêm/Xóa phần tử: O(1)
+
+Trie 2D:
+Sử dụng trie (cây tiền tố) để lưu trữ và truy vấn dữ liệu 2D.
+Độ phức tạp thời gian:
+Truy cập/Tìm kiếm: O(k), trong đó k là độ dài của khóa tìm kiếm
+Thêm/Xóa: O(k)
+
+Đồ thị (Graph):
+Sử dụng đồ thị để biểu diễn mối quan hệ giữa các phần tử.
+Độ phức tạp thời gian:
+Truy cập/Tìm kiếm: Tùy thuộc vào thuật toán duyệt đồ thị sử dụng (VD: BFS, DFS)
+
+Ghi chú:• Trong bảng trên, n là kích thước đầu vào. • Bảng chỉ ra các thực hiện có thể có được đề cập trong cuốn sách này. Tuy nhiên, cũng có thể có những thực hiện khác.

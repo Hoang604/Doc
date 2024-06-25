@@ -1,0 +1,317 @@
+																													Bắt đầu viết vào này 19/8/2023
+
+15.1 Giới thiệu
+
+Để hiểu về tầm quan trọng của các thuật toán chuỗi, hãy xem xét trường hợp nhập URL (Uniform Resource Locator) vào bất kỳ trình duyệt nào (ví dụ, Internet Explorer, Firefox, hoặc Google Chrome). Bạn sẽ thấy rằng sau khi nhập tiền tố của URL, một danh sách tất cả các URL có thể xuất hiện. Điều này có nghĩa là các trình duyệt đang thực hiện một số xử lý nội bộ và đưa ra danh sách các URL phù hợp. Kỹ thuật này đôi khi được gọi là tự động - hoàn thành. 
+
+Tương tự, hãy xem xét trường hợp nhập tên thư mục trong giao diện dòng lệnh (cả trong Windows và UNIX). Sau khi nhập tiền tố của tên thư mục, nếu chúng ta nhấn nút tab, chúng ta sẽ nhận được danh sách tất cả các tên thư mục phù hợp có sẵn. Đây là một ví dụ khác về tự động - hoàn thành. 
+Để hỗ trợ các hoạt động này, chúng ta cần một cấu trúc dữ liệu lưu trữ dữ liệu chuỗi một cách hiệu quả. Trong chương này, chúng ta sẽ xem xét các cấu trúc dữ liệu hữu ích cho việc triển khai các thuật toán chuỗi. 
+
+Chúng ta bắt đầu cuộc trò chuyện của mình với vấn đề cơ bản về chuỗi: cho một chuỗi, làm thế nào chúng ta tìm kiếm một chuỗi con (mẫu)? Điều này được gọi là vấn đề khớp chuỗi. Sau khi thảo luận về các thuật toán khớp chuỗi khác nhau, chúng ta sẽ xem xét các cấu trúc dữ liệu khác nhau để lưu trữ chuỗi.
+
+15.2 Thuật toán Khớp Chuỗi
+
+Trong phần này, chúng ta tập trung vào việc kiểm tra xem một mẫu P có phải là một chuỗi con của chuỗi khác T (T đại diện cho văn bản) hay không. Vì chúng ta đang cố gắng kiểm tra một chuỗi cố định P, đôi khi các thuật toán này được gọi là các thuật toán khớp chuỗi chính xác. Để đơn giản hóa cuộc trò chuyện của chúng ta, hãy giả sử rằng độ dài của văn bản T đã cho là n và độ dài của mẫu P mà chúng ta đang cố gắng khớp có độ dài là m. Điều này có nghĩa, T có các ký tự từ 0 đến n - 1 (T[0 ... n - 1]) và P có các ký tự từ 0 đến m - 1 (T[0 ... m - 1]). Thuật toán này được triển khai trong C++ như strstr(). Trong các phần tiếp theo, chúng ta sẽ bắt đầu bằng phương pháp vét cạn và dần dần chuyển đến các thuật toán tốt hơn.
+
+- Phương pháp vét cạn
+- Thuật toán Khớp Chuỗi Rabin-Karp
+- Khớp Chuỗi với Tự động hóa hữu hạn
+- Thuật toán KMP
+- Thuật toán Boyer-Moore
+- Cây Hậu Tố
+
+15.3 Phương pháp vét cạn
+
+Trong phương pháp này, đối với mỗi vị trí có thể có trong văn bản T, chúng ta kiểm tra xem mẫu P có khớp hay không. Vì độ dài của T là n, chúng ta có n - m + 1 lựa chọn có thể cho các so sánh. Điều này là do chúng ta không cần kiểm tra m - 1 vị trí cuối cùng của T vì độ dài của mẫu là m. Thuật toán sau đây tìm kiếm sự xuất hiện đầu tiên của một chuỗi mẫu P trong một chuỗi văn bản T.
+
+Thuật toán:
+
+Độ phức tạp thời gian: O((n - m + 1) × m) ≈ O(n × m). Độ phức tạp không gian: O(1).
+
+Chúng ta thấy rằng phương pháp vét cạn này đơn giản, tuy nhiên, nó có thể trở nên không hiệu quả đối với các chuỗi văn bản và mẫu lớn. Trong các phần tiếp theo, chúng ta sẽ tìm hiểu về các thuật toán khớp chuỗi khác mạnh mẽ hơn để giải quyết vấn đề này.
+
+15.4 Thuật toán Rabin-Karp Khớp Chuỗi
+
+Trong phương pháp này, chúng ta sử dụng kỹ thuật băm (hashing) và thay vì kiểm tra từng vị trí có thể trong T, chúng ta chỉ kiểm tra nếu việc băm của P và việc băm của m ký tự của T cho kết quả giống nhau. 
+Ban đầu, áp dụng hàm băm cho m ký tự đầu tiên của T và kiểm tra xem kết quả này và kết quả băm của P có giống nhau không. Nếu chúng không giống nhau, chúng ta tiếp tục đến ký tự tiếp theo của T và lại áp dụng hàm băm cho m ký tự (bắt đầu từ ký tự thứ hai). Nếu chúng giống nhau, chúng ta so sánh m ký tự đó của T với P.
+
+Lựa chọn Hàm Băm
+
+Ở mỗi bước, vì chúng ta đang tính toán băm của m ký tự của T, chúng ta cần một hàm băm hiệu quả. Nếu hàm băm có độ phức tạp O(m), thì tổng phức tạp là O(n × m). Điều này tồi tệ hơn so với phương pháp vét cạn vì trước tiên chúng ta phải áp dụng hàm băm và sau đó so sánh. Mục tiêu của chúng ta là chọn một hàm băm mà ở mỗi bước, việc tính băm cho m ký tự của T chỉ mất O(1). Chỉ khi đó chúng ta mới có thể giảm độ phức tạp tổng cộng của thuật toán.
+
+Nếu hàm băm không tốt (trường hợp xấu nhất), độ phức tạp của thuật toán Rabin-Karp là O((n - m + 1) × m) ≈ O(n × m). Nếu chúng ta chọn một hàm băm tốt, độ phức tạp của thuật toán Rabin-Karp sẽ là O(m + n).Bây giờ chúng ta hãy xem cách lựa chọn một hàm băm có thể tính băm của m ký tự của T ở mỗi bước trong O(1). 
+
+Để đơn giản, hãy giả sử rằng các ký tự được sử dụng trong chuỗi T chỉ là số nguyên. Điều này có nghĩa, tất cả các ký tự trong T ∈ {0,1,2,...,9}. Vì tất cả chúng đều là số nguyên, chúng ta có thể xem xét một chuỗi gồm m ký tự liên tiếp như các số thập phân. Ví dụ, chuỗi '61815' tương ứng với số 61815. Với giả định trên, mẫu P cũng là một giá trị thập phân, và hãy giả định rằng giá trị thập phân của P là p. Với văn bản T[0..n – 1] đã cho, hãy ký hiệu t(i) là giá trị thập phân của chuỗi con có độ dài m của T[i..i + m – 1] với i = 0,1, ...,n – m– 1. Vì vậy, t(i) == p nếu và chỉ nếu T[i..i + m – 1] == P[0..m – 1]. Chúng ta có thể tính toán p trong thời gian O(m) bằng Công thức của Horner như sau:
+
+p = p(m - 1) + 10(p(m - 2) + 10(p(m - 3) + 10(.......)))
+
+mã nguồn của công thức này sẽ là:
+int p = 0; 
+for (int i = 0; i < m; i++) {
+    p = 10 * p + (P[i] - '0');
+}
+Chúng ta có thể tính toán tất cả các t(i), cho i = 0,1,..., n – m – 1 trong tổng thời gian O(n). Giá trị t(0) cũng có thể tính trong thời gian O(m). Để tính toán các giá trị còn lại t(0), t(1),..., t(n – m – 1), hãy hiểu rằng t(i + 1) có thể tính từ t(i) trong thời gian hằng số. Ví dụ, nếu T = '123456' và m = 3, ta có thể tính t(i + 1) từ t(i) như sau:
+
+Bước 1: Loại bỏ chữ số đầu tiên: 123 - 100 * 1 = 23
+
+Bước 2: Nhân với 10 để dịch chúng ra trước: 23 * 10 = 230
+
+Bước 3: Thêm phần tử ngay sau chúng vào chữ số cuối cùng: 230 + 4 = 234
+
+Thuật toán hoạt động bằng cách so sánh t(i) với p. Khi t(i) == p, chúng ta đã tìm thấy chuỗi con P trong T, bắt đầu từ vị trí i.
+
+15.5 Khớp Chuỗi bằng Automata Hữu Hạn
+
+Trong phương pháp này, chúng ta sử dụng automata hữu hạn, một khái niệm trong lý thuyết tính toán (ToC). Trước khi xem xét thuật toán, hãy xem xét định nghĩa của automata hữu hạn.
+
+Automata Hữu Hạn Một automata hữu hạn F là một 5-tuple (Q, q0, A, ∑, δ), trong đó:
+
+Q là tập hữu hạn các trạng thái.
+q0 ∈ Q là trạng thái khởi đầu.
+A ⊆ Q là tập các trạng thái chấp nhận.
+∑ là bảng chữ cái đầu vào hữu hạn.
+δ là hàm chuyển đổi cho biết trạng thái tiếp theo dựa trên trạng thái hiện tại và đầu vào.
+Cách Automata Hữu Hạn Hoạt Động
+
+Automata hữu hạn F bắt đầu ở trạng thái q0.
+Đọc các ký tự từ ∑ một lần mỗi lần.
+Nếu F ở trạng thái q và đọc ký tự đầu vào a, F di chuyển đến trạng thái δ(q, a).
+Cuối cùng, nếu trạng thái của nó thuộc A, chúng ta nói rằng F đã chấp nhận chuỗi đầu vào đã đọc. Nếu chuỗi đầu vào không được chấp nhận, nó được gọi là chuỗi bị từ chối.
+Ví dụ:
+Hãy giả định rằng Q = {0,1}, q0 = 0, A = {1}, ∑ = {a, b}. Hàm δ(q, a) như được hiển thị trong bảng chuyển đổi. Automata này chấp nhận chuỗi kết thúc bằng số lẻ các ký tự 'a'; ví dụ, abbaaa được chấp nhận, trong khi aa bị từ chối.
+
+Ghi Chú Quan Trọng Cho Việc Xây Dựng Automata Hữu Hạn
+
+Để xây dựng automata, chúng ta bắt đầu với trạng thái ban đầu. Automata sẽ ở trạng thái k nếu đã khớp k ký tự của mẫu.
+Nếu ký tự tiếp theo của văn bản giống với ký tự mẫu c, chúng ta đã khớp k + 1 ký tự và automata chuyển đến trạng thái k + 1.
+Nếu ký tự tiếp theo của văn bản không giống với ký tự mẫu, automata chuyển đến trạng thái 0,1,2,... hoặc k, tùy thuộc vào số ký tự mẫu ban đầu khớp với ký tự văn bản kết thúc bằng c.
+Thuật Toán Khớp Chuỗi
+
+Đầu tiên, cho một mẫu P[0.. m – 1], chúng ta cần xây dựng một automata hữu hạn F.
+Bộ trạng thái Q = {0,1,2, ..., m}.
+Trạng thái khởi đầu là 0.
+Chỉ có một trạng thái chấp nhận, đó là m.
+Thời gian để xây dựng F có thể lớn nếu ∑ lớn.
+Quét chuỗi văn bản T[0.. n – 1] để tìm tất cả các xuất hiện của mẫu P[0.. m – 1].
+Khớp chuỗi hiệu quả: Θ(n).
+Mỗi ký tự được kiểm tra đúng một lần.
+Thời gian tính δ (hàm chuyển đổi) là O(m|∑|). Điều này là do δ có O(m|∑|) mục.
+Nếu giả định |∑| là hằng số, thì độ phức tạp là O(m).
+Thuật Toán: Độ phức tạp thời gian O(m).
+
+15.6 Thuật toán KMP
+
+Tương tự như trước, hãy giả định rằng T là chuỗi cần tìm kiếm và P là mẫu cần khớp. Thuật toán này được trình bày bởi Knuth, Morris và Pratt. Nó có độ phức tạp thời gian O(n) cho việc tìm kiếm một mẫu. Để có độ phức tạp thời gian O(n), nó tránh so sánh với các phần tử của T đã được liên quan đến so sánh với một phần tử nào đó của mẫu P. Thuật toán sử dụng một bảng và chúng ta thường gọi nó là hàm tiền tố hoặc bảng tiền tố hoặc hàm thất bại F.
+
+Trước tiên, chúng ta sẽ xem cách điền bảng này và sau đó là cách tìm kiếm một mẫu bằng cách sử dụng bảng này. Hàm tiền tố F cho một mẫu lưu trữ thông tin về cách mẫu khớp với các dịch chuyển của nó. Thông tin này có thể được sử dụng để tránh các dịch chuyển không cần thiết của mẫu P. Điều này có nghĩa rằng bảng này có thể được sử dụng để tránh việc quay lại trên chuỗi T.
+
+Đầu tiên phải nói đến bảng tiền tố này là gì?
+
+Giả sử cho chuỗi kí tự là:        a b a c a b c  a  b a
+Sẽ được đánh dấu thứ tự: 0  1 2 3 4 5 6 7 8 9 10
+Bảng tiền tố sẽ là:                    0 0 1 0 1 2 0 1 2 3
+
+Tại sao lại tạo được bảng tiền tố như thế này? Và nó sinh ra để làm gì? Hãy tìm hiểu ngay dưới đây
+
+Bảng tiền tố này sinh ra là để xác định xem một chuỗi con bắt đầu từ vị trí bất kì trong chuỗi cha có giống với đoạn đầu của chuỗi cha hay không, với đoạn đầu là đoạn nằm trong khoảng từ đầu chuỗi cha cho đến trước vị trí đuôi của chuỗi con. Nếu giống với chuỗi cha thì ghi lại phía dưới các phần tử của chuỗi con đó. Ví dụ như chuỗi con [5,6] giống với hai phần tử đầu tiên của chuỗi cha thì ghi 1, 2 ở bên dưới nó; chuỗi con [8,9,10] giống với 3 phần tử đầu tiên của chuỗi cha thì ghi phía dưới nó là 1,2,3. Còn đoạn nào không trùng với phần đầu của chuỗi cha thì ghi 0.
+Nói một cách đơn giản thì bảng này giúp ta xác định phần nào trong  giống đoạn đầu của nó
+
+Tạo ra bảng tiền tố này với mục đích là khi tìm kiếm chuỗi, nếu so sánh ở chuỗi lớn (chuỗi chứa chuỗi cần tìm kiếm) mà không khớp với chuỗi cần tìm kiếm, thì không cần quay lui ở chuỗ =i T, và bước quay lui ở trong chuỗi P sẽ ngắn hơn.
+
+ví dụ tìm chuỗi P "abab" trong chuỗi T "abacabcabab"
+Chuỗi "abab" có bảng tiền tố như sau: 		    a b a b c
+										 	0 1 2 3 4 5
+											   0 0 1 2 0
+Được tìm kiếm trong chuỗi "abacabcabab" được đánh số thứ tự là
+											   a b a  c a b a b a  b    c
+											   1 2 3 4 5 6 7 8 9 10 11
+Băt đầu so sánh:
+đặt i là số chỉ vị trí của chuỗi lớn, j là số chỉ vị trí của chuỗi bé. ban đầu cho j bằng 0, i = 1. chúng ta sẽ lần lượt so sánh phần tử ở vị trí i của chuỗi lớn và j+1 của chuỗi bé.
+i = 1; j = 0 trùng nhau (a), cùng tăng i và j lên để tiếp tục kiểm tra phần sau của chuỗi
+i = 2, j = 1 trùng nhau (b), tăng i, j
+i = 3, j = 2 trùng nhau (a), tăng i, j
+i = 4, j = 3 ta thấy vị trí i của chuỗi lớn là c, còn j + 1 của chuỗi bé là b. Theo phương pháp vét cạn, chúng ta sẽ chuyển i về bằng 2, j về bằng 0 để xét lại từ vị trí thứ hai của chuỗi lớn, đây là một sự lãng phí về thời gian. Thay vì làm vậy, chúng ta hãy nhìn vào bảng tiền tố. 
+Ta có tại j = 3 thì giá trị của bảng tiền tố là 1, có nghĩa là tại vị trí thứ 3 trong chuỗi P (chuỗi cần khớp), phần tử tại đó giống với phần tử đâu tiên. Vì các phần tử trước đó trong chuỗi T đã khớp với chuỗi P rồi, nên ta chắc chắn rằng phần tử tại i - 1 = 3 của chuỗi T cũng bằng phần tử đầu tiên của chuỗi P (vì nó bằng phần tử thứ j trong chuỗi P, và phần tử thứ j lại bằng với phần tử đầu tiên), do đó ta chỉ cần tiếp tục so sánh phần tử thứ 2 của P với phần phía sau phần tử thứ i của T thôi, hay nói cách khác là đưa j về bằng 1, và so sánh với vị trí i của chuỗi T. theo đó ta sẽ có:
+
+i = 4; j = 1, phần tử thứ j + 1 = 2 của chuỗi P không giống với phần tử thứ i của chuỗi j (b và c), và bảng tiền tố trả về 0 tại j = 1, có nghĩa là phần tử tại vị trí j này không trùng với bất kì phần tử nào ở đầu chuỗi hoặc nó chính là phần tử ở đầu chuỗi (trong trường hợp này nó là phần tử ở đầu chuỗi) nên ta sẽ chuyển j về bằng 0 để xét lại từ đầu trong chuỗi P. Nhìn vào bảng tiền tố của chuỗi P, dễ rút ra kết luận là không còn chuỗi con tử nào trong đoạn từ 1 đến 4 của T giống với đoạn đầu của P nữa, ta chuyển qua vị trí i = 5 của chuỗi T để xét tiếp.
+i = 5, j = 0, giống
+i = 6, j = 1, giống
+i = 7, j = 2, giống,
+i = 8, j = 3, giống,
+i = 9, j = 4, khác (ở chuỗi T là a, còn chuỗi P là c)
+Ta có giá trị của bảng tiền tố ở vị trí j = 4 là 2, có nghĩa là đoạn đầu của chuỗi P (đoạn [1, 2]) giống với đoạn [3, 4] của chuỗi này. Và từ các so sánh ở trên, ta thấy đoạn [5,8] của T giống với đoạn [1, 4] của P, điều đó có nghĩa là đoạn [7,8] của T giống với đoạn đầu của P ([1, 2]). Do đó ta có thể lập tức nhảy j lên bằng 2 (tức là bắt đầu so sánh từ vị trí thứ 3 của P trở về sau) để tiếp tục so sánh.
+i = 9, j = 2, giống,
+i = 10, j = 3, giống,
+i = 11, j = 4, giống
+Như vậy là ta đã tìm được chuỗi P ở trong T, mà không cần phải quay lui i một lần nào.
+
+Ghi Chú:
+- KMP thực hiện so sánh từ trái sang phải: Thuật toán KMP thực hiện các so sánh từ trái sang phải, điều này có nghĩa là nó bắt đầu khớp từ đầu mẫu P và di chuyển từ trái qua phải trên chuỗi T.
+- KMP cần một bước tiền xử lý (hàm tiền tố): Thuật toán KMP cần một bước tiền xử lý để xây dựng hàm tiền tố, điều này mất O(m) thời gian và không gian. Hàm tiền xử lý này làm cho việc tìm kiếm sau đó trở nên hiệu quả hơn.
+- Tìm kiếm mất O(n + m) thời gian: Việc tìm kiếm một mẫu sử dụng thuật toán KMP mất O(n + m) thời gian, không phụ thuộc vào kích thước của bảng chữ cái (alphabet).
+
+15.7 Thuật toán Boyer-Moore
+
+Tương tự như thuật toán KMP, thuật toán Boyer-Moore cũng thực hiện một số bước tiền xử lý và chúng ta gọi nó là hàm cuối cùng (last function). Thuật toán quét các ký tự của mẫu từ phải sang trái, bắt đầu với ký tự phải nhất. Trong quá trình kiểm tra vị trí có thể của mẫu P trong T, một sai khác được xử lý như sau:
+
+Hãy giả định rằng ký tự hiện tại đang được so khớp là T[i] = c và ký tự mẫu tương ứng là P[j]. Nếu c không xuất hiện ở bất kỳ đâu trong P, thì dịch toàn bộ mẫu P qua T[i]. Ngược lại, dịch mẫu P cho đến khi một lần xuất hiện của ký tự c trong P trùng với T[i]. Kỹ thuật này tránh các so sánh không cần thiết bằng cách dịch mẫu liên quan đến văn bản.
+
+Hàm cuối cùng mất thời gian O(m + |∑|) và việc tìm kiếm thực tế mất O(nm) thời gian. Do đó, độ phức tạp thời gian xấu nhất của thuật toán Boyer-Moore là O(nm + |∑|). Điều này chỉ ra rằng độ phức tạp thời gian xấu nhất là bậc hai, trong trường hợp n == m, giống với thuật toán Brute Force.
+
+Thuật toán Boyer-Moore rất nhanh trên bảng chữ cái lớn (so với độ dài của mẫu).
+Đối với bảng chữ cái nhỏ, Boyer-Moore không được ưa thích.
+Đối với chuỗi nhị phân, thuật toán KMP được khuyến nghị.
+Đối với các mẫu ngắn nhất, thuật toán Brute Force tốt hơn
+
+15.8 Cấu Trúc Dữ Liệu để Lưu Trữ Chuỗi
+
+Nếu chúng ta có một tập hợp các chuỗi (ví dụ: tất cả các từ trong từ điển) và một từ mà chúng ta muốn tìm kiếm trong tập hợp đó, để thực hiện thao tác tìm kiếm nhanh hơn, chúng ta cần một cách lưu trữ hiệu quả cho các chuỗi. Để lưu trữ tập hợp các chuỗi, chúng ta có thể sử dụng một trong các cấu trúc dữ liệu sau đây:
+
+Bảng Băm (Hashing Tables)
+Cây Tìm Kiếm Nhị Phân (Binary Search Trees)
+Cây Trie (Tries)
+Cây Tìm Kiếm Nhị Phân Tam Phân (Ternary Search Trees)
+
+15.9 Bảng Băm cho Chuỗi
+
+Như đã thấy trong chương về Băm (Hashing), chúng ta có thể sử dụng bảng băm để lưu trữ số nguyên hoặc chuỗi. Trong trường hợp này, các khóa không gì khác là các chuỗi. Vấn đề với việc triển khai bảng băm là chúng ta mất thông tin về thứ tự - sau khi áp dụng hàm băm, chúng ta không biết nó sẽ ánh xạ đến đâu. Do đó, một số truy vấn mất nhiều thời gian hơn. Ví dụ, để tìm tất cả các từ bắt đầu bằng chữ "K", trong trường hợp biểu diễn bảng băm, chúng ta cần quét toàn bộ bảng băm. Điều này là do hàm băm lấy toàn bộ khóa, thực hiện băm trên nó, và chúng ta không biết vị trí của mỗi từ.
+
+15.10 Cây Tìm Kiếm Nhị Phân cho Chuỗi
+
+Trong biểu diễn này, mỗi nút được sử dụng để sắp xếp các chuỗi theo thứ tự chữ cái. Điều này có thể thực hiện được vì các chuỗi có một thứ tự tự nhiên: A đứng trước B, B đứng trước C, và cứ thế. Điều này là do các từ có thể được sắp xếp và chúng ta có thể sử dụng Cây Tìm Kiếm Nhị Phân (BST) để lưu trữ và truy xuất chúng.
+
+Ví dụ, giả sử rằng chúng ta muốn lưu trữ các chuỗi sau bằng cách sử dụng BST:
+					this is a career monk string
+Đối với chuỗi đã cho, có nhiều cách để biểu diễn chúng trong BST. Một trong các khả năng được hiển thị trong cây dưới đây.
+
+															is
+												career                         string
+										a                                         monk                      this
+
+Vấn đề với việc biểu diễn bằng Cây Tìm Kiếm Nhị Phân
+Phương pháp này tốt về hiệu suất lưu trữ. Nhưng nhược điểm của biểu diễn này là, tại mỗi nút, thao tác tìm kiếm thực hiện so sánh hoàn toàn của khóa đã cho với dữ liệu nút, và do đó độ phức tạp thời gian của thao tác tìm kiếm tăng lên. Vì vậy, từ đây chúng ta có thể nói rằng biểu diễn BST của chuỗi tốt về mặt lưu trữ nhưng không tốt về thời gian.
+
+15.11 Cây Trie
+
+Bây giờ, hãy xem xét biểu diễn thay thế giảm độ phức tạp thời gian của thao tác tìm kiếm. Tên "trie" được lấy từ từ "retrie". Vậy Trie là gì?
+
+Một cây trie là một cây và mỗi nút trong đó chứa một số con trỏ bằng số ký tự trong bảng chữ cái. Ví dụ, nếu chúng ta giả định rằng tất cả các chuỗi được tạo thành từ các ký tự trong bảng chữ cái tiếng Anh "a" đến "z", thì mỗi nút của cây trie chứa 26 con trỏ. Một cấu trúc dữ liệu trie có thể được khai báo như sau:
+
+struct TrieNode {
+    char data;
+    bool is_End_Of_String;
+    std::vector<TrieNode*> children;
+};
+
+Giả sử chúng ta muốn lưu trữ các chuỗi "a", "all", "als" và "as". Trie cho các chuỗi này sẽ có dạng:
+
+         root
+            |
+            a
+       /    |    \
+      l     s     l
+      |     |     |
+      l     s     s
+
+
+Tại sao lại sử dụng Trie?
+Cây trie có thể chèn và tìm chuỗi trong thời gian O(L) (trong đó L đại diện cho độ dài của một từ duy nhất). Điều này nhanh hơn nhiều so với biểu diễn bảng băm và cây tìm kiếm nhị phân. Cấu trúc Trie cho phép tìm kiếm và chèn từ với hiệu suất tuyến tính theo độ dài của từ, do đó rất phù hợp cho các ứng dụng yêu cầu thao tác nhanh chóng trên dữ liệu văn bản.
+
+Cấu Trúc Trie được khai báo với một lớp TrieNode. Mỗi TrieNode chứa một ký tự (char), một biến boolean để xác định xem nút hiện tại có phải là kết thúc của một từ hay không, và một bộ sưu tập các nút con (Collection of TrieNodes). Nó cũng có một phương thức nữa được gọi là subNode(char). Phương thức này nhận một ký tự làm đối số và sẽ trả về nút con của loại ký tự đó nếu nó tồn tại.
+
+Tổng quan về cấu trúc cơ bản của TrieNode trong cấu trúc Trie có dạng sau:
+
+struct TrieNode {
+    char data;
+    bool is_End_Of_String;
+    std::vector<TrieNode*> children(26);
+
+    TrieNode(char c) {
+        data = c;
+        is_End_Of_String = false;
+    }
+};
+Bây giờ khi chúng ta đã xác định TrieNode của mình, hãy tiến hành xem xét các thao tác khác của Trie. May mắn thay, cấu trúc dữ liệu Trie dễ dàng triển khai vì nó có hai phương thức chính: insert() và search(). Hãy xem xét cách triển khai cơ bản của cả hai phương thức này.
+
+Chèn một Chuỗi vào Trie
+Để chèn một chuỗi, chúng ta chỉ cần bắt đầu từ nút gốc và theo đường dẫn tương ứng (đường dẫn từ gốc chỉ ra tiền tố của chuỗi đã cho). Khi chúng ta đạt đến con trỏ NULL, chúng ta chỉ cần tạo một chuỗi các nút cho các ký tự còn lại của chuỗi đã cho.
+
+Độ phức tạp thời gian: O(L), trong đó L là độ dài của chuỗi cần chèn.
+Lưu ý: Đối với việc triển khai từ điển thực tế, chúng ta có thể cần thêm một số kiểm tra khác như kiểm tra xem chuỗi đã cho có trong từ điển hay chưa.
+
+Tìm kiếm một Chuỗi trong Trie
+Tương tự với thao tác tìm kiếm: chúng ta chỉ cần bắt đầu từ gốc và theo các con trỏ. Độ phức tạp thời gian của thao tác tìm kiếm bằng với độ dài của chuỗi đã cho mà chúng ta muốn tìm kiếm.
+Độ phức tạp thời gian: O(L), trong đó L là độ dài của chuỗi cần tìm kiếm.
+
+Vấn đề với Biểu Diễn Trie
+Nhược điểm chính của cây trie là chúng cần nhiều bộ nhớ để lưu trữ các chuỗi. Như chúng ta đã thấy ở trên, đối với mỗi nút, chúng ta có quá nhiều con trỏ nút. Trong nhiều trường hợp, sự chiếm dụng của mỗi nút là rất ít. Kết luận cuối cùng về cấu trúc dữ liệu Trie là chúng nhanh hơn nhưng cần nhiều bộ nhớ lớn để lưu trữ các chuỗi.
+
+Lưu ý: Có một số biểu diễn Trie cải thiện được gọi là các kỹ thuật nén trie (trie compression techniques). Nhưng, ngay cả với những kỹ thuật đó, chúng ta chỉ có thể giảm bộ nhớ ở các lá và không ở các nút nội bộ.
+
+15.12 Cây Tìm Kiếm Nhị Phân Tam Phân (Ternary Search Trees)
+
+Biểu diễn này được cung cấp ban đầu bởi Jon Bentley và Sedgewick. Cây tìm kiếm nhị phân tam phân (TST) kết hợp các ưu điểm của cây tìm kiếm nhị phân và trie. Điều này có nghĩa là nó kết hợp sự hiệu quả về bộ nhớ của cây tìm kiếm nhị phân và sự hiệu quả về thời gian của trie.
+
+Khai Báo Cây Tìm Kiếm Nhị Phân Tam Phân (TST)
+
+Cây Tìm Kiếm Nhị Phân Tam Phân (TST) sử dụng ba con trỏ:
+
+- Con trái trỏ đến TST chứa tất cả các chuỗi mà theo thứ tự chữ cái nhỏ hơn dữ liệu.
+- Con phải trỏ đến TST chứa tất cả các chuỗi mà theo thứ tự chữ cái lớn hơn dữ liệu.
+- Con eq trỏ đến TST chứa tất cả các chuỗi mà theo thứ tự chữ cái bằng với dữ liệu.
+
+Điều này có nghĩa, nếu chúng ta muốn tìm kiếm một chuỗi, và nếu ký tự hiện tại của chuỗi đầu vào và dữ liệu của nút hiện tại trong TST giống nhau, thì chúng ta cần tiến hành tìm kiếm ký tự tiếp theo trong chuỗi đầu vào và tìm kiếm nó trong cây con được trỏ bởi eq.
+
+**Chèn Chuỗi vào Cây Tìm Kiếm Nhị Phân Tam Phân
+Để đơn giản, hãy giả sử rằng chúng ta muốn lưu trữ các từ sau trong TST (cũng giả sử thứ tự giống nhau): boats, boat, bat và bats. Ban đầu, hãy bắt đầu với chuỗi boats.
+
+**Tìm Kiếm trong Cây Tìm Kiếm Nhị Phân Tam Phân
+Nếu sau khi chèn các từ chúng ta muốn tìm kiếm chúng, thì chúng ta phải tuân theo cùng các quy tắc như trong tìm kiếm nhị phân. Sự khác biệt duy nhất là, trong trường hợp khớp, chúng ta nên kiểm tra các ký tự còn lại (trong cây con eq) thay vì trả kết quả. Hơn nữa, giống như BST, chúng ta sẽ thấy cả phiên bản đệ quy và phi đệ quy của phương thức tìm kiếm.
+
+**Hiển Thị Tất Cả Các Từ của Cây Tìm Kiếm Nhị Phân Tam Phân
+Nếu chúng ta muốn in tất cả các chuỗi trong TST, chúng ta có thể sử dụng thuật toán sau. Nếu chúng ta muốn in chúng theo thứ tự đã sắp xếp, chúng ta cần tuân theo việc duyệt theo thứ tự của TST (inorder traversal).
+
+**Tìm Chiều Dài của Từ Lớn Nhất trong TST
+Điều này tương tự như việc tìm chiều cao của BST và có thể được tính như sau:
+
+15.13 So Sánh BSTs, Tries và TSTs
+
+- Biểu diễn bảng băm và BST lưu trữ toàn bộ chuỗi ở mỗi nút. Kết quả là chúng mất nhiều thời gian để tìm kiếm. Nhưng chúng hiệu quả về bộ nhớ.
+- TST có thể phát triển và co lại động, nhưng bảng băm chỉ thay đổi kích thước dựa trên tỷ lệ tải (load factor).
+- TST cho phép tìm kiếm một phần của chuỗi trong khi BST và bảng băm không hỗ trợ điều này.
+- TST có thể hiển thị các từ theo thứ tự sắp xếp, nhưng trong bảng băm chúng ta không thể có được thứ tự sắp xếp.
+- Trie thực hiện các thao tác tìm kiếm rất nhanh chóng nhưng chúng yêu cầu bộ nhớ lớn để lưu trữ chuỗi.
+- TST kết hợp các ưu điểm của BST và Trie. Điều này có nghĩa là chúng kết hợp hiệu quả về bộ nhớ của BST và hiệu quả về thời gian của Trie.
+
+15.14 Cây Hậu Tố (Suffix Trees)
+
+Cây hậu tố là một cấu trúc dữ liệu quan trọng cho chuỗi. Với cây hậu tố, chúng ta có thể trả lời các truy vấn một cách nhanh chóng. Tuy nhiên, điều này yêu cầu một số xử lý trước và xây dựng cây hậu tố. Mặc dù việc xây dựng cây hậu tố phức tạp, nhưng nó giải quyết nhiều vấn đề khác liên quan đến chuỗi trong thời gian tuyến tính.
+
+Chú ý: Cây hậu tố sử dụng một cây (cây hậu tố) cho một chuỗi, trong khi bảng băm (hash tables), cây tìm kiếm nhị phân (BSTs), trie và cây tìm kiếm nhị phân tam phân (TSTs) lưu trữ một tập hợp các chuỗi. Điều này có nghĩa là cây hậu tố trả lời các truy vấn liên quan đến một chuỗi.
+
+**Tiền Tố và Hậu Tố
+Cho một chuỗi T = T1T2 … Tn, tiền tố của T là một chuỗi T1 ...Ti với i có thể lấy các giá trị từ 1 đến n. Ví dụ, nếu T = banana, thì các tiền tố của T là: b, ba, ban, bana, banan, banana. Tương tự, cho một chuỗi T = T1T2 … Tn, hậu tố của T là một chuỗi Ti ...Tn với i có thể lấy các giá trị từ n đến 1. Ví dụ, nếu T = banana, thì các hậu tố của T là: a, na, ana, nana, anana, banana.
+
+Quan sát
+Từ ví dụ trên, chúng ta có thể dễ dàng thấy rằng đối với một chuỗi văn bản T đã cho và mẫu P, vấn đề trùng chuỗi chính xác cũng có thể được định nghĩa như sau:
+- Tìm một hậu tố của T sao cho P là tiền tố của hậu tố này hoặc
+- Tìm một tiền tố của T sao cho P là hậu tố của tiền tố này.
+
+**Cây Hậu Tố là Gì?
+Một cách đơn giản, cây hậu tố cho văn bản T là một cấu trúc dữ liệu giống Trie, đại diện cho các hậu tố của T. Định nghĩa của cây hậu tố có thể được cho là:
+
+Một cây hậu tố cho một chuỗi T có n ký tự T[1 ...n] là một cây gốc với các tính chất sau:
+Một cây hậu tố sẽ chứa n lá được đánh số từ 1 đến n.
+Mỗi nút nội (trừ nút gốc) phải có ít nhất 2 con.
+Mỗi cạnh trong cây được gắn nhãn bởi một chuỗi con không rỗng của T.
+Không có hai cạnh của một nút (cạnh con) bắt đầu bằng cùng một ký tự.
+Các đường đi từ gốc đến lá biểu diễn tất cả các hậu tố của T.
+Xây Dựng Cây Hậu Tố
+
+Hãy S là tập hợp của tất cả các hậu tố của T. Thêm dấu $ vào cuối mỗi hậu tố.
+Sắp xếp các hậu tố trong S dựa trên ký tự đầu tiên của họ.
+Đối với mỗi nhóm Sc (c ∈ ∑):
+Nếu nhóm Sc chỉ có một phần tử, thì tạo một nút lá.
+Ngược lại, tìm tiền tố chung dài nhất của các hậu tố trong nhóm Sc, tạo một nút nội và tiếp tục đệ quy với Bước 2, S là tập hợp của các hậu tố còn lại từ Sc sau khi tách ra tiền tố chung dài nhất.
+Để hiểu rõ hơn, hãy xem qua một ví dụ. Cho chuỗi văn bản T = tatat. Đánh số từng hậu tố của nó.
+

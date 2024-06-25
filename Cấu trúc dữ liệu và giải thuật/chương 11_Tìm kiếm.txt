@@ -1,0 +1,44 @@
+																													Bắt đầu viết vào ngày 16/ 8/ 2023
+
+11.1 Tìm kiếm là gì?
+Trong khoa học máy tính, tìm kiếm là quá trình tìm một mục có các thuộc tính cụ thể từ một tập hợp các mục. Các mục có thể được lưu trữ như các bản ghi trong cơ sở dữ liệu, các phần tử dữ liệu đơn giản trong mảng, văn bản trong các tệp, nút trong cây, đỉnh và cạnh trong đồ thị, hoặc chúng có thể là các phần tử trong không gian tìm kiếm khác.
+
+11.2 Tại sao chúng ta cần tìm kiếm?
+Tìm kiếm là một trong những thuật toán cơ bản trong khoa học máy tính. Chúng ta biết rằng máy tính hiện nay lưu trữ rất nhiều thông tin. Để truy xuất thông tin này một cách hiệu quả, chúng ta cần các thuật toán tìm kiếm rất hiệu quả. Có một số cách tổ chức dữ liệu cải thiện quá trình tìm kiếm. Điều đó có nghĩa, nếu chúng ta duy trì dữ liệu theo thứ tự đúng, việc tìm kiếm phần tử cần tìm sẽ dễ dàng hơn. Sắp xếp là một trong các kỹ thuật để làm cho các phần tử đươc sắp xếp. Trong chương này, chúng ta sẽ thấy các thuật toán tìm kiếm khác nhau.
+
+11.3 Các loại tìm kiếm
+Dưới đây là các loại tìm kiếm mà chúng ta sẽ thảo luận trong cuốn sách này:
+- Tìm kiếm tuyến tính không có thứ tự (Unordered Linear Search)
+- Tìm kiếm tuyến tính đã được sắp xếp (Sorted/Ordered Linear Search)
+- Tìm kiếm nhị phân (Binary Search)
+- Tìm kiếm nội suy (Interpolation Search)
+- Cây tìm kiếm nhị phân (Binary Search Trees - thao tác trên cây và xem chương về cây)
+- Bảng ký hiệu và băm (Symbol Tables and Hashing)
+- Các thuật toán tìm kiếm chuỗi: Trie, Ternary Search và Suffix Trees
+
+11.4 Tìm kiếm tuyến tính không có thứ tự (Unordered Linear Search)
+Hãy giả sử chúng ta có một mảng trong đó thứ tự của các phần tử không được biết đến. Điều này có nghĩa là các phần tử của mảng không được sắp xếp. Trong trường hợp này, để tìm một phần tử, chúng ta phải quét toàn bộ mảng và xem xem phần tử đó có trong danh sách đã cho hay không. Phức tạp thời gian: O(n), trong trường hợp tồi nhất, chúng ta cần quét toàn bộ mảng. Phức tạp không gian: O(1).
+
+11.5 Tìm kiếm tuyến tính đã được sắp xếp (Sorted/Ordered Linear Search)
+Nếu các phần tử của mảng đã được sắp xếp, trong nhiều trường hợp chúng ta không cần phải quét toàn bộ mảng để xem xem phần tử có trong mảng đã cho hay không. 
+Phức tạp thời gian của thuật toán này là O(n). Điều này bởi vì trong trường hợp tồi nhất, chúng ta cần quét toàn bộ mảng. Nhưng trong trường hợp trung bình, nó giảm bớt phức tạp mặc dù tỷ lệ tăng tương tự. Phức tạp không gian: O(1). Lưu ý: Đối với thuật toán trên, chúng ta có thể cải thiện thêm bằng cách tăng chỉ số với tốc độ nhanh hơn (ví dụ: 2). Điều này sẽ giảm số lần so sánh để tìm kiếm trong danh sách đã được sắp xếp.
+
+11.6 Tìm kiếm nhị phân (Binary Search)
+Hãy xem xét bài toán tìm kiếm một từ trong từ điển. Thông thường, chúng ta sẽ trực tiếp đi đến một trang xấp xỉ nào đó [chẳng hạn, trang giữa] và bắt đầu tìm kiếm từ điểm đó. Nếu tên chúng ta đang tìm kiếm giống nhau thì tìm kiếm đã hoàn thành. Nếu trang nằm trước các trang đã chọn thì chúng ta áp dụng cùng quy trình cho nửa đầu đầu tiên; ngược lại áp dụng quy trình tương tự cho nửa thứ hai. Tìm kiếm nhị phân cũng hoạt động theo cách tương tự. Thuật toán áp dụng chiến lược này được gọi là thuật toán tìm kiếm nhị phân.
+
+Công thức tái phát cho tìm kiếm nhị phân là . Điều này bởi vì chúng ta luôn xem xét chỉ một nửa của danh sách đầu vào và bỏ đi nửa còn lại. Sử dụng công thức chia để trị, chúng ta có, T(n) = O(logn). Phức tạp thời gian: O(logn). Phức tạp không gian: O(1) [đối với thuật toán lặp].
+
+11.7 Tìm kiếm nội suy (Interpolation Search)
+Không thể phủ nhận rằng tìm kiếm nhị phân là một thuật toán xuất sắc cho việc tìm kiếm với phức tạp thời gian trung bình là logn. Nó luôn chọn vị trí giữa của không gian tìm kiếm còn lại, bỏ đi một nửa hoặc một nửa khác, phụ thuộc vào so sánh giữa giá trị khóa tìm thấy ở vị trí được ước tính (giữa) và giá trị khóa cần tìm. Không gian tìm kiếm còn lại được giảm xuống phía trước hoặc phía sau vị trí được ước tính. Trong toán học, nội suy là quá trình xây dựng các điểm dữ liệu mới trong phạm vi của một tập hợp rời rạc các điểm dữ liệu đã biết. Trong khoa học máy tính, thường có một số điểm dữ liệu biểu diễn các giá trị của một hàm cho một số giá trị hạn chế của biến độc lập. Thường xuyên cần phải nội suy (tức là ước tính) giá trị của hàm đó cho một giá trị trung gian của biến độc lập. Ví dụ, giả sử chúng ta có một bảng như sau, cho các giá trị của một hàm chưa biết f.Nội suy cung cấp phương tiện để ước tính hàm tại các điểm trung gian
+
+Có nhiều phương pháp nội suy khác nhau, và một trong những phương pháp đơn giản nhất là nội suy tuyến tính. Với các giá trị đầu vào trên, điều gì sẽ xảy ra nếu chúng ta không sử dụng hằng số ½ (ở trong tìm kiếm nhị phân), mà sử dụng một hằng số "k" chính xác hơn, có thể đưa chúng ta gần hơn với mục tìm kiếm. Thuật toán này cố gắng mô phỏng cách chúng ta tìm kiếm một tên trong danh bạ điện thoại hoặc một từ trong từ điển. Chúng ta, con người, biết trước rằng trong trường hợp tên chúng ta đang tìm kiếm bắt đầu bằng "m", ví dụ như "monk", chúng ta nên bắt đầu tìm kiếm ở gần giữa của danh bạ điện thoại. Do đó, nếu chúng ta đang tìm kiếm từ "career" trong từ điển, bạn biết rằng nó nên nằm ở đâu đó ở đầu. Điều này bởi vì chúng ta biết thứ tự của các chữ cái, chúng ta biết khoảng (a-z), và bằng cách nào đó chúng ta biết rằng các từ được phân tán đều. 
+
+Những sự thật này đủ để nhận ra rằng tìm kiếm nhị phân có thể là một lựa chọn tồi. Thực sự, thuật toán tìm kiếm nhị phân chia danh sách thành hai danh sách con bằng nhau, điều này vô dụng nếu chúng ta biết trước rằng mục tìm kiếm nằm ở đầu hoặc cuối danh sách. Thay vì làm thế, nếu chúng ta đã biết trước được mục cần tìm kiếm ở khoảng nào thì ta sẽ nhảy đến đó luôn. Đây chính là tìm kiếm nội suy. Câu hỏi là làm thế nào để tìm giá trị này? Chúng ta biết giới hạn của khoảng tìm kiếm, và nó được sắp xếp tăng dần, với một phép gần đúng không tốt lắm thì có thể coi như dãy sắp xếp là tăng tuyến tính . Hằng số k ( 0 < k < 1) này được sử dụng để thu hẹp không gian tìm kiếm. Đối với tìm kiếm nhị phân, hằng số k này là (low + high)/2.  Nhưng với tìm kiếm nội suy thì ta sẽ tính như sau: 
+									k = (data - low) / (high - data) 
+
+Trung bình, tìm kiếm nội suy thực hiện khoảng log(logn) so sánh (nếu các phần tử được phân bố đều), trong đó n là số lượng phần tử cần tìm. Trong trường hợp xấu nhất (ví dụ khi giá trị số của các khóa tăng theo cấp số nhân) có thể thực hiện đến O(n) so sánh. Trong tìm kiếm tuần tự nội suy, nội suy được sử dụng để tìm một mục gần mục đang tìm kiếm, sau đó tìm kiếm tuần tự được sử dụng để tìm mục chính xác. Đối với thuật toán này để đạt được kết quả tốt nhất, tập dữ liệu phải được sắp xếp và phân bố đều.
+
+11.8 Thuật toán tìm kiếm trên cây nhị phân (xem chương cây)
+11.9 Thuật toán tìm kiếm trên chuỗi kí tự (xem chương thuật toán trên chuỗi)
+11.10 Thuật toán tìm kiếm dựa trên bảng kí hiệu và "băm" (xem chương bảng kí hiệu và chương băm)
+																											               Viết xong vào ngày 16/ 8/ 2023

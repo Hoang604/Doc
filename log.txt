@@ -1,0 +1,276 @@
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1]: tmp-snap.rootfs_mJl8em.mount: Deactivated successfully.
+Apr 15 15:05:05 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.gnome.ScreenSaver'
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Started GNOME printer notifications service.
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Reached target GNOME printer notifications target.
+Apr 15 15:05:05 hoang-Aspire-A715-42G gsd-media-keys[2143]: Failed to grab accelerator for keybinding settings:playback-repeat
+Apr 15 15:05:05 hoang-Aspire-A715-42G gsd-media-keys[2143]: Failed to grab accelerator for keybinding settings:hibernate
+Apr 15 15:05:05 hoang-Aspire-A715-42G gsd-media-keys[2143]: Failed to grab accelerator for keybinding settings:playback-random
+Apr 15 15:05:05 hoang-Aspire-A715-42G gsd-media-keys[2143]: Failed to grab accelerator for keybinding settings:rotate-video-lock
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Started GNOME XSettings service.
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: GNOME session X11 services is inactive.
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Reached target GNOME XSettings target.
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Reached target GNOME Session.
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Reached target GNOME X11 Session (session: ubuntu).
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Reached target Current graphical user session.
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Condition check resulted in GNOME Initial Setup being skipped.
+Apr 15 15:05:05 hoang-Aspire-A715-42G snapd-desktop-i[1976]: All available theme snaps installed
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Starting Tracker file system data miner...
+Apr 15 15:05:05 hoang-Aspire-A715-42G warp-taskbar[2224]: #033[2m2024-04-15T08:05:05.674Z#033[0m #033[32m INFO#033[0m ThreadId(16) #033[2mwarp_taskbar::main_window#033[0m#033[2m:#033[0m Theme changed
+Apr 15 15:05:05 hoang-Aspire-A715-42G warp-taskbar[2224]: #033[2m2024-04-15T08:05:05.674Z#033[0m #033[32m INFO#033[0m ThreadId(16) #033[2mwarp_taskbar::main_window#033[0m#033[2m:#033[0m theme_name: "Yaru-blue-dark"
+Apr 15 15:05:05 hoang-Aspire-A715-42G warp-taskbar[2224]: #033[2m2024-04-15T08:05:05.674Z#033[0m #033[32m INFO#033[0m ThreadId(16) #033[2mwarp_taskbar::main_window#033[0m#033[2m:#033[0m theme is light: false
+Apr 15 15:05:05 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.freedesktop.impl.portal.desktop.gnome'
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Started Portal service (GNOME implementation).
+Apr 15 15:05:05 hoang-Aspire-A715-42G rtkit-daemon[1047]: Supervising 12 threads of 6 processes of 2 users.
+Apr 15 15:05:05 hoang-Aspire-A715-42G rtkit-daemon[1047]: message repeated 2 times: [ Supervising 12 threads of 6 processes of 2 users.]
+Apr 15 15:05:05 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1695]: (II) AMDGPU(0): EDID vendor "AUO", prod id 57223
+Apr 15 15:05:05 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1695]: (II) AMDGPU(0): Printing DDC gathered Modelines:
+Apr 15 15:05:05 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1695]: (II) AMDGPU(0): Modeline "1920x1080"x0.0  142.00  1920 2028 2076 2100  1080 1090 1100 1126 -hsync -vsync (67.6 kHz eP)
+Apr 15 15:05:05 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Activating via systemd: service name='org.freedesktop.impl.portal.desktop.gtk' unit='xdg-desktop-portal-gtk.service' requested by ':1.66' (uid=1000 pid=2180 comm="/usr/libexec/xdg-desktop-portal " label="unconfined")
+Apr 15 15:05:05 hoang-Aspire-A715-42G systemd[1591]: Starting Portal service (GTK/GNOME implementation)...
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 32 with keysym 32 (keycode b).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 33 with keysym 33 (keycode c).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 34 with keysym 34 (keycode d).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 35 with keysym 35 (keycode e).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 36 with keysym 36 (keycode f).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 37 with keysym 37 (keycode 10).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 38 with keysym 38 (keycode 11).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 39 with keysym 39 (keycode 12).
+Apr 15 15:05:05 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 31 with keysym 31 (keycode a).
+Apr 15 15:05:06 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.freedesktop.impl.portal.desktop.gtk'
+Apr 15 15:05:06 hoang-Aspire-A715-42G systemd[1591]: Started Portal service (GTK/GNOME implementation).
+Apr 15 15:05:06 hoang-Aspire-A715-42G snap-store[2265]: GTK+ module /snap/snap-store/1113/gnome-platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so cannot be loaded.#012GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is not supported.
+Apr 15 15:05:06 hoang-Aspire-A715-42G snap-store[2265]: GTK+ module /snap/snap-store/1113/gnome-platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so cannot be loaded.#012GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is not supported.
+Apr 15 15:05:06 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.freedesktop.portal.Desktop'
+Apr 15 15:05:06 hoang-Aspire-A715-42G ubuntu-software-service.desktop[2265]: Graylist: app;application;package;program;programme;suite;tool
+Apr 15 15:05:06 hoang-Aspire-A715-42G systemd[1591]: Started Portal service.
+Apr 15 15:05:06 hoang-Aspire-A715-42G systemd[1591]: Started Tracker file system data miner.
+Apr 15 15:05:06 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.freedesktop.FileManager1'
+Apr 15 15:05:06 hoang-Aspire-A715-42G dbus-daemon[565]: [system] Activating via systemd: service name='org.freedesktop.fwupd' unit='fwupd.service' requested by ':1.112' (uid=1000 pid=2265 comm="/snap/snap-store/1113/usr/bin/snap-store --gapplic" label="snap.snap-store.snap-store (enforce)")
+Apr 15 15:05:06 hoang-Aspire-A715-42G systemd[1]: Starting Firmware update daemon...
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 32 with keysym 32 (keycode b).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 33 with keysym 33 (keycode c).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 34 with keysym 34 (keycode d).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 35 with keysym 35 (keycode e).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 36 with keysym 36 (keycode f).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 37 with keysym 37 (keycode 10).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 38 with keysym 38 (keycode 11).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 39 with keysym 39 (keycode 12).
+Apr 15 15:05:06 hoang-Aspire-A715-42G gnome-shell[1912]: Window manager warning: Overwriting existing binding of keysym 31 with keysym 31 (keycode a).
+Apr 15 15:05:06 hoang-Aspire-A715-42G fwupd[2542]: 08:05:06:0790 FuEngine             failed to get releases for UEFI dbx: No releases found: Not compatible with org.freedesktop.fwupd version 1.7.9, requires >= 1.9.1
+Apr 15 15:05:06 hoang-Aspire-A715-42G fwupd[2542]: 08:05:06:0793 FuEngine             failed to get releases for UEFI dbx: No releases found: Not compatible with org.freedesktop.fwupd version 1.7.9, requires >= 1.9.1
+Apr 15 15:05:06 hoang-Aspire-A715-42G snapd-desktop-i[1976]: New theme: gtk=Yaru-blue-dark icon=Yaru-blue cursor=Yaru, sound=Yaru
+Apr 15 15:05:06 hoang-Aspire-A715-42G snapd-desktop-i[1976]: All available theme snaps installed
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-shell[1912]: GNOME Shell started at Mon Apr 15 2024 15:05:04 GMT+0700 (+07)
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-shell[1912]: Registering session with GDM
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1154]: dbus-daemon[1154]: [session uid=128 pid=1154] Activating service name='org.freedesktop.systemd1' requested by ':1.9' (uid=128 pid=1281 comm="/usr/libexec/gsd-sharing " label="unconfined")
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-session[1155]: gnome-session-binary[1155]: WARNING: App 'org.gnome.SettingsDaemon.Keyboard.desktop' exited with code 1
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-session-binary[1155]: WARNING: App 'org.gnome.SettingsDaemon.Keyboard.desktop' exited with code 1
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-session[1155]: gnome-session-binary[1155]: WARNING: App 'org.gnome.SettingsDaemon.Wacom.desktop' exited with code 1
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-session-binary[1155]: WARNING: App 'org.gnome.SettingsDaemon.Wacom.desktop' exited with code 1
+Apr 15 15:05:07 hoang-Aspire-A715-42G gsd-a11y-settin[1319]: Error releasing name org.gnome.SettingsDaemon.A11ySettings: The connection is closed
+Apr 15 15:05:07 hoang-Aspire-A715-42G gsd-color[1289]: failed to set xrandr-AU Optronics color transform matrix: failed to load file: Error opening file /home/hoang/.local/share/icc/edid-60080cea8c9f4a62c54c982d44ccf638.icc: Permission denied
+Apr 15 15:05:07 hoang-Aspire-A715-42G gsd-sound[1315]: Error releasing name org.gnome.SettingsDaemon.Sound: The connection is closed
+Apr 15 15:05:07 hoang-Aspire-A715-42G gsd-screensaver[1314]: Error releasing name org.freedesktop.ScreenSaver: The connection is closed
+Apr 15 15:05:07 hoang-Aspire-A715-42G gsd-rfkill[1295]: Error releasing name org.gnome.SettingsDaemon.Rfkill: The connection is closed
+Apr 15 15:05:07 hoang-Aspire-A715-42G gsd-smartcard[1300]: Error releasing name org.gnome.SettingsDaemon.Smartcard: The connection is closed
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-session[1155]: gnome-session-binary[1155]: WARNING: App 'org.gnome.SettingsDaemon.MediaKeys.desktop' exited with code 1
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-session-binary[1155]: WARNING: App 'org.gnome.SettingsDaemon.MediaKeys.desktop' exited with code 1
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:71
+Apr 15 15:05:07 hoang-Aspire-A715-42G gsd-color[2132]: failed to connect to device: Failed to connect to missing device /org/freedesktop/ColorManager/devices/xrandr_AU_Optronics_gdm_128
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:68
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:74
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:72
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:65
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:64
+Apr 15 15:05:07 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Activating service name='org.gnome.ArchiveManager1' requested by ':1.87' (uid=1000 pid=2552 comm="gjs /usr/share/gnome-shell/extensions/ding@rasters" label="unconfined")
+Apr 15 15:05:07 hoang-Aspire-A715-42G dbus-daemon[565]: [system] Successfully activated service 'org.freedesktop.fwupd'
+Apr 15 15:05:07 hoang-Aspire-A715-42G systemd[1]: Started Firmware update daemon.
+Apr 15 15:05:07 hoang-Aspire-A715-42G fwupd[2542]: 08:05:07:0240 FuPluginTpm          failed to get eventlog reconstruction: no event log data
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:70
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.279613] kauditd_printk_skb: 28 callbacks suppressed
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.279617] audit: type=1107 audit(1713168307.252:87): pid=565 uid=102 auid=4294967295 ses=4294967295 subj=unconfined msg='apparmor="DENIED" operation="dbus_method_call"  bus="system" path="/org/freedesktop/PolicyKit1/Authority" interface="org.freedesktop.DBus.Properties" member="GetAll" mask="send" name=":1.3" pid=2265 label="snap.snap-store.snap-store" peer_pid=577 peer_label="unconfined"
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.279617]  exe="/usr/bin/dbus-daemon" sauid=102 hostname=? addr=? terminal=?'
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.279921] audit: type=1107 audit(1713168307.252:88): pid=565 uid=102 auid=4294967295 ses=4294967295 subj=unconfined msg='apparmor="DENIED" operation="dbus_method_call"  bus="system" path="/org/freedesktop/PolicyKit1/Authority" interface="org.freedesktop.PolicyKit1.Authority" member="CheckAuthorization" mask="send" name=":1.3" pid=2265 label="snap.snap-store.snap-store" peer_pid=577 peer_label="unconfined"
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.279921]  exe="/usr/bin/dbus-daemon" sauid=102 hostname=? addr=? terminal=?'
+Apr 15 15:05:07 hoang-Aspire-A715-42G snap-store[2265]: enabled plugins: fwupd, os-release, packagekit-refine-repos, packagekit-refresh, appstream, hardcoded-blocklist, hardcoded-popular, modalias, packagekit, rewrite-resource, provenance, snap, systemd-updates, generic-updates, provenance-license, icons
+Apr 15 15:05:07 hoang-Aspire-A715-42G snap-store[2265]: disabled plugins: dpkg, dummy, fedora-langpacks, fedora-pkgdb-collections, repos
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.282198] audit: type=1107 audit(1713168307.256:89): pid=565 uid=102 auid=4294967295 ses=4294967295 subj=unconfined msg='apparmor="DENIED" operation="dbus_method_call"  bus="system" path="/org/freedesktop/PolicyKit1/Authority" interface="org.freedesktop.DBus.Properties" member="GetAll" mask="send" name=":1.3" pid=2265 label="snap.snap-store.snap-store" peer_pid=577 peer_label="unconfined"
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.282198]  exe="/usr/bin/dbus-daemon" sauid=102 hostname=? addr=? terminal=?'
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.282418] audit: type=1107 audit(1713168307.256:90): pid=565 uid=102 auid=4294967295 ses=4294967295 subj=unconfined msg='apparmor="DENIED" operation="dbus_method_call"  bus="system" path="/org/freedesktop/PolicyKit1/Authority" interface="org.freedesktop.PolicyKit1.Authority" member="CheckAuthorization" mask="send" name=":1.3" pid=2265 label="snap.snap-store.snap-store" peer_pid=577 peer_label="unconfined"
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.282418]  exe="/usr/bin/dbus-daemon" sauid=102 hostname=? addr=? terminal=?'
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:69
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:67
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) UnloadModule: "libinput"
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) systemd-logind: releasing fd for 13:73
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) NVIDIA(GPU-0): Deleting GPU-0
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1046]: (II) Server terminated successfully (0). Closing log file.
+Apr 15 15:05:07 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.gnome.ArchiveManager1'
+Apr 15 15:05:07 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Activating via systemd: service name='org.gtk.vfs.Metadata' unit='gvfs-metadata.service' requested by ':1.87' (uid=1000 pid=2552 comm="gjs /usr/share/gnome-shell/extensions/ding@rasters" label="unconfined")
+Apr 15 15:05:07 hoang-Aspire-A715-42G gdm-launch-environment]: GLib-GObject: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+Apr 15 15:05:07 hoang-Aspire-A715-42G systemd[1]: session-c1.scope: Deactivated successfully.
+Apr 15 15:05:07 hoang-Aspire-A715-42G systemd[1591]: Starting Virtual filesystem metadata service...
+Apr 15 15:05:07 hoang-Aspire-A715-42G systemd[1]: session-c1.scope: Consumed 4.369s CPU time.
+Apr 15 15:05:07 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.gtk.vfs.Metadata'
+Apr 15 15:05:07 hoang-Aspire-A715-42G systemd[1591]: Started Virtual filesystem metadata service.
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-shell[1912]: DING: Detected async api for thumbnails
+Apr 15 15:05:07 hoang-Aspire-A715-42G gdm3: Gdm: Child process -1044 was already dead.
+Apr 15 15:05:07 hoang-Aspire-A715-42G gnome-shell[1912]: DING: GNOME nautilus 42.6
+Apr 15 15:05:07 hoang-Aspire-A715-42G kernel: [   21.717638] audit: type=1400 audit(1713168307.696:91): apparmor="DENIED" operation="open" class="file" profile="snap.snap-store.snap-store" name="/etc/appstream.conf" pid=2265 comm="snap-store" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1695]: (EE) event10 - SYNA7DB5:00 06CB:CD41 Touchpad: kernel bug: Touch jump detected and discarded.
+Apr 15 15:05:07 hoang-Aspire-A715-42G /usr/libexec/gdm-x-session[1695]: See https://wayland.freedesktop.org/libinput/doc/1.20.0/touchpad-jumping-cursors.html for details
+Apr 15 15:05:08 hoang-Aspire-A715-42G systemd[1]: Starting Update APT News...
+Apr 15 15:05:08 hoang-Aspire-A715-42G systemd[1]: Starting Update the local ESM caches...
+Apr 15 15:05:08 hoang-Aspire-A715-42G systemd[1]: apt-news.service: Deactivated successfully.
+Apr 15 15:05:08 hoang-Aspire-A715-42G systemd[1]: Finished Update APT News.
+Apr 15 15:05:09 hoang-Aspire-A715-42G systemd[1591]: Started Application launched by gnome-shell.
+Apr 15 15:05:10 hoang-Aspire-A715-42G systemd[1]: NetworkManager-dispatcher.service: Deactivated successfully.
+Apr 15 15:05:10 hoang-Aspire-A715-42G systemd[1]: esm-cache.service: Deactivated successfully.
+Apr 15 15:05:10 hoang-Aspire-A715-42G systemd[1]: Finished Update the local ESM caches.
+Apr 15 15:05:11 hoang-Aspire-A715-42G ubuntu-report[1604]: level=error msg="data were not delivered successfully to metrics server, retrying in 30s"
+Apr 15 15:05:13 hoang-Aspire-A715-42G PackageKit: refresh-cache transaction /345_cdabcecd from uid 1000 finished with success after 5311ms
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.Builder.desktop/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.Calculator.desktop/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.clocks.desktop/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.Dictionary.desktop/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.Documents.desktop/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.Evince/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.gedit.desktop/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: Only 0 apps for recent list, hiding
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.Maps.desktop/* to plugin cache
+Apr 15 15:05:13 hoang-Aspire-A715-42G snap-store[2265]: adding wildcard app */*/*/org.gnome.Weather/* to plugin cache
+Apr 15 15:05:15 hoang-Aspire-A715-42G snapd[761]: storehelpers.go:791: cannot refresh: snap has no updates available: "bare", "core22", "gnome-42-2204", "gtk-common-themes", "snap-store", "snapd", "snapd-desktop-integration"
+Apr 15 15:05:16 hoang-Aspire-A715-42G PackageKit: resolve transaction /346_baeddcdb from uid 1000 finished with success after 1614ms
+Apr 15 15:05:16 hoang-Aspire-A715-42G nautilus[2095]: Could not delete '.meta.isrunning': No such file or directory
+Apr 15 15:05:16 hoang-Aspire-A715-42G snapd[761]: storehelpers.go:791: cannot refresh: snap has no updates available: "bare", "core22", "gnome-42-2204", "gtk-common-themes", "snap-store", "snapd", "snapd-desktop-integration"
+Apr 15 15:05:17 hoang-Aspire-A715-42G PackageKit: search-file transaction /347_ebccebde from uid 1000 finished with success after 704ms
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: Stopping User Manager for UID 128...
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped target Main User Target.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopping D-Bus User Message Bus...
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopping PipeWire Media Session Manager...
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopping flatpak document portal service...
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopping sandboxed app permission store...
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped D-Bus User Message Bus.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: xdg-permission-store.service: Main process exited, code=exited, status=1/FAILURE
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: xdg-permission-store.service: Failed with result 'exit-code'.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped sandboxed app permission store.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped PipeWire Media Session Manager.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: run-user-128-doc.mount: Deactivated successfully.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: xdg-document-portal.service: Main process exited, code=exited, status=20/n/a
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: xdg-document-portal.service: Failed with result 'exit-code'.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped flatpak document portal service.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopping PipeWire Multimedia Service...
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped PipeWire Multimedia Service.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Removed slice User Core Session Slice.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped target Basic System.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped target Paths.
+Apr 15 15:05:17 hoang-Aspire-A715-42G PackageKit: search-file transaction /348_cabdcdae from uid 1000 finished with success after 427ms
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped Pending report trigger for Ubuntu Report.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped target Sockets.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Stopped target Timers.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed D-Bus User Message Bus Socket.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed GnuPG network certificate management daemon.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed GnuPG cryptographic agent and passphrase cache (access for web browsers).
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed GnuPG cryptographic agent and passphrase cache (restricted).
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed GnuPG cryptographic agent (ssh-agent emulation).
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed GnuPG cryptographic agent and passphrase cache.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed PipeWire Multimedia System Socket.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed debconf communication socket.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed Sound System.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed REST API socket for snapd user session agent.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Closed Speech Dispatcher Socket.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Removed slice User Application Slice.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Reached target Shutdown.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Finished Exit the Session.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1026]: Reached target Exit the Session.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: user@128.service: Deactivated successfully.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: Stopped User Manager for UID 128.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: Stopping User Runtime Directory /run/user/128...
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: run-user-128.mount: Deactivated successfully.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: user-runtime-dir@128.service: Deactivated successfully.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: Stopped User Runtime Directory /run/user/128.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: Removed slice User Slice of UID 128.
+Apr 15 15:05:17 hoang-Aspire-A715-42G systemd[1]: user-128.slice: Consumed 5.021s CPU time.
+Apr 15 15:05:18 hoang-Aspire-A715-42G PackageKit: search-file transaction /349_bbdaaeca from uid 1000 finished with success after 407ms
+Apr 15 15:05:18 hoang-Aspire-A715-42G PackageKit: search-file transaction /350_abcbadca from uid 1000 finished with success after 390ms
+Apr 15 15:05:18 hoang-Aspire-A715-42G PackageKit: search-file transaction /351_dadbacec from uid 1000 finished with success after 376ms
+Apr 15 15:05:19 hoang-Aspire-A715-42G systemd[1]: systemd-fsckd.service: Deactivated successfully.
+Apr 15 15:05:19 hoang-Aspire-A715-42G PackageKit: get-details transaction /352_caceadac from uid 1000 finished with success after 332ms
+Apr 15 15:05:20 hoang-Aspire-A715-42G systemd[1591]: Started Application launched by gnome-shell.
+Apr 15 15:05:20 hoang-Aspire-A715-42G brave-browser.desktop[3324]: [3325:3325:0415/150520.935227:ERROR:policy_logger.cc(157)] :components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc(161) Cloud management controller initialization aborted as CBCM is not enabled. Please use the `--enable-chrome-browser-cloud-management` command line flag to enable it if you are not using the official Google Chrome build.
+Apr 15 15:05:21 hoang-Aspire-A715-42G brave-browser.desktop[3324]: [3325:3325:0415/150521.281120:ERROR:object_proxy.cc(576)] Failed to call method: org.freedesktop.ScreenSaver.GetActive: object_path= /org/freedesktop/ScreenSaver: org.freedesktop.DBus.Error.NotSupported: This method is not implemented
+Apr 15 15:05:21 hoang-Aspire-A715-42G kernel: [   35.994704] nvidia-modeset: WARNING: GPU:0: Correcting number of heads for current head configuration (0x00)
+Apr 15 15:05:22 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Activating via systemd: service name='org.freedesktop.Tracker3.Miner.Extract' unit='tracker-extract-3.service' requested by ':1.84' (uid=1000 pid=2420 comm="/usr/libexec/tracker-miner-fs-3 " label="unconfined")
+Apr 15 15:05:22 hoang-Aspire-A715-42G systemd[1591]: Starting Tracker metadata extractor...
+Apr 15 15:05:22 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.freedesktop.Tracker3.Miner.Extract'
+Apr 15 15:05:22 hoang-Aspire-A715-42G systemd[1591]: Started Tracker metadata extractor.
+Apr 15 15:05:22 hoang-Aspire-A715-42G systemd[1591]: Started Application launched by gnome-shell.
+Apr 15 15:05:22 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Activating via systemd: service name='org.gnome.Terminal' unit='gnome-terminal-server.service' requested by ':1.99' (uid=1000 pid=3536 comm="/usr/bin/gnome-terminal.real " label="unconfined")
+Apr 15 15:05:22 hoang-Aspire-A715-42G systemd[1591]: Created slice Slice /app/org.gnome.Terminal.
+Apr 15 15:05:22 hoang-Aspire-A715-42G systemd[1591]: Starting GNOME Terminal Server...
+Apr 15 15:05:22 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:05:22.896Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise::timers#033[0m#033[2m:#033[0m KEEPALIVE(PERSISTENT_KEEPALIVE)
+Apr 15 15:05:22 hoang-Aspire-A715-42G dbus-daemon[1619]: [session uid=1000 pid=1619] Successfully activated service 'org.gnome.Terminal'
+Apr 15 15:05:22 hoang-Aspire-A715-42G systemd[1591]: Started GNOME Terminal Server.
+Apr 15 15:05:23 hoang-Aspire-A715-42G systemd[1591]: Started VTE child process 3561 launched by gnome-terminal-server process 3539.
+Apr 15 15:05:23 hoang-Aspire-A715-42G systemd[1]: systemd-timedated.service: Deactivated successfully.
+Apr 15 15:05:27 hoang-Aspire-A715-42G systemd[1]: fprintd.service: Deactivated successfully.
+Apr 15 15:05:30 hoang-Aspire-A715-42G brave-browser.desktop[3324]: [3325:3325:0415/150530.985656:ERROR:sharing_service.cc(221)] Device registration failed with fatal error
+Apr 15 15:05:32 hoang-Aspire-A715-42G systemd-timesyncd[507]: Timed out waiting for reply from [2620:2d:4000:1::41]:123 (ntp.ubuntu.com).
+Apr 15 15:05:35 hoang-Aspire-A715-42G systemd[1]: systemd-localed.service: Deactivated successfully.
+Apr 15 15:05:35 hoang-Aspire-A715-42G systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+Apr 15 15:05:41 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:05:41.076Z#033[0m #033[34mDEBUG#033[0m #033[2mwarp::warp_service::network_change#033[0m#033[2m:#033[0m Routes changed:
+Apr 15 15:05:41 hoang-Aspire-A715-42G warp-svc[614]: NewNeighbour; Destination: 10.128.128.128;
+Apr 15 15:05:42 hoang-Aspire-A715-42G systemd-timesyncd[507]: Timed out waiting for reply from [2620:2d:4000:1::40]:123 (ntp.ubuntu.com).
+Apr 15 15:05:46 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:05:46.196Z#033[0m #033[34mDEBUG#033[0m #033[2mwarp::warp_service::network_change#033[0m#033[2m:#033[0m Routes changed:
+Apr 15 15:05:46 hoang-Aspire-A715-42G warp-svc[614]: NewNeighbour; Destination: 10.128.128.128;
+Apr 15 15:05:46 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:05:46.198Z#033[0m #033[34mDEBUG#033[0m #033[2mwarp::warp_service::network_change#033[0m#033[2m:#033[0m Routes changed:
+Apr 15 15:05:46 hoang-Aspire-A715-42G warp-svc[614]: NewNeighbour; Destination: 10.128.128.128;
+Apr 15 15:05:46 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:05:46.896Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise::timers#033[0m#033[2m:#033[0m KEEPALIVE(PERSISTENT_KEEPALIVE)
+Apr 15 15:05:51 hoang-Aspire-A715-42G ubuntu-report[1604]: level=error msg="data were not delivered successfully to metrics server, retrying in 60s"
+Apr 15 15:05:52 hoang-Aspire-A715-42G systemd-timesyncd[507]: Timed out waiting for reply from [2620:2d:4000:1::3f]:123 (ntp.ubuntu.com).
+Apr 15 15:05:52 hoang-Aspire-A715-42G systemd-timesyncd[507]: Initial synchronization to time server 185.125.190.58:123 (ntp.ubuntu.com).
+Apr 15 15:06:02 hoang-Aspire-A715-42G brave-browser.desktop[3324]: [3325:3325:0415/150602.753721:ERROR:extension_host.cc(416)] Received EventAck for extension amfojhdiedpdnlijjbhjnhokbnohfdfb for an unknown event.
+Apr 15 15:06:02 hoang-Aspire-A715-42G brave-browser.desktop[3324]: [3325:3325:0415/150602.753816:ERROR:extension_host.cc(416)] Received EventAck for extension amfojhdiedpdnlijjbhjnhokbnohfdfb for an unknown event.
+Apr 15 15:06:02 hoang-Aspire-A715-42G brave-browser.desktop[3324]: [3325:3325:0415/150602.759785:ERROR:extension_host.cc(416)] Received EventAck for extension amfojhdiedpdnlijjbhjnhokbnohfdfb for an unknown event.
+Apr 15 15:06:04 hoang-Aspire-A715-42G systemd[1591]: Started Application launched by gnome-session-binary.
+Apr 15 15:06:04 hoang-Aspire-A715-42G systemd[1591]: Started Application launched by gnome-session-binary.
+Apr 15 15:06:07 hoang-Aspire-A715-42G ubuntu-appindicators@ubuntu.com[1912]: unable to update icon for software-update-available
+Apr 15 15:06:07 hoang-Aspire-A715-42G ubuntu-appindicators@ubuntu.com[1912]: unable to update icon for livepatch
+Apr 15 15:06:11 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:11.195Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise::timers#033[0m#033[2m:#033[0m KEEPALIVE(PERSISTENT_KEEPALIVE)
+Apr 15 15:06:24 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: WNM: Disassociation Imminent - Disassociation Timer 10
+Apr 15 15:06:24 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: WNM: Preferred List Available
+Apr 15 15:06:27 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:27.412Z#033[0m #033[34mDEBUG#033[0m #033[2mwarp::warp_service::network_change#033[0m#033[2m:#033[0m Routes changed:
+Apr 15 15:06:27 hoang-Aspire-A715-42G warp-svc[614]: NewNeighbour; Destination: 10.128.128.128;
+Apr 15 15:06:28 hoang-Aspire-A715-42G gnome-shell[1912]: Can't update stage views actor <unnamed>[<MetaWindowGroup>:0x5920893a8370] is on because it needs an allocation.
+Apr 15 15:06:28 hoang-Aspire-A715-42G gnome-shell[1912]: Can't update stage views actor <unnamed>[<MetaWindowActorX11>:0x59208b7a7300] is on because it needs an allocation.
+Apr 15 15:06:28 hoang-Aspire-A715-42G gnome-shell[1912]: Can't update stage views actor <unnamed>[<MetaSurfaceActorX11>:0x59208b7ad140] is on because it needs an allocation.
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:b8:93:27:c5 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:b8:93:27:be 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:b8:93:27:d6 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:b8:93:25:59 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:a8:93:27:be 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:a8:93:31:40 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:a8:93:27:d6 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:a8:93:25:59 0
+Apr 15 15:06:31 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:a8:93:27:c5 0
+Apr 15 15:06:32 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:32.788Z#033[0m #033[34mDEBUG#033[0m #033[2mwarp::warp_service::network_change#033[0m#033[2m:#033[0m Routes changed:
+Apr 15 15:06:32 hoang-Aspire-A715-42G warp-svc[614]: NewNeighbour; Destination: 10.128.128.128;
+Apr 15 15:06:32 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:32.815Z#033[0m #033[34mDEBUG#033[0m #033[2mwarp::warp_service::network_change#033[0m#033[2m:#033[0m Routes changed:
+Apr 15 15:06:32 hoang-Aspire-A715-42G warp-svc[614]: NewNeighbour; Destination: 10.128.128.128;
+Apr 15 15:06:35 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:35.195Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise::timers#033[0m#033[2m:#033[0m KEEPALIVE(PERSISTENT_KEEPALIVE)
+Apr 15 15:06:44 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: WNM: Disassociation Imminent - Disassociation Timer 10
+Apr 15 15:06:44 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: WNM: Preferred List Available
+Apr 15 15:06:51 hoang-Aspire-A715-42G wpa_supplicant[617]: wlp4s0: PMKSA-CACHE-ADDED d6:55:b8:93:27:d5 0
+Apr 15 15:06:58 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:58.895Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise::timers#033[0m#033[2m:#033[0m HANDSHAKE(REKEY_AFTER_TIME (on send))
+Apr 15 15:06:58 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:58.895Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise#033[0m#033[2m:#033[0m Sending handshake_initiation
+Apr 15 15:06:58 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:58.938Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise#033[0m#033[2m:#033[0m Received handshake_response #033[3mlocal_idx#033[0m#033[2m=#033[0m3158018 #033[3mremote_idx#033[0m#033[2m=#033[0m14857729
+Apr 15 15:06:58 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:58.938Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise#033[0m#033[2m:#033[0m New session #033[3msession#033[0m#033[2m=#033[0m3158018 #033[3mindex#033[0m#033[2m=#033[0m12336
+Apr 15 15:06:58 hoang-Aspire-A715-42G warp-svc[614]: #033[2m2024-04-15T08:06:58.938Z#033[0m #033[34mDEBUG#033[0m #033[1mtunnel_loop#033[0m#033[1m{#033[0mprotocol="wireguard"#033[1m}#033[0m#033[2m:#033[0m #033[2mboringtun::noise#033[0m#033[2m:#033[0m Sending keepalive

@@ -1,0 +1,2759 @@
+																														Bắt đầu viết vào ngày 19/7/2023
+
+6.1 Cây là gì?
+
+Cây là một cấu trúc dữ liệu tương tự như danh sách liên kết, nhưng thay vì mỗi nút chỉ trỏ đến nút tiếp theo theo một hướng tuyến tính, mỗi nút trỏ đến một số lượng nút khác. Cây là một ví dụ về cấu trúc dữ liệu phi tuyến. Cấu trúc cây là một cách biểu diễn tính phân cấp của một cấu trúc dữ liệu dưới dạng đồ họa. Trong cây ADT (Abstract Data Type), thứ tự các phần tử không quan trọng. Nếu chúng ta cần thông tin về thứ tự, các cấu trúc dữ liệu tuyến tính như danh sách liên kết, ngăn xếp, hàng đợi, v.v. có thể được sử dụng.
+
+6.2 Thuật ngữ:
+
+- Gốc của cây là nút không có cha. Có thể có tối đa một nút gốc trong một cây.
+- Cạnh là liên kết từ cha đến con.
+- Nút không có con gọi là nút lá.
+- Các con cùng cha được gọi là các nút anh em.
+- Nút p là tổ tiên của nút q nếu có một đường đi từ gốc đến q và p xuất hiện trên đường đi đó. Nút q được gọi là hậu duệ của p. 
+- Tập hợp các nút ở một độ sâu cụ thể được gọi là cấp của cây. Nút gốc nằm ở cấp 0.
+- Chiều sâu của một nút là độ dài của đường đi từ gốc đến nút (bằng tổng số lượng các cạnh nối từ gốc đến nút đó).
+- Chiều cao của một nút là độ dài của đường đi từ nút đó đến nút sâu nhất. Chiều cao của cây là độ dài của đường đi từ gốc đến nút sâu nhất trong cây. Một cây (có gốc) chỉ có một nút (gốc) có chiều cao bằng không. 
+- Chiều cao của cây là chiều cao lớn nhất giữa tất cả các nút trong cây và chiều sâu của cây là chiều sâu lớn nhất giữa tất cả các nút trong cây. Đối với một cây cụ thể, chiều sâu và chiều cao trả về cùng một giá trị. Nhưng đối với từng nút riêng lẻ, chúng ta có thể nhận được kết quả khác nhau.
+- Kích thước của một nút là số lượng hậu duệ của nó, bao gồm cả chính nó.
+- Nếu mỗi nút trong cây chỉ có một con (ngoại trừ các nút lá) thì gọi cây đó là cây lệch. Nếu mỗi nút chỉ có con trái thì gọi là cây lệch trái. Tương tự, nếu mỗi nút chỉ có con phải thì gọi là cây lệch phải.
+
+6.3 Cây nhị phân:
+
+Một cây được gọi là cây nhị phân nếu mỗi nút có không có con, một con hoặc hai con. Cây rỗng cũng là một cây nhị phân hợp lệ. Chúng ta có thể hình dung một cây nhị phân dưới dạng bao gồm một nút gốc và hai cây nhị phân không giao nhau, gọi là cây con trái và cây con phải của nút gốc.
+
+6.4 Các loại cây nhị phân:
+
+1. Cây nhị phân đầy đủ (Full Binary Tree): Một cây nhị phân được gọi là cây nhị phân đầy đủ nếu mỗi nút có đúng hai con. 
+
+2. Cây nhị phân hoàn chỉnh (Complete binary tree):
+Cây nhị phân hoàn chỉnh là một loại cây nhị phân mà tất cả các cấp trừ cấp cuối cùng đều được điền đầy đủ, và tất cả các nút ở cấp cuối cùng được chèn từ trái sang phải. Cây nhị phân hoàn chỉnh là một trường hợp đặc biệt của cây nhị phân đầy đủ, nơi các nút trên cấp cuối cùng được chèn vào các vị trí bên trái trước khi chèn các vị trí bên phải.
+Ví dụ cây nhị phân hoàn chỉnh với 3 cấp độ (h = 3):
+     A
+   /   \
+  B     C
+ / \   
+D   E 
+3. Cây nhị phân hoàn hảo
+Cây nhị phân hoàn hảo là cây nhị phân với mỗi nút trong nó đều có hai nút con, và tất cả các nút lá đều cùng thuộc một cấp duy nhất (cùng  nằm trên một hàng).
+
+6.5 Các tính chất của cây nhị phân:
+
+Với các tính chất sau, hãy giả sử chiều cao của cây là h và nút gốc nằm ở chiều cao 0.
+
+- Số nút n trong một cây nhị phân hoàn hảo là 2^(h+1) - 1. Vì có h cấp, chúng ta cần thêm tất cả các nút ở mỗi cấp [2^0 + 2^1 + 2^2 + ··· + 2^h = 2^(h+1) - 1].
+- Số nút n trong một cây nhị phân hoàn chỉnh nằm trong khoảng từ 2^h (tối thiểu) đến 2^(h+1) - 1 (tối đa). Đối với thêm thông tin về điều này, hãy tham khảo chương về Hàng đợi Ưu tiên (Priority Queues).
+- Số nút lá trong một cây nhị phân hoàn hảo là 2^h.
+- Số liên kết NULL (con trỏ lãng phí) trong một cây nhị phân hoàn hảo với n nút là n + 1
+Cấu trúc của cây nhị phân
+
+class Binary_tree {
+private:
+	int data;
+	Binary_tree *left;
+	Binaru_tree*right;
+};
+Chú ý: Trong cây, luồng mặc định là từ cha đến con và không bắt buộc phải hiển thị các nhánh được chỉ định.
+Các phép toán trên cây nhị phân:
+
+Các phép toán cơ bản:
+- Chèn một phần tử vào cây
+- Xóa một phần tử khỏi cây
+- Tìm kiếm một phần tử
+- Duyệt cây
+
+Các phép toán bổ sung:
+- Tìm kích thước của cây
+- Tìm chiều cao của cây
+- Tìm cấp có tổng lớn nhất
+- Tìm tổ tiên chung gần nhất (LCA) cho một cặp nút đã cho và nhiều hơn nữa.
+
+Ứng dụng của cây nhị phân:
+
+Dưới đây là một số ứng dụng nơi cây nhị phân đóng một vai trò quan trọng:
+- Cây biểu thức được sử dụng trong trình biên dịch.
+- Cây Huffman coding được sử dụng trong các thuật toán nén dữ liệu.
+- Cây tìm kiếm nhị phân (BST) hỗ trợ tìm kiếm, chèn và xóa trên một bộ sưu tập các mục trong O(logn) (trung bình).
+- Hàng đợi ưu tiên (Priority Queue), hỗ trợ tìm kiếm và xóa tối thiểu (hoặc tối đa) trên một bộ sưu tập các mục trong thời gian logarithmic (trong trường hợp tồi tệ).
+
+6.6 Duyệt cây nhị phân
+
+Để xử lý cây, chúng ta cần một cơ chế để duyệt qua các nút của cây, và điều đó được mô tả trong phần này. Quá trình ghé thăm tất cả các nút của cây được gọi là duyệt cây. Mỗi nút chỉ được xử lý một lần nhưng có thể được ghé thăm nhiều lần. Như chúng ta đã thấy trong các cấu trúc dữ liệu tuyến tính (như danh sách liên kết, ngăn xếp, hàng đợi, v.v.), các phần tử được ghé thăm theo thứ tự tuần tự. Nhưng trong cấu trúc cây, có nhiều cách khác nhau để duyệt. Duyệt cây giống như tìm kiếm cây, ngoại trừ việc duyệt cây là di chuyển qua cây theo một thứ tự cụ thể. Ngoài ra, tất cả các nút đều được xử lý trong quá trình duyệt nhưng tìm kiếm dừng lại khi tìm thấy nút cần thiết.
+
+Các khả năng duyệt:
+Bắt đầu từ gốc của cây nhị phân, có ba bước chính có thể được thực hiện và thứ tự trong đó chúng được thực hiện xác định loại duyệt. Những bước này là: thực hiện một hành động trên nút hiện tại (được gọi là "ghé thăm" nút và ký hiệu là "D"), di chuyển đến nút con trái (được ký hiệu là "L"), và di chuyển đến nút con phải (được ký hiệu là "R"). Quá trình này có thể được mô tả dễ dàng thông qua đệ quy. Dựa trên định nghĩa trên, có 6 khả năng:
+1. LDR: Xử lý cây con trái, xử lý dữ liệu của nút hiện tại và sau đó xử lý cây con phải.
+2. LRD: Xử lý cây con trái, xử lý cây con phải và sau đó xử lý dữ liệu của nút hiện tại.
+3. DLR: Xử lý dữ liệu của nút hiện tại, xử lý cây con trái và sau đó xử lý cây con phải.
+4. DRL: Xử lý dữ liệu của nút hiện tại, xử lý cây con phải và sau đó xử lý cây con trái.
+5. RDL: Xử lý cây con phải, xử lý dữ liệu của nút hiện tại và sau đó xử lý cây con trái.
+6. RLD: Xử lý cây con phải, xử lý cây con trái và sau đó xử lý dữ liệu của nút hiện tại.
+
+Phân loại các phép duyệt:
+Thứ tự mà các phần tử (nút) được xử lý định nghĩa một phương pháp duyệt cụ thể. Phân loại dựa trên thứ tự xử lý nút hiện tại. Điều này có nghĩa, nếu chúng ta phân loại dựa trên nút hiện tại (D) và nếu D nằm ở giữa thì không quan trọng liệu L có ở bên trái D hay R có ở bên trái D. Tương tự, không quan trọng liệu L có ở bên phải D hay R có ở bên phải D. Do đó, 6 khả năng tổng cộng giảm xuống còn 3 và đó là:
+- Duyệt trước (DLR) (Preorder Traversal)
+- Duyệt giữa (LDR) (Inorder Traversal)
+- Duyệt sau (LRD) (Postorder Traversal)
+
+Còn một phương pháp duyệt khác không phụ thuộc vào các thứ tự trên và đó là:
+- Duyệt theo cấp (Level Order Traversal): Phương pháp này được lấy cảm hứng từ việc duyệt theo chiều rộng (Breadth First Traversal) của các thuật toán đồ thị. Hãy sử dụng sơ đồ dưới đây cho phần còn lại của cuộc thảo luận
+
+.			1
+		      /  \
+		    2      3
+		 /  \    /  \
+	       4    5   6     7	
+a.1 Duyệt trước (DLR):
+Trong duyệt trước, mỗi nút được xử lý trước (pre) cả hai cây con của nó. Đây là phương pháp duyệt đơn giản nhất để hiểu. Tuy nhiên, mặc dù mỗi nút được xử lý trước các cây con, nhưng vẫn cần phải duy trì một số thông tin khi di chuyển xuống cây. Trong ví dụ trên, 1 được xử lý đầu tiên, sau đó là cây con trái và sau đó là cây con phải. Do đó, việc xử lý phải quay trở lại cây con phải sau khi hoàn thành việc xử lý cây con trái. Để chuyển đến cây con phải sau khi xử lý cây con trái, chúng ta phải duy trì thông tin về nút gốc. ADT rõ ràng cho thông tin như vậy là một ngăn xếp. Bằng cách sử dụng cấu trúc LIFO của nó, ta có thể lấy thông tin về các cây con phải theo thứ tự ngược lại. Duyệt trước được định nghĩa như sau:
+- Ghé thăm gốc.
+- Duyệt cây con trái theo thứ tự duyệt trước.
+- Duyệt cây con phải theo thứ tự duyệt trước.
+
+Dưới đây là một phiên bản duyệt trước, viết bằng ngôn ngữ C++
+
+void Tree :: pre_order(){
+    if(this){
+        cout << this->data << ' ';
+        (this -> left)->pre_order();
+        (this->right)->pre_order();
+    }
+}
+
+Các nút của cây sẽ được ghé thăm theo thứ tự: 1 2 4 5 3 6 7
+Độ phức tạp thời gian: O(n).
+Độ phức tạp không gian: O(n).
+a.2 Phiên bản không đệ quy của Duyệt trước (DLR):
+
+Trong phiên bản không đệ quy, chúng ta sẽ sử dụng một ngăn xếp để mô phỏng việc lưu giữ thông tin của các nút. Ý tưởng là xử lý nút hiện tại trước và trước khi di chuyển đến cây con trái, chúng ta sẽ lưu trữ nút hiện tại trên ngăn xếp. Sau khi hoàn thành việc xử lý cây con trái, chúng ta sẽ lấy phần tử từ ngăn xếp và đi đến cây con phải. Tiếp tục quá trình này cho đến khi ngăn xếp không rỗng.
+
+Dưới đây là một phiên bản duyệt trước không đệ quy, được viết bằng ngôn ngữ C++
+
+void Tree :: pre_order2(){
+    Tree * root = this;
+    stack <Tree*> s;
+    while(true){
+        while(root){
+            cout << root-> data << ' ';
+            s.push(root);
+            root = root -> left;
+        }
+        if(s.empty()) break;
+        root = s.top(); s.pop();
+        root = root -> right;
+    }
+}
+
+Điều này cho phép chúng ta thực hiện Duyệt trước mà không cần sử dụng đệ quy. Thay vì lưu thông tin trên đệ quy, chúng ta lưu trữ thông tin trên ngăn xếp.
+
+Độ phức tạp thời gian: O(n).
+Độ phức tạp không gian: O(n).
+
+b.1 Duyệt giữa (LDR) (Inorder Traversal):
+
+Trong Duyệt giữa, mỗi nút được ghé thăm sau (in) cả hai cây con của nó. Duyệt giữa được định nghĩa như sau:
+- Duyệt cây con trái theo thứ tự giữa.
+- Ghé thăm gốc.
+- Duyệt cây con phải theo thứ tự giữa.
+
+Dưới đây là hàm duyệt giữa sử dụng đệ quy, được trình bày bằng ngôn ngữ C++
+
+void in_order(Tree*root){
+    if(root){
+        in_order(root-> left);
+        cout << root->data;
+        in_order(root -> right);
+    }
+}
+
+Các nút của cây sẽ được ghé thăm theo thứ tự: 4 2 5 1 6 3 7
+Độ phức tạp thời gian: O(n).
+Độ phức tạp không gian: O(n).
+
+b.2 Phiên bản không đệ quy của Duyệt giữa (LDR) (Inorder Traversal):
+
+Phiên bản không đệ quy của Duyệt giữa tương tự như phiên bản không đệ quy của Duyệt trước, chỉ có một sự thay đổi nhỏ. Thay vì xử lý nút trước khi đi đến cây con trái, chúng ta xử lý nó sau khi lấy nút từ ngăn xếp (điều này được chỉ ra sau khi hoàn thành việc xử lý cây con trái).
+
+Dưới đây là hàm duyệt giữa, sử dụng stack để lưu trữ địa chỉ của các node trước
+
+void in_order2(Tree * root){
+    stack <Tree *> s;
+    while(true){
+        //khi root chưa phải là nullptr thì đưa root vào stack, đồng thời chuyển root=root -> left
+        //khi root -> left == null thì dừng lặp để đảm bảo có thể xuất được data của node cuối cùng
+        while(root){
+            s.push(root);
+            if(root->left == nullptr) break; 
+            root = root -> left;
+        }
+        //có kiểm tra root có phải là nullptr hay không, để đảm bảo không bị lỗi khi chuyển qua con trỏ right ở lá
+        if(root) cout << root-> data;
+        /*mỗi lần đến node lá thì lại lấy hai phần tử bên trong stack ra, do con trỏ left của node lá bằng null.
+        Con trỏ trỏ đến node lá được lấy ra đầu tiên, nhưng con trỏ right được nó quản lí (right của node lá) lại
+        là nullptr nên tiếp tục lấy ra con trỏ tiếp theo trong stack (con trỏ trỏ đến node trên node lá một bậc), 
+        nên ta có thể chuyển qua node lá kế tiếp, vì con trỏ right được con trỏ này quản lí trỏ đến node lá bên 
+        cạnh node lá đầu tiên*/
+        //kiểm tra trước khi lấy phần tử ra
+        if(s.empty()) break;
+        //lấy con trỏ trên cùng trong stack ra, rồi truy xuất đến con trỏ right mà nó quản lí, gán con trỏ right đó
+        //bằng root
+        root = s.top() ->right;
+        s.pop();
+    }
+}
+
+Độ phức tạp thời gian: O(n).
+Độ phức tạp không gian: O(n).
+
+c.1 Duyệt sau (LRD) (Postorder Traversal):
+
+Trong Duyệt sau, mỗi nút được ghé thăm sau (post) cả hai cây con của nó. Duyệt sau được định nghĩa như sau:
+- Duyệt cây con trái theo thứ tự sau.
+- Duyệt cây con phải theo thứ tự sau.
+- Ghé thăm gốc.
+
+Các nút của cây sẽ được ghé thăm theo thứ tự: 4 5 2 6 7 3 1
+Độ phức tạp thời gian: O(n).
+Độ phức tạp không gian: O(n).
+
+c.2 Phiên bản không đệ quy của Duyệt sau (Non-Recursive Postorder Traversal):
+
+Trong duyệt sau không đệ quy, mỗi nút được ghé thăm hai lần. Điều này có nghĩa là sau khi xử lý cây con trái, chúng ta sẽ ghé thăm nút hiện tại, và sau khi xử lý cây con phải, chúng ta sẽ ghé thăm nút hiện tại một lần nữa. Nhưng chúng ta chỉ nên xử lý nút trong lần thăm thứ hai.
+
+Để làm điều này, chúng ta sử dụng một biến 'previous' để theo dõi nút đã duyệt trước đó. Khi 'previous' là cha của nút hiện tại, chúng ta đang đi xuống cây. Trong trường hợp này, chúng ta sẽ kiểm tra xem nút con trái của nút hiện tại có tồn tại không (nếu có, đẩy nút con trái vào ngăn xếp). Nếu không tồn tại, chúng ta sẽ xem nút con phải của nút hiện tại. Nếu cả nút con trái và nút con phải đều không tồn tại (nghĩa là nút hiện tại là nút lá), chúng ta sẽ in giá trị của nút hiện tại và loại bỏ nó khỏi ngăn xếp.
+
+Nếu 'previous' là con trái của nút hiện tại, chúng ta đang đi lên cây từ bên trái. Chúng ta sẽ xem nút con phải của nút hiện tại. Nếu nó tồn tại, chúng ta sẽ đi xuống cây con phải (đẩy nút con phải vào ngăn xếp); nếu không, chúng ta sẽ in giá trị của nút hiện tại và loại bỏ nó khỏi ngăn xếp.
+
+Nếu 'previous' là con phải của nút hiện tại, chúng ta đang đi lên cây từ bên phải. Trong trường hợp này, chúng ta sẽ in giá trị của nút hiện tại và loại bỏ nó khỏi ngăn xếp.
+
+Dưới đây là phiên bản duyệt sau không đệ quy, được trình bày bằng ngôn ngữC++
+
+void post_order2(Tree * root){
+    stack <Tree*> s;
+    Tree * prev = nullptr; 
+    while(true){
+        while(root){
+            s.push(root);
+            root = root -> left;
+        }
+        while(root == nullptr && !s.empty()){
+            root = s. top();
+            if(root -> right == nullptr || root -> right == prev){
+                cout << root -> data;
+                prev = root;
+                s.pop();
+                root = nullptr;
+            }
+            else{
+                root = root -> right;
+            }
+        }
+        if (s.empty()) break;
+    }
+}
+
+Độ phức tạp thời gian: O(n).
+Độ phức tạp không gian: O(n).
+
+d. Duyệt theo cấp (Level Order Traversal):
+
+Duyệt theo cấp được định nghĩa như sau:
+- Ghé thăm gốc.
+- Trong khi duyệt cấp x, giữ tất cả các phần tử ở cấp x trong hàng đợi (queue).
+- Tiếp tục đi đến cấp tiếp theo và ghé thăm tất cả các nút ở cấp đó.
+- Lặp lại quá trình này cho đến khi tất cả các cấp được hoàn thành.
+
+Dưới đây là một phiên bản duyệt theo cấp được viết bằng ngôn ngữ C++
+
+void level_order(Tree* root){
+    queue<Tree*> q;
+    if(root == nullptr) return;
+    q.push(root);
+    /*mỗi vòng lặp, lại lấy một phần tử từ đầu hàng đợi ra và chèn vào cuối hàng đợi các phần tử con của nó, đảm bảo 
+    được sẽ cho được tất cả các phần tử của cây vào hàng đợi vì các phần tử cùng hàng sẽ lần lượt được chèn vào và 
+    lấy ra theo thứ tự từ trái qua phải, nên các phần tử con của chúng cũng thế*/
+    while(!q.empty()){
+        root = q.front();
+        cout << root ->data;
+        if(root -> left)
+        q.push(root->left);
+        if(root -> right)
+        q.push(root -> right);
+    }
+}
+
+Các nút của cây sẽ được ghé thăm theo thứ tự: 1 2 3 4 5 6 7
+Độ phức tạp thời gian: O(n).
+Độ phức tạp không gian: O(n).
+
+Trong trường hợp xấu nhất, tất cả các nút trên toàn bộ cấp cuối cùng có thể nằm trong hàng đợi cùng một lúc, khi đó hàng đợi sẽ khá lớn nếu cây lớn.
+
+Dưới đây là chương trình cây nhị phân với các kiểu duyệt khác nhau cùng với một số phương thức hay dùng, được viết bằng ngôn ngữ C++
+
+#include<iostream>
+#include<stack>
+#include<queue>
+#include<limits>
+#include<cmath>
+using namespace std;
+struct Tree{
+    int data;
+    Tree *left;
+    Tree *right;
+    Tree();
+    Tree(int);
+};
+Tree::Tree(){data = 0; left = right = nullptr;};
+Tree ::Tree (int a){ data = a; left = nullptr; right =nullptr;}
+//hàm duyệt trước có dử dụng đệ quy
+void pre_order(Tree * root){
+    if(root){
+        cout << root->data << ' ';
+        pre_order(root ->left);
+        pre_order(root -> right);
+    }
+    else return;
+}
+//hàm duyệt trước sử dụng stack để lưu trữ địa chỉ của các node trước đó 
+void pre_order2(Tree * root){
+    stack <Tree*> s;
+    while(true){
+        while(root){
+            cout << root-> data << ' ';
+            s.push(root);
+            root = root -> left;
+        }
+        if(s.empty()) break;
+        root = s.top(); s.pop();
+        root = root -> right;
+    }
+}
+//hàm duyệt LDR dùng đệ quy
+void in_order(Tree*root){
+    if(root){
+        in_order(root-> left);
+        cout << root->data<<' ';
+        in_order(root -> right);
+    }
+}
+//hàm duyệt LDR không dùng đệ quy, chạy về cây trái khi có thể, không chạy được nữa
+//thì lùi lại một bước và qua cây phải
+void in_order2(Tree * root){
+    stack <Tree *> s;
+    while(true){
+        //khi root chưa phải là nullptr thì đưa root vào stack, đồng thời chuyển root=root -> left
+        //khi root -> left == nullptr thì dừng lặp để đảm bảo có thể xuất được data của node cuối cùng
+        while(root){
+            s.push(root);
+            root = root -> left;
+        }
+        /*mỗi lần đến node lá thì lại lấy hai phần tử bên trong stack ra, do con trỏ left của node lá bằng nullptr.
+        Con trỏ trỏ đến node lá được lấy ra đầu tiên, nhưng con trỏ right được nó quản lí (right của node lá) lại
+        là nullptr nên tiếp tục lấy ra con trỏ tiếp theo trong stack (con trỏ trỏ đến node trên node lá một bậc), 
+        nên ta có thể chuyển qua node lá kế tiếp, vì con trỏ right được con trỏ này quản lí trỏ đến node lá bên 
+        cạnh node lá đầu tiên*/
+        //kiểm tra trước khi lấy phần tử ra
+        if(s.empty()) break;
+        //lấy con trỏ trên cùng trong stack ra, rồi truy xuất đến con trỏ right mà nó quản lí, gán con trỏ right đó
+        //bằng root
+        root = s.top();
+        cout << root  -> data<<' ';
+        s.pop();
+        root = root -> right;
+    }
+}
+//hàm duyệt RLD đệ quy
+void post_order(Tree * root){
+    if(root){
+        post_order(root -> left);
+        post_order(root -> right);
+        cout << root -> data<<' ';
+    }
+}
+//hàm duyệt RLD không đệ quy
+void post_order2(Tree * root){
+    stack <Tree*> s;
+    Tree * prev = nullptr; 
+    while(true){
+        while(root){
+            s.push(root);
+            root = root -> left;
+        }
+        while(root == nullptr && !s.empty()){
+            root = s. top();
+            if(root -> right == nullptr || root -> right == prev){
+                cout << root -> data<<' ';
+                prev = root;
+                s.pop();
+                root = nullptr;
+            }
+            else{
+                root = root -> right;
+            }
+        }
+        if (s.empty()) break;
+    }
+}
+//hàm duyệt theo hàng từ trên xuống dưới, từ trái qua phải
+void level_order(Tree* root){
+    queue<Tree*> q;
+    if(root == nullptr) return;
+    q.push(root);
+    /*mỗi vòng lặp, lại lấy một phần tử từ đầu hàng đợi ra và chèn vào cuối hàng đợi các phần tử con của nó, đảm bảo 
+    được sẽ cho được tất cả các phần tử của cây vào hàng đợi vì các phần tử cùng hàng sẽ lần lượt được chèn vào và 
+    lấy ra theo thứ tự từ trái qua phải, nên các phần tử con của chúng cũng thế*/
+    while(!q.empty()){
+        root = q.front();
+        cout << root ->data<<' ';
+        q.pop();
+        if(root -> left)
+        q.push(root->left);
+        if(root -> right)
+        q.push(root -> right);
+    }
+}
+//tìm phần tử có giá trị x trong cây, có trả về true, không trả về false
+bool find(Tree* root,int x){
+    queue<Tree*> q;
+    q.push(root);
+    while(!q.empty()){
+        root = q. front();
+        if(root -> data == x) return true;
+        else{ 
+            q.pop();
+            if (root -> left ) q.push(root -> left);
+            if (root -> right) q.push(root -> right);
+        }
+    }
+    return false;
+}
+//tìm và trả về phần tử có giá trị lớn nhất trong cây
+int find_max(Tree* root){
+    int a=numeric_limits<int>:: min();
+    queue <Tree*> q;
+    q.push(root);
+    while(!q.empty()){
+        root=q.front();
+        if (root -> data > a) a = root -> data;
+        q.pop();
+        if(root -> left) q.push(root -> left);
+        if(root -> right) q.push(root -> right);
+    }
+    return a;
+}
+//thêm phần tử vào cây, theo thứ tự từ trên xuống dưới, từ trái qua phải, tạo thành cây hoàn chỉnh
+//(complete binary tree)
+void insert(Tree*&rooot, int a){
+    if(rooot == nullptr){
+        rooot = new Tree(a);
+        return;
+    }
+    Tree* root = rooot;
+    queue <Tree*> q;
+    q.push(root);
+    while(!q.empty()){
+        root = q.front();q.pop();   
+        if (root -> left == nullptr){
+            root-> left = new Tree(a);
+            return;
+        }
+        else q.push(root -> left);
+        if(root -> right== nullptr){
+            root -> right = new Tree(a);
+            return;
+        }
+        else q.push(root -> right);
+    }
+}
+//hàm trả về kích thước của cây
+int size(Tree* root){
+    int siz=0;
+    if(root == nullptr) return 0;
+    queue<Tree*> q;
+    q.push(root);
+    while(!q.empty()){
+        root = q.front(); q.pop();
+        siz++;
+        if(root->left) q.push(root->left);
+        if(root->right) q.push(root->right);
+    }
+    return siz;
+}
+//hàm duyệt ngược từ dưới lên, trên mỗi dòng duyệt từ trái qua phải
+void prev_level_order(Tree*root){
+    if(!root){
+        cout << "cay rong!"; return;
+    }
+    stack <Tree*> s;
+    queue <Tree*> q;
+    q.push(root);
+    s.push(root);
+    while(!q.empty()){
+        root = q.front(); q. pop();
+        if (root->right){
+            q.push(root->right);
+            s.push(root->right);
+        }
+        if(root->left){
+            q.push(root->left);
+            s.push(root->left);
+        }
+    }
+    int a = s.size();
+    for(int i= 0; i < a; i++){
+        cout << s.top() -> data << ' '; s.pop();
+    }
+}
+//hàm xóa cây theo duyệt sau, cùng các comment giúp người đọc dễ hiểu hơn
+void delete_tree(Tree *&Root){
+    if(Root == nullptr) return;
+    stack<Tree*> s;
+    Tree* root = Root;
+    Tree*prev = nullptr;
+    int n=0;
+    while(root || !s.empty()){
+        if(root){
+            s.push(root);
+            root = root -> left;
+            cout <<"\ntruyen node con thu "<<n <<" vao ngan xep ";
+            n++;
+            system("pause");
+        }
+        else{
+            root = s.top();
+            cout<<"\nlay top stack ";
+            system("pause");
+            if (root -> right == nullptr){
+                cout<<"\nben phai dinh la nullptr ";
+                system("pause");                
+                delete root;
+                cout<<"\nxoa dinh ";
+                system("pause");
+                prev=root;
+                s.pop();
+                cout<<"\nxoa top stack ";
+                if(s.empty()){
+                    Root = nullptr;
+                    return;
+                }
+                root=s.top();
+                system("pause");
+                if(root->left==prev){
+                    root ->left = nullptr;
+                    cout<<"\nmoi duyet node trai ";
+                    system("pause");   
+                }
+                if(root->right==prev){
+                    root->right = nullptr;
+                    cout<<"\nmoi duyet node phai ";
+                    system("pause");                    
+                }
+                root = nullptr;
+            }
+            else{
+                root = root -> right;
+                cout <<"\nben phai dinh con co phan tu";
+                system("pause");
+            }
+        }
+    }
+}
+//hàm xóa cây, duyệt theo hàng
+void delete_tree2(Tree *& Root){
+    queue<Tree*> q;
+    Tree*root = Root;
+    if(root == nullptr) return;
+    q.push(root);
+    while (!q.empty()){
+        root = q.front();
+        q.pop();
+        if(root -> left){
+            q.push(root->left);
+        }
+        if(root->right){
+            q.push(root->right);
+        }
+        delete root;
+    }
+    Root = nullptr;
+}
+//hàm trả về độ cao của cây
+int height(Tree* root){
+    if(root == nullptr) return -1;
+    int lh = height(root->left);
+    int rh = height(root->right);
+    if (lh>=rh) return (1+lh);
+    if (lh<rh) return (1+rh);
+}
+//hàm trả về node sâu nhất của cây, duyệt theo hàng sẽ tối ưu nhất, phần tử cuối cùng được thêm vào hàng
+//đợi chính là phần tử sâu nhất
+Tree* deepest(Tree * root){
+    if(root == nullptr) return nullptr;
+    queue <Tree*> q;
+    q.push(root);
+    while(!q.empty()){
+        root = q.front();q.pop();
+        if(root->left) q.push(root->left);
+        if(root->right) q.push(root->right);
+        if(q.size()==1) break;
+    }
+    return q.front();
+}
+//hàm thay đổi con trỏ truyền vào thành con trỏ trỏ đến nốt thấp nhất, trả về 0 nếu node con thấp nhất là
+//node con bên trái, trả về 1 nếu node thấp nhất là node con bên phải
+int point_to_deepest(Tree*&root){
+    if(root == nullptr) return 3;
+    Tree* deep = deepest(root);
+    stack<Tree*> s;
+    while(root||!s.empty()){
+        if(root){
+            s.emplace(root);
+            root = root->left;
+        }
+        else{
+            root = s.top(); s.pop();
+            if (root->left==deep) return 0;
+            else if (root->right==deep) return 1;
+            else{
+                root = root -> right;
+            }
+        }
+    }
+    return 3;
+}
+//hàm xóa một phần tử có data cho trước
+//tìm phần tử cần xóa, rồi hoán đổi nó với phần tử thấp nhất, sau đó xóa phần tử thấp nhất đi
+//duyệt RLD, LDR, DLR sẽ tối ưu hơn duyệt theo hàng vì sẽ tốn ít dữ liệu hơn
+void delete_node(Tree*root, int data){
+    if(root == nullptr) return;
+    Tree*ptr=root;
+    int a = point_to_deepest(ptr);
+    Tree * deep = deepest(root);
+    stack<Tree*> s;
+    while(true){
+        while(root){
+            s.push(root);
+            root=root->left;
+        }
+        if(s.empty()) break;
+        if(s.top()->data==data){
+            s.top()->data^=deep->data;
+            deep->data^=s.top()->data;
+            s.top()->data^=deep->data;
+            delete deep;
+            if(a==1){
+                ptr->right = nullptr;
+            }
+            else if(a==0){
+                ptr->left = nullptr;
+            }
+            return;
+        }
+        root = s.top()->right;
+        s.pop();
+    }
+}
+//hàm trả về số node lá có trong cây
+int number_of_leaf(Tree*root){
+    int count = 0;
+    stack<Tree*> s;
+    while(root||!s.empty()){
+        if(root){
+            s.emplace(root);
+            root = root -> left;
+        }
+        else{
+            root = s.top(); s.pop();
+            if (root -> left == nullptr && root -> right == nullptr){
+                count ++;
+            }
+            root = root -> right;
+        }
+    }
+    return count;
+}
+//hàm trả về số node hoàn chỉnh (có hai node con) của cây
+int number_of_complete_node(Tree* root){
+    int count = 0;
+    stack<Tree*> s;
+    while(root||!s.empty()){
+        if(root){
+            s.emplace(root);
+            root = root -> left;
+        }
+        else{
+            root = s.top(); s.pop();
+            if (root->left== nullptr || root->right==nullptr){
+                root= root -> right; continue;
+            }
+            root = root -> right;
+            count ++;
+        }
+    }
+    return count;
+}
+//hàm trả về số lượng node chỉ có một node con trong cây
+int number_of_half_node(Tree* root){
+    int count = 0;
+    stack<Tree*> s;
+    while(root||!s.empty()){
+        if(root){
+            s.emplace(root);
+            root = root -> left;
+        }
+        else{
+            root = s.top(); s.pop();
+            if (root->left== nullptr && root->right!=nullptr||root->left!=nullptr&&root->right==nullptr){
+                root= root -> right;
+                count ++; continue;
+            }
+            root = root -> right;
+        }
+    }
+    return count;
+}
+//hàm tính đường kính của cây
+int diameter(Tree*root,int diameter_=0){
+    int lh=height(root->left);
+    int rh=height(root->right);
+    if((lh+rh+2)>diameter_) diameter_ = lh+rh+2;
+    if(abs(lh-rh)<3) return diameter_;
+    else if(rh>lh){
+        root = root->right;
+        diameter(root,diameter_);
+    }
+    else if(lh>rh){
+        root = root->left;
+        diameter(root,diameter_);
+    }
+}
+int main(){
+    Tree* root = nullptr;
+    for(int i=1; i<17; i++){
+        insert(root, i);
+    }
+    if(find(root, 10)) cout << "trong cay co phan tu 10.\n";
+    cout<< "cac phan tu luu trong cay la: ";
+    level_order(root);
+    cout << "\nphan tu lon nhat trong cay la: "<< find_max(root);
+    cout << "\ntong so cac phan tu co trong cay la: "<<size(root);
+    cout << "\nchieu cao cua cay la: "<< height(root);
+    cout << "\nphan tu sau nhat cua cay la: " << deepest(root)->data;
+    cout << "\nso node la cua cay la: "<< number_of_leaf(root);
+    cout << "\nso node hoan chinh cua cay la: "<<number_of_complete_node(root);
+    cout << "\nso node nua cua cay la: "<< number_of_half_node(root);
+    cout << "\nduong kinh cua cay la: "<<diameter(root);
+    delete_node(root, 2);
+    cout << "\ncac phan tu con lai sau khi xoa di phan tu 2 la: ";
+    level_order(root);
+    delete_tree2(root);
+    return 0;
+}
+
+6.7 Cây tổng quát (Cây N-ary)
+
+Trong phần trước, chúng ta đã thảo luận về cây nhị phân, trong đó mỗi nút có tối đa hai nút con và chúng được biểu diễn dễ dàng bằng hai con trỏ. Nhưng giả sử chúng ta có một cây với nhiều nút con ở mỗi nút và chúng ta không biết một nút có thể có bao nhiêu nút con, làm thế nào để biểu diễn chúng?
+Làm thế nào chúng ta biểu diễn cây này? Trong cây trên, có các nút với 6 nút con, 3 nút con, 2 nút con, 1 nút con và không có nút con (lá). Để biểu diễn cây này, chúng ta phải xem xét trường hợp tồi tệ nhất (6 nút con) và cấp phát con trỏ con tương ứng cho mỗi nút. Dựa trên điều này, biểu diễn của nút có thể được thể hiện như sau:
+
+struct TreeNode {
+    int data;
+    TreeNode *child1;
+    TreeNode *child2;
+    TreeNode *child3;
+    TreeNode *child4;
+    TreeNode *child5;
+    TreeNode *child6;
+};
+
+Vì chúng ta không sử dụng tất cả các con trỏ trong tất cả các trường hợp, nên sẽ lãng phí khá nhiều bộ nhớ. Vấn đề khác là chúng ta không biết số lượng con của mỗi nút trước. Để giải quyết vấn đề này, chúng ta cần một biểu diễn giảm thiểu lãng phí và cũng chấp nhận các nút với bất kỳ số lượng con nào.
+
+Biểu diễn của cây tổng quát
+Bởi vì mục tiêu của chúng ta là đạt tới tất cả các nút trong cây, một giải pháp khả thi là như sau:
+- Tại mỗi nút, kết nối các nút con cùng một cha (anh em) từ trái sang phải.
+- Loại bỏ các liên kết từ cha đến tất cả các con trừ con đầu tiên.
+
+Nghĩa là nếu chúng ta có một liên kết giữa các nút con thì chúng ta không cần các liên kết bổ sung từ cha đến tất cả các con. Điều này là vì chúng ta có thể duyệt qua tất cả các phần tử bằng cách bắt đầu từ nút con đầu tiên của cha. Vì vậy, nếu chúng ta có liên kết giữa cha và con đầu tiên cũng như các liên kết giữa tất cả các nút con cùng một cha, điều này giải quyết vấn đề của chúng ta. Biểu diễn này được gọi là biểu diễn con trỏ con đầu tiên/con anh em tiếp theo. Biểu diễn con trỏ con đầu tiên/con anh em tiếp theo của cây tổng quát được hiển thị ở trên. Biểu diễn thực tế cho cây này là:
+
+struct TreeNode {
+    int data;
+    TreeNode *firstChild;
+    TreeNode *nextSibling;
+};
+
+Dựa trên thảo luận này, khai báo nút cây tổng quát có thể được đưa ra như sau:
+
+struct TreeNode {
+    int data;
+    TreeNode *firstChild;
+    TreeNode *nextSibling;
+};
+
+Lưu ý: Vì chúng ta có thể chuyển đổi bất kỳ cây tổng quát nào thành biểu diễn nhị phân; trong thực tế, chúng ta sử dụng cây nhị phân. Chúng ta có thể xem tất cả các cây tổng quát với biểu diễn con trỏ con đầu tiên/con anh em tiếp theo như cây nhị phân.
+
+6.8 Các phương pháp duyệt cây nhị phân có gắn luồng (Threaded Binary Tree Traversals)
+
+Trong các phần trước, chúng ta đã thấy các phương pháp duyệt cây nhị phân theo thứ tự trước (preorder), theo thứ tự giữa (inorder) và theo thứ tự sau (postorder) sử dụng ngăn xếp (stack) và duyệt theo cấp (level order) sử dụng hàng đợi (queue) là một cấu trúc dữ liệu phụ trợ. Trong phần này, chúng ta sẽ thảo luận về các thuật toán duyệt mới mà không cần sử dụng cả ngăn xếp lẫn hàng đợi. Những thuật toán duyệt như vậy được gọi là các phương pháp duyệt cây nhị phân có gắn luồng hoặc còn gọi là duyệt không dùng ngăn xếp/hàng đợi.
+
+Vấn đề với các phương pháp Duyệt Cây Nhị Phân thông thường:
+- Không gian lưu trữ yêu cầu cho ngăn xếp và hàng đợi lớn.
+- Đa số con trỏ trong bất kỳ cây nhị phân nào là NULL. Ví dụ, một cây nhị phân có n nút có n + 1 con trỏ NULL và điều này là lãng phí.
+
+Để giải quyết những vấn đề này, ý tưởng là lưu trữ một số thông tin hữu ích trong các con trỏ NULL. Nếu quan sát kỹ các phương pháp duyệt trước đó, ngăn xếp/hàng đợi là cần thiết vì chúng ta phải ghi lại vị trí hiện tại để di chuyển đến cây con bên phải sau khi xử lý cây con bên trái. Nếu chúng ta lưu trữ thông tin hữu ích trong các con trỏ NULL, thì chúng ta không cần phải lưu trữ thông tin đó trong ngăn xếp/hàng đợi. Cây nhị phân lưu trữ thông tin như vậy trong các con trỏ NULL được gọi là cây nhị phân có gắn luồng.
+
+Dựa trên thảo luận trên, chúng ta giả sử chúng ta muốn lưu trữ một số thông tin hữu ích trong các con trỏ NULL. Câu hỏi tiếp theo là lưu trữ gì? Cách thông thường là lưu trữ thông tin tiền/predecessor và thông tin kế/successor. Điều này có nghĩa là, nếu chúng ta xem xét duyệt theo thứ tự trước, thì đối với một nút cụ thể, con trái NULL sẽ chứa thông tin tiền/predecessor của duyệt theo thứ tự trước và con phải NULL sẽ chứa thông tin kế/successor của duyệt theo thứ tự trước. Những con trỏ đặc biệt này được gọi là luồng(threads). Phân loại cây nhị phân có gắn luồng:
+
+Phân loại này dựa trên việc chúng ta có lưu trữ thông tin hữu ích trong cả hai con trỏ NULL hay chỉ trong một trong hai con trỏ NULL.
+- Nếu chúng ta chỉ lưu trữ thông tin tiền/predecessor trong các con trỏ NULL bên trái, thì chúng ta có thể gọi cây nhị phân như là cây nhị phân có gắn luồng bên trái (left threaded binary trees).
+- Nếu chúng ta chỉ lưu trữ thông tin kế/successor trong các con trỏ NULL bên phải, thì chúng ta có thể gọi cây nhị phân như là cây nhị phân có gắn luồng bên phải (right threaded binary trees).
+- Nếu chúng ta lưu trữ thông tin tiền/predecessor trong các con trỏ NULL bên trái và thông tin kế/successor trong các con trỏ NULL bên phải, thì chúng ta có thể gọi cây nhị phân như là cây nhị phân có gắn luồng đầy đủ hoặc đơn giản là cây nhị phân có gắn luồng (fully threaded binary trees).
+
+Lưu ý: Trong phần còn lại của thảo luận, chúng ta chỉ xem xét cây nhị phân có gắn luồng đầy đủ (fully threaded binary trees).
+
+Các loại cây nhị phân có gắn luồng dựa trên thảo luận trên chúng ta có ba biểu diễn cho cây nhị phân có gắn luồng:
+- Cây nhị phân có gắn luồng theo thứ tự trước: Con trỏ NULL bên trái sẽ chứa thông tin tiền/predecessor của duyệt theo thứ tự trước và con trỏ NULL bên phải sẽ chứa thông tin kế/successor của duyệt theo thứ tự trước.
+- Cây nhị phân có gắn luồng theo thứ tự giữa: Con trỏ NULL bên trái sẽ chứa thông tin tiền/predecessor của duyệt theo thứ tự giữa và con trỏ NULL bên phải sẽ chứa thông tin kế/successor của duyệt theo thứ tự giữa.
+- Cây nhị phân có gắn luồng theo thứ tự sau: Con trỏ NULL bên trái sẽ chứa thông tin tiền/predecessor của duyệt theo thứ tự sau và con trỏ NULL bên phải sẽ chứa thông tin kế/successor của duyệt theo thứ tự sau.
+
+Lưu ý: Vì các biểu diễn tương tự nhau, trong phần còn lại của thảo luận, chúng ta sẽ sử dụng cây nhị phân có gắn luồng theo thứ tự giữa.
+
+Cấu trúc cây nhị phân có gắn luồng: Bất kỳ chương trình nào kiểm tra cây cũng phải có khả năng phân biệt được giữa một con trỏ trái/phải bình thường và một luồng. Để làm điều này, chúng ta sử dụng hai trường bổ sung trong mỗi nút, cho chúng ta các nút có dạng sau đây cho cây có gắn luồng:
+
+struct Threated_tree{
+    int data;
+    bool l_thread;
+    bool r_thread;
+    Threated_tree* left;
+    Threated_tree* right;
+};
+
+Lưu ý: Tương tự, chúng ta có thể định nghĩa sự khác biệt giữa duyệt trước/duyệt sau. Như một ví dụ, hãy thử biểu diễn một cây dưới dạng cây nhị phân có gắn luồng theo thứ tự giữa. Cây dưới đây cho thấy cây nhị phân có gắn luồng theo thứ tự giữa sẽ trông như thế nào. Các mũi tên chấm chỉ các luồng. Nếu quan sát, con trái của nút trái nhất (2) và con phải của nút phải nhất (31) đều treo lơ lửng. 
+
+Cần phải chỉ định con trỏ trái nhất và con trỏ phải nhất trỏ đến đâu?
+Trong biểu diễn của cây nhị phân có gắn luồng, tiện lợi để sử dụng một nút đặc biệt gọi là Dummy luôn hiện diện ngay cả đối với cây rỗng. Lưu ý rằng điểm đánh dấu phải của nút Dummy là 1 và con trỏ phải trỏ đến chính nó. Với quy ước này, cây trên có thể được biểu diễn như sau:
+
+Tìm kiếm Inorder Successor trong Inorder Threaded Binary Tree:
+
+Chúng ta muốn tìm Inorder Successor của một nút được gọi là P trong Inorder Threaded Binary Tree mà không sử dụng một ngăn xếp (stack). Chiến lược như sau:
+
+- Nếu P không có cây con bên phải, thì trả về con phải của P.
+- Nếu P có cây con bên phải, thì trả về con trái của nút gần nhất mà cây con trái của nó chứa nút P.
+
+Dưới đây là mã nguồn viết bằng ngôn ngữ C++
+
+Threated_tree * inorder_successor(Threated_tree * p){
+    if(!p->r_thread){
+        return p->right;
+    }
+    else{
+        Threated_tree * pos= p->right;
+        while(pos->l_thread){
+            pos=pos->left;
+        }
+        return pos;
+    }
+}
+
+Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(1).
+
+Duyệt Inorder trong Inorder Threaded Binary Tree:
+
+Chúng ta có thể bắt đầu với nút giả (dummy node) và gọi hàm InorderSuccessor() để thăm mỗi nút cho đến khi chúng ta đạt đến nút giả. 
+
+Dưới đây là mã nguồn viết bằng ngôn ngữ C++
+
+void inorder(Threated_tree* root){
+    Threated_tree* p = inorder_successor(root);
+    while(p!=root){
+        cout << p->data;
+        p= inorder_successor(p);
+    }
+}
+
+Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(1).
+
+Thêm nút vào InOrder Threaded Binary Trees:
+
+Vì tính đơn giản, hãy giả sử có hai nút P và Q và chúng ta muốn gắn Q vào bên phải của P. Đối với điều này, chúng ta có hai trường hợp:
+
+1. Nút P không có con bên phải: Trong trường hợp này, chúng ta chỉ cần gắn Q vào P và thay đổi các con trỏ left và right của nó.
+2. Nút P có con bên phải (gọi là R): Trong trường hợp này, chúng ta cần duyệt qua cây con trái của R và tìm nút bên trái nhất, sau đó cập nhật con trỏ left và right của nút đó (như đã hiển thị bên dưới).
+
+void insert_inorder_threaded_tree(Threated_tree* p, int data){
+    Threated_tree* q = new Threated_tree(data);
+    q->l_thread=p->l_thread;
+    q->left=p->left;
+    q->right=p;
+    q->r_thread=false;
+    p->left = q;
+    p->l_thread=true;
+    if(q->l_thread){
+        Threated_tree* lmao= q->left;
+        while(lmao->r_thread){
+            lmao = lmao->right;
+        }
+        lmao ->right = q;
+    }  
+}
+
+Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(1).
+
+Dưới đây là chương trình cơ bản gồm nhập xuất dữ liệu trong cây nhị phân có gắn luồng
+
+#include <iostream>
+using namespace std;
+struct Threated_tree{
+    int data;
+    bool l_thread;
+    bool r_thread;
+    Threated_tree* left;
+    Threated_tree* right;
+    Threated_tree(int );
+    void dummy();
+};
+Threated_tree::Threated_tree(int a){
+    data=a; l_thread=r_thread=false;left = right = nullptr;
+}
+void Threated_tree::dummy(){
+    data = 0; l_thread=r_thread=true; left = nullptr; right = this;
+}
+Threated_tree * inorder_successor(Threated_tree * p){
+    if(!p->r_thread){
+        return p->right;
+    }
+    else{
+        Threated_tree * pos= p->right;
+        while(pos->l_thread){
+            pos=pos->left;
+        }
+        return pos;
+    }
+}
+void inorder(Threated_tree* root){
+    Threated_tree* p = inorder_successor(root);
+    while(p!=root){
+        cout << p->data <<' ';
+        p= inorder_successor(p);
+    }
+}
+void insert_inorder_threaded_tree(Threated_tree* p, int data){
+    Threated_tree* q = new Threated_tree(data);
+    q->l_thread=p->l_thread;
+    q->left=p->left;
+    q->right=p;
+    q->r_thread=false;
+    p->left = q;
+    p->l_thread=true;
+    if(q->l_thread){
+        Threated_tree* lmao= q->left;
+        while(lmao->r_thread){
+            lmao = lmao->right;
+        }
+        lmao ->right = q;
+    }  
+}
+int main(){
+    Threated_tree* dum=new Threated_tree(0);
+    dum->dummy();
+    dum ->left = new Threated_tree(1);
+    (dum->left)->l_thread =  true;
+    (dum->left)->right = dum;
+    (dum->left)->left = new Threated_tree(2);
+    ((dum->left)->left)->left = dum; ((dum->left)->left)->right = dum->left;
+    for(int i=1; i<=10; i++){
+        insert_inorder_threaded_tree(dum->left,i);
+    }
+    inorder(dum);
+    return 0;
+}
+
+6.9 Cây Biểu Thức
+
+Một cây biểu thức là một cây biểu diễn một biểu thức. Trong cây biểu thức, các nút lá là các toán hạng (operand) và các nút không phải lá là các toán tử (operator). Điều này có nghĩa là một cây biểu thức là một cây nhị phân trong đó các nút trong và là các toán tử và các nút lá là các toán hạng. Một cây biểu thức bao gồm các biểu thức nhị phân. Nhưng đối với một toán tử u-nary, một nhánh con sẽ rỗng.
+
+Trong cây biểu thức, mỗi nút có thể là một trong hai loại:
+
+1. Nút toán tử (Operator Node): Đây là các nút không phải lá, chứa các toán tử như "+", "-", "*", "/" v.v. Các nút toán tử có thể có hai con, một bên là con trái và một bên là con phải.
+
+2. Nút toán hạng (Operand Node): Đây là các nút lá, chứa các toán hạng như số hoặc biến.
+
+Ví dụ, giả sử chúng ta có biểu thức sau: 3 * (5 + 2)
+
+Ta có thể biểu diễn biểu thức trên bằng cây biểu thức như sau:
+
+```
+       *
+      / \
+     3   +
+        / \
+       5   2
+```
+
+Trong ví dụ trên, nút gốc là toán tử "*", có hai con là nút lá chứa toán hạng "3" và nút toán tử "+". Nút toán tử "+" lại có hai con là nút lá chứa toán hạng "5" và "2".
+
+//DƯỚI ĐÂY LÀ MỘT PHIÊN BẢN CHƯA HOÀN CHỈNH CỦA CÂY BIỂU THỨC
+
+#include <iostream>
+#include <stack>
+using namespace std;
+struct Tree{
+    char data;
+    Tree* left;
+    Tree* right;
+    Tree(char);
+};
+Tree::Tree(char a){ data = a; left = nullptr; right = nullptr;}
+void in_order(Tree*root){
+    if(root){
+        in_order(root-> left);
+        cout << root->data<<' ';
+        in_order(root -> right);
+    }
+}
+void post_order(Tree * root){
+    if(root){
+        post_order(root -> left);
+        post_order(root -> right);
+        cout << root -> data<<' ';
+    }
+}
+Tree* build_expression_tree(char c[],int size){
+    //cout <<"bat dau ham "; system("pause");
+    stack<Tree*> s;
+    int i=0;
+    while(true){
+        //cout <<"vao vong lap while "; system("pause");
+        for ( i; i<size; i++){
+            if((c[i]<91&&c[i]>64)||(c[i]>96&&c[i]<123)){
+                Tree*temp =new Tree(c[i]);
+                //cout << "tao node chua bieu thuc "<<c[i] << ' '; system("pause");
+                s.emplace(temp);
+            }
+            else {
+            //     cout << "phan tu thu "<<i+1<<"khong phai ki tu ";  system("pause");
+                break;
+            }
+        }
+        Tree* op = new Tree(c[i]);
+        // cout << "tao toan tu "<< c[i] << ' '; system("pause");
+        i++;
+        // cout << "tang i len 1, i bay gio la: "<< i; system("pause");
+        for(int j = 0; j <2; j++){
+            if(j==0){ op->right = s.top();s.pop();}
+            else {
+            op->left =s.top(); s.pop();
+            // cout << "cay da duoc tao la: ";
+            // in_order(op); system("pause");
+            }
+        }
+        s.emplace(op);
+        // cout << "dua cay vao stack";
+        if(i==size) break;
+    }
+    return s.top();
+}
+int main(){
+    char c[]={"abc*d/+"};
+    int size = 7;
+    for(int i=0; i<7; i++){
+        cout << c[i] << ' ';
+    }
+    cout <<'\n';
+    Tree* root = build_expression_tree(c,size);
+    in_order(root);
+    return 0;
+}
+
+6.10 Cây XOR
+
+Khái niệm này tương tự như danh sách liên kết đôi tiết kiệm bộ nhớ trong chương trình Linked Lists. Tương tự như cây nhị phân theo dạng 'threaded', biểu diễn này không cần sử dụng ngăn xếp hoặc hàng đợi để duyệt cây. Biểu diễn này được sử dụng để di chuyển về (tới nút cha) và tới (tới các nút con) bằng phép toán ^. Để biểu diễn cây XOR, dựa vào quy tắc và thảo luận trên, sau đây là các quy tắc được sử dụng cho mỗi nút:
+
+Nút trái sẽ có giá trị ^ của nút cha và nút con trái của nó.
+Nút phải sẽ có giá trị ^ của nút cha và nút con phải của nó.
+Nút gốc có nút cha là NULL và các nút lá có các nút con là NULL.
+Dựa vào các quy tắc và thảo luận trên, cây có thể được biểu diễn như sau: [đoạn này trích dẫn từ phần không rõ ràng, có thể bị mất thông tin nếu không có ngữ cảnh hoàn chỉnh]
+
+Mục tiêu chính của biểu diễn này là khả năng di chuyển đến nút cha cũng như các nút con. Bây giờ, hãy xem cách sử dụng biểu diễn này để duyệt cây. Ví dụ, nếu chúng ta đang ở nút B và muốn di chuyển đến nút cha A của nó, thì chúng ta chỉ cần thực hiện phép ^ trên nội dung trái của nút B với địa chỉ của nút con trái của nó (chúng ta cũng có thể sử dụng nút con phải để di chuyển đến nút cha). Tương tự, nếu chúng ta muốn di chuyển đến nút con của nó (ví dụ, nút con trái D) thì chúng ta phải thực hiện phép ^ trên nội dung trái của nút B với địa chỉ của nút cha của nó.
+
+Một điểm quan trọng mà chúng ta cần hiểu về biểu diễn này là: Khi chúng ta đang ở nút B, làm thế nào để biết địa chỉ của các nút con D của nó? Vì duyệt cây bắt đầu từ nút gốc, chúng ta có thể áp dụng phép ^ trên nội dung trái của gốc với NULL. Kết quả là chúng ta nhận được nút con trái, B. Khi chúng ta ở B, chúng ta có thể áp dụng phép ^ trên nội dung trái của nó với địa chỉ của nút A.
+
+6.11 Cây Tìm Kiếm Nhị Phân (BSTs)
+
+**Tại sao lại sử dụng Cây Tìm Kiếm Nhị Phân?**
+Trong các phần trước, chúng ta đã thảo luận về các biểu diễn cây khác nhau và trong tất cả chúng, chúng ta không áp đặt bất kỳ hạn chế nào về dữ liệu của các nút. Kết quả là, để tìm kiếm một phần tử, chúng ta cần kiểm tra cả trong cây con trái và cây con phải. Do đó, độ phức tạp tệ nhất của phép tìm kiếm là O(n).
+
+**Biểu diễn Cây Tìm Kiếm Nhị Phân**
+Trong phần này, chúng ta sẽ thảo luận về một biến thể khác của cây nhị phân: Cây Tìm Kiếm Nhị Phân (BSTs). Như tên gọi, việc sử dụng chính của biểu diễn này là để tìm kiếm. Trong biểu diễn này, chúng ta áp đặt hạn chế về loại dữ liệu mà một nút có thể chứa. Kết quả là, nó giảm thiểu độ phức tạp tệ nhất của phép tìm kiếm trung bình xuống O(logn).
+
+**Thuộc tính Cây Tìm Kiếm Nhị Phân**
+Trong cây tìm kiếm nhị phân, tất cả các phần tử trong cây con trái phải nhỏ hơn dữ liệu của nút gốc và tất cả các phần tử trong cây con phải phải lớn hơn dữ liệu của nút gốc. Điều này được gọi là thuộc tính cây tìm kiếm nhị phân và phải được thỏa mãn tại mỗi nút trong cây.
+
+Cụ thể, thuộc tính này có ba quy tắc chính:
+- Cây con trái của một nút chỉ chứa các nút có giá trị nhỏ hơn giá trị của nút đó.
+- Cây con phải của một nút chỉ chứa các nút có giá trị lớn hơn giá trị của nút đó.
+- Cả cây con trái và cây con phải đều phải là cây tìm kiếm nhị phân.
+
+**Ví dụ**
+
+```
+      8
+     / \
+    3   10
+   / \    \
+  1   6    14
+     / \   /   \
+    4   7 13   15
+```
+
+**Khai báo Cây Tìm Kiếm Nhị Phân**
+Không có sự khác biệt giữa việc khai báo cây nhị phân thông thường và việc khai báo cây tìm kiếm nhị phân. Sự khác biệt chỉ nằm ở dữ liệu mà không phải là cấu trúc. Để thuận tiện, chúng ta thay đổi tên cấu trúc thành "BSTNode" để chỉ ra rõ rằng đây là cấu trúc cho cây tìm kiếm nhị phân.
+
+struct Bst_node{
+    int data;
+    Bst_node* left;
+    Bst_node* right;
+};
+
+**Các Thao Tác Trên Cây Tìm Kiếm Nhị Phân**
+Các thao tác chính:
+- Tìm/ Tìm phần tử nhỏ nhất/ Tìm phần tử lớn nhất trong cây tìm kiếm nhị phân
+- Chèn một phần tử vào cây tìm kiếm nhị phân
+- Xóa một phần tử khỏi cây tìm kiếm nhị phân
+
+Các thao tác phụ:
+- Kiểm tra xem cây đã cho có phải là cây tìm kiếm nhị phân hay không
+- Tìm phần tử thứ k trong cây
+- Sắp xếp các phần tử của cây tìm kiếm nhị phân và nhiều thao tác quan trọng khác.
+
+**Lưu Ý Quan Trọng về Cây Tìm Kiếm Nhị Phân**
+- Vì dữ liệu của nút gốc luôn nằm giữa dữ liệu của cây con trái và cây con phải, việc thực hiện duyệt theo thứ tự trung tuyến (duyệt giữa) trên cây tìm kiếm nhị phân sẽ tạo ra một danh sách được sắp xếp.
+- Khi giải quyết các vấn đề liên quan đến cây tìm kiếm nhị phân, trước tiên chúng ta xử lý cây con trái, sau đó là dữ liệu của nút gốc và cuối cùng là chúng ta xử lý cây con phải. Điều này có nghĩa là, tùy thuộc vào vấn đề, chỉ có bước trung gian (xử lý dữ liệu của nút gốc) thay đổi và chúng ta không thay đổi bước đầu tiên và bước cuối cùng.
+- Nếu chúng ta đang tìm kiếm một phần tử và nếu dữ liệu của nút con trái nhỏ hơn phần tử chúng ta muốn tìm kiếm, thì chúng ta có thể bỏ qua nó. Tương tự như vậy, nếu có thể chúng ta bỏ qua cây con phải. Bởi vì điều này, cây tìm kiếm nhị phân mất ít thời gian hơn để tìm kiếm một phần tử so với cây nhị phân thông thường. Nói cách khác, cây tìm kiếm nhị phân xem xét hoặc cây con trái hoặc cây con phải để tìm kiếm một phần tử nhưng không phải cả hai cùng một lúc.
+- Các thao tác cơ bản có thể thực hiện trên cây tìm kiếm nhị phân là thêm phần tử, xóa phần tử và tìm kiếm phần tử. Khi thực hiện các thao tác này trên cây tìm kiếm nhị phân, chiều cao của cây thay đổi mỗi lần. Do đó tồn tại sự biến đổi trong độ phức tạp tốt nhất, trường hợp trung bình và trường hợp xấu nhất.
+- Các thao tác cơ bản trên cây tìm kiếm nhị phân mất thời gian tỷ lệ thuận với chiều cao của cây. Đối với cây nhị phân đầy đủ có n nút, các thao tác này chạy trong thời gian O(logn) trong trường hợp tồi nhất. Tuy nhiên, nếu cây là một chuỗi tuyến tính gồm n nút (cây nghiêng), cùng các thao tác sẽ mất thời gian O(n) trong trường hợp tồi nhất.
+
+**Tìm Phần Tử Trong Cây Tìm Kiếm Nhị Phân**
+Phép tìm kiếm phần tử trong BST là đơn giản. Bắt đầu từ gốc và tiếp tục di chuyển sang trái hoặc phải sử dụng thuộc tính BST. Nếu dữ liệu chúng ta đang tìm kiếm giống với dữ liệu của nút hiện tại, thì chúng ta trả về nút hiện tại. Nếu dữ liệu chúng ta đang tìm kiếm nhỏ hơn dữ liệu của nút, thì tìm kiếm trong cây con trái của nút hiện tại; nếu không, tìm kiếm trong cây con phải của nút hiện tại. Nếu dữ liệu không tồn tại, chúng ta sẽ đến một liên kết NULL. Độ phức tạp thời gian: O(n) trong trường hợp xấu nhất (khi BST là cây nghiêng). Độ phức tạp không gian: O(n) cho ngăn xếp đệ quy. Phiên bản không đệ quy của thuật toán trên có thể được thực hiện như sau: Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(1).
+
+Dưới đây là hàm tìm kiếm phần tử trong cây tìm kiếm nhị phân, trình bày bằng ngôn ngữ C++
+
+Bst_node* find(Bst_node* root, int data){
+    if(root == nullptr) {
+        return nullptr;
+    }
+    while(root){
+        if(root -> data = data){
+            return root;
+        }
+        else if(root->data > data){
+            root = root ->left;
+        }
+        else root = root->right;
+    }
+    return nullptr;
+}
+
+**Tìm Phần Tử Nhỏ Nhất Trong Cây Tìm Kiếm Nhị Phân**
+Trong BST, phần tử nhỏ nhất là nút ở bên trái cùng, không có nút con bên trái. Trong BST dưới đây, phần tử nhỏ nhất là 4. Độ phức tạp thời gian: O(n) trong trường hợp xấu nhất (khi BST là cây nghiêng). Độ phức tạp không gian: O(n) cho ngăn xếp đệ quy. Phiên bản không đệ quy của thuật algorithm có thể được thực hiện như sau: Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(1).
+
+Dưới đây là hàm tìm kiếm phần tử nhỏ nhất trong cây tìm kiếm nhị phân, trình bày bằng ngôn ngữ C++
+
+Bst_node* find_min(Bst_node* root){
+    while(root){
+        if(root->left==nullptr){
+            return root;
+        }
+        root = root -> left;
+    }
+    return nullptr;
+}
+
+**Tìm Phần Tử Lớn Nhất Trong Cây Tìm Kiếm Nhị Phân**
+Trong BST, phần tử lớn nhất là nút ở bên phải cùng, không có nút con bên phải. Trong BST dưới đây, phần tử lớn nhất là 16. Độ phức tạp thời gian: O(n) trong trường hợp xấu nhất (khi BST là cây nghiêng). Độ phức tạp không gian: O(n) cho ngăn xếp đệ quy. Phiên bản không đệ quy của thuật algorithm có thể được thực hiện như sau: Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(1).
+
+Dưới đây là hàm tìm kiếm phần tử lớn nhất trong cây tìm kiếm nhị phân, trình bày bằng ngôn ngữ C++
+
+Bst_node* find_max(Bst_node* root){
+    while(root){
+        if(root->right==nullptr){
+            return root;
+        }
+        root = root->right;
+    }
+    return nullptr;
+}
+
+**Inorder Predecessor và Successor**
+Inorder predecessor và successor của nút X trong cây tìm kiếm nhị phân, giả sử tất cả các khóa là khác nhau, được xác định như sau: Nếu X có hai nút con thì inorder predecessor của nó là giá trị lớn nhất trong cây con trái của nó và inorder successor của nó là giá trị nhỏ nhất trong cây con phải của nó. Nếu X không có nút con bên trái, thì inorder predecessor của nút X là tổ tiên đầu tiên của nó mà có nút con trái.
+
+**Chèn Một Phần Tử Vào Cây Tìm Kiếm Nhị Phân**
+Để chèn dữ liệu vào cây tìm kiếm nhị phân, trước tiên chúng ta cần tìm vị trí cho phần tử đó. Chúng ta có thể tìm vị trí chèn bằng cách theo cơ chế tìm kiếm giống như phép tìm kiếm. Trong quá trình tìm kiếm vị trí, nếu dữ liệu đã có thì chúng ta có thể bỏ qua và thoát ra. Ngược lại, chèn dữ liệu vào vị trí cuối cùng trên đường đi đã đi qua.
+
+Dưới đây là hàm chèn một phần tử vào cây tìm kiếm nhị phân, viết bằng ngôn ngữ C++
+
+void insert(Bst_node* &Root, int data){
+    if(Root==nullptr){
+        Root = new Bst_node;
+        Root -> data = data;
+        Root -> left = Root -> right = nullptr;
+        return;
+    }
+    Bst_node*root = Root;
+    int a;
+    stack <Bst_node*> s;
+    while(root!=nullptr){
+        s.emplace(root);
+        if(root ->data == data) return;
+        else if(data < root -> data){
+            root = root -> left;
+            a = 1;
+        }
+        else if(data > root -> data){
+            root = root -> right;
+            a = 0;
+        }
+    }
+    if (a == 1){
+        root = s.top();
+        root -> left = new Bst_node;
+        root = root -> left;
+        root -> data = data;
+        root -> left = root -> right = nullptr;
+    } 
+    else if (a==0){
+        root = s.top();
+        root -> right = new Bst_node;
+        root = root ->right;
+        root -> data = data;
+        root -> right = root -> left = nullptr;
+    }
+}
+
+**Xóa Một Phần Tử Khỏi Cây Tìm Kiếm Nhị Phân**
+Thao tác xóa là phức tạp hơn so với các thao tác khác. Điều này bởi vì phần tử cần xóa có thể không phải là nút lá. Trong thao tác này, chúng ta cũng cần tìm vị trí của phần tử mà chúng ta muốn xóa. Sau khi đã tìm được nút cần xóa, chúng ta xem xét các trường hợp sau:
+
+- Nếu phần tử cần xóa là nút lá: trả về NULL cho nút cha của nó. Điều này có nghĩa là làm cho con trỏ con tương ứng trở thành NULL.
+- Nếu phần tử cần xóa có một nút con: Trong trường hợp này, chúng ta chỉ cần gửi nút con hiện tại của nó đến nút cha của nó.
+- Nếu phần tử cần xóa có cả hai nút con: Chiến lược chung là thay thế khóa của nút này bằng phần tử lớn nhất của cây con trái và xóa đệ quy nút đó (nút hiện trống rỗng). Nút lớn nhất trong cây con trái không thể có nút con phải, vì vậy việc xóa thứ hai là dễ dàng. Ví dụ, hãy xem cây dưới đây. Trong cây dưới đây, để xóa 8, nó là con phải của gốc. Giá trị khóa là 8. Nó được thay thế bằng giá trị lớn nhất trong cây con trái của nó (7), và sau đó nút đó được xóa như trước (trường hợp thứ hai).
+
+Lưu ý: Chúng ta cũng có thể thay thế bằng phần tử nhỏ nhất trong cây con phải.
+
+//hàm truyền đối số dưới dạng tham chiếu, khi kết thúc hàm, root trở thành node đứng trước node max,
+//nếu node max không nằm ngay sau root 
+//hàm trả về 1 nếu max nằm bên phải root, trả về 0 nếu max nằm bên trái
+int Node_before_max(Bst_node*&root, int max) {
+    if (root == nullptr) return 2;
+    int a=2;
+    stack<Bst_node*> s;
+    while (root) {
+        s.emplace(root);
+        if (max > root->data) root = root->right;
+        else if (max < root->data) root = root->left;
+        else {
+            s.pop();
+            if (!s.empty()) {
+                root = s.top();
+                if (root->left->data == max) a = 0;
+                else if (root->right->data == max) a = 1;
+                break;
+            }
+            else {
+                a = 3; break;
+            }
+        }
+    }
+    return a;
+}
+void delete_node(Bst_node* root, int data){
+    if (root == nullptr){
+        cout << "element not there in tree!";
+        return;
+    }
+    Bst_node* root2 = root;
+    stack <Bst_node*> s;
+    while(root){
+        if(data < root -> data){
+            root = root -> left;
+        }
+        else if(data > root -> data){
+            root = root -> right;
+        }
+        else {
+            if (root->left == nullptr && root->right == nullptr) {
+                int a = Node_before_max(root2, data);
+                if (a == 1) {
+                    delete root2->right;
+                    root2->right = nullptr;
+                }
+                else if (a == 0) { 
+                    delete root2->left;
+                    root2->left = nullptr;
+                }
+                break;
+            }
+            else if (root->left == nullptr && root->right != nullptr) {
+                int a = Node_before_max(root2, data);
+                if (a == 1) {
+                    Bst_node* temp = root2->right;
+                    root2->right = root->right;
+                    delete temp;
+                }
+                else if (a == 0) {
+                    Bst_node* temp = root2->left;
+                    root2->left = root->right;
+                }
+                break;
+            }
+            else if (root->left != nullptr && root->right == nullptr) {
+                int a = Node_before_max(root2, data);
+                if (a == 1) {
+                    Bst_node* temp = root2->right;
+                    root2->right = root->left;
+                    delete temp;
+                }
+                else if (a == 0) {
+                    Bst_node* temp = root2->left;
+                    root2->left = root->left;
+                    delete temp;
+                }
+                break;
+            }
+            else {
+                Bst_node* temp = find_max(root->left);
+                root->data = temp->data;
+                if (temp == root->left) {
+                    delete temp;
+                    root->left = nullptr;
+                }
+                else {
+                    delete_node(root->left, temp->data);
+                }
+                break;
+            }
+        }
+    }
+    return;
+}
+
+Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(n) cho ngăn xếp đệ quy. Phiên bản không đệ quy của thuật toán có thể được thực hiện như sau: Độ phức tạp thời gian: O(n). Độ phức tạp không gian: O(1).
+
+Dưới đây là mã nguồn về cây tìm kiếm nhị phân, trình bày bằng ngôn ngữ C++
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+struct Bst_node{
+    int data;
+    Bst_node* left;
+    Bst_node* right;
+};
+void in_order(Bst_node* root){
+    if(root == nullptr){
+        cout << "empty tree!";
+        return;
+    }
+    stack<Bst_node*> s;
+    while(true){
+        while(root){
+            s.emplace(root);
+            root = root -> left;
+        }
+        if(s.empty()) return;
+        root = s.top(); s.pop();
+        cout << root -> data << ' ';
+        root = root -> right;
+    }
+}
+Bst_node* find(Bst_node* root, int data){
+    if(root == nullptr) {
+        return nullptr;
+    }
+    while(root){
+        if(root -> data = data){
+            return root;
+        }
+        else if(root->data > data){
+            root = root ->left;
+        }
+        else root = root->right;
+    }
+    return nullptr;
+}
+
+Bst_node* find_min(Bst_node* root){
+    while(root){
+        if(root->left==nullptr){
+            return root;
+        }
+        root = root -> left;
+    }
+    return nullptr;
+}
+Bst_node* find_max(Bst_node* root){
+    while(root){
+        if(root->right==nullptr){
+            return root;
+        }
+        root = root->right;
+    }
+    return nullptr;
+}
+void insert(Bst_node* &Root, int data){
+    if(Root==nullptr){
+        Root = new Bst_node;
+        Root -> data = data;
+        Root -> left = Root -> right = nullptr;
+        return;
+    }
+    Bst_node*root = Root;
+    int a;
+    stack <Bst_node*> s;
+    while(root!=nullptr){
+        s.emplace(root);
+        if(root ->data == data) return;
+        else if(data < root -> data){
+            root = root -> left;
+            a = 1;
+        }
+        else if(data > root -> data){
+            root = root -> right;
+            a = 0;
+        }
+    }
+    if (a == 1){
+        root = s.top();
+        root -> left = new Bst_node;
+        root = root -> left;
+        root -> data = data;
+        root -> left = root -> right = nullptr;
+    } 
+    else if (a==0){
+        root = s.top();
+        root -> right = new Bst_node;
+        root = root ->right;
+        root -> data = data;
+        root -> right = root -> left = nullptr;
+    }
+}
+//hàm truyền đối số dưới dạng tham chiếu, khi kết thúc hàm, root trở thành node đứng trước node max,
+//hàm trả về 1 nếu max nằm bên phải root, trả về 0 nếu max nằm bên trái
+int Node_before_max(Bst_node*&root, int max) {
+    if (root == nullptr) return 2;
+    int a=2;
+    stack<Bst_node*> s;
+    while (root) {
+        s.emplace(root);
+        if (max > root->data) root = root->right;
+        else if (max < root->data) root = root->left;
+        else {
+            s.pop();
+            if (!s.empty()) {
+                root = s.top();
+                if (root->left->data == max) a = 0;
+                else if (root->right->data == max) a = 1;
+                break;
+            }
+            else {
+                a = 3; break;
+            }
+        }
+    }
+    return a;
+}
+void delete_node(Bst_node* root, int data){
+    if (root == nullptr){
+        cout << "element not there in tree!";
+        return;
+    }
+    Bst_node* root2 = root;
+    stack <Bst_node*> s;
+    while(root){
+        if(data < root -> data){
+            root = root -> left;
+        }
+        else if(data > root -> data){
+            root = root -> right;
+        }
+        else {
+            if (root->left == nullptr && root->right == nullptr) {
+                int a = Node_before_max(root2, data);
+                if (a == 1) {
+                    delete root2->right;
+                    root2->right = nullptr;
+                }
+                else if (a == 0) { 
+                    delete root2->left;
+                    root2->left = nullptr;
+                }
+                break;
+            }
+            else if (root->left == nullptr && root->right != nullptr) {
+                int a = Node_before_max(root2, data);
+                if (a == 1) {
+                    Bst_node* temp = root2->right;
+                    root2->right = root->right;
+                    delete temp;
+                }
+                else if (a == 0) {
+                    Bst_node* temp = root2->left;
+                    root2->left = root->right;
+                }
+                break;
+            }
+            else if (root->left != nullptr && root->right == nullptr) {
+                int a = Node_before_max(root2, data);
+                if (a == 1) {
+                    Bst_node* temp = root2->right;
+                    root2->right = root->left;
+                    delete temp;
+                }
+                else if (a == 0) {
+                    Bst_node* temp = root2->left;
+                    root2->left = root->left;
+                    delete temp;
+                }
+                break;
+            }
+            else {
+                Bst_node* temp = find_max(root->left);
+                root->data = temp->data;
+                if (temp == root->left) {
+                    delete temp;
+                    root->left = nullptr;
+                }
+                else {
+                    delete_node(root->left, temp->data);
+                }
+                break;
+            }
+        }
+    }
+    return;
+}
+int main(){
+    Bst_node* root = nullptr;
+    insert(root, 6);
+    insert(root, 4);
+    insert(root, 7);
+    insert(root, 2);
+    insert(root, 5);
+    insert(root, 10);
+    insert(root, 1);
+    insert(root, 3);
+    insert(root, 9);
+    insert(root, 8);
+    in_order(root);
+    delete_node(root, 4);
+    system("pause");
+    cout << "\ncay da duoc loai bo node 4, cay hien tai la:\n";
+    in_order(root);
+    system("pause");
+    return 0;
+}
+
+
+6.12 Cây Tìm Kiếm Nhị Phân Cân Bằng (Balanced Binary Search Trees)
+
+Trong các phần trước, chúng ta đã thấy các loại cây khác nhau có độ phức tạp tệ nhất là O(n), với n là số nút trong cây. Điều này xảy ra khi các cây là các cây nghiêng (skew trees). Trong phần này, chúng ta sẽ cố gắng giảm độ phức tạp tệ nhất này xuống O(logn) bằng cách áp đặt các hạn chế về chiều cao.
+
+Cây cân bằng theo chiều cao thường được biểu diễn với HB(k), trong đó k là hiệu số giữa chiều cao cây con trái và chiều cao cây con phải. Đôi khi k được gọi là yếu tố cân bằng (balance factor).
+
+Cây Tìm Kiếm Nhị Phân Cân Bằng Đầy Đủ
+Trong HB(k), nếu k = 0 (nếu yếu tố cân bằng bằng không), chúng ta gọi các cây tìm kiếm nhị phân như là cây tìm kiếm nhị phân cân bằng đầy đủ (full balanced binary search trees). Điều này có nghĩa là hiệu số giữa chiều cao cây con trái và chiều cao cây con phải trong cây HB(0) phải là tối đa bằng không. Điều này đảm bảo rằng cây là một cây nhị phân đầy đủ.
+
+Ví dụ:
+      4
+     / \
+    2   6
+   / \ / \
+  1  3 5  7
+Lưu Ý: Để xây dựng cây HB(0), xin hãy tham khảo phần Các Bài Tập.
+
+6.13 Cây AVL (Adelson-Velskii và Landis)
+
+Trong HB(k), nếu k = 1 (nếu yếu tố cân bằng bằng một), một cây tìm kiếm nhị phân như vậy được gọi là cây AVL. Điều này có nghĩa là cây AVL là một cây tìm kiếm nhị phân với một điều kiện cân bằng: hiệu số giữa chiều cao cây con trái và chiều cao cây con phải là tối đa là 1.
+
+**Các Đặc Điểm Của Cây AVL**
+Một cây nhị phân được gọi là cây AVL nếu:
+- Đó là cây tìm kiếm nhị phân
+- Đối với bất kỳ nút X nào, chiều cao của cây con trái của X và chiều cao của cây con phải của X khác nhau không quá 1.
+
+**Số Lượng Node Tối Thiểu/Tối Đa Trong Cây AVL**
+Để đơn giản hóa, hãy giả sử chiều cao của cây AVL là h và N(K) chỉ số lượng node trong cây AVL có chiều cao h. Để có số lượng node tối thiểu với chiều cao h, chúng ta nên điền cây với số lượng node tối thiểu có thể. Điều đó có nghĩa là nếu chúng ta điền cây con trái với chiều cao h - 1 thì chúng ta nên điền cây con phải với chiều cao h - 2. Kết quả là, số lượng node tối thiểu với chiều cao h là:
+													
+														 N(h) = N(h - 1) + N(h - 2) + 1
+
+Trong biểu thức trên:
+- N(h - 1) chỉ số lượng node tối thiểu với chiều cao h - 1.
+- N(h - 2) chỉ số lượng node tối thiểu với chiều cao h - 2.
+- Trong biểu thức trên, "1" chỉ số lượng node hiện tại. Chúng ta có thể đặt N(h - 1) cho cây con trái hoặc cây con phải.
+
+Giải phương trình đệ quy trên ta có: N(h) = O(1.618^h) ⇒ h = 1.44logn ≈ O(logn), trong đó n là số lượng node trong cây AVL. Đồng thời, phân tích trên cho thấy độ cao tối đa trong cây AVL là O(logn).
+
+Tương tự, để có số lượng node tối đa, chúng ta cần điền cả cây con trái và cây con phải với chiều cao h - 1. Kết quả là: N(h) = N(h - 1) + N(h - 1) + 1 = 2N(h - 1) + 1
+
+Biểu thức trên xác định trường hợp của cây nhị phân đầy đủ. Giải phương trình đệ quy ta có: N(h) = O(2^h) ⇒ h = logn ≈ O(logn)
+
+Vậy, cả hai trường hợp đều đảm bảo rằng chiều cao của cây AVL với n node là O(logn).
+
+**Khai Báo node của cây AVL và các thao tác liên quan đến node như lấy chiều cao, constructor, kiểm tra xem node nằm bên phải hay trái node cha**
+
+struct AVL_node {
+    int data;
+    int height;
+    AVL_node *parent, *left, *right;
+    int get_height();
+    bool is_on_left();
+    bool is_on_right();
+    AVL_node(int);
+};
+AVL_node :: AVL_node(int a) : data(a) {
+    left = right = nullptr;
+    parent = nullptr;
+    height = 0;
+}
+inline int AVL_node :: get_height() {
+    call_get_height++;
+    if (this != nullptr) {
+        return this->height;
+    }
+    else {
+        return -1;
+    }
+}
+bool AVL_node :: is_on_left() {
+    return this == parent->left;
+}
+bool AVL_node::is_on_right() {
+    return this == parent->right;
+}
+
+**Khai báo cây AVL, bao gồm các thao tác liên quan đến cây AVL**
+class AVL_tree {
+    AVL_node *root = nullptr;
+public:
+    void in_order();
+    void fix_height(AVL_node*);
+    void single_rotate_right(AVL_node*);
+    void single_rotate_left(AVL_node*);
+    void double_rotate_left_right(AVL_node*);
+    void double_rotate_right_left(AVL_node*);
+    void fix_AVL_node(AVL_node*, int);
+    AVL_node* find(int);
+    void insert(int);
+    AVL_node* successor(AVL_node *);
+    AVL_node *replace_node(AVL_node *);
+    void delete_node(AVL_node *);
+    void delete_by_value(int);
+    int get_root();
+    AVL_node* find_to_delete(int);
+};
+
+**Xoay (Rotations)**
+Khi cấu trúc cây thay đổi (ví dụ: sau khi chèn hoặc xóa), chúng ta cần điều chỉnh cây để khôi phục tính chất cây AVL. Điều này có thể được thực hiện bằng cách sử dụng các xoay đơn hoặc xoay kép. Vì một thao tác chèn / xóa chỉ liên quan đến thêm / xóa một nút duy nhất, điều này chỉ có thể làm tăng / giảm chiều cao của một cây con tối đa 1. Vì vậy, nếu tính chất cây AVL bị vi phạm tại một nút X nào đó, điều đó có nghĩa là chiều cao của left(X) và right(X) khác nhau chính xác 2. Điều này bởi vì nếu chúng ta cân bằng cây AVL mỗi lần, thì tại bất kỳ điểm nào, sự khác biệt về chiều cao giữa left(X) và right(X) đều khác nhau chính xác 2. Các xoay được sử dụng để khôi phục tính chất cây AVL. Điều này có nghĩa là chúng ta cần áp dụng các xoay cho nút X. 
+
+**Quan sát quan trọng:** 
+Một quan sát quan trọng là, sau khi chèn, chỉ có các nút trên đường đi từ điểm chèn đến gốc có thể có trạng thái cân bằng bị thay đổi, vì chỉ những nút đó có cây con của chúng bị thay đổi. Để khôi phục tính chất cây AVL, chúng ta bắt đầu tại điểm chèn và tiếp tục đi lên đến gốc của cây. Khi di chuyển đến gốc, chúng ta cần xem xét nút đầu tiên không thỏa mãn tính chất cây AVL. Từ nút đó trở đi, mỗi nút trên đường đi đến gốc sẽ có vấn đề. Nếu chúng ta sửa vấn đề cho nút đầu tiên đó, thì tất cả các nút khác trên đường đi đến gốc sẽ tự động thỏa mãn tính chất cây AVL. Điều này có nghĩa là chúng ta luôn cần quan tâm đến nút đầu tiên không thỏa mãn tính chất cây AVL trên đường đi từ điểm chèn đến gốc và sửa nó.
+
+**Các Loại Vi Phạm (Violations)**
+
+Hãy giả sử nút cần được cân bằng là X. Vì mỗi nút có tối đa hai nút con và sự mất cân bằng chiều cao yêu cầu chiều cao của hai cây con của X khác nhau hai đơn vị, ta có thể quan sát rằng vi phạm có thể xảy ra trong bốn trường hợp:
+
+1. Một nút được chèn vào cây con trái của con trái của X.
+2. Một nút được chèn vào cây con phải của con trái của X.
+3. Một nút được chèn vào cây con trái của con phải của X.
+4. Một nút được chèn vào cây con phải của con phải của X.
+
+Trường hợp 1 và 4 là đối xứng và có thể được giải quyết bằng các xoay đơn. Tương tự, trường hợp 2 và 3 cũng đối xứng và có thể giải quyết bằng các xoay kép (cần hai xoay đơn). 
+
+**Xoay Đơn (Single Rotations)**
+Xoay trái-trái (Left Left Rotation - LL Rotation) [Trường hợp 1]: Như đã thảo luận trước đó, xoay không cần phải được thực hiện tại gốc của cây. Nói chung, chúng ta bắt đầu từ nút được chèn và di chuyển lên cây, cập nhật thông tin cân bằng tại mỗi nút trên đường đi.
+
+void AVL_tree :: single_rotate_right(AVL_node* x) {
+    AVL_node *temp = x->left;
+    if (x != root) {
+        if (x->is_on_left()) {
+            x->parent->left = temp;
+        } else {
+            x->parent->right = temp;
+        }
+    }
+    else {
+        root = temp;
+    }
+    temp->parent = x->parent;
+    x->left = temp->right;
+    if (temp->right)
+        temp->right->parent = x;
+    temp->right = x;
+    x->parent = temp;
+    fix_height(x);
+    fix_height(temp);
+}
+
+Xoay phải-phải (RR Rotation) [Trường hợp 4]:
+
+void AVL_tree :: single_rotate_left(AVL_node* x) {
+    AVL_node *temp = x->right;
+    if (x != root) {
+        if (x->is_on_right()) {
+            x->parent->right = temp;
+        } else {
+            x->parent->left = temp;
+        }
+    }
+    else {
+        root = temp;
+    }
+    temp->parent = x->parent;
+    x->right = temp->left;
+    if (temp->left)
+        temp->left->parent = x;
+    temp->left = x;
+    x->parent = temp;
+    fix_height(x);
+    fix_height(temp);
+}
+
+**Double Rotations**
+Left Right Rotation (LR Rotation) [Trường hợp 2]: Trong trường hợp 2 và trường hợp 3, xoay đơn không sửa được vấn đề. Chúng ta cần thực hiện hai xoay.
+
+Mã cho xoay kép phải-trái có thể được đưa ra như sau:
+//node được thêm vào cây con phải của cây con trái của root
+void AVL_tree :: double_rotate_left_right(AVL_node* x) {
+    single_rotate_left(x->left);
+    single_rotate_right(x);
+}
+
+Right Left Rotation (RL Rotation) [Trường hợp 3]:Tương tự như trường hợp 2, chúng ta cần thực hiện hai xoay để sửa vấn đề này.
+
+Mã cho xoay kép trái-phải có thể được đưa ra như sau:
+//node được thêm vào cây con trái của cây con phải của root
+void AVL_tree :: double_rotate_right_left(AVL_node* x) {
+    single_rotate_right(x->right);
+    single_rotate_left(x);
+}
+
+Như vậy, thông qua các xoay đơn và xoay kép, chúng ta có thể duy trì tính chất cây AVL và cân bằng cây sau khi thêm hoặc xóa các nút. Điều này giúp giảm thiểu độ phức tạp thời gian của các thao tác trên cây AVL và giữ cho cây luôn có chiều cao tối đa là O(logn).
+
+**Sửa lại chiều cao của node sau các thao tác chèn và xóa**
+
+void AVL_tree::fix_height(AVL_node* x) {
+    x->height = max(x->left->get_height(), x->right->get_height()) + 1;
+}
+
+**Sửa lại chiều cao của cây sau các thao tác chèn xóa**
+
+//difference_height bang chieu cao cua cay con tra tru di chieu cao cua cay con phai
+void AVL_tree :: fix_AVL_node(AVL_node* x, int difference_height) {
+    if (difference_height <= -2) {
+		 if(x->right->left->get_height() < x->right->right->get_height()) {
+             single_rotate_left(x);
+         } else {
+             double_rotate_right_left(x);
+         }
+    } else if(difference_height >=2) {
+       if(x->left->left->get_height() > x->left->right->get_height()) {
+            single_rotate_right(x);
+        } else {
+            double_rotate_left_right(x);
+        }
+	}
+} 
+
+**Chèn vào cây AVL**
+Chèn vào cây AVL tương tự như chèn vào BST. Sau khi chèn phần tử, chúng ta chỉ cần kiểm tra xem có sự mất cân bằng về chiều cao hay không. Nếu có sự mất cân bằng, gọi các hàm xoay thích hợp.
+
+Các Bước Chèn vào Cây AVL
+1. Thực hiện chèn như chèn vào BST để đảm bảo cây vẫn là một BST hợp lệ.
+2. Di chuyển từ nút được chèn lên tới gốc của cây, cập nhật thông tin cân bằng tại mỗi nút trên đường đi.
+3. Kiểm tra tính chất cây AVL của từng nút trên đường đi. Nếu phát hiện mất cân bằng, gọi hàm fix_AVL_node().
+
+Dưới đây là mã nguồn cho phép thêm một node vào cây AVL, viết bằng ngôn ngữ C++
+
+void AVL_tree :: insert(int value) {
+    call_insert++;
+    if(root == nullptr) {
+        root = new AVL_node(value);
+        return;
+    }
+    AVL_node *temp = find(value);
+    if (value == temp->data) {
+        std :: cout << value << " is already in the tree!\n";
+        return;
+    } else {
+        AVL_node *new_node = new AVL_node(value);
+		new_node->parent = temp;
+        if(value > temp->data) {
+            temp->right = new_node;
+        } else {
+            temp->left = new_node;
+        }
+        fix_height(temp);
+        AVL_node *parent = temp->parent;
+        while (parent) {
+			fix_height(parent);
+            int balance = (parent->left->get_height()) - (parent->right->get_height());
+            if (balance > 1 || balance < -1) {
+                fix_AVL_node(parent, balance);
+                return;
+            }
+            parent = parent->parent;
+        }
+		while (parent) {
+			fix_height(parent);
+			parent = parent->parent;
+		}
+    }
+}
+
+Độ phức tạp thời gian:O(logn).
+Độ phức tạp không gian: O(logn) vì quá trình kiểm tra cân bằng và xoay được thực hiện đệ quy qua các nút trên đường đi từ nút được chèn đến gốc của cây, do đó tạo ra một đệ quy stack có độ sâu tối đa là log(n).
+
+**Hàm trả về node thay thế node bị xóa**
+
+AVL_node* AVL_tree :: successor(AVL_node* x) {
+    while (x->left) {
+        x = x->left;
+    }
+    return x;
+}
+AVL_node* AVL_tree :: replace_node(AVL_node* x) {
+    if (x->left == nullptr && x->right == nullptr) {
+        return nullptr;
+    } else if (x->left == nullptr || x->right == nullptr) {
+        if (x->left) {
+            return x->left;
+        } else {
+            return x->right;
+        }
+    } else {
+        return successor(x->right);
+    }
+}
+
+**Xóa một phần tử trong cây AVL**
+Chèn vào như cách chèn cây tìm kiếm nhị phân thông thường, sau đó kiểm tra chiều cao của các node xem có bị mất tính chất của cây AVL hay không, rồi dùng hàm xoay thích hợp để điều chỉnh lại
+
+Các bước để xóa một node trong cây AVL bao gồm:
+1. Xóa node trong cây như xóa node của một cây nhị phân tìm kiếm thông thường
+2. Di chuyển lên dần từ node bị xóa cho đến khi gặp một node mà tại đó tính chất của cây AVL bị vi phạm
+3. Nếu gặp node vi phạm tính chất cây AVL thì gọi hàm fix_AVL_node()
+4. Tiếp tục di chuyển lên trên, cập nhật chiều cao của từng node trong lúc di chuyển, đến khi đến root thì dừng lại
+
+Dưới đây là mã nguồn của hàm xóa một node trong cây AVL, được viết bằng ngôn ngữ C++
+
+void AVL_tree :: delete_node(AVL_node* x) {
+    AVL_node *replace = replace_node(x);
+    if (replace == nullptr) {
+        if (x == root) {
+            root = nullptr;
+            delete x;
+        } else {
+            // x is leaf
+            AVL_node *parent = x->parent;
+            if (x == parent->left) {
+                parent->left = nullptr;
+            } else {
+                parent->right = nullptr;
+            }
+            delete x;
+            while (parent) {
+                fix_height(parent);
+                int balance = parent->left->get_height() - parent->right->get_height();
+                if (balance > 1 || balance < -1) {
+                    fix_AVL_node(parent, balance);
+                    break;
+                }
+                parent = parent->parent;
+            }
+            while(parent) {
+                fix_height(parent);
+                parent = parent->parent;
+            }
+        }
+    }
+    else if (x->left == nullptr || x->right == nullptr) {
+        if(x == root) {
+            if (x->left) {
+                x->left = root;
+                delete x;
+            } else {
+                x->right = root;
+                delete x;
+            }
+        } else {
+            AVL_node *parent = x->parent;
+            if (x->left) {
+                if (x->is_on_right()) {
+                    parent->right = x->left;
+                } else {
+                    parent->left = x->left;
+                }
+                x->left->parent = parent;
+            } else {
+                if (x->is_on_left()) {
+                    parent->left = x->right;
+                } else {
+                    parent->right = x->right;
+                }
+                x->right->parent = parent;
+            }
+            delete x;
+            while (parent) {
+                fix_height(parent);
+                int balance = parent->left->get_height() - parent->right->get_height();
+                if (balance > 1 || balance < -1) {
+                    fix_AVL_node(parent, balance);
+                    break;
+                }
+                parent = parent->parent;
+            }
+            while (parent) {
+                fix_height(parent);
+                parent = parent->parent;
+            }
+        } 
+    } else {
+        int k = replace->data;
+        replace->data = x->data;
+        x->data = k;
+        delete_node(replace);
+    }
+}
+AVL_node* AVL_tree::find_to_delete(int data) {
+    AVL_node* temp = root;
+    while (temp) {
+        if (temp->data == data) {
+            return temp;
+        }
+        else if (temp->data > data) {
+            temp = temp->left;
+        }
+        else {
+            temp = temp->right;
+        }
+    }
+    return temp;
+}
+void AVL_tree :: delete_by_value(int data) {
+    if (root == nullptr) {
+        cout << "empty tree!" << endl;
+        return;
+    }
+    AVL_node *temp = nullptr;
+    temp = find_to_delete(data);
+    if(temp == nullptr) {
+        return;
+    } else {
+        delete_node(temp);
+    }
+}
+Dưới đây là mã nguồn hoàn chỉnh của cây AVL, viết bằng ngôn ngữ C++
+
+///CHUONG TRINH VIET TU NGAY 8/8/2023 DEN NGAY 9/8/2023
+#include <iostream>
+#include <stack>
+
+using namespace std;
+long long call_insert = 0;
+long long call_find = 0;
+long long call_get_height = 0;
+struct AVL_node {
+    int data;
+    int height;
+    AVL_node *parent, *left, *right;
+    int get_height();
+    bool is_on_left();
+    bool is_on_right();
+    AVL_node(int);
+};
+AVL_node :: AVL_node(int a) : data(a) {
+    left = right = nullptr;
+    parent = nullptr;
+    height = 0;
+}
+inline int AVL_node :: get_height() {
+    call_get_height++;
+    if (this != nullptr) {
+        return this->height;
+    }
+    else {
+        return -1;
+    }
+}
+bool AVL_node :: is_on_left() {
+    return this == parent->left;
+}
+bool AVL_node::is_on_right() {
+    return this == parent->right;
+}
+class AVL_tree {
+    AVL_node *root = nullptr;
+public:
+    void in_order();
+    void fix_height(AVL_node*);
+    void single_rotate_right(AVL_node*);
+    void single_rotate_left(AVL_node*);
+    void double_rotate_left_right(AVL_node*);
+    void double_rotate_right_left(AVL_node*);
+    void fix_AVL_node(AVL_node*, int);
+    AVL_node* find(int);
+    void insert(int);
+    AVL_node* successor(AVL_node *);
+    AVL_node *replace_node(AVL_node *);
+    void delete_node(AVL_node *);
+    void delete_by_value(int);
+    AVL_node* find_to_delete(int);
+};
+void AVL_tree :: in_order() {
+    AVL_node *temp = root;
+    if (temp == nullptr) {
+		cout << "empty tree!";
+		return;
+	}
+	stack <AVL_node*> s;
+	while (temp || !s.empty()) {
+		if (temp) {
+			s.emplace(temp);
+			temp = temp->left;
+		}
+		else {
+			temp = s.top(); s.pop();
+            cout << temp->data << ": " << temp->height << endl;
+            temp = temp->right;
+		}
+	}
+}
+int max(int a, int b) {
+	return (a > b)? a : b;
+}
+void AVL_tree::fix_height(AVL_node* x) {
+    x->height = max(x->left->get_height(), x->right->get_height()) + 1;
+}
+void AVL_tree :: single_rotate_right(AVL_node* x) {
+    AVL_node *temp = x->left;
+    if (x != root) {
+        if (x->is_on_left()) {
+            x->parent->left = temp;
+        } else {
+            x->parent->right = temp;
+        }
+    }
+    else {
+        root = temp;
+    }
+    temp->parent = x->parent;
+    x->left = temp->right;
+    if (temp->right)
+        temp->right->parent = x;
+    temp->right = x;
+    x->parent = temp;
+    fix_height(x);
+    fix_height(temp);
+}
+void AVL_tree :: single_rotate_left(AVL_node* x) {
+    AVL_node *temp = x->right;
+    if (x != root) {
+        if (x->is_on_right()) {
+            x->parent->right = temp;
+        } else {
+            x->parent->left = temp;
+        }
+    }
+    else {
+        root = temp;
+    }
+    temp->parent = x->parent;
+    x->right = temp->left;
+    if (temp->left)
+        temp->left->parent = x;
+    temp->left = x;
+    x->parent = temp;
+    fix_height(x);
+    fix_height(temp);
+}
+void AVL_tree :: double_rotate_left_right(AVL_node* x) {
+    single_rotate_left(x->left);
+    single_rotate_right(x);
+}
+void AVL_tree :: double_rotate_right_left(AVL_node* x) {
+    single_rotate_right(x->right);
+    single_rotate_left(x);
+}
+//difference_height bang chieu cao cua cay con tra tru di chieu cao cua cay con phai
+void AVL_tree :: fix_AVL_node(AVL_node* x, int difference_height) {
+    if (difference_height <= -2) {
+		 if(x->right->left->get_height() < x->right->right->get_height()) {
+             single_rotate_left(x);
+         } else {
+             double_rotate_right_left(x);
+         }
+    } else if(difference_height >=2) {
+       if(x->left->left->get_height() > x->left->right->get_height()) {
+            single_rotate_right(x);
+        } else {
+            double_rotate_left_right(x);
+        }
+	}
+} 
+
+AVL_node* AVL_tree :: find(int data) {
+    call_find++;
+    AVL_node* temp = root;
+    while (temp != nullptr) {
+        if (data < temp->data) {
+            if (temp->left == nullptr)
+                break;
+            else
+                temp = temp->left;
+        }
+        else if (data == temp->data) {
+            break;
+        }
+        else {
+            if (temp->right == nullptr)
+                break;
+            else
+                temp = temp->right;
+        }
+    }
+
+    return temp;
+}
+void AVL_tree :: insert(int value) {
+    call_insert++;
+    if(root == nullptr) {
+        root = new AVL_node(value);
+        return;
+    }
+    AVL_node *temp = find(value);
+    if (value == temp->data) {
+        std :: cout << value << " is already in the tree!\n";
+        return;
+    } else {
+        AVL_node *new_node = new AVL_node(value);
+		new_node->parent = temp;
+        if(value > temp->data) {
+            temp->right = new_node;
+        } else {
+            temp->left = new_node;
+        }
+        fix_height(temp);
+        AVL_node *parent = temp->parent;
+        while (parent) {
+			fix_height(parent);
+            int balance = (parent->left->get_height()) - (parent->right->get_height());
+            if (balance > 1 || balance < -1) {
+                fix_AVL_node(parent, balance);
+                return;
+            }
+            parent = parent->parent;
+        }
+		while (parent) {
+			fix_height(parent);
+			parent = parent->parent;
+		}
+    }
+}
+AVL_node* AVL_tree :: successor(AVL_node* x) {
+    while (x->left) {
+        x = x->left;
+    }
+    return x;
+}
+AVL_node* AVL_tree :: replace_node(AVL_node* x) {
+    if (x->left == nullptr && x->right == nullptr) {
+        return nullptr;
+    } else if (x->left == nullptr || x->right == nullptr) {
+        if (x->left) {
+            return x->left;
+        } else {
+            return x->right;
+        }
+    } else {
+        return successor(x->right);
+    }
+}
+void AVL_tree :: delete_node(AVL_node* x) {
+    AVL_node *replace = replace_node(x);
+    if (replace == nullptr) {
+        if (x == root) {
+            root = nullptr;
+            delete x;
+        } else {
+            // x is leaf
+            AVL_node *parent = x->parent;
+            if (x == parent->left) {
+                parent->left = nullptr;
+            } else {
+                parent->right = nullptr;
+            }
+            delete x;
+            while (parent) {
+                fix_height(parent);
+                int balance = parent->left->get_height() - parent->right->get_height();
+                if (balance > 1 || balance < -1) {
+                    fix_AVL_node(parent, balance);
+                    break;
+                }
+                parent = parent->parent;
+            }
+            while(parent) {
+                fix_height(parent);
+                parent = parent->parent;
+            }
+        }
+    }
+    else if (x->left == nullptr || x->right == nullptr) {
+        if(x == root) {
+            if (x->left) {
+                x->left = root;
+                delete x;
+            } else {
+                x->right = root;
+                delete x;
+            }
+        } else {
+            AVL_node *parent = x->parent;
+            if (x->left) {
+                if (x->is_on_right()) {
+                    parent->right = x->left;
+                } else {
+                    parent->left = x->left;
+                }
+                x->left->parent = parent;
+            } else {
+                if (x->is_on_left()) {
+                    parent->left = x->right;
+                } else {
+                    parent->right = x->right;
+                }
+                x->right->parent = parent;
+            }
+            delete x;
+            while (parent) {
+                fix_height(parent);
+                int balance = parent->left->get_height() - parent->right->get_height();
+                if (balance > 1 || balance < -1) {
+                    fix_AVL_node(parent, balance);
+                    break;
+                }
+                parent = parent->parent;
+            }
+            while (parent) {
+                fix_height(parent);
+                parent = parent->parent;
+            }
+        } 
+    } else {
+        int k = replace->data;
+        replace->data = x->data;
+        x->data = k;
+        delete_node(replace);
+    }
+}
+AVL_node* AVL_tree::find_to_delete(int data) {
+    AVL_node* temp = root;
+    while (temp) {
+        if (temp->data == data) {
+            return temp;
+        }
+        else if (temp->data > data) {
+            temp = temp->left;
+        }
+        else {
+            temp = temp->right;
+        }
+    }
+    return temp;
+}
+void AVL_tree :: delete_by_value(int data) {
+    if (root == nullptr) {
+        cout << "empty tree!" << endl;
+        return;
+    }
+    AVL_node *temp = nullptr;
+    temp = find_to_delete(data);
+    if(temp == nullptr) {
+        return;
+    } else {
+        delete_node(temp);
+    }
+}
+int main(){
+    AVL_tree tree;
+    for (int i = 1; i <= 20; i++) {
+        tree.insert(i);
+    }
+    cout << tree.find(1)->data << endl;
+    tree.in_order();
+    cout << "============" << endl;
+    tree.delete_by_value(4);
+    tree.delete_by_value(9);
+    tree.delete_by_value(14);
+    tree.delete_by_value(19);
+    tree.in_order();
+    return 0;
+}
+
+
+**6.14 Các biến thể khác của cây**
+
+Trong phần này, chúng ta sẽ xem xét một số biểu diễn khác của cây. Trong các phần trước, chúng ta đã xem xét cây AVL, một loại cây nhị phân tìm kiếm (BST) có tính chất cân bằng. Bây giờ, hãy xem xét một số cây nhị phân tìm kiếm cân bằng khác: Red-black Trees và Splay Trees.
+
+**6.14.1 Red-Black Trees**
+Cây Đỏ-Đen là một cây tìm kiếm nhị phân mà trong đó mỗi nút được màu sắc là đỏ hoặc đen. Đây là một loại cây tìm kiếm nhị phân tự cân bằng. Nó có hiệu suất tốt trong cả những trường hợp tệ nhất
+
+Các thuộc tính của Cây Đỏ-Đen:
+Cây Đỏ-Đen đáp ứng tất cả các thuộc tính của cây tìm kiếm nhị phân, bên cạnh đó nó còn đáp ứng các thuộc tính bổ sung sau đây -
+
+1. Thuộc tính gốc: Gốc của cây là màu đen.
+
+2. Thuộc tính liên kết: Mọi lá (Lá là một nút con NULL của một nút) đều màu đen trong cây Đỏ-Đen.
+
+3. Thuộc tính nội bộ: Các nút con của một nút đỏ đều là đen. Do đó, nút cha có thể là một nút đen.
+
+4. Thuộc tính độ sâu: Tất cả các lá đều có độ sâu đen giống nhau.
+
+5. Thuộc tính đường dẫn: Mọi đường dẫn đơn giản từ gốc đến nút lá con của nó chứa cùng một số lượng nút đen.
+
+Kết quả của tất cả các thuộc tính đã nêu ở trên là Cây Đỏ-Đen có sự cân bằng đáng kể.
+
+Từ những thuộc tính trên, rút ra được luật mà mọi cây đỏ đen đều phải tuân theo:
+1. Mỗi nút có một màu sắc là đỏ hoặc đen.
+2. Gốc của cây luôn luôn là màu đen.
+3. Không có hai nút đỏ liền kề (Một nút đỏ không thể có một nút cha đỏ hoặc con đỏ).
+4. Mọi đường dẫn từ một nút (bao gồm cả gốc) đến bất kỳ nút con NULL của nó đều có cùng số lượng nút đen.
+5. Mọi lá (nút NULL) phải là màu ĐEN.
+
+**Tại sao Sử dụng Cây Đỏ-Đen?**
+
+Hầu hết các thao tác trên Cây Tìm Kiếm Nhị Phân (BST) (ví dụ: tìm kiếm, lớn nhất, nhỏ nhất, chèn, xóa... vv) mất thời gian O(h), trong đó h là chiều cao của BST. Chi phí của những thao tác này có thể trở thành O(n) cho một cây nhị phân bị lệch. Nếu chúng ta đảm bảo rằng chiều cao của cây luôn là O(log n) sau mỗi lần chèn và xóa, thì chúng ta có thể đảm bảo một giới hạn trên là O(log n) cho tất cả các thao tác này. Chiều cao của một Cây Đỏ-Đen luôn là O(log n) trong đó n là số nút trong cây.
+Các thao tác tìm kiếm, chèn, xóa đều có độ phức tạp là O(logn)
+"n" là tổng số phần tử trong cây đỏ-đen.
+
+So sánh với Cây AVL:
+Cây AVL cân bằng hơn so với Cây Đỏ-Đen, nhưng chúng có thể gây ra nhiều phép xoay hơn trong quá trình chèn và xóa. Vì vậy, nếu ứng dụng của bạn liên quan đến chèn và xóa thường xuyên, thì nên ưu tiên Cây Đỏ-Đen. Và nếu chèn và xóa ít thường xuyên hơn và tìm kiếm là một thao tác phổ biến hơn, thì nên ưu tiên Cây AVL hơn là Cây Đỏ-Đen.
+
+Làm thế nào Cây Đỏ-Đen đảm bảo sự cân bằng?
+Một ví dụ đơn giản để hiểu về sự cân bằng là, một chuỗi gồm 3 nút không thể tồn tại trong Cây Đỏ-Đen. Chúng ta có thể thử bất kỳ sự kết hợp màu sắc nào và chắc chắn là chúng sẽ không thỏa mãn tính chất của cây đỏ đen
+
+Điểm thú vị về Cây Đỏ-Đen:
+-Chiều cao đen của cây Đỏ-Đen là số lượng nút đen trên một đường từ nút gốc đến nút lá. Các nút lá cũng được tính là nút đen. Do đó, một cây Đỏ-Đen có chiều cao h có chiều cao đen >= h/2.
+-Chiều cao của cây Đỏ-Đen với n nút là h <= 2 log2(n + 1).
+-Tất cả lá (NIL) đều màu đen.
+-Độ sâu đen của một nút được định nghĩa là số lượng nút đen từ gốc đến nút đó, tức là số lượng tổ tiên đen.
+-Mọi cây Đỏ-Đen đều là một trường hợp đặc biệt của một cây nhị phân.
+-Chiều cao Đen của một Cây Đỏ-Đen: Chiều cao Đen là số lượng nút đen trên một đường từ gốc đến lá. Các nút lá cũng được tính là nút đen. Từ các thuộc tính 3 và 4 ở trên, chúng ta có thể suy ra rằng một Cây Đỏ-Đen có chiều cao h có chiều cao đen >= h/2.
+-Số lượng nút từ một nút đến lá con xa nhất của nó không nhiều hơn gấp đôi số lượng nút đến lá con gần nhất.
+-Mọi Cây Đỏ Đen với n nút có chiều cao <= 2Log2(n+1)
+Điều này có thể được chứng minh bằng cách sử dụng các dữ kiện sau:
+
+Đối với một Cây Nhị Phân chung, hãy cho k là số lượng tối thiểu các nút trên tất cả các đường từ gốc đến NULL, sau đó n >= 2^k - 1 (Ví dụ: Nếu k là 3, thì n ít nhất là 7). Biểu thức này cũng có thể được viết lại là k <= Log2(n+1).
+Từ thuộc tính 4 của cây Đỏ-Đen và sự kiện trên, chúng ta có thể nói trong một Cây Đỏ-Đen có n nút, có một đường từ gốc đến lá với tối đa Log2(n+1) nút đen.
+Từ các thuộc tính 3 và 5 của cây Đỏ-Đen, chúng ta có thể khẳng định rằng số lượng nút đen trong một Cây Đỏ-Đen ít nhất là ⌊ n/2 ⌋ nơi n là tổng số nút.
+Từ những điểm trên, chúng ta có thể kết luận rằng Cây Đỏ Đen với n nút có chiều cao <= 2Log2(n+1).
+
+Thao tác Tìm kiếm trong Cây Đỏ-Đen:
+Vì mọi cây Đỏ-Đen đều là một trường hợp đặc biệt của một cây nhị phân, vì vậy thuật toán tìm kiếm của cây Đỏ-Đen tương tự như thuật toán tìm kiếm của một cây nhị phân.
+
+Dưới đây là mã nguồn của cây đỏ đen, được biểu diễn bằng ngôn ngữ C++
+
+#include <iostream>
+#include <stack>
+long long call_insert = 0;
+long long call_find = 0;
+using namespace std;
+constexpr bool black = true;
+constexpr bool red = false;
+
+//node va cac thao tac lien quan
+struct red_black_node{
+    int data;
+    bool color;
+    red_black_node* left, *right, *parent;
+    red_black_node(int dat){
+        data = dat;
+        left = right = parent = nullptr;
+        color = red;
+    }
+    //kiem tra xem node nam ben trai parent hay khong
+    inline bool is_on_left(){
+        return this == parent->left;
+    }
+    //tra ve con tro den sibling
+    red_black_node* sibling(){
+        if(parent == nullptr){
+            return nullptr;
+        }
+        if(is_on_left()) {
+            return parent->right;
+        } else {
+            return parent->left;
+        }
+    }
+    red_black_node* uncle(){
+        if(parent == nullptr || parent->parent == nullptr){
+            return nullptr;
+        }
+        if (parent->is_on_left()) {
+            return parent->parent->right;
+        } else {
+            return parent->parent->left;
+        }
+    }
+    void move_down(red_black_node* new_parent) {
+        if(parent){
+            if (this->is_on_left()){
+                parent->left = new_parent;
+            } else {
+                parent->right = new_parent;
+            }
+        }
+        new_parent->parent = parent;
+        parent = new_parent;
+    }
+    bool has_red_child(){
+        return (left && left->color == red || right && right->color == red);
+    }
+
+    red_black_node() = default;
+};
+
+class red_black_tree {
+private:
+    red_black_node *root = nullptr;
+public:
+    void rotate_left(red_black_node *);
+    void rotate_right(red_black_node *);
+    void fix_red_red(red_black_node *);
+    void fix_double_black(red_black_node *);
+    void in_order();
+    red_black_node *find(int);
+    void delete_node(red_black_node *);
+    void delete_by_value(int);
+    void insert(int);
+    // node khong co con trai, voi goc la x
+    red_black_node *successor(red_black_node *x);
+    // tim node thay the cho node bi xoa
+    red_black_node *repalce_node(red_black_node *);
+};
+void red_black_tree :: rotate_left (red_black_node* x) {
+        red_black_node *new_parent = x->right;
+        if (x == root) {
+            root = new_parent;
+        }
+        x->move_down(new_parent);
+        x->right = new_parent->left;
+        if(new_parent->left)
+            new_parent->left->parent = x;
+        new_parent->left = x;
+}
+void red_black_tree :: rotate_right (red_black_node* x) {
+        red_black_node *new_parent = x->left;
+        if(x == root){
+            root = new_parent;
+        }
+        x->move_down(new_parent);
+        x->left = new_parent->right;
+        if(new_parent->right){
+            new_parent->right->parent = x;
+        }
+        new_parent->right = x;
+}
+inline void swap_color(red_black_node* a, red_black_node* b) {
+    // bool temp = a->color; 
+    // a->color = b->color;
+    // b->color = temp;
+        a->color ^= b->color;
+        b->color ^= a->color;
+        a->color ^= b->color;
+}
+void swap_data(red_black_node* a, red_black_node* b) {
+    int k = a->data;
+    a->data = b->data;
+    b->data = k;
+}
+void red_black_tree :: fix_red_red(red_black_node* x) {
+    if (x == root){
+        x->color = black;
+        return;
+    }
+    red_black_node *parent = x->parent, *uncle = x->uncle(), *grand = parent->parent;
+    if (parent->color == red){
+        if(uncle && uncle->color == red){
+            uncle->color = parent->color = black;
+            grand->color = red;
+            fix_red_red(grand);
+        } else {
+            //uncle is black
+            if(parent->is_on_left()){
+                if(x->is_on_left()){
+                    swap_color(parent, grand);
+                } else {
+                    //x the cho parent
+                    swap_color(grand, x);
+                    rotate_left(parent);
+                }
+                rotate_right(grand);
+            } else {
+                if(x->is_on_left()){
+                    rotate_right(parent);
+                    swap_color(x, grand);
+                } else {
+                    swap_color(grand, parent);
+                }
+                rotate_left(grand);
+            }
+        }
+    }
+}
+
+red_black_node* red_black_tree :: successor(red_black_node* x){
+    while(x->left != nullptr){
+        x = x->left;
+    }
+    return x;
+}
+red_black_node* red_black_tree :: repalce_node(red_black_node* x){
+    if (x->right == nullptr && x->left == nullptr) {
+        return nullptr;
+    } else if(x->right == nullptr || x->left == nullptr) {
+        if(x->left) {
+            return x->left;
+        } else {
+            return x->right;
+        }
+    } else {
+        return successor(x->right);
+    }
+
+}
+void red_black_tree :: fix_double_black(red_black_node* x) {
+    if(x == root) {
+        return;
+    }
+    red_black_node *sibling = x->sibling(), *parent = x->parent;
+    if(sibling->color == red){
+        swap_color(sibling, parent);
+        if(sibling->is_on_left()) {
+            rotate_right(parent);
+        } else {
+            rotate_left(parent);
+        }
+        fix_double_black(x);
+    } else {
+        //sibling is black node
+        if (sibling->has_red_child()) {
+            // sibling has red child
+            if (sibling->is_on_left()) {
+                if (sibling->left && sibling->left->color == red) {
+                    swap_color(parent, sibling);
+                    sibling->left->color = black;
+                } else {
+                    sibling->right->color = black;
+                    swap_color(sibling->right, parent);
+                    rotate_left(sibling);
+                }
+                rotate_right(parent);
+            } else {
+                if (sibling->right && sibling->right->color == red){
+                    swap(parent->color, sibling->color);
+                    sibling->right->color = black;
+                } else {
+                    sibling->left->color = black;
+                    swap(parent->color, sibling->left->color);
+                    rotate_right(sibling);
+                }
+                rotate_left(parent);
+            }
+        } else {
+            // sibling has two black child
+            sibling->color = red;
+            if (parent->color == red) {
+                parent->color = black;
+            } else {
+                fix_double_black(parent);
+            }
+        }
+    }
+}
+void red_black_tree :: delete_node(red_black_node *v) {
+    red_black_node *u = repalce_node(v);
+    red_black_node *parent = v->parent;
+    bool both_u_v_black = (u == nullptr || u->color == black) && v->color == black;
+    if (u == nullptr) {
+        // u is nullptr therefore v is leaf
+        if (v == root) {
+            root = nullptr;
+        } else {
+            if (both_u_v_black) {
+                fix_double_black(v);
+            }
+            //delete v
+            if (v->is_on_left()) {
+                parent->left = nullptr;
+            } else {
+                parent->right = nullptr;
+            }
+            delete v;
+            // fix double black
+        }
+        return;
+    }
+    if (v->left == nullptr || v->right == nullptr) {
+        // v has one child, if v is red, u is black, else if v is black, u have to be red
+        // u can not have child
+        if (v == root) {
+            u->parent = nullptr;
+            u->color = black;
+            root = u;
+            delete v;
+        } else {
+            u->color = black;
+            if (v->is_on_left()) {
+                parent->left = u;
+                u->parent = parent;
+                delete v;
+            } else {
+                parent->right = u;
+                u->parent = parent;
+                delete v;
+            }
+        }
+        return;
+    } else {
+        //v has two child
+        swap_data(u, v);
+        delete_node(u);
+    }
+}
+red_black_node* red_black_tree :: find(int data) {
+    call_find++;
+    red_black_node *temp = root;
+	while (temp != nullptr) {
+	if (data < temp->data) {
+		if (temp->left == nullptr)
+		break;
+		else
+		temp = temp->left;
+	} else if (data == temp->data) {
+		break;
+	} else {
+		if (temp->right == nullptr)
+		break;
+		else
+		temp = temp->right;
+	}
+	}
+
+	return temp;
+}
+void red_black_tree :: delete_by_value(int data) {
+    if (root == nullptr) {
+        cout << "empty tree!";
+        return;
+    }
+    red_black_node *v = find(data);
+    if (v->data != data) {
+        cout << "no node found to delete with value: " << data << '!';
+    } else {
+        delete_node(v);
+    }
+}
+void red_black_tree :: insert(int data) {
+    call_insert++;
+    red_black_node* new_node = new red_black_node(data);
+    if (root == nullptr) {
+        new_node->color = black;
+        root = new_node;
+        return;
+    } 
+    red_black_node *temp = find(data);
+    if(temp->data == data) {
+        cout << data << " already in the tree\n";
+        return;
+    }
+    new_node->parent = temp;
+    if(temp->data > data){
+        temp->left = new_node;
+    } else {
+        temp->right = new_node;
+    }
+    fix_red_red(new_node);
+}
+void red_black_tree :: in_order() {
+    if(root == nullptr) {
+        cout << "empty tree!";
+        return;
+    }
+    red_black_node* temp = root;
+    stack<red_black_node *> s;
+    while(!s.empty() || temp){
+        if(temp) {
+            s.emplace(temp);
+            temp = temp->left;
+        } else {
+            temp = s.top();
+            s.pop();
+            cout << temp->data << ": ";
+            if(temp->color == red) {
+                cout << "red";
+            } else {
+                cout << "black";
+            }
+            cout << endl;
+            temp = temp->right;
+        }
+    }
+    
+}
+int main(){
+   red_black_tree tree;
+   clock_t start_time, end_time;
+	double total_time;
+	start_time = clock();
+	for (int i = 1; i <= 10000000; i++) {
+       tree.insert(i);
+   }
+	end_time = clock();
+
+	// tinh tong thoi gian chay, don vi la ticks
+	total_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+
+	// in ra thoi gian chay
+	cout << "Thoi gian de them 10000000 phan tu vao cay do den la: " << total_time << " giay" << endl;
+    cout << "so lan goi ham insert la: " << call_insert << endl;
+    cout << "so lan goi ham find la: " << call_find << endl;
+   return 0;
+}
+
+**6.14.2 Splay Trees**
+
+Splay-trees là cây BST với tính chất tự điều chỉnh. Một đặc tính thú vị khác của splay-trees là: bắt đầu từ một cây rỗng, bất kỳ chuỗi K thao tác với tối đa n nút mất O(Klogn) thời gian trong trường hợp xấu nhất. Splay-trees dễ lập trình hơn và đảm bảo truy cập nhanh hơn vào các mục được truy cập gần đây. Tương tự như AVL và Red-Black trees, tại bất kỳ thời điểm nào splay tree trở nên mất cân bằng, chúng ta có thể thực hiện xoay để duy trì tính chất cân bằng. Splay-trees không đảm bảo độ phức tạp O(logn) trong trường hợp xấu nhất. Nhưng nó cung cấp độ phức tạp trung bình là O(logn). Một thao tác có thể mất nhiều thời gian (một thao tác có thể mất O(n) thời gian), nhưng các thao tác tiếp theo có thể không mất độ phức tạp trường hợp xấu và trung bình mỗi thao tác là O(logn).
+
+**6.14.3 B-Trees**
+
+B-Tree tương tự như các cây cân bằng tự động khác như AVL và Red-black tree, đảm bảo tính cân bằng của các nút trong khi thực hiện các hoạt động. B-Tree có các thuộc tính sau:
+
+- Độ bán cầu tối thiểu "t" nơi, ngoại trừ nút gốc, tất cả các nút khác phải có ít nhất t - 1 khóa.
+-
+
+ Mỗi nút có n phím có n + 1 con.
+- Các khóa trong mỗi nút được sắp xếp theo thứ tự không giảm.
+- Mỗi nút không thể có nhiều hơn 2t - 1 phím, do đó 2t con.
+- Nút gốc ít nhất phải chứa một khóa. Không có nút gốc nếu cây trống.
+- Cây chỉ tăng độ sâu khi nút gốc bị chia. Khác với cây nhị phân, mỗi nút của B-Tree có thể có một số lượng biến đổi của khóa và con. Các khóa được lưu trữ theo thứ tự không giảm. Mỗi khóa có một con tương ứng là gốc của cây con chứa tất cả các nút có khóa nhỏ hơn hoặc bằng khóa nhưng lớn hơn khóa trước đó. Một nút cũng có một con bổ sung cuối cùng là gốc cho cây con chứa tất cả các khóa lớn hơn bất kỳ khóa nào trong nút. B-Tree có một yếu tố tối thiểu cho phép cho mỗi nút được biết đến là hệ số tối thiểu. Nếu t là hệ số tối thiểu này, mỗi nút phải có ít nhất t - 1 khóa. Trong các trường hợp cụ thể, nút gốc được phép vi phạm thuộc tính này bằng cách có ít hơn t - 1 khóa. Mỗi nút có thể có tối đa 2t - 1 khóa hoặc, tương đương, 2t con. Vì mỗi nút có xu hướng có một hệ số nhánh lớn (một số lượng lớn các con), nó thường cần duyệt ít nút hơn trước khi xác định được khóa cần tìm. Nếu truy cập vào mỗi nút yêu cầu một truy cập đĩa, thì B-Tree sẽ giảm thiểu số lần truy cập đĩa cần thiết. Hệ số tối thiểu thường được chọn sao cho tổng kích thước của mỗi nút tương ứng với một bội số của kích thước khối của thiết bị lưu trữ gốc. Sự lựa chọn này đơn giản hóa và tối ưu hóa việc truy cập đĩa. Do đó, B-Tree là một cấu trúc dữ liệu lý tưởng cho các tình huống mà tất cả dữ liệu không thể tồn tại trong bộ nhớ chính và việc truy cập vào bộ nhớ thứ cấp tương đối đắt đỏ (hoặc tốn thời gian). Để tìm kiếm trong cây, nó tương tự như cây nhị phân ngoại trừ việc so sánh khóa nhiều lần trong một nút cụ thể vì nút chứa nhiều hơn 1 khóa. Nếu tìm thấy khóa trong nút, tìm kiếm kết thúc. Nếu không, di chuyển xuống nút con được chỉ định bởi ci trong đó key k < ki. Chèn khóa của B-Tree xảy ra từ dưới lên. Điều này có nghĩa là nó đi xuống cây từ gốc đến nút con đích trước tiên. Nếu con đó không đầy, khóa được chèn đơn giản. Nếu con đó đầy, nút con bị chia làm hai phần, khóa trung vị di chuyển lên nút cha, sau đó khóa mới được chèn. Khi chèn và đi xuống cây, nếu tìm thấy nút gốc bị đầy, nó được chia trước và chúng ta có một nút gốc mới. Sau đó, thực hiện thao tác chèn bình thường. Việc xóa khóa phức tạp hơn vì nó cần duy trì số lượng khóa trong mỗi nút để đáp ứng ràng buộc. Nếu tìm thấy khóa trong nút lá và việc xóa nó vẫn giữ số lượng khóa trong nút không quá thấp, nó được thực hiện ngay lập tức. Nếu xóa nó ở nút trong, khóa trước của nút con tương ứng được di chuyển để thay thế khóa trong nút trong. Nếu di chuyển khóa trước sẽ làm nút con vi phạm ràng buộc về số lượng nút, nút con được kết hợp và khóa trong nút trong bị xóa.
+
+6.14.4 Cây tăng cường (Augmented Trees)
+Trong các phần trước, chúng ta đã thấy nhiều vấn đề như tìm phần tử thứ K nhỏ nhất trong cây và các vấn đề tương tự khác. Trong tất cả các vấn đề này, phức tạp tệ nhất là O(n), trong đó n là số lượng nút trong cây. Để thực hiện các hoạt động như vậy với O(logn), cây tăng cường là rất hữu ích. Trong những cây này, thông tin bổ sung được thêm vào mỗi nút và dữ liệu bổ sung đó phụ thuộc vào vấn đề chúng ta đang cố gắng giải quyết. Ví dụ, để tìm phần tử thứ K trong cây tìm kiếm nhị phân, hãy xem làm thế nào cây tăng cường giải quyết vấn đề này. Giả sử chúng ta sử dụng cây đỏ-đen làm BST cân bằng (hoặc bất kỳ BST cân bằng nào khác) và bổ sung thông tin về kích thước trong dữ liệu các nút. Đối với một nút X cho trước trong cây đỏ-đen với trường size(X) bằng số lượng nút trong cây con và có thể tính toán như sau: size(X) = size(X → left) + size(X → right)) + 1. Phép toán tìm phần tử thứ K nhỏ nhất có thể được định nghĩa như sau: Phức tạp thời gian: O(logn). Phức tạp không gian: O(logn).
+
+6.14.5 Cây Khoảng (Interval Trees) [Cây Đoạn (Segment Trees)]
+Chúng ta thường gặp các câu hỏi liên quan đến truy vấn được thực hiện trong một mảng dựa trên khoảng. Ví dụ, cho một mảng số nguyên, số lớn nhất trong khoảng α đến β là bao nhiêu, trong đó α và β đương nhiên nằm trong giới hạn của mảng. Để lặp lại các mục có khoảng chứa một giá trị cụ thể, chúng ta có thể sử dụng một mảng đơn giản. Nhưng nếu chúng ta cần truy cập hiệu quả hơn, chúng ta cần một cấu trúc dữ liệu phức tạp hơn. Một lưu trữ dựa trên mảng và tìm kiếm bằng vét cạn qua toàn bộ mảng chỉ chấp nhận nếu chỉ có một tìm kiếm duy nhất được thực hiện hoặc số lượng phần tử nhỏ. Ví dụ, nếu bạn biết tất cả các giá trị mảng quan tâm trước, bạn chỉ cần duyệt qua mảng một lần. Tuy nhiên, nếu bạn có thể chỉ định tương tác các hoạt động tìm kiếm khác nhau vào các thời điểm khác nhau, việc tìm kiếm bằng vét cạn trở nên không thực tế vì mỗi phần tử trong mảng phải được kiểm tra trong mỗi hoạt động tìm kiếm. Nếu bạn sắp xếp mảng theo thứ tự tăng dần của giá trị mảng, bạn có thể kết thúc tìm kiếm tuần tự khi bạn đến đối tượng có giá trị thấp hơn phần tử chúng ta đang tìm kiếm. Tuy nhiên, kỹ thuật này ngày càng không hiệu quả khi giá trị thấp tăng lên, vì ít hoạt động tìm kiếm được loại bỏ. Điều đó có nghĩa là, nếu chúng ta phải trả lời một số lượng lớn các truy vấn như thế này, liệu phương pháp vét cạn vẫn là một lựa chọn tốt không? Một ví dụ khác là khi chúng ta cần trả về tổng trong một khoảng cho trước. Chúng ta cũng có thể dùng vét cạn, nhưng vấn đề cho một số lượng lớn truy vấn vẫn tồn tại. Vậy chúng ta có thể làm gì? Với một chút suy nghĩ, chúng ta có thể đưa ra một phương pháp như duy trì một mảng riêng biệt gồm n phần tử, trong đó n là kích thước của mảng gốc, trong đó mỗi chỉ số lưu trữ tổng của tất cả các phần tử từ 0 đến chỉ số đó. Vì vậy, thực chất chúng ta đã giảm thời gian truy vấn từ trường hợp xấu nhất là O(n) xuống còn O(1). Điều này tốt đẹp đối với các mảng tĩnh, nhưng nếu chúng ta yêu cầu thực hiện cập nhật trên mảng, thì sao? Phương pháp đầu tiên cho chúng ta thời gian truy vấn O(n), nhưng thời gian cập nhật O(1). Phương pháp thứ hai, ngược lại, cho chúng ta thời gian truy vấn O(1), nhưng thời gian cập nhật O(n). Vậy chúng ta nên chọn cái nào? Cây khoảng cũng là các cây tìm kiếm nhị phân và chúng lưu trữ thông tin khoảng trong cấu trúc nút. Điều đó có nghĩa, chúng ta duy trì một tập hợp các khoảng [i1, i2] sao cho một trong các khoảng chứa một điểm truy vấn Q (nếu có) có thể được tìm thấy một cách hiệu quả. Cây khoảng được sử dụng để thực hiện các truy vấn khoảng một cách hiệu quả. Cây đoạn là một cấu trúc dữ liệu giống như heap có thể được sử dụng để thực hiện các hoạt động cập nhật/truy vấn trên các khoảng mảng trong thời gian logarit. Chúng ta định nghĩa cây đoạn cho khoảng [i,j] theo cách đệ quy sau: • Nút gốc (đầu tiên trong mảng) sẽ chứa thông tin cho khoảng [i,j] • Nếu i < y, hai nút con bên trái và bên phải sẽ chứa thông tin cho các khoảng và. Cây đoạn (còn được gọi là cây segtree và cây khoảng) là một cấu trúc dữ liệu tuyệt vời, chủ yếu được sử dụng cho các truy vấn khoảng. Đó là một cây nhị phân cân bằ
+
+ng chiều cao với cấu trúc tĩnh. Các nút của cây đoạn tương ứng với các khoảng khác nhau và có thể được bổ sung với thông tin thích hợp liên quan đến các khoảng đó. Nó hơi kém mạnh hơn cây nhị phân cân bằng do cấu trúc tĩnh của nó, nhưng do tính đệ quy của các hoạt động trên cây đoạn, việc suy nghĩ và lập trình nó rất dễ dàng. Chúng ta có thể sử dụng cây đoạn để giải quyết các vấn đề truy vấn tối thiểu/tối đa khoảng. Phức tạp thời gian là T(nlogn) trong đó O(n) là thời gian cần thiết để xây dựng cây và mỗi truy vấn mất O(logn) thời gian.
+
+6.14.6 Cây Scapegoat (Scapegoat Trees)
+Cây Scapegoat là một cây tìm kiếm nhị phân tự cân bằng, được khám phá bởi Arne Andersson. Nó cung cấp thời gian tìm kiếm tệ nhất là O(logn), và thời gian chèn và xóa trung bình là O(logn). Cây AVL cân bằng lại mỗi khi chiều cao của hai cây con chị em khác nhau hơn một; cây Scapegoat cân bằng lại mỗi khi kích thước của một cây con vượt quá tỷ lệ cụ thể của cha mẹ, tỷ lệ được gọi là a. Sau khi chèn phần tử, chúng ta duyệt lên cây. Nếu chúng ta phát hiện sự mất cân đối trong đó kích thước của một cây con vượt quá kích thước của cha mẹ lần lượt nhân với alpha, chúng ta phải xây dựng lại cây con tại cha mẹ, gọi là scapegoat (kẻ tội đồ). Có thể có nhiều scapegoat có thể, nhưng chúng ta chỉ cần chọn một. Scapegoat tối ưu nhất thực sự được xác định bởi cân bằng chiều cao. Khi loại bỏ nó, chúng ta xem xét xem tổng kích thước của cây có nhỏ hơn alpha của kích thước lớn nhất kể từ lần xây dựng lại cây cuối cùng không. Nếu có, chúng ta xây dựng lại toàn bộ cây. Giá trị alpha cho cây Scapegoat có thể là bất kỳ số nào từ 0.5 đến 1.0. Giá trị 0.5 sẽ buộc cân bằng hoàn hảo, trong khi 1.0 sẽ khiến việc cân bằng không bao giờ xảy ra, hiệu quả biến nó thành một cây tìm kiếm nhị phân (BST).
+
+																													Kết thúc viết vào ngày 9/8/2023
